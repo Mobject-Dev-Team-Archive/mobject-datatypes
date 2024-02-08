@@ -4,7 +4,7 @@ This is a work in progress. The information below is a guide to common serializa
 
 ## Primative
 
-```example
+```json
 {
   "type": "BOOL"
 }
@@ -12,7 +12,7 @@ This is a work in progress. The information below is a guide to common serializa
 
 ## Structures
 
-```example
+```json
 {
   "name": "MachineSettings",
   "type": "STRUCT",
@@ -24,7 +24,7 @@ This is a work in progress. The information below is a guide to common serializa
     {
       "name": "Speed",
       "type": "INT",
-      "value": 123
+      "defaultValue": 123
     }
   ]
 }
@@ -32,7 +32,7 @@ This is a work in progress. The information below is a guide to common serializa
 
 ## Enums
 
-```example
+```json
 {
   "name": "MachineState",
   "type": "ENUM",
@@ -54,7 +54,7 @@ This is a work in progress. The information below is a guide to common serializa
 
 ## Alias
 
-```example
+```json
 {
   "name": "Speed",
   "type": "ALIAS",
@@ -64,7 +64,7 @@ This is a work in progress. The information below is a guide to common serializa
 
 ## Unions
 
-```example
+```json
 {
   "name": "Buffer",
   "type": "UNION",
@@ -90,13 +90,28 @@ This is a work in progress. The information below is a guide to common serializa
 
 ## Interfaces
 
-```example
-
+```json
+{
+  "name": "I_Echo",
+  "type": "INTERFACE",
+  "methods": [
+    {
+      "name": "Echo",
+      "returnType": "STRING",
+      "parameters": [
+        {
+          "name": "input",
+          "type": "STRING"
+        }
+      ]
+    }
+  ]
+}
 ```
 
 ## Other
 
-```example
+```json
 // when adding an array to a UDT
 
 {
