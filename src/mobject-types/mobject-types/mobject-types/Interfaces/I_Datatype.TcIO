@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_Datatype" Id="{60a3fa78-0098-0a1a-3ab1-3b6b68cfc3f8}">
+    <Declaration><![CDATA[INTERFACE I_Datatype extends I_Serializable, I_Deserializable, I_Disposable]]></Declaration>
+    <Property Name="Address" Id="{97ce40cf-daf1-4f84-befc-3d953dbd0739}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Address : PVOID]]></Declaration>
+      <Get Name="Get" Id="{cbd086cf-89d8-45a8-89c5-e52e3a096e7d}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Identifier" Id="{b5ede973-026a-40e2-b656-ccf5a34daaf0}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Identifier : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{bd9a47c5-8817-48b1-a2cd-e41da6b3e2dd}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="Size" Id="{5c04081a-bb6e-4218-8597-9b7757149fa1}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Size : UDINT]]></Declaration>
+      <Get Name="Get" Id="{fdc689ce-7c38-465d-a111-883a520bad02}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

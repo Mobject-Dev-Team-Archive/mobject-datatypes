@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="MAIN" Id="{7bf63626-4b20-4fda-b93b-546e8359a2c5}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	_BOOL_TestSuit : _BOOL_TestSuit;
+	
+	_BOOL : _BOOL(TRUE);
+	
+	initalValue : TIMESTRUCT := (wYear := 1, wMonth := 2, wDayOfWeek := 3, wDay := 4, wHour := 5, wMinute := 6, wSecond := 7, wMilliseconds := 8);
+	_timeStruct : _TIMESTRUCT;
+	
+	
+	serializer : JsonSerializer;
+	_boolStructType : STRING(500);
+	_boolStructValue : STRING(500);
+	_timeStructType : STRING(500);
+	_timeStructValue : STRING(500);
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[TcUnit.RUN();
+
+// _BOOL
+
+serializer.Reset();
+_BOOL.SerializeTypeWith(serializer);
+serializer.TryGetSerialziedData(ADR(_boolStructType), SIZEOF(_boolStructType));
+
+serializer.Reset();
+_BOOL.SerializeWith(serializer);
+serializer.TryGetSerialziedData(ADR(_boolStructValue), SIZEOF(_boolStructValue));
+
+// _TIMESTRUCT
+// structs cannot be initialized in FB_INIT, so instead this is going as a value set
+_timeStruct.Value := initalValue;
+
+serializer.Reset();
+_timeStruct.SerializeTypeWith(serializer);
+serializer.TryGetSerialziedData(ADR(_timeStructType), SIZEOF(_timeStructType));
+
+serializer.Reset();
+_timeStruct.SerializeWith(serializer);
+serializer.TryGetSerialziedData(ADR(_timeStructValue), SIZEOF(_timeStructValue));
+]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>
