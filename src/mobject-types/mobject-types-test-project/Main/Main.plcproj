@@ -24,7 +24,7 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Tests\_BOOL_TestSuit.TcPOU">
+    <Compile Include="Tests\_BOOL_TestSuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

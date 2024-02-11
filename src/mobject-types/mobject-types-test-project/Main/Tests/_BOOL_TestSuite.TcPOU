@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="_BOOL_TestSuit" Id="{04424176-653a-49ad-adf2-0c9b2705b8ed}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK _BOOL_TestSuit EXTENDS TcUnit.FB_TestSuite
+  <POU Name="_BOOL_TestSuite" Id="{04424176-653a-49ad-adf2-0c9b2705b8ed}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK _BOOL_TestSuite EXTENDS TcUnit.FB_TestSuite
 VAR
 END_VAR
 ]]></Declaration>
