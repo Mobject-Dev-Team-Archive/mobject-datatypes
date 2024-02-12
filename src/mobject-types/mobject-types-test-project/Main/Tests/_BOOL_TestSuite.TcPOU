@@ -6,18 +6,212 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[Placeholder();]]></ST>
+      <ST><![CDATA[TestAddress();
+TestIdentifierReturnsExpected();
+TestSize();
+TestValueReturnsExpectedAfterInit();
+TestValueReturnsExpectedAfterChange();
+
+TestSerializeTypeWith();
+TestSerializeWith();
+TestTryDeserializeFrom();
+]]></ST>
     </Implementation>
-    <Method Name="Placeholder" Id="{ea3d6e63-a114-47ac-8ed8-933bb714da06}">
-      <Declaration><![CDATA[METHOD PUBLIC Placeholder
+    <Method Name="TestAddress" Id="{ee5b03cc-e519-04e2-1da9-f4d64faa2752}">
+      <Declaration><![CDATA[METHOD PUBLIC TestAddress
 VAR
-END_VAR]]></Declaration>
+    _type : _BOOL(TRUE);
+    notExpected : PVOID := 0;
+    actual : PVOID;
+END_VAR
+]]></Declaration>
       <Implementation>
-        <ST><![CDATA[TEST('Placeholder');
+        <ST><![CDATA[TEST('TestAddress');
 
-AssertTrue(Condition := TRUE, Message := '');
+actual := _type.Address;
 
-TEST_FINISHED();]]></ST>
+AssertFalse(
+    Condition := (notExpected = actual),
+    Message := 'Type did not return a valid address.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestIdentifierReturnsExpected" Id="{ea3d6e63-a114-47ac-8ed8-933bb714da06}">
+      <Declaration><![CDATA[METHOD PUBLIC TestIdentifierReturnsExpected
+VAR
+    _type : _BOOL(TRUE);
+    expected : STRING := 'BOOL';
+    actual : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestIdentifierReturnsExpected');
+
+actual := _type.Identifier;
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Type did not return correct identifier.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestSerializeTypeWith" Id="{9318f8b6-50be-0560-2f4c-cd867b2836e0}">
+      <Declaration><![CDATA[METHOD PUBLIC TestSerializeTypeWith
+VAR
+    _type : _BOOL(TRUE);
+    serializer : JsonSerializer;
+    expected : STRING := '{"type":"BOOL"}';
+    actual : STRING(500);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestSerializeTypeWith');
+
+serializer.Reset();
+_type.SerializeTypeWith(serializer);
+serializer.TryGetSerialziedData(ADR(actual), SIZEOF(actual));
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Serialization of type did not return correct string.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestSerializeWith" Id="{35680c07-5aa5-0f1d-3d6f-05901d1af2b3}">
+      <Declaration><![CDATA[METHOD PUBLIC TestSerializeWith
+VAR
+    _type : _BOOL(TRUE);
+    serializer : JsonSerializer;
+    expected : STRING := 'true';
+    actual : STRING(500);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestSerializeWith');
+
+serializer.Reset();
+_type.SerializeWith(serializer);
+serializer.TryGetSerialziedData(ADR(actual), SIZEOF(actual));
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Serialization of type data did not return correct string.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestSize" Id="{c10b084a-a917-023f-234e-39089eb7852a}">
+      <Declaration><![CDATA[METHOD PUBLIC TestSize
+VAR
+    _type : _BOOL(TRUE);
+    expected : UDINT := SIZEOF(BOOL);
+    actual : UDINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestSize');
+
+actual := _type.Size;
+
+AssertEquals_UDINT(
+    Expected := Expected,
+    Actual := actual,
+    Message := 'Type did not return the correct size.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestTryDeserializeFrom" Id="{379babdf-e7c6-0fcb-2c20-9f83902a719b}">
+      <Declaration><![CDATA[METHOD PUBLIC TestTryDeserializeFrom
+VAR
+    deserializer : JsonDeserializer;
+    json : STRING := 'true';
+    _type : _BOOL(FALSE);
+    expected : BOOL := TRUE;
+    actual : BOOL;
+ END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestTryDeserializeFrom');
+
+deserializer.Reset();
+deserializer.TryLoad(json);
+_type.TryDeserializeFrom(deserializer);
+
+actual := _type.Value;
+
+AssertEquals_BOOL(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Type did not deserialize correctly.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestValueReturnsExpectedAfterChange" Id="{a4210117-f93d-0a57-1d4e-4071d20fa13b}">
+      <Declaration><![CDATA[METHOD PUBLIC TestValueReturnsExpectedAfterChange
+VAR
+    _type : _BOOL(TRUE);
+    expected : BOOL := FALSE;
+    actual : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestValueReturnsExpectedAfterChange');
+
+_type.Value := FALSE;
+
+actual := _type.Value;
+
+AssertEquals_BOOL(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Expected value not returned after change.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestValueReturnsExpectedAfterInit" Id="{b8a62806-49b1-0b12-2b17-7ce8dd89ebed}">
+      <Declaration><![CDATA[METHOD PUBLIC TestValueReturnsExpectedAfterInit
+VAR
+    _type : _BOOL(TRUE);
+    expected : BOOL := TRUE;
+    actual : BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestValueReturnsExpectedAfterInit');
+
+actual := _type.Value;
+
+AssertEquals_BOOL(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Expected value not returned after Init.'
+);
+
+TEST_FINISHED();
+]]></ST>
       </Implementation>
     </Method>
   </POU>

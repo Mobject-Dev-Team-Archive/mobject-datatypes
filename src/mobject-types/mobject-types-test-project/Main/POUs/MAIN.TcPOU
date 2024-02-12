@@ -3,7 +3,7 @@
   <POU Name="MAIN" Id="{7bf63626-4b20-4fda-b93b-546e8359a2c5}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
-	_BOOL_TestSuit : _BOOL_TestSuite;
+	_BOOL_TestSuite : _BOOL_TestSuite;
 	
 	_BOOL : _BOOL(TRUE);
 	
