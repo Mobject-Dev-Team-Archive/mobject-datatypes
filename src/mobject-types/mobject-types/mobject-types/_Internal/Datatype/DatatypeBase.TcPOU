@@ -22,6 +22,15 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="ClearReference" Id="{4259927f-6f52-00ed-02eb-e8cf594481d2}">
+      <Declaration><![CDATA[METHOD PUBLIC ABSTRACT ClearReference
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="Identifier" Id="{b214c73d-d71a-494a-a4e7-b82330259257}">
       <Declaration><![CDATA[PROPERTY PUBLIC ABSTRACT Identifier : T_MAXSTRING]]></Declaration>
       <Get Name="Get" Id="{c0278ba6-e414-4f61-82bf-4c91d676ba7e}">
@@ -63,8 +72,8 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="TryCopyFrom" Id="{ff5a7101-aefc-4015-bfe6-0f0bdfd3b844}">
-      <Declaration><![CDATA[METHOD PUBLIC TryCopyFrom : BOOL
+    <Method Name="TryCopy" Id="{ff5a7101-aefc-4015-bfe6-0f0bdfd3b844}">
+      <Declaration><![CDATA[METHOD PUBLIC TryCopy : BOOL
 VAR_INPUT
 	Source : I_Datatype;
 END_VAR
@@ -81,6 +90,15 @@ memcpy(Address, Source.Address, Size);]]></ST>
       <Declaration><![CDATA[METHOD PUBLIC ABSTRACT TryDeserializeFrom : BOOL
 VAR_INPUT
 	Deserializer : I_Deserializer;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TryMakeReferenceOf" Id="{aed9eb80-ebc5-03fc-0ecc-e5fedc065442}">
+      <Declaration><![CDATA[METHOD PUBLIC ABSTRACT TryMakeReferenceOf : BOOL
+VAR_INPUT
+	Target : I_Datatype;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>

@@ -6,7 +6,8 @@
 {attribute 'enable_dynamic_creation'}
 FUNCTION_BLOCK _TIMESTRUCT EXTENDS DatatypeBase
 VAR
-	data : TIMESTRUCT;
+	localData : TIMESTRUCT;
+	activeData : REFERENCE TO TIMESTRUCT REF= localData;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -19,10 +20,19 @@ END_VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Address := ADR(data);]]></ST>
+          <ST><![CDATA[Address := ADR(activeData);]]></ST>
         </Implementation>
       </Get>
     </Property>
+    <Method Name="ClearReference" Id="{16c22b7d-2069-0e94-0823-7f69befe1715}">
+      <Declaration><![CDATA[METHOD PUBLIC ClearReference
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[activeData REF= localData;]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="Identifier" Id="{11804f6c-c92e-0f5b-382d-3367d277dbcc}">
       <Declaration><![CDATA[PROPERTY PUBLIC Identifier : T_MAXSTRING]]></Declaration>
       <Get Name="Get" Id="{7977c071-5d37-04dd-33f0-5d682f8e3abf}">
@@ -89,14 +99,14 @@ VAR_INPUT
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[Serializer.StartObject();
-Serializer.AddKeyWord('wYear',data.wYear);
-Serializer.AddKeyWord('wMonth',data.wMonth);
-Serializer.AddKeyWord('wDayOfWeek',data.wDayOfWeek);
-Serializer.AddKeyWord('wDay',data.wDay);
-Serializer.AddKeyWord('wHour',data.wHour);
-Serializer.AddKeyWord('wMinute',data.wMinute);
-Serializer.AddKeyWord('wSecond',data.wSecond);
-Serializer.AddKeyWord('wMilliseconds',data.wMilliseconds);
+Serializer.AddKeyWord('wYear',activeData.wYear);
+Serializer.AddKeyWord('wMonth',activeData.wMonth);
+Serializer.AddKeyWord('wDayOfWeek',activeData.wDayOfWeek);
+Serializer.AddKeyWord('wDay',activeData.wDay);
+Serializer.AddKeyWord('wHour',activeData.wHour);
+Serializer.AddKeyWord('wMinute',activeData.wMinute);
+Serializer.AddKeyWord('wSecond',activeData.wSecond);
+Serializer.AddKeyWord('wMilliseconds',activeData.wMilliseconds);
 Serializer.EndObject();]]></ST>
       </Implementation>
     </Method>
@@ -107,7 +117,7 @@ Serializer.EndObject();]]></ST>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Size := SIZEOF(data);]]></ST>
+          <ST><![CDATA[Size := SIZEOF(activeData);]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -118,14 +128,32 @@ VAR_INPUT
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[TryDeserializeFrom := 
-	Deserializer.TryGetKeyWord('wYear',data.wYear) AND 
-	Deserializer.TryGetKeyWord('wMonth',data.wMonth) AND 
-	Deserializer.TryGetKeyWord('wDayOfWeek',data.wDayOfWeek) AND 
-	Deserializer.TryGetKeyWord('wDay',data.wDay) AND 
-	Deserializer.TryGetKeyWord('wHour',data.wHour) AND 
-	Deserializer.TryGetKeyWord('wMinute',data.wMinute) AND 
-	Deserializer.TryGetKeyWord('wSecond',data.wSecond) AND 
-	Deserializer.TryGetKeyWord('wMilliseconds',data.wMilliseconds);]]></ST>
+	Deserializer.TryGetKeyWord('wYear',activeData.wYear) AND 
+	Deserializer.TryGetKeyWord('wMonth',activeData.wMonth) AND 
+	Deserializer.TryGetKeyWord('wDayOfWeek',activeData.wDayOfWeek) AND 
+	Deserializer.TryGetKeyWord('wDay',activeData.wDay) AND 
+	Deserializer.TryGetKeyWord('wHour',activeData.wHour) AND 
+	Deserializer.TryGetKeyWord('wMinute',activeData.wMinute) AND 
+	Deserializer.TryGetKeyWord('wSecond',activeData.wSecond) AND 
+	Deserializer.TryGetKeyWord('wMilliseconds',activeData.wMilliseconds);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TryMakeReferenceOf" Id="{8b5d5a6b-3b1b-05bb-2e0f-edb7929e5540}">
+      <Declaration><![CDATA[METHOD TryMakeReferenceOf : BOOL
+VAR_INPUT
+	Target : I_Datatype;
+END_VAR
+VAR
+	pTargetData : POINTER TO TIMESTRUCT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT (Target.Identifier = Identifier) THEN
+	RETURN;
+END_IF
+
+pTargetData := Target.Address;
+activeData REF= pTargetData^;
+TryMakeReferenceOf := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Property Name="Value" Id="{b58f9a32-1b3b-0a05-0577-0e7b74707ce6}">
@@ -135,7 +163,7 @@ END_VAR]]></Declaration>
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Value := data;]]></ST>
+          <ST><![CDATA[Value := activeData;]]></ST>
         </Implementation>
       </Get>
       <Set Name="Set" Id="{4bd1c6bf-61b3-0a38-37ec-840667c35baf}">
@@ -143,7 +171,7 @@ END_VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[data := Value;]]></ST>
+          <ST><![CDATA[activeData := Value;]]></ST>
         </Implementation>
       </Set>
     </Property>

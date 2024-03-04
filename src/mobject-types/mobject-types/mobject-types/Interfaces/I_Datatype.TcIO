@@ -8,17 +8,37 @@
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
+    <Method Name="ClearReference" Id="{d6ba8507-aaaa-0d79-12ee-6da70653c60f}">
+      <Declaration><![CDATA[METHOD PUBLIC ClearReference
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
     <Property Name="Identifier" Id="{b5ede973-026a-40e2-b656-ccf5a34daaf0}">
       <Declaration><![CDATA[PROPERTY PUBLIC Identifier : T_MAXSTRING]]></Declaration>
       <Get Name="Get" Id="{bd9a47c5-8817-48b1-a2cd-e41da6b3e2dd}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
+    <Method Name="SerializeTypeWith" Id="{62fe74e3-7708-080e-2978-6b48ab2638bd}">
+      <Declaration><![CDATA[METHOD PUBLIC SerializeTypeWith
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR
+]]></Declaration>
+    </Method>
     <Property Name="Size" Id="{5c04081a-bb6e-4218-8597-9b7757149fa1}">
       <Declaration><![CDATA[PROPERTY PUBLIC Size : UDINT]]></Declaration>
       <Get Name="Get" Id="{fdc689ce-7c38-465d-a111-883a520bad02}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
+    <Method Name="TryMakeReferenceOf" Id="{baec0ebb-3447-0677-3e86-cc7b3c3ce04c}">
+      <Declaration><![CDATA[METHOD TryMakeReferenceOf : BOOL
+VAR_INPUT
+	Target : I_Datatype;
+END_VAR
+]]></Declaration>
+    </Method>
   </Itf>
 </TcPlcObject>
