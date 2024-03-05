@@ -33,6 +33,18 @@ END_VAR
         <ST><![CDATA[activeData REF= localData;]]></ST>
       </Implementation>
     </Method>
+    <Method Name="Clone" Id="{f9cc5498-2141-4519-8b72-11d757b9f1bd}">
+      <Declaration><![CDATA[METHOD PUBLIC Clone : I_Datatype
+VAR
+    pClone : POINTER TO _TIMESTRUCT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[pClone := __NEW(_TIMESTRUCT());
+Clone := pClone^;
+]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="Identifier" Id="{11804f6c-c92e-0f5b-382d-3367d277dbcc}">
       <Declaration><![CDATA[PROPERTY PUBLIC Identifier : T_MAXSTRING]]></Declaration>
       <Get Name="Get" Id="{7977c071-5d37-04dd-33f0-5d682f8e3abf}">

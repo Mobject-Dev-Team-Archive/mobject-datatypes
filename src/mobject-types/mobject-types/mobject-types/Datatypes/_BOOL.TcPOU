@@ -34,16 +34,28 @@ END_VAR
         <ST><![CDATA[activeData REF= localData;]]></ST>
       </Implementation>
     </Method>
+    <Method Name="Clone" Id="{a0f61c7d-9075-49a5-ae2f-6fa56ea65ce9}">
+      <Declaration><![CDATA[METHOD PUBLIC Clone : I_Datatype
+VAR
+    pClone : POINTER TO _BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[pClone := __NEW(_BOOL(InitialValue := Value));
+Clone := pClone^;
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="FB_init" Id="{b9c2f4cc-3d64-49ec-b0f9-94f6b91f63cf}" FolderPath="Constructor\">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	InitalValue : BOOL;
+	InitialValue : BOOL;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[localData := InitalValue;]]></ST>
+        <ST><![CDATA[localData := InitialValue;]]></ST>
       </Implementation>
     </Method>
     <Property Name="Identifier" Id="{72af1979-c8a6-44ae-8e4c-a01801501cf1}">
