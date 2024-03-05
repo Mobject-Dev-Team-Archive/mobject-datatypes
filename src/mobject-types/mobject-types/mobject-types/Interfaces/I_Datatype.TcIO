@@ -14,6 +14,10 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
+    <Method Name="Clone" Id="{a5e44a0b-ad36-4fe9-a852-9aa161cad98e}">
+      <Declaration><![CDATA[METHOD Clone : I_Datatype
+]]></Declaration>
+    </Method>
     <Property Name="Identifier" Id="{b5ede973-026a-40e2-b656-ccf5a34daaf0}">
       <Declaration><![CDATA[PROPERTY PUBLIC Identifier : T_MAXSTRING]]></Declaration>
       <Get Name="Get" Id="{bd9a47c5-8817-48b1-a2cd-e41da6b3e2dd}">
