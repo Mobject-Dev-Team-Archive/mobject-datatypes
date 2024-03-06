@@ -41,8 +41,8 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[pClone := __NEW(_TIMESTRUCT());
-Clone := pClone^;
-]]></ST>
+pClone^.Value := Value;
+Clone := pClone^;]]></ST>
       </Implementation>
     </Method>
     <Property Name="Identifier" Id="{11804f6c-c92e-0f5b-382d-3367d277dbcc}">
