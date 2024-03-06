@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="StructuredDatatypeBase" Id="{d625e009-5f55-02c3-36d6-363c53933949}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'linkalways'} 
+{attribute 'no_explicit_call' := 'This FB is a CLASS and must be accessed using methods or properties'}
+{attribute 'enable_dynamic_creation'}
+FUNCTION_BLOCK ABSTRACT StructuredDatatypeBase EXTENDS DatatypeBase IMPLEMENTS I_StructuredDatatype
+VAR
+	membersHost : MembersHost;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="Constructor" Id="{eff44f9a-a7a1-0b84-089b-0a0764f36f1f}" />
+    <Folder Name="Protected" Id="{7be81008-5185-0ecf-2c87-21a945dccc6c}" />
+    <Method Name="Accept" Id="{06765757-4f9c-06e9-3ba8-c4dbd62f08c0}">
+      <Declaration><![CDATA[METHOD PUBLIC Accept
+VAR_INPUT
+	Visitor : I_DatatypeVisitor;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Visitor.VisitDatatype(THIS^);
+membersHost.Accept(Visitor);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_init" Id="{d5677db4-ca21-0216-255e-e87398a35f03}" FolderPath="Constructor\">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[InitializeMembers(membersHost);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetMemberEnumerator" Id="{fac9ada8-4cb2-073e-22b0-6df830bd06b4}">
+      <Declaration><![CDATA[METHOD PUBLIC GetMemberEnumerator : I_KeyValueForwardEnumerator
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetMemberEnumerator := membersHost.GetMemberEnumerator();]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Identifier" Id="{fad1b093-141e-0c94-3cbf-d2814230ee8f}">
+      <Declaration><![CDATA[PROPERTY PUBLIC ABSTRACT Identifier : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{0ba07a67-9506-0b52-2c39-54987f0097d7}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="IecType" Id="{a8c18764-bb60-0e02-27e9-99f1e4f4ba10}">
+      <Declaration><![CDATA[PROPERTY PUBLIC IecType : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{bc004734-b432-0c60-2e2e-c258a8f38112}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IecType := 'STRUCT';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="InitializeMembers" Id="{778de691-ca9f-0d52-0542-bd26615e86d9}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED ABSTRACT InitializeMembers
+VAR_INPUT
+	members : REFERENCE TO MembersHost;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[// make your members references and add to members]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TryGetMemberByName" Id="{8f166c4e-7a97-0c21-3753-3c2e46dcf112}">
+      <Declaration><![CDATA[METHOD PUBLIC TryGetMemberByName : BOOL
+VAR_INPUT
+	Name : T_MAXSTRING;
+	Destination : REFERENCE TO I_Datatype;
+END_VAR
+VAR
+	member : I_Datatype;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT membersHost.TryGetMemberByName(Name, member) THEN 
+	RETURN;
+END_IF
+
+Destination := member;
+TryGetMemberByName := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TryResolveAsStructuredType" Id="{4cf287f6-cc3a-0aaf-0d50-e2dcf54e34fd}">
+      <Declaration><![CDATA[METHOD PUBLIC TryResolveAsStructuredType : BOOL
+VAR_INPUT
+	Destination : REFERENCE TO I_StructuredDatatype;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Destination := THIS^;
+TryResolveAsStructuredType := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

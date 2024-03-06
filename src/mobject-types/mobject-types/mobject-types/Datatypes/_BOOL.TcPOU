@@ -69,16 +69,25 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="SerializeTypeWith" Id="{713b8a57-0816-4acb-80e0-2d0e5c479dc0}">
-      <Declaration><![CDATA[METHOD PUBLIC SerializeTypeWith
+    <Property Name="IecType" Id="{4cdd9b75-726e-0315-350b-ae8f0e86020d}">
+      <Declaration><![CDATA[PROPERTY PUBLIC IecType : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{544ed6ae-fb08-0637-3ffd-c81c2b8876fa}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IecType := 'BOOL';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ReferenceOf" Id="{300ca044-2f72-0cc4-22f3-fecb0789a110}">
+      <Declaration><![CDATA[METHOD PUBLIC ReferenceOf
 VAR_INPUT
-	Serializer : I_Serializer;
+	ReferenceTarget : REFERENCE TO BOOL;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Serializer.StartObject();
-Serializer.AddKeyString('type','BOOL');
-Serializer.EndObject();]]></ST>
+        <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SerializeWith" Id="{0c38b446-0e15-4d4f-ad5d-632b1b0e0167}">

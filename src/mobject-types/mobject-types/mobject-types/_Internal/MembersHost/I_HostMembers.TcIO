@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_HostMembers" Id="{95e5ce33-2242-4ae6-b2da-5b0dea84e884}">
+    <Declaration><![CDATA[INTERFACE I_HostMembers EXTENDS __SYSTEM.IQueryInterface
+]]></Declaration>
+    <Method Name="TryGetMemberByName" Id="{36a256af-0a44-0fb8-2636-9d8385c607c5}">
+      <Declaration><![CDATA[METHOD PUBLIC TryGetMemberByName : BOOL
+VAR_INPUT
+	Name : T_MAXSTRING;
+	Destination : REFERENCE TO I_Datatype;
+END_VAR]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

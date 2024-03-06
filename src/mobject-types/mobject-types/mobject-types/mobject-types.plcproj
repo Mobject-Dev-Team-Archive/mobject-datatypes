@@ -36,8 +36,14 @@
     </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
+    <LibraryReference Include="mobject-collections,1.1.0,mobject">
+      <Namespace>mobject_collections</Namespace>
+    </LibraryReference>
     <LibraryReference Include="mobject-disposable,1.0.0,mobject">
       <Namespace>mobject_disposable</Namespace>
+    </LibraryReference>
+    <LibraryReference Include="mobject-enumerable,1.1.0,mobject">
+      <Namespace>mobject_enumerable</Namespace>
     </LibraryReference>
     <LibraryReference Include="mobject-serialization,0.4.0,mobject">
       <Namespace>mobject_serialization</Namespace>
@@ -53,13 +59,34 @@
     <Compile Include="Datatypes\_HRESULT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Datatypes\_WORD.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Datatypes\_TIMESTRUCT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Interfaces\I_Datatype.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interfaces\I_StructuredDatatype.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\DatatypeVisitor\I_DatatypeVisitor.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\Datatype\AliasDatatypeBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="_Internal\Datatype\DatatypeBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\Datatype\StructuredDatatypeBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\MembersHost\I_HostMembers.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\MembersHost\MembersHost.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -68,6 +95,8 @@
     <Folder Include="Datatypes" />
     <Folder Include="_Internal" />
     <Folder Include="_Internal\Datatype" />
+    <Folder Include="_Internal\MembersHost" />
+    <Folder Include="_Internal\DatatypeVisitor" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_System">

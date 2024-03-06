@@ -5,11 +5,22 @@
 VAR
 	_BOOL_TestSuite : _BOOL_TestSuite;
     _INT_TestSuite : _INT_TestSuite;
+	
+	myTime : _TIMESTRUCT;
+	
+	myUnknownType : I_Datatype := myTime;
+	myStructuredType : I_StructuredDatatype;
+	myWYear : I_Datatype;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[TcUnit.RUN();
-]]></ST>
+
+myTime.wMonth.Value := 123;
+
+IF myUnknownType.TryResolveAsStructuredType(myStructuredType) THEN
+	myStructuredType.TryGetMemberByName('wYear',myWYear);
+END_IF]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

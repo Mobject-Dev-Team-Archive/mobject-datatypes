@@ -4,15 +4,18 @@
     <Declaration><![CDATA[{attribute 'linkalways'} 
 {attribute 'no_explicit_call' := 'This FB is a CLASS and must be accessed using methods or properties'}
 {attribute 'enable_dynamic_creation'}
-FUNCTION_BLOCK _TIMESTRUCT EXTENDS DatatypeBase
+FUNCTION_BLOCK _TIMESTRUCT EXTENDS StructuredDatatypeBase
 VAR
 	localData : TIMESTRUCT;
 	activeData : REFERENCE TO TIMESTRUCT REF= localData;
+	_wYear : _WORD(localData.wYear);
+	_wMonth : _WORD(localData.wMonth);
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Folder Name="Protected" Id="{9fdedf6e-4ca0-00e0-0273-13cb491dabf3}" />
     <Property Name="Address" Id="{b5129746-2857-0022-1d98-5cd0054c1e32}">
       <Declaration><![CDATA[PROPERTY PUBLIC Address : PVOID]]></Declaration>
       <Get Name="Get" Id="{b9ad7187-0100-02be-2dd1-43dd70cfdd46}">
@@ -56,6 +59,30 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="InitializeMembers" Id="{59fd7717-5550-0f25-158c-9c1e87cde269}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED InitializeMembers
+VAR_INPUT
+	members : REFERENCE TO MembersHost;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_wYear.ReferenceOf(activeData.wYear);
+members.AddMember('wYear',_wYear);
+
+_wMonth.ReferenceOf(activeData.wMonth);
+members.AddMember('wMonth',_wMonth);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="ReferenceOf" Id="{7e8e9cd2-b76b-014b-0b95-9790b062a9ee}">
+      <Declaration><![CDATA[METHOD PUBLIC ReferenceOf
+VAR_INPUT
+	ReferenceTarget : TIMESTRUCT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="SerializeTypeWith" Id="{9557f45b-3472-0cda-2edb-d40f943436f4}">
       <Declaration><![CDATA[METHOD PUBLIC SerializeTypeWith
 VAR_INPUT
@@ -66,41 +93,7 @@ END_VAR
         <ST><![CDATA[Serializer.StartObject();
 Serializer.AddKeyString('name','TIMESTRUCT');
 Serializer.AddKeyString('type','STRUCT');	
-Serializer.AddKey('fields');
-Serializer.StartArray();
-Serializer.StartObject();
-Serializer.AddKeyString('name','wYear');	
-Serializer.AddKeyString('type','WORD');
-Serializer.EndObject();
-Serializer.StartObject();
-Serializer.AddKeyString('name','wMonth');	
-Serializer.AddKeyString('type','WORD');
-Serializer.EndObject();
-Serializer.StartObject();
-Serializer.AddKeyString('name','wDayOfWeek');	
-Serializer.AddKeyString('type','WORD');
-Serializer.EndObject();
-Serializer.StartObject();
-Serializer.AddKeyString('name','wDay');	
-Serializer.AddKeyString('type','WORD');
-Serializer.EndObject();
-Serializer.StartObject();
-Serializer.AddKeyString('name','wHour');	
-Serializer.AddKeyString('type','WORD');
-Serializer.EndObject();
-Serializer.StartObject();
-Serializer.AddKeyString('name','wMinute');	
-Serializer.AddKeyString('type','WORD');
-Serializer.EndObject();
-Serializer.StartObject();
-Serializer.AddKeyString('name','wSecond');	
-Serializer.AddKeyString('type','WORD');
-Serializer.EndObject();
-Serializer.StartObject();
-Serializer.AddKeyString('name','wMilliseconds');	
-Serializer.AddKeyString('type','WORD');
-Serializer.EndObject();
-Serializer.EndArray();
+Serializer.AddObject(membersHost);
 Serializer.EndObject();]]></ST>
       </Implementation>
     </Method>
@@ -186,6 +179,28 @@ END_VAR
           <ST><![CDATA[activeData := Value;]]></ST>
         </Implementation>
       </Set>
+    </Property>
+    <Property Name="wMonth" Id="{54bb8911-1454-0b68-0e6e-66985ac5d437}">
+      <Declaration><![CDATA[PROPERTY PUBLIC wMonth : Reference to _WORD]]></Declaration>
+      <Get Name="Get" Id="{8a1a1f3d-9a7a-02bf-2086-eb0b47f7f038}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[wMonth := _wMonth;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="wYear" Id="{3419be73-53a1-06fe-0591-dafdced19fef}">
+      <Declaration><![CDATA[PROPERTY PUBLIC wYear : Reference to _WORD]]></Declaration>
+      <Get Name="Get" Id="{aaabb8ed-77b5-04e0-2779-9412c3abbc56}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[wYear := _wYear;]]></ST>
+        </Implementation>
+      </Get>
     </Property>
   </POU>
 </TcPlcObject>

@@ -2,9 +2,16 @@
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <Itf Name="I_Datatype" Id="{60a3fa78-0098-0a1a-3ab1-3b6b68cfc3f8}">
     <Declaration><![CDATA[INTERFACE I_Datatype extends I_Serializable, I_Deserializable, I_Disposable]]></Declaration>
-    <Property Name="Address" Id="{97ce40cf-daf1-4f84-befc-3d953dbd0739}">
+    <Method Name="Accept" Id="{1c1466e3-ad38-00c6-12b7-d0f5bec45e3e}">
+      <Declaration><![CDATA[METHOD PUBLIC Accept
+VAR_INPUT
+	Visitor : I_DatatypeVisitor;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="Address" Id="{b6af980d-6fa4-03e7-1a92-210c4355cbef}">
       <Declaration><![CDATA[PROPERTY PUBLIC Address : PVOID]]></Declaration>
-      <Get Name="Get" Id="{cbd086cf-89d8-45a8-89c5-e52e3a096e7d}">
+      <Get Name="Get" Id="{76d29585-9396-0c2b-27b7-268d48861c4a}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
@@ -18,9 +25,9 @@ END_VAR
       <Declaration><![CDATA[METHOD Clone : I_Datatype
 ]]></Declaration>
     </Method>
-    <Property Name="Identifier" Id="{b5ede973-026a-40e2-b656-ccf5a34daaf0}">
+    <Property Name="Identifier" Id="{b4fb8027-840b-08bc-315e-60616e6c7ab7}">
       <Declaration><![CDATA[PROPERTY PUBLIC Identifier : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{bd9a47c5-8817-48b1-a2cd-e41da6b3e2dd}">
+      <Get Name="Get" Id="{a3a0a750-6e0e-06c4-2aed-6a0b791cb09c}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
@@ -31,9 +38,9 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
-    <Property Name="Size" Id="{5c04081a-bb6e-4218-8597-9b7757149fa1}">
+    <Property Name="Size" Id="{62faceef-ce01-06be-1436-db1d1975794e}">
       <Declaration><![CDATA[PROPERTY PUBLIC Size : UDINT]]></Declaration>
-      <Get Name="Get" Id="{fdc689ce-7c38-465d-a111-883a520bad02}">
+      <Get Name="Get" Id="{d19a682f-eef7-086c-07e1-c29beb39c672}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
@@ -41,6 +48,13 @@ END_VAR
       <Declaration><![CDATA[METHOD TryMakeReferenceOf : BOOL
 VAR_INPUT
 	Target : I_Datatype;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="TryResolveAsStructuredType" Id="{0f22426d-8db4-0d92-039e-352711832c27}">
+      <Declaration><![CDATA[METHOD PUBLIC TryResolveAsStructuredType : BOOL
+VAR_INPUT
+	Destination : REFERENCE TO I_StructuredDatatype;
 END_VAR
 ]]></Declaration>
     </Method>

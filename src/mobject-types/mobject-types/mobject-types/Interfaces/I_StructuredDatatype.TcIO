@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_StructuredDatatype" Id="{b239b75e-3191-0c43-3209-599970eef4a1}">
+    <Declaration><![CDATA[INTERFACE I_StructuredDatatype EXTENDS I_Datatype]]></Declaration>
+    <Property Name="Identifier" Id="{854169a8-0914-021e-32b5-f9bf0b5fd927}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Identifier : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{faf3af4d-db74-0910-00ec-0ce4f6071d5e}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="TryGetMemberByName" Id="{ba134a7f-e924-0cce-2762-f09af934118f}">
+      <Declaration><![CDATA[METHOD PUBLIC TryGetMemberByName : BOOL
+VAR_INPUT
+	Name : T_MAXSTRING;
+	Destination : REFERENCE TO I_Datatype;
+END_VAR]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

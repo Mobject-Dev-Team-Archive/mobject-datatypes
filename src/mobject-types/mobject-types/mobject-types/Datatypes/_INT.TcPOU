@@ -69,16 +69,25 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="SerializeTypeWith" Id="{af35cae2-a092-4032-89d6-a30694d676f9}">
-      <Declaration><![CDATA[METHOD PUBLIC SerializeTypeWith
+    <Property Name="IecType" Id="{93df8d16-361c-0589-1f02-56441476a1c3}">
+      <Declaration><![CDATA[PROPERTY PUBLIC IecType : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{e4478699-f245-0f2c-0325-791fec8c3d09}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IecType := 'INT';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ReferenceOf" Id="{10808909-7a1b-0eae-399d-be00cd1ce852}">
+      <Declaration><![CDATA[METHOD PUBLIC ReferenceOf
 VAR_INPUT
-	Serializer : I_Serializer;
+	ReferenceTarget : INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Serializer.StartObject();
-Serializer.AddKeyString('type','INT');
-Serializer.EndObject();]]></ST>
+        <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SerializeWith" Id="{78bbb435-9f2e-431a-8b4c-405d57f91cbd}">
