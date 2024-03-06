@@ -78,11 +78,12 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[BaseType := aliasBaseType;]]></ST>
+        <ST><![CDATA[aliasBaseType.MakeReferenceTo(activeData);
+BaseType := aliasBaseType;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="ReferenceOf" Id="{b812282b-13cf-0ccc-1aff-702feb80c71d}">
-      <Declaration><![CDATA[METHOD PUBLIC ReferenceOf
+    <Method Name="MakeReferenceTo" Id="{b812282b-13cf-0ccc-1aff-702feb80c71d}">
+      <Declaration><![CDATA[METHOD PUBLIC MakeReferenceTo
 VAR_INPUT
 	ReferenceTarget : HRESULT;
 END_VAR
@@ -102,8 +103,8 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="TryMakeReferenceOf" Id="{43bcd589-1009-0f1a-3a87-0d5bc8645b2a}">
-      <Declaration><![CDATA[METHOD TryMakeReferenceOf : BOOL
+    <Method Name="TryMakeReferenceTo" Id="{43bcd589-1009-0f1a-3a87-0d5bc8645b2a}">
+      <Declaration><![CDATA[METHOD TryMakeReferenceTo : BOOL
 VAR_INPUT
 	Target : I_Datatype;
 END_VAR
@@ -117,7 +118,7 @@ END_IF
 
 pTargetData := Target.Address;
 activeData REF= pTargetData^;
-TryMakeReferenceOf := TRUE;]]></ST>
+TryMakeReferenceTo := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Property Name="Value" Id="{85c486dd-d750-0c76-00cb-4c376724f1d2}">

@@ -50,8 +50,8 @@ VAR_INPUT
 	Deserializer : I_Deserializer;
 END_VAR]]></Declaration>
     </Method>
-    <Method Name="TryMakeReferenceOf" Id="{baec0ebb-3447-0677-3e86-cc7b3c3ce04c}">
-      <Declaration><![CDATA[METHOD TryMakeReferenceOf : BOOL
+    <Method Name="TryMakeReferenceTo" Id="{baec0ebb-3447-0677-3e86-cc7b3c3ce04c}">
+      <Declaration><![CDATA[METHOD TryMakeReferenceTo : BOOL
 VAR_INPUT
 	Target : I_Datatype;
 END_VAR

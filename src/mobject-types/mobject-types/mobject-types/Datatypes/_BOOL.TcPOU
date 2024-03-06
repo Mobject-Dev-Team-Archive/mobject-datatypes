@@ -69,8 +69,8 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="ReferenceOf" Id="{300ca044-2f72-0cc4-22f3-fecb0789a110}">
-      <Declaration><![CDATA[METHOD PUBLIC ReferenceOf
+    <Method Name="MakeReferenceTo" Id="{300ca044-2f72-0cc4-22f3-fecb0789a110}">
+      <Declaration><![CDATA[METHOD PUBLIC MakeReferenceTo
 VAR_INPUT
 	ReferenceTarget : REFERENCE TO BOOL;
 END_VAR
@@ -108,8 +108,8 @@ END_VAR]]></Declaration>
         <ST><![CDATA[TryDeserializeFrom := Deserializer.TryGetBool(activeData);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TryMakeReferenceOf" Id="{7005b362-8e83-054d-2624-d6bbb82e7b1c}">
-      <Declaration><![CDATA[METHOD TryMakeReferenceOf : BOOL
+    <Method Name="TryMakeReferenceTo" Id="{7005b362-8e83-054d-2624-d6bbb82e7b1c}">
+      <Declaration><![CDATA[METHOD TryMakeReferenceTo : BOOL
 VAR_INPUT
 	Target : I_Datatype;
 END_VAR
@@ -123,7 +123,7 @@ END_IF
 
 pTargetData := Target.Address;
 activeData REF= pTargetData^;
-TryMakeReferenceOf := TRUE;]]></ST>
+TryMakeReferenceTo := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Property Name="Value" Id="{c45fd22d-2330-40b4-b235-05bd28ec9ac2}">

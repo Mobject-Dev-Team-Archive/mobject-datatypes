@@ -69,8 +69,8 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="ReferenceOf" Id="{6ed8112e-bd9f-47d8-93fc-f014f84e363b}">
-      <Declaration><![CDATA[METHOD PUBLIC ReferenceOf
+    <Method Name="MakeReferenceTo" Id="{6ed8112e-bd9f-47d8-93fc-f014f84e363b}">
+      <Declaration><![CDATA[METHOD PUBLIC MakeReferenceTo
 VAR_INPUT
 	ReferenceTarget : DINT;
 END_VAR
@@ -108,8 +108,8 @@ END_VAR]]></Declaration>
         <ST><![CDATA[TryDeserializeFrom := Deserializer.TryGetDint(activeData);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TryMakeReferenceOf" Id="{bba1a4f3-2e9f-4afb-ad98-e91b315f70d0}">
-      <Declaration><![CDATA[METHOD TryMakeReferenceOf : BOOL
+    <Method Name="TryMakeReferenceTo" Id="{bba1a4f3-2e9f-4afb-ad98-e91b315f70d0}">
+      <Declaration><![CDATA[METHOD TryMakeReferenceTo : BOOL
 VAR_INPUT
 	Target : I_Datatype;
 END_VAR
@@ -123,7 +123,7 @@ END_IF
 
 pTargetData := Target.Address;
 activeData REF= pTargetData^;
-TryMakeReferenceOf := TRUE;]]></ST>
+TryMakeReferenceTo := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Property Name="Value" Id="{95d8e7ae-8166-41ea-b32a-844f1aa026c3}">

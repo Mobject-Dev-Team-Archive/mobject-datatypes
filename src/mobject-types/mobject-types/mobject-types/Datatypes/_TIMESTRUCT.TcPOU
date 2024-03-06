@@ -66,15 +66,15 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[_wYear.ReferenceOf(activeData.wYear);
+        <ST><![CDATA[_wYear.MakeReferenceTo(activeData.wYear);
 members.AddMember('wYear',_wYear);
 
-_wMonth.ReferenceOf(activeData.wMonth);
+_wMonth.MakeReferenceTo(activeData.wMonth);
 members.AddMember('wMonth',_wMonth);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="ReferenceOf" Id="{7e8e9cd2-b76b-014b-0b95-9790b062a9ee}">
-      <Declaration><![CDATA[METHOD PUBLIC ReferenceOf
+    <Method Name="MakeReferenceTo" Id="{7e8e9cd2-b76b-014b-0b95-9790b062a9ee}">
+      <Declaration><![CDATA[METHOD PUBLIC MakeReferenceTo
 VAR_INPUT
 	ReferenceTarget : TIMESTRUCT;
 END_VAR
@@ -94,8 +94,8 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="TryMakeReferenceOf" Id="{8b5d5a6b-3b1b-05bb-2e0f-edb7929e5540}">
-      <Declaration><![CDATA[METHOD TryMakeReferenceOf : BOOL
+    <Method Name="TryMakeReferenceTo" Id="{8b5d5a6b-3b1b-05bb-2e0f-edb7929e5540}">
+      <Declaration><![CDATA[METHOD TryMakeReferenceTo : BOOL
 VAR_INPUT
 	Target : I_Datatype;
 END_VAR
@@ -109,7 +109,7 @@ END_IF
 
 pTargetData := Target.Address;
 activeData REF= pTargetData^;
-TryMakeReferenceOf := TRUE;]]></ST>
+TryMakeReferenceTo := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Property Name="Value" Id="{b58f9a32-1b3b-0a05-0577-0e7b74707ce6}">

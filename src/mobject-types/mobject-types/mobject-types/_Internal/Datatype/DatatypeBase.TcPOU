@@ -113,8 +113,8 @@ END_VAR]]></Declaration>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TryMakeReferenceOf" Id="{aed9eb80-ebc5-03fc-0ecc-e5fedc065442}">
-      <Declaration><![CDATA[METHOD PUBLIC ABSTRACT TryMakeReferenceOf : BOOL
+    <Method Name="TryMakeReferenceTo" Id="{aed9eb80-ebc5-03fc-0ecc-e5fedc065442}">
+      <Declaration><![CDATA[METHOD PUBLIC ABSTRACT TryMakeReferenceTo : BOOL
 VAR_INPUT
 	Target : I_Datatype;
 END_VAR]]></Declaration>
