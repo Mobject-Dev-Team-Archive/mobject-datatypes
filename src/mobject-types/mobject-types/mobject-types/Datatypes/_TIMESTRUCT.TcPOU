@@ -83,38 +83,6 @@ END_VAR
         <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SerializeTypeWith" Id="{9557f45b-3472-0cda-2edb-d40f943436f4}">
-      <Declaration><![CDATA[METHOD PUBLIC SerializeTypeWith
-VAR_INPUT
-	Serializer : I_Serializer;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[Serializer.StartObject();
-Serializer.AddKeyString('name','TIMESTRUCT');
-Serializer.AddKeyString('type','STRUCT');	
-Serializer.AddObject(membersHost);
-Serializer.EndObject();]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="SerializeWith" Id="{f17129c1-ecf8-045a-20b3-0a14e299ca4b}">
-      <Declaration><![CDATA[METHOD PUBLIC SerializeWith
-VAR_INPUT
-	Serializer : I_Serializer;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[Serializer.StartObject();
-Serializer.AddKeyWord('wYear',activeData.wYear);
-Serializer.AddKeyWord('wMonth',activeData.wMonth);
-Serializer.AddKeyWord('wDayOfWeek',activeData.wDayOfWeek);
-Serializer.AddKeyWord('wDay',activeData.wDay);
-Serializer.AddKeyWord('wHour',activeData.wHour);
-Serializer.AddKeyWord('wMinute',activeData.wMinute);
-Serializer.AddKeyWord('wSecond',activeData.wSecond);
-Serializer.AddKeyWord('wMilliseconds',activeData.wMilliseconds);
-Serializer.EndObject();]]></ST>
-      </Implementation>
-    </Method>
     <Property Name="Size" Id="{3db85a58-3871-08be-0a1b-c8cbab28906e}">
       <Declaration><![CDATA[PROPERTY PUBLIC Size : UDINT]]></Declaration>
       <Get Name="Get" Id="{c45ad51d-3dc4-00ea-11f7-a16d1bad1963}">
@@ -126,23 +94,6 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="TryDeserializeFrom" Id="{81f90143-8327-08ec-2623-a73f946b24e9}">
-      <Declaration><![CDATA[METHOD TryDeserializeFrom : BOOL
-VAR_INPUT
-	Deserializer : I_Deserializer;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[TryDeserializeFrom := 
-	Deserializer.TryGetKeyWord('wYear',activeData.wYear) AND 
-	Deserializer.TryGetKeyWord('wMonth',activeData.wMonth) AND 
-	Deserializer.TryGetKeyWord('wDayOfWeek',activeData.wDayOfWeek) AND 
-	Deserializer.TryGetKeyWord('wDay',activeData.wDay) AND 
-	Deserializer.TryGetKeyWord('wHour',activeData.wHour) AND 
-	Deserializer.TryGetKeyWord('wMinute',activeData.wMinute) AND 
-	Deserializer.TryGetKeyWord('wSecond',activeData.wSecond) AND 
-	Deserializer.TryGetKeyWord('wMilliseconds',activeData.wMilliseconds);]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="TryMakeReferenceOf" Id="{8b5d5a6b-3b1b-05bb-2e0f-edb7929e5540}">
       <Declaration><![CDATA[METHOD TryMakeReferenceOf : BOOL
 VAR_INPUT
@@ -152,7 +103,7 @@ VAR
 	pTargetData : POINTER TO TIMESTRUCT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT (Target.Identifier = Identifier) THEN
+        <ST><![CDATA[IF NOT (Target.IecType = IecType) THEN
 	RETURN;
 END_IF
 

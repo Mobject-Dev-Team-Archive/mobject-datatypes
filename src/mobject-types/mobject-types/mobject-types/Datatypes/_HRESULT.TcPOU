@@ -8,12 +8,14 @@ FUNCTION_BLOCK _HRESULT EXTENDS AliasDatatypeBase
 VAR
 	localData : HRESULT;
 	activeData : REFERENCE TO HRESULT REF= localData;
+	aliasBaseType : _DINT(localData);
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Folder Name="Constructor" Id="{c86d702f-77a8-0c2d-2692-85b706f92094}" />
+    <Folder Name="Protected" Id="{ad40f793-9b3d-4478-aa9d-0319dd4f7560}" />
     <Property Name="Address" Id="{eaea8ce2-d780-069a-2354-b9040dbfdf59}">
       <Declaration><![CDATA[PROPERTY PUBLIC Address : PVOID]]></Declaration>
       <Get Name="Get" Id="{9ca66335-2df6-0b97-035a-cfdc96d663e4}">
@@ -69,6 +71,16 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="InitializeBaseType" Id="{13e14335-59c8-4817-abfb-1cdbed05ddb5}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED InitializeBaseType
+VAR_INPUT
+	BaseType : REFERENCE TO I_Datatype;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[BaseType := aliasBaseType;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="ReferenceOf" Id="{b812282b-13cf-0ccc-1aff-702feb80c71d}">
       <Declaration><![CDATA[METHOD PUBLIC ReferenceOf
 VAR_INPUT
@@ -77,29 +89,6 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="SerializeTypeWith" Id="{79420e18-4568-0164-3ff9-5586c365a9bc}">
-      <Declaration><![CDATA[METHOD PUBLIC SerializeTypeWith
-VAR_INPUT
-	Serializer : I_Serializer;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[Serializer.StartObject();
-Serializer.AddKeyString('name','HRESULT');
-Serializer.AddKeyString('type','ALIAS');
-Serializer.AddKeyString('baseType','DINT');
-Serializer.EndObject();]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="SerializeWith" Id="{383560a3-8b65-0257-31d6-71c64440cf07}">
-      <Declaration><![CDATA[METHOD PUBLIC SerializeWith
-VAR_INPUT
-	Serializer : I_Serializer;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[Serializer.AddDint(activeData);]]></ST>
       </Implementation>
     </Method>
     <Property Name="Size" Id="{78fc7983-bbf0-072e-3bed-9c1f413ab6ff}">
@@ -113,15 +102,6 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="TryDeserializeFrom" Id="{2cbaac55-0de2-0fcc-24d0-d8a31addeef5}">
-      <Declaration><![CDATA[METHOD TryDeserializeFrom : BOOL
-VAR_INPUT
-	Deserializer : I_Deserializer;
-END_VAR]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[TryDeserializeFrom := Deserializer.TryGetDint(activeData);]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="TryMakeReferenceOf" Id="{43bcd589-1009-0f1a-3a87-0d5bc8645b2a}">
       <Declaration><![CDATA[METHOD TryMakeReferenceOf : BOOL
 VAR_INPUT
@@ -131,7 +111,7 @@ VAR
 	pTargetData : POINTER TO HRESULT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT (Target.Identifier = Identifier) THEN
+        <ST><![CDATA[IF NOT (Target.IecType = IecType) THEN
 	RETURN;
 END_IF
 

@@ -25,9 +25,9 @@ END_VAR
       <Declaration><![CDATA[METHOD Clone : I_Datatype
 ]]></Declaration>
     </Method>
-    <Property Name="Identifier" Id="{b4fb8027-840b-08bc-315e-60616e6c7ab7}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Identifier : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{a3a0a750-6e0e-06c4-2aed-6a0b791cb09c}">
+    <Property Name="IecType" Id="{3e504b15-a23a-4860-84f9-0eb7a5748e54}">
+      <Declaration><![CDATA[PROPERTY PUBLIC IecType : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{754d9748-a1f0-4e02-a812-888502f394ac}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
@@ -44,6 +44,12 @@ END_VAR
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
+    <Method Name="TryDeserializeFrom" Id="{9b5d8c97-6edb-4df7-bfad-f57fc25daaf7}">
+      <Declaration><![CDATA[METHOD PUBLIC ABSTRACT TryDeserializeFrom : BOOL
+VAR_INPUT
+	Deserializer : I_Deserializer;
+END_VAR]]></Declaration>
+    </Method>
     <Method Name="TryMakeReferenceOf" Id="{baec0ebb-3447-0677-3e86-cc7b3c3ce04c}">
       <Declaration><![CDATA[METHOD TryMakeReferenceOf : BOOL
 VAR_INPUT

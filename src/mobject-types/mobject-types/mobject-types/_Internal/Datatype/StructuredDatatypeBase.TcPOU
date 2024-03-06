@@ -76,6 +76,61 @@ END_VAR
         <ST><![CDATA[// make your members references and add to members]]></ST>
       </Implementation>
     </Method>
+    <Method Name="SerializeTypeWith" Id="{9654791f-6cce-4be3-aa2e-1642f4102f87}">
+      <Declaration><![CDATA[METHOD PUBLIC SerializeTypeWith
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Serializer.StartObject();
+Serializer.AddKeyString('name',Identifier);
+Serializer.AddKeyString('type',IecType);	
+membersHost.SerializeTypeWith(Serializer);
+Serializer.EndObject();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SerializeWith" Id="{f673cce2-1a3e-44bc-81da-e8bc2c037902}">
+      <Declaration><![CDATA[METHOD PUBLIC SerializeWith
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Serializer.StartObject();
+membersHost.SerializeWith(Serializer);
+Serializer.EndObject();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TryCopy" Id="{2a52ab7e-c04c-4dca-9c5a-bd85f10678c4}">
+      <Declaration><![CDATA[METHOD PUBLIC TryCopy : BOOL
+VAR_INPUT
+	Source : I_Datatype;
+END_VAR
+VAR
+	SourceAsStructure : I_StructuredDatatype;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT Source.TryResolveAsStructuredType(SourceAsStructure) THEN
+	RETURN;
+END_IF
+
+IF SourceAsStructure.Identifier <> Identifier THEN
+	RETURN;
+END_IF
+
+memcpy(Address, Source.Address, Size);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TryDeserializeFrom" Id="{59671805-cc69-411a-a0b1-4ff94095acb6}">
+      <Declaration><![CDATA[METHOD TryDeserializeFrom : BOOL
+VAR_INPUT
+	Deserializer : I_Deserializer;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TryDeserializeFrom := membersHost.TryDeserializeFrom(Deserializer);]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="TryGetMemberByName" Id="{8f166c4e-7a97-0c21-3753-3c2e46dcf112}">
       <Declaration><![CDATA[METHOD PUBLIC TryGetMemberByName : BOOL
 VAR_INPUT

@@ -60,7 +60,7 @@ VAR_INPUT
 	Serializer : I_Serializer;
 END_VAR
 VAR
-	enumerator : I_ForwardEnumerator;
+	enumerator : I_KeyValueForwardEnumerator;
 	member : I_Datatype;
 END_VAR]]></Declaration>
       <Implementation>
@@ -69,25 +69,57 @@ END_VAR]]></Declaration>
 END_IF
 
 Serializer.AddKey('members');
-Serializer.StartArray();
+Serializer.StartObject();
 
-enumerator := members.GetEnumerator();
+enumerator := members.GetKeyValueEnumerator();
 
 WHILE enumerator.MoveNext() DO
 	IF enumerator.TryGet(member) THEN
+		Serializer.AddKey(enumerator.Key);
 		member.SerializeTypeWith(Serializer);
 	END_IF
 END_WHILE
 
 enumerator.Dispose();
 
-Serializer.EndArray();]]></ST>
+Serializer.EndObject();]]></ST>
       </Implementation>
     </Method>
     <Method Name="SerializeWith" Id="{1e9c1195-3c87-091e-3b0f-f69341ebd0ce}">
       <Declaration><![CDATA[METHOD PUBLIC SerializeWith
 VAR_INPUT
 	Serializer : I_Serializer;
+END_VAR
+VAR
+	enumerator : I_KeyValueForwardEnumerator;
+	member : I_Datatype;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF members.Count = 0 THEN
+	RETURN;
+END_IF
+
+Serializer.AddKey('members');
+Serializer.StartObject();
+
+enumerator := members.GetKeyValueEnumerator();
+
+WHILE enumerator.MoveNext() DO
+	IF enumerator.TryGet(member) THEN
+		Serializer.AddKey(enumerator.Key);
+		member.SerializeWith(Serializer);
+	END_IF
+END_WHILE
+
+enumerator.Dispose();
+
+Serializer.EndObject();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TryDeserializeFrom" Id="{cae46b9b-ff76-4a34-8161-85ff7268ebd3}">
+      <Declaration><![CDATA[METHOD PUBLIC TryDeserializeFrom : BOOL
+VAR_INPUT
+	Deserializer : I_Deserializer;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>

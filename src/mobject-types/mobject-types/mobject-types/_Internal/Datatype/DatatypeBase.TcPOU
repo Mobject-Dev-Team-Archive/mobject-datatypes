@@ -48,17 +48,6 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Identifier" Id="{38c97105-1e1e-042d-1dd5-913fa343c046}">
-      <Declaration><![CDATA[PROPERTY PUBLIC ABSTRACT Identifier : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{e817416c-06f6-0e3c-0e6c-9eb1708153b9}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Property Name="IecType" Id="{4e6b709c-3c41-0f61-1dc2-0d8936572b7d}">
       <Declaration><![CDATA[PROPERTY PUBLIC ABSTRACT IecType : T_MAXSTRING]]></Declaration>
       <Get Name="Get" Id="{0619a35f-75ef-01ba-106d-74a7e27a44d7}">
@@ -108,7 +97,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF Source.Identifier <> Identifier THEN
+        <ST><![CDATA[IF Source.IecType <> IecType THEN
 	RETURN;
 END_IF
 

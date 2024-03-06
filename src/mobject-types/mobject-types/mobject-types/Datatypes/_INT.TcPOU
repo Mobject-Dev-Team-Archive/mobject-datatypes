@@ -58,17 +58,6 @@ END_VAR
         <ST><![CDATA[localData := InitialValue;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Identifier" Id="{803cba95-d958-4e03-a926-d5adf0c86fe5}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Identifier : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{f20cfaef-4a0f-4a36-8dbe-c8bccec1599f}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[Identifier := 'INT';]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Property Name="IecType" Id="{93df8d16-361c-0589-1f02-56441476a1c3}">
       <Declaration><![CDATA[PROPERTY PUBLIC IecType : T_MAXSTRING]]></Declaration>
       <Get Name="Get" Id="{e4478699-f245-0f2c-0325-791fec8c3d09}">
@@ -128,7 +117,7 @@ VAR
 	pTargetData : POINTER TO INT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT (Target.Identifier = Identifier) THEN
+        <ST><![CDATA[IF NOT (Target.IecType = IecType) THEN
 	RETURN;
 END_IF
 

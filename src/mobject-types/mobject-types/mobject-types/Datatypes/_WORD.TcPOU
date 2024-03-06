@@ -58,17 +58,6 @@ END_VAR
         <ST><![CDATA[localData := InitialValue;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Identifier" Id="{704d196e-2441-0acf-2bae-1a2fa6256ede}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Identifier : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{348a0a3a-6e9a-0b48-0a10-5913eb8053a7}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[Identifier := 'WORD';]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Property Name="IecType" Id="{aa0f3556-0005-0473-258e-203dbe03d661}">
       <Declaration><![CDATA[PROPERTY PUBLIC IecType : T_MAXSTRING]]></Declaration>
       <Get Name="Get" Id="{5a893654-cf12-012c-03b2-d2c7473b6d47}">
@@ -96,7 +85,7 @@ VAR_INPUT
 	Serializer : I_Serializer;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Serializer.AddInt(activeData);]]></ST>
+        <ST><![CDATA[Serializer.AddWord(activeData);]]></ST>
       </Implementation>
     </Method>
     <Property Name="Size" Id="{4f1f6c93-bfc9-0181-03ad-e942dcc5d704}">
@@ -128,7 +117,7 @@ VAR
 	pTargetData : POINTER TO WORD;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT (Target.Identifier = Identifier) THEN
+        <ST><![CDATA[IF NOT (Target.IecType = IecType) THEN
 	RETURN;
 END_IF
 
