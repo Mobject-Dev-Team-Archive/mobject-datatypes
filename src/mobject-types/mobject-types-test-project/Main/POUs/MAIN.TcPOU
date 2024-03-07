@@ -8,7 +8,23 @@ VAR
 	
 	// primitive
 	_BOOL_TestSuite : _BOOL_TestSuite;
+    //_BYTE_TestSuite : _BYTE_TestSuite;
+    _WORD_TestSuite : _WORD_TestSuite;
+    //_DWORD_TestSuite : _DWORD_TestSuite;
+    //_LWORD_TestSuite : _LWORD_TestSuite;
+    
+    //_SINT_TestSuite : _SINT_TestSuite;
     _INT_TestSuite : _INT_TestSuite;
+    _DINT_TestSuite : _DINT_TestSuite;
+    //_LINT_TestSuite : _LINT_TestSuite;
+    
+    //_USINT_TestSuite : _USINT_TestSuite;
+    //_UINT_TestSuite : _UINT_TestSuite;
+    //_UDINT_TestSuite : _UDINT_TestSuite;
+    //_ULINT_TestSuite : _ULINT_TestSuite;
+    
+    //_REAL_TestSuite : _REAL_TestSuite;
+    //_LREAL_TestSuite : _LREAL_TestSuite;
 	
 	// struct
 	_TIMESTRUCT_TestSuite : _TIMESTRUCT_TestSuite;
