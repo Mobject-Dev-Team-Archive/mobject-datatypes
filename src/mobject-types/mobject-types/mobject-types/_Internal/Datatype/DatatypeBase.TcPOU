@@ -11,6 +11,16 @@ END_VAR
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Method Name="Accept" Id="{dd871bbb-4ec4-0283-1fd2-71cc24047cd6}">
+      <Declaration><![CDATA[METHOD PUBLIC Accept
+VAR_INPUT
+	Visitor : I_DatatypeVisitor;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Visitor.VisitDatatype(this^);]]></ST>
+      </Implementation>
+    </Method>
     <Property Name="Address" Id="{d51246f1-c326-4bd3-ad2b-6abdbcc9c6a3}">
       <Declaration><![CDATA[PROPERTY PUBLIC ABSTRACT Address : PVOID]]></Declaration>
       <Get Name="Get" Id="{75c65319-5779-49e1-ac09-d48067a51f26}">
@@ -31,9 +41,16 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Identifier" Id="{b214c73d-d71a-494a-a4e7-b82330259257}">
-      <Declaration><![CDATA[PROPERTY PUBLIC ABSTRACT Identifier : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{c0278ba6-e414-4f61-82bf-4c91d676ba7e}">
+    <Method Name="Clone" Id="{7af27274-3902-4c83-b5c8-4b63225091df}">
+      <Declaration><![CDATA[METHOD PUBLIC ABSTRACT Clone : I_Datatype
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="IecType" Id="{4e6b709c-3c41-0f61-1dc2-0d8936572b7d}">
+      <Declaration><![CDATA[PROPERTY PUBLIC ABSTRACT IecType : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{0619a35f-75ef-01ba-106d-74a7e27a44d7}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
@@ -43,13 +60,14 @@ END_VAR
       </Get>
     </Property>
     <Method Name="SerializeTypeWith" Id="{d792640c-a39f-4b1c-9df5-bece16fc714d}">
-      <Declaration><![CDATA[METHOD PUBLIC ABSTRACT SerializeTypeWith
+      <Declaration><![CDATA[METHOD PUBLIC SerializeTypeWith
 VAR_INPUT
 	Serializer : I_Serializer;
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[Serializer.StartObject();
+Serializer.AddKeyString('type',IecType);
+Serializer.EndObject();]]></ST>
       </Implementation>
     </Method>
     <Method Name="SerializeWith" Id="{52279ac4-78de-4c93-a829-75eb4e6edb6e}">
@@ -79,7 +97,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF Source.Identifier <> Identifier THEN
+        <ST><![CDATA[IF Source.IecType <> IecType THEN
 	RETURN;
 END_IF
 
@@ -95,13 +113,35 @@ END_VAR]]></Declaration>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TryMakeReferenceOf" Id="{aed9eb80-ebc5-03fc-0ecc-e5fedc065442}">
-      <Declaration><![CDATA[METHOD PUBLIC ABSTRACT TryMakeReferenceOf : BOOL
+    <Method Name="TryMakeReferenceTo" Id="{aed9eb80-ebc5-03fc-0ecc-e5fedc065442}">
+      <Declaration><![CDATA[METHOD PUBLIC ABSTRACT TryMakeReferenceTo : BOOL
 VAR_INPUT
 	Target : I_Datatype;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TryResolveAsAliasType" Id="{55ca9292-ffda-0855-259b-60ba4748a149}">
+      <Declaration><![CDATA[METHOD PUBLIC TryResolveAsAliasType : BOOL
+VAR_INPUT
+	Destination : REFERENCE TO I_AliasDatatype;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TryResolveAsAliasType := FALSE;
+RETURN;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TryResolveAsStructuredType" Id="{ec909d59-647a-0183-1246-435cce0f434c}">
+      <Declaration><![CDATA[METHOD PUBLIC TryResolveAsStructuredType : BOOL
+VAR_INPUT
+	Destination : REFERENCE TO I_StructuredDatatype;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TryResolveAsStructuredType := FALSE;
+RETURN;]]></ST>
       </Implementation>
     </Method>
   </POU>

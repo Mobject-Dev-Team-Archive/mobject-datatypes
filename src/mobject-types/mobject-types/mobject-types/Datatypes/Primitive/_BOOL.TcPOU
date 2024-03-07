@@ -34,39 +34,49 @@ END_VAR
         <ST><![CDATA[activeData REF= localData;]]></ST>
       </Implementation>
     </Method>
+    <Method Name="Clone" Id="{a0f61c7d-9075-49a5-ae2f-6fa56ea65ce9}">
+      <Declaration><![CDATA[METHOD PUBLIC Clone : I_Datatype
+VAR
+    pClone : POINTER TO _BOOL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[pClone := __NEW(_BOOL(InitialValue := Value));
+Clone := pClone^;
+]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="FB_init" Id="{b9c2f4cc-3d64-49ec-b0f9-94f6b91f63cf}" FolderPath="Constructor\">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
-	InitalValue : BOOL;
+	InitialValue : BOOL;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[localData := InitalValue;]]></ST>
+        <ST><![CDATA[localData := InitialValue;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Identifier" Id="{72af1979-c8a6-44ae-8e4c-a01801501cf1}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Identifier : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{3733e778-83b4-4688-aec0-b56df0af7a48}">
+    <Property Name="IecType" Id="{4cdd9b75-726e-0315-350b-ae8f0e86020d}">
+      <Declaration><![CDATA[PROPERTY PUBLIC IecType : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{544ed6ae-fb08-0637-3ffd-c81c2b8876fa}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Identifier := 'BOOL';]]></ST>
+          <ST><![CDATA[IecType := 'BOOL';]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Method Name="SerializeTypeWith" Id="{713b8a57-0816-4acb-80e0-2d0e5c479dc0}">
-      <Declaration><![CDATA[METHOD PUBLIC SerializeTypeWith
+    <Method Name="MakeReferenceTo" Id="{300ca044-2f72-0cc4-22f3-fecb0789a110}">
+      <Declaration><![CDATA[METHOD PUBLIC MakeReferenceTo
 VAR_INPUT
-	Serializer : I_Serializer;
+	ReferenceTarget : REFERENCE TO BOOL;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Serializer.StartObject();
-Serializer.AddKeyString('type','BOOL');
-Serializer.EndObject();]]></ST>
+        <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SerializeWith" Id="{0c38b446-0e15-4d4f-ad5d-632b1b0e0167}">
@@ -98,8 +108,8 @@ END_VAR]]></Declaration>
         <ST><![CDATA[TryDeserializeFrom := Deserializer.TryGetBool(activeData);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TryMakeReferenceOf" Id="{7005b362-8e83-054d-2624-d6bbb82e7b1c}">
-      <Declaration><![CDATA[METHOD TryMakeReferenceOf : BOOL
+    <Method Name="TryMakeReferenceTo" Id="{7005b362-8e83-054d-2624-d6bbb82e7b1c}">
+      <Declaration><![CDATA[METHOD TryMakeReferenceTo : BOOL
 VAR_INPUT
 	Target : I_Datatype;
 END_VAR
@@ -107,13 +117,13 @@ VAR
 	pTargetData : POINTER TO BOOL;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT (Target.Identifier = Identifier) THEN
+        <ST><![CDATA[IF NOT (Target.IecType = IecType) THEN
 	RETURN;
 END_IF
 
 pTargetData := Target.Address;
 activeData REF= pTargetData^;
-TryMakeReferenceOf := TRUE;]]></ST>
+TryMakeReferenceTo := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Property Name="Value" Id="{c45fd22d-2330-40b4-b235-05bd28ec9ac2}">

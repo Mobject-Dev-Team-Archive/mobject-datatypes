@@ -36,35 +36,76 @@
     </SelectedLibraryCategories>
   </PropertyGroup>
   <ItemGroup>
+    <LibraryReference Include="mobject-collections,1.1.0,mobject">
+      <Namespace>mobject_collections</Namespace>
+    </LibraryReference>
     <LibraryReference Include="mobject-disposable,1.0.0,mobject">
       <Namespace>mobject_disposable</Namespace>
+    </LibraryReference>
+    <LibraryReference Include="mobject-enumerable,1.1.0,mobject">
+      <Namespace>mobject_enumerable</Namespace>
     </LibraryReference>
     <LibraryReference Include="mobject-serialization,0.4.0,mobject">
       <Namespace>mobject_serialization</Namespace>
     </LibraryReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Datatypes\_BOOL.TcPOU">
+    <Compile Include="Datatypes\Alias\_HRESULT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\_HRESULT.TcPOU">
+    <Compile Include="Datatypes\Primitive\_BOOL.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\_TIMESTRUCT.TcPOU">
+    <Compile Include="Datatypes\Primitive\_DINT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatypes\Primitive\_INT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatypes\Primitive\_WORD.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatypes\Structs\_TIMESTRUCT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Interfaces\I_Datatype.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interfaces\I_StructuredDatatype.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\I_AliasDatatype.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\DatatypeVisitor\I_DatatypeVisitor.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\Datatype\AliasDatatypeBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="_Internal\Datatype\DatatypeBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\Datatype\StructuredDatatypeBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\MembersHost\I_HostMembers.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\MembersHost\MembersHost.TcPOU">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Datatypes\Alias" />
+    <Folder Include="Datatypes\Structs" />
+    <Folder Include="Datatypes\Primitive" />
     <Folder Include="Interfaces" />
     <Folder Include="Datatypes" />
     <Folder Include="_Internal" />
     <Folder Include="_Internal\Datatype" />
+    <Folder Include="_Internal\MembersHost" />
+    <Folder Include="_Internal\DatatypeVisitor" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_System">
@@ -84,8 +125,8 @@
   <ProjectExtensions>
     <PlcProjectOptions>
       <XmlArchive>
-  <Data>
-    <o xml:space="preserve" t="OptionKey">
+        <Data>
+          <o xml:space="preserve" t="OptionKey">
       <v n="Name">"&lt;ProjectRoot&gt;"</v>
       <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
         <v>{192FAD59-8248-4824-A8DE-9177C94C195A}</v>
@@ -112,13 +153,13 @@
       </d>
       <d n="Values" t="Hashtable" />
     </o>
-  </Data>
-  <TypeList>
-    <Type n="Hashtable">System.Collections.Hashtable</Type>
-    <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
-    <Type n="String">System.String</Type>
-  </TypeList>
-</XmlArchive>
+        </Data>
+        <TypeList>
+          <Type n="Hashtable">System.Collections.Hashtable</Type>
+          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+          <Type n="String">System.String</Type>
+        </TypeList>
+      </XmlArchive>
     </PlcProjectOptions>
   </ProjectExtensions>
 </Project>

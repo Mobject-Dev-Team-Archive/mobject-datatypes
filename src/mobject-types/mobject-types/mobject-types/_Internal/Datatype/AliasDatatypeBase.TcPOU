@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="AliasDatatypeBase" Id="{51efc251-d562-035f-0714-2cb40d22bd49}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK ABSTRACT AliasDatatypeBase EXTENDS DatatypeBase IMPLEMENTS I_AliasDatatype
+VAR
+	_baseType : I_Datatype;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="Protected" Id="{32e64345-9794-024b-1b99-8f3ce9518447}" />
+    <Method Name="AddBaseType" Id="{75762eda-cb7a-071b-0eb1-7f2a098f1636}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED AddBaseType
+VAR_INPUT
+	BaseType : I_Datatype;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_baseType := BaseType;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="BaseType" Id="{3a1b6a1c-2ed1-4f30-b499-6a6e905bbab5}">
+      <Declaration><![CDATA[PROPERTY PUBLIC BaseType : I_Datatype]]></Declaration>
+      <Get Name="Get" Id="{cac64592-d854-4fdc-8853-dc04b5c5a68c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[BaseType := _baseType;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Identifier" Id="{4fd74cf6-e374-07af-3898-0d824025ee54}">
+      <Declaration><![CDATA[PROPERTY PUBLIC ABSTRACT Identifier : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{819235c9-99be-0d93-0e95-eac5e4e08621}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="IecType" Id="{4522de90-f1b5-0fc0-0e0b-23cb79104913}">
+      <Declaration><![CDATA[PROPERTY PUBLIC IecType : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{87e770ed-14bd-0fd2-0898-258431f34b50}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IecType := 'ALIAS';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="SerializeTypeWith" Id="{854505f5-1017-462d-a584-80f93779a559}">
+      <Declaration><![CDATA[METHOD PUBLIC SerializeTypeWith
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Serializer.StartObject();
+Serializer.AddKeyString('name',Identifier);
+Serializer.AddKeyString('type',IecType);
+Serializer.AddKey('baseType');
+_baseType.SerializeTypeWith(Serializer);
+Serializer.EndObject();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SerializeWith" Id="{0e1207a2-8592-4c4b-9710-52ccdb73d294}">
+      <Declaration><![CDATA[METHOD PUBLIC SerializeWith
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_baseType.SerializeWith(Serializer);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TryDeserializeFrom" Id="{d02555e8-a46e-47c3-9f23-7110e9393468}">
+      <Declaration><![CDATA[METHOD TryDeserializeFrom : BOOL
+VAR_INPUT
+	Deserializer : I_Deserializer;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TryDeserializeFrom := _baseType.TryDeserializeFrom(Deserializer);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TryResolveAsAliasType" Id="{8b7c7d86-c00c-052e-0c75-6034d6f85e34}">
+      <Declaration><![CDATA[METHOD PUBLIC TryResolveAsAliasType : BOOL
+VAR_INPUT
+	Destination : REFERENCE TO I_AliasDatatype;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Destination := THIS^;
+TryResolveAsAliasType := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
