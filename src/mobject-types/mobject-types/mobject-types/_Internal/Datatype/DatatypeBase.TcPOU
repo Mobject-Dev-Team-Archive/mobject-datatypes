@@ -122,6 +122,17 @@ END_VAR]]></Declaration>
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Method Name="TryResolveAsAliasType" Id="{55ca9292-ffda-0855-259b-60ba4748a149}">
+      <Declaration><![CDATA[METHOD PUBLIC TryResolveAsAliasType : BOOL
+VAR_INPUT
+	Destination : REFERENCE TO I_AliasDatatype;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TryResolveAsAliasType := FALSE;
+RETURN;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="TryResolveAsStructuredType" Id="{ec909d59-647a-0183-1246-435cce0f434c}">
       <Declaration><![CDATA[METHOD PUBLIC TryResolveAsStructuredType : BOOL
 VAR_INPUT

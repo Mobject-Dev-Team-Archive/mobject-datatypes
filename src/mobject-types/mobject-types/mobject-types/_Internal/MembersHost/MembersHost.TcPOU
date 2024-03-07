@@ -95,14 +95,7 @@ VAR
 	member : I_Datatype;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF members.Count = 0 THEN
-	RETURN;
-END_IF
-
-Serializer.AddKey('members');
-Serializer.StartObject();
-
-enumerator := members.GetKeyValueEnumerator();
+        <ST><![CDATA[enumerator := members.GetKeyValueEnumerator();
 
 WHILE enumerator.MoveNext() DO
 	IF enumerator.TryGet(member) THEN
@@ -111,18 +104,35 @@ WHILE enumerator.MoveNext() DO
 	END_IF
 END_WHILE
 
-enumerator.Dispose();
-
-Serializer.EndObject();]]></ST>
+enumerator.Dispose();]]></ST>
       </Implementation>
     </Method>
     <Method Name="TryDeserializeFrom" Id="{cae46b9b-ff76-4a34-8161-85ff7268ebd3}">
       <Declaration><![CDATA[METHOD PUBLIC TryDeserializeFrom : BOOL
 VAR_INPUT
 	Deserializer : I_Deserializer;
+END_VAR
+VAR
+	membersEnumerator : I_DeserializerObjectForwardEnumerator;
+	member : I_Datatype;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[]]></ST>
+        <ST><![CDATA[membersEnumerator := Deserializer.GetObjectEnumerator();
+
+WHILE membersEnumerator.MoveNext() DO
+	
+	IF NOT TryGetMemberByName(membersEnumerator.Key, member) THEN
+		CONTINUE;
+	END_IF
+	
+	IF NOT member.TryDeserializeFrom(membersEnumerator.Current) THEN
+		RETURN;
+	END_IF
+
+END_WHILE
+
+membersEnumerator.Dispose();
+TryDeserializeFrom := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="TryGetMemberByName" Id="{f0390782-7618-05ab-17dc-ab918637b5bc}">

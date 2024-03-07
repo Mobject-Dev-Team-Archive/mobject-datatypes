@@ -15,7 +15,7 @@ END_VAR
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Folder Name="Constructor" Id="{c86d702f-77a8-0c2d-2692-85b706f92094}" />
-    <Folder Name="Protected" Id="{ad40f793-9b3d-4478-aa9d-0319dd4f7560}" />
+    <Folder Name="Protected" Id="{e16fea1f-f592-091f-2024-44bbaa215477}" />
     <Property Name="Address" Id="{eaea8ce2-d780-069a-2354-b9040dbfdf59}">
       <Declaration><![CDATA[PROPERTY PUBLIC Address : PVOID]]></Declaration>
       <Get Name="Get" Id="{9ca66335-2df6-0b97-035a-cfdc96d663e4}">
@@ -33,7 +33,8 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[activeData REF= localData;]]></ST>
+        <ST><![CDATA[activeData REF= localData;
+SetBaseTypeReference();]]></ST>
       </Implementation>
     </Method>
     <Method Name="Clone" Id="{3e05ef98-5afd-4b49-b284-8e3d2d8200da}">
@@ -57,7 +58,9 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[localData := InitialValue;]]></ST>
+        <ST><![CDATA[localData := InitialValue;
+SetBaseTypeReference();
+AddBaseType(aliasBaseType);]]></ST>
       </Implementation>
     </Method>
     <Property Name="Identifier" Id="{783e0e3e-7447-0c8f-3ba4-419752f4a16d}">
@@ -71,25 +74,24 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="InitializeBaseType" Id="{13e14335-59c8-4817-abfb-1cdbed05ddb5}" FolderPath="Protected\">
-      <Declaration><![CDATA[METHOD PROTECTED InitializeBaseType
-VAR_INPUT
-	BaseType : REFERENCE TO I_Datatype;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[aliasBaseType.MakeReferenceTo(activeData);
-BaseType := aliasBaseType;]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="MakeReferenceTo" Id="{b812282b-13cf-0ccc-1aff-702feb80c71d}">
       <Declaration><![CDATA[METHOD PUBLIC MakeReferenceTo
 VAR_INPUT
-	ReferenceTarget : HRESULT;
+	ReferenceTarget : REFERENCE TO HRESULT;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
+        <ST><![CDATA[activeData REF= ReferenceTarget;
+SetBaseTypeReference();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetBaseTypeReference" Id="{68a695f5-ff13-0dcc-1466-991b2c518bab}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED SetBaseTypeReference
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[aliasBaseType.MakeReferenceTo(activeData);]]></ST>
       </Implementation>
     </Method>
     <Property Name="Size" Id="{78fc7983-bbf0-072e-3bed-9c1f413ab6ff}">
@@ -118,6 +120,7 @@ END_IF
 
 pTargetData := Target.Address;
 activeData REF= pTargetData^;
+SetBaseTypeReference();
 TryMakeReferenceTo := TRUE;]]></ST>
       </Implementation>
     </Method>

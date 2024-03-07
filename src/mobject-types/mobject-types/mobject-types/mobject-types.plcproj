@@ -50,28 +50,31 @@
     </LibraryReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Datatypes\_BOOL.TcPOU">
+    <Compile Include="Datatypes\Alias\_HRESULT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\_INT.TcPOU">
+    <Compile Include="Datatypes\Primitive\_BOOL.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\_HRESULT.TcPOU">
+    <Compile Include="Datatypes\Primitive\_DINT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\_DINT.TcPOU">
+    <Compile Include="Datatypes\Primitive\_INT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\_WORD.TcPOU">
+    <Compile Include="Datatypes\Primitive\_WORD.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\_TIMESTRUCT.TcPOU">
+    <Compile Include="Datatypes\Structs\_TIMESTRUCT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Interfaces\I_Datatype.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Interfaces\I_StructuredDatatype.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\I_AliasDatatype.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="_Internal\DatatypeVisitor\I_DatatypeVisitor.TcIO">
@@ -94,6 +97,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Datatypes\Alias" />
+    <Folder Include="Datatypes\Structs" />
+    <Folder Include="Datatypes\Primitive" />
     <Folder Include="Interfaces" />
     <Folder Include="Datatypes" />
     <Folder Include="_Internal" />

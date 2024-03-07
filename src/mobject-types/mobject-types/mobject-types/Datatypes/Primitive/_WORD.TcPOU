@@ -8,6 +8,7 @@ FUNCTION_BLOCK _WORD EXTENDS DatatypeBase
 VAR
 	localData : WORD;
 	activeData : REFERENCE TO WORD REF= localData;
+	usingReference : BOOL;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -72,11 +73,12 @@ END_VAR
     <Method Name="MakeReferenceTo" Id="{c68ef1de-2ec4-03cf-262f-3ed89ab93621}">
       <Declaration><![CDATA[METHOD PUBLIC MakeReferenceTo
 VAR_INPUT
-	ReferenceTarget : WORD;
+	ReferenceTarget : REFERENCE TO WORD;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
+        <ST><![CDATA[activeData REF= ReferenceTarget;
+usingReference := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="SerializeWith" Id="{f1af31b2-031b-0cef-0af3-bc734e479124}">

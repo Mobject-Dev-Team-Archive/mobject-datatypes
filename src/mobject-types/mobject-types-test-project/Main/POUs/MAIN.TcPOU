@@ -3,24 +3,19 @@
   <POU Name="MAIN" Id="{7bf63626-4b20-4fda-b93b-546e8359a2c5}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
+	//alias
+	_HRESULT_TestSuite : _HRESULT_TestSuite;
+	
+	// primitive
 	_BOOL_TestSuite : _BOOL_TestSuite;
     _INT_TestSuite : _INT_TestSuite;
 	
-	myTime : _TIMESTRUCT;
-	
-	myUnknownType : I_Datatype := myTime;
-	myStructuredType : I_StructuredDatatype;
-	myWYear : I_Datatype;
+	// struct
+	_TIMESTRUCT_TestSuite : _TIMESTRUCT_TestSuite;
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[TcUnit.RUN();
-
-myTime.wMonth.Value := 123;
-
-IF myUnknownType.TryResolveAsStructuredType(myStructuredType) THEN
-	myStructuredType.TryGetMemberByName('wYear',myWYear);
-END_IF]]></ST>
+      <ST><![CDATA[TcUnit.RUN();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

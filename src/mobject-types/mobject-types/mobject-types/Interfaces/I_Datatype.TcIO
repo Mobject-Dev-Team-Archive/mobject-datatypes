@@ -57,6 +57,13 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
+    <Method Name="TryResolveAsAliasType" Id="{1d8302da-9522-045a-2834-f4b58ccaba74}">
+      <Declaration><![CDATA[METHOD PUBLIC TryResolveAsAliasType : BOOL
+VAR_INPUT
+	Destination : REFERENCE TO I_AliasDatatype;
+END_VAR
+]]></Declaration>
+    </Method>
     <Method Name="TryResolveAsStructuredType" Id="{0f22426d-8db4-0d92-039e-352711832c27}">
       <Declaration><![CDATA[METHOD PUBLIC TryResolveAsStructuredType : BOOL
 VAR_INPUT
