@@ -56,7 +56,13 @@
     <Compile Include="Datatypes\Primitive\_BOOL.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Datatypes\Primitive\_BYTE.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Datatypes\Primitive\_DINT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatypes\Primitive\_LWORD.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Datatypes\Primitive\_INT.TcPOU">
@@ -81,6 +87,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Datatypes\Primitive\_WORD.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatypes\Primitive\_DWORD.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Datatypes\Structs\_TIMESTRUCT.TcPOU">

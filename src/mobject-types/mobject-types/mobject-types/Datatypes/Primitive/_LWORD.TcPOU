@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="_WORD" Id="{e7bccc65-ec8e-095b-18a1-42a50d575606}" SpecialFunc="None">
+  <POU Name="_LWORD" Id="{83eb2057-61c3-0f5c-2bbd-2c1a0c4bcdbb}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute 'linkalways'} 
 {attribute 'no_explicit_call' := 'This FB is a CLASS and must be accessed using methods or properties'}
 {attribute 'enable_dynamic_creation'}
-FUNCTION_BLOCK _WORD EXTENDS DatatypeBase
+FUNCTION_BLOCK _LWORD EXTENDS DatatypeBase
 VAR
-	localData : WORD;
-	activeData : REFERENCE TO WORD REF= localData;
+	localData : LWORD;
+	activeData : REFERENCE TO LWORD REF= localData;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Folder Name="Constructor" Id="{9855b4c7-dd4b-091f-048e-197bbbc3d1ff}" />
-    <Property Name="Address" Id="{8506bb2c-de33-0776-279b-8f3e62d4e41f}">
+    <Folder Name="Constructor" Id="{76a599ac-f355-0c91-3411-2c4573633eb2}" />
+    <Property Name="Address" Id="{3ea38e9d-e5b4-08f8-3bac-d50de01d8088}">
       <Declaration><![CDATA[PROPERTY PUBLIC Address : PVOID]]></Declaration>
-      <Get Name="Get" Id="{624c1396-e620-080b-0ec9-5d90a0cf661b}">
+      <Get Name="Get" Id="{4c3c2f62-1325-05ee-2e66-2b5f5411ac84}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
@@ -25,7 +25,7 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="ClearReference" Id="{107fc361-cc8f-01f3-0be2-6be785ad8651}">
+    <Method Name="ClearReference" Id="{10b74754-dd3d-0784-2dc0-bc9aaaa6dff2}">
       <Declaration><![CDATA[METHOD PUBLIC ClearReference
 VAR_INPUT
 END_VAR
@@ -34,63 +34,63 @@ END_VAR
         <ST><![CDATA[activeData REF= localData;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Clone" Id="{24c77b7d-908b-0d82-37f7-3e8e4bfd466a}">
+    <Method Name="Clone" Id="{70ec616f-2c61-064a-2209-68affc8cda70}">
       <Declaration><![CDATA[METHOD PUBLIC Clone : I_Datatype
 VAR
-    pClone : POINTER TO _WORD;
+    pClone : POINTER TO _LWORD;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[pClone := __NEW(_WORD(InitialValue := Value));
+        <ST><![CDATA[pClone := __NEW(_LWORD(InitialValue := Value));
 Clone := pClone^;
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="FB_init" Id="{88882bf8-9a7d-01b3-21ce-f4d80e61d67d}" FolderPath="Constructor\">
+    <Method Name="FB_init" Id="{6fbd1526-f642-03c9-1957-3df80912e78f}" FolderPath="Constructor\">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
 	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved WORDo the copy code (online change)
-	InitialValue : WORD;
+	InitialValue : LWORD;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[localData := InitialValue;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="IecType" Id="{aa0f3556-0005-0473-258e-203dbe03d661}">
+    <Property Name="IecType" Id="{f1ea044d-8243-0a57-0c7e-1f8798251cf8}">
       <Declaration><![CDATA[PROPERTY PUBLIC IecType : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{5a893654-cf12-012c-03b2-d2c7473b6d47}">
+      <Get Name="Get" Id="{7c6d7a65-de1e-06bb-2224-776a3f729bc6}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IecType := 'WORD';]]></ST>
+          <ST><![CDATA[IecType := 'LWORD';]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Method Name="MakeReferenceTo" Id="{c68ef1de-2ec4-03cf-262f-3ed89ab93621}">
+    <Method Name="MakeReferenceTo" Id="{22dc0f3b-b797-03c0-006f-7c61fb3682bc}">
       <Declaration><![CDATA[METHOD PUBLIC MakeReferenceTo
 VAR_INPUT
-	ReferenceTarget : REFERENCE TO WORD;
+	ReferenceTarget : REFERENCE TO LWORD;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SerializeWith" Id="{f1af31b2-031b-0cef-0af3-bc734e479124}">
+    <Method Name="SerializeWith" Id="{43957286-f88e-05ee-30ce-fc0a753ce5f1}">
       <Declaration><![CDATA[METHOD PUBLIC SerializeWith
 VAR_INPUT
 	Serializer : I_Serializer;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Serializer.AddWord(activeData);]]></ST>
+        <ST><![CDATA[Serializer.AddLword(activeData);]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Size" Id="{4f1f6c93-bfc9-0181-03ad-e942dcc5d704}">
+    <Property Name="Size" Id="{e6a57ecf-e117-0957-19ab-e82010e77df9}">
       <Declaration><![CDATA[PROPERTY PUBLIC Size : UDINT]]></Declaration>
-      <Get Name="Get" Id="{2306413c-09e9-0d25-12a8-21d69e8cb935}">
+      <Get Name="Get" Id="{e9dcdc74-ac46-04bd-0982-1d0e341f3ca2}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
@@ -99,22 +99,22 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="TryDeserializeFrom" Id="{c337f86f-3d51-0565-1456-61c27ff55c65}">
+    <Method Name="TryDeserializeFrom" Id="{0e99a354-8f0e-0ad8-03af-ecb45be70e2a}">
       <Declaration><![CDATA[METHOD TryDeserializeFrom : BOOL
 VAR_INPUT
 	Deserializer : I_Deserializer;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[TryDeserializeFrom := Deserializer.TryGetWord(activeData);]]></ST>
+        <ST><![CDATA[TryDeserializeFrom := Deserializer.TryGetLword(activeData);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TryMakeReferenceTo" Id="{6584c998-95ea-019d-215d-408811ee36f4}">
+    <Method Name="TryMakeReferenceTo" Id="{7534ac8b-b439-087c-0eca-0e1f7561613f}">
       <Declaration><![CDATA[METHOD TryMakeReferenceTo : BOOL
 VAR_INPUT
 	Target : I_Datatype;
 END_VAR
 VAR
-	pTargetData : POINTER TO WORD;
+	pTargetData : POINTER TO LWORD;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF NOT (Target.IecType = IecType) THEN
@@ -126,9 +126,9 @@ activeData REF= pTargetData^;
 TryMakeReferenceTo := TRUE;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Value" Id="{058c9661-e32a-0fab-0644-75834aa01d79}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Value : WORD]]></Declaration>
-      <Get Name="Get" Id="{0f16fb52-a5db-061a-278c-bb5743ba8ee2}">
+    <Property Name="Value" Id="{32408784-0d34-0b64-3e25-e04ead8e7528}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Value : LWORD]]></Declaration>
+      <Get Name="Get" Id="{4b97d08e-c899-0a71-3b3b-f66d8e13a09d}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
@@ -136,7 +136,7 @@ END_VAR
           <ST><![CDATA[Value := activeData;]]></ST>
         </Implementation>
       </Get>
-      <Set Name="Set" Id="{3a8f4c76-f9ec-099c-21f1-cf58433b5ed9}">
+      <Set Name="Set" Id="{4a2d1657-4af8-0535-24f3-4c03181dcf25}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
