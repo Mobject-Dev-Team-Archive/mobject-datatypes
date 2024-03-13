@@ -8,10 +8,10 @@ VAR
 	
 	// primitive
 	_BOOL_TestSuite : _BOOL_TestSuite;
-    //_BYTE_TestSuite : _BYTE_TestSuite;
+    _BYTE_TestSuite : _BYTE_TestSuite;
     _WORD_TestSuite : _WORD_TestSuite;
-    //_DWORD_TestSuite : _DWORD_TestSuite;
-    //_LWORD_TestSuite : _LWORD_TestSuite;
+    _DWORD_TestSuite : _DWORD_TestSuite;
+    _LWORD_TestSuite : _LWORD_TestSuite;
     
     _SINT_TestSuite : _SINT_TestSuite;
     _INT_TestSuite : _INT_TestSuite;
