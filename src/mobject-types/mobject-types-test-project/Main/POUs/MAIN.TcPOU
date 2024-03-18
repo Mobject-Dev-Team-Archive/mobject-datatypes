@@ -28,8 +28,8 @@ VAR
     
     //_TIME_TestSuite : _TIME_TestSuite;
     //_LTIME_TestSuite : _LTIME_TestSuite;
-    //_TOD_TestSuite : _TOD_TestSuite;
-    //_TIME_OF_DAY_TestSuite : _TIME_OF_DAY_TestSuite;
+    _TOD_TestSuite : _TOD_TestSuite;
+    _TIME_OF_DAY_TestSuite : _TIME_OF_DAY_TestSuite;
     
     //_DATE_TestSuite : _TIME_TestSuite;
     //_DATE_AND_TIME_TestSuite : _DATE_AND_TIME_TestSuite;
