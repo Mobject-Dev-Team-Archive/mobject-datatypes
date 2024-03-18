@@ -31,6 +31,9 @@
     <Compile Include="Tests\Primitives\_BOOL_TestSuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\Primitives\_TIME_OF_DAY_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\Primitives\_REAL_TestSuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -47,6 +50,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tests\Primitives\_LREAL_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\Primitives\_TOD_TestSuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tests\Primitives\_ULINT_TestSuite.TcPOU">

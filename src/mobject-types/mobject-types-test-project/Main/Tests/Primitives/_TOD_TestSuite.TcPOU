@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="_REAL_TestSuite" Id="{328b2bf2-c951-05ec-1c81-0c69e5069561}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK _REAL_TestSuite EXTENDS TcUnit.FB_TestSuite
+  <POU Name="_TOD_TestSuite" Id="{24a4035a-8b6a-01a7-0d6d-703327f09457}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK _TOD_TestSuite EXTENDS TcUnit.FB_TestSuite
 VAR
 END_VAR
 ]]></Declaration>
@@ -22,10 +22,10 @@ TestTryMakeReferenceToFollowsReference();
 TestTryMakeReferenceToUpdatesReference();
 ]]></ST>
     </Implementation>
-    <Method Name="TestAddress" Id="{610e7c27-8321-0728-2089-a702be071d05}">
+    <Method Name="TestAddress" Id="{74e38a62-d55b-0e9a-0c2f-c4f664bf1d9d}">
       <Declaration><![CDATA[METHOD PUBLIC TestAddress
 VAR
-    _type : _REAL(0.0);
+    _type : _TOD(TOD#0:0:0);
     notExpected : PVOID := 0;
     actual : PVOID;
 END_VAR
@@ -44,13 +44,13 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestClearReference" Id="{fed68d47-4e63-0fad-14b3-62b5a8952dbf}">
+    <Method Name="TestClearReference" Id="{2072720f-d814-043d-2e9e-ed2e5e8af9a5}">
       <Declaration><![CDATA[METHOD PUBLIC TestClearReference
 VAR
-    _type : _REAL(0.0);
-	target : REAL := 0.0;
-    expected : REAL := 0.0;
-    actual : REAL;
+    _type : _TOD(TOD#0:0:0);
+	target : TOD := TOD#0:0:0;
+    expected : TOD := TOD#0:0:0;
+    actual : TOD;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -58,14 +58,13 @@ END_VAR
 
 _type.MakeReferenceTo(target);
 _type.ClearReference();
-target := 123.4;
+target := TOD#12:34:56.789;
 
 actual := _type.Value;
 
-AssertEquals_REAL(
+AssertEquals(
     Expected := expected,
     Actual := actual,
-    Delta := REAL#0.001,
     Message := 'Value did not follow target change'
 );
 
@@ -73,10 +72,10 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestClone" Id="{0127e830-3223-0ae5-26cb-b68f8efbc94c}">
+    <Method Name="TestClone" Id="{d0f3e9d6-e2be-00f5-1053-ca55f17de2cf}">
       <Declaration><![CDATA[METHOD PUBLIC TestClone
 VAR
-    _type : _REAL(123.4);
+    _type : _TIME_OF_DAY(TIME_OF_DAY#12:34:56.789);
 	clone : I_Datatype;
 	isValidClone : BOOL;
 	compareResult : DINT;
@@ -110,11 +109,11 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestIecTypeReturnsExpected" Id="{ebaecb80-18bd-0fc1-1124-d7ffd7983c9c}">
+    <Method Name="TestIecTypeReturnsExpected" Id="{c0608f1a-0df8-09f4-03cd-8238be2cd1b8}">
       <Declaration><![CDATA[METHOD PUBLIC TestIecTypeReturnsExpected
 VAR
-    _type : _REAL(0.0);
-    expected : STRING := 'REAL';
+    _type : _TOD(TOD#0:0:0);
+    expected : STRING := 'TOD';
     actual : STRING;
 END_VAR
 ]]></Declaration>
@@ -133,27 +132,26 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestMakeReferenceToFollowsReference" Id="{bcae6ed8-52cc-06aa-22c8-019b3516c8f2}">
+    <Method Name="TestMakeReferenceToFollowsReference" Id="{ba94f02c-136b-0d5c-1d7d-edd2b18b3d11}">
       <Declaration><![CDATA[METHOD PUBLIC TestMakeReferenceToFollowsReference
 VAR
-    _type : _REAL(0.0);
-	target : REAL := 0.0;
-    expected : REAL := 123.4;
-    actual : REAL;
+    _type : _TOD(TOD#0:0:0);
+	target : TOD := TOD#0:0:0;
+    expected : TOD := TOD#12:34:56.789;
+    actual : TOD;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('TestMakeReferenceToFollowsReference');
 
 _type.MakeReferenceTo(target);
-target := 123.4;
+target := TOD#12:34:56.789;;
 
 actual := _type.Value;
 
-AssertEquals_REAL(
+AssertEquals_TIME_OF_DAY(
     Expected := expected,
     Actual := actual,
-    Delta := REAL#0.001,
     Message := 'Value did not follow target change'
 );
 
@@ -161,27 +159,26 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestMakeReferenceToUpdatesReference" Id="{0db9ce7e-4897-0740-021e-8239fda97f46}">
+    <Method Name="TestMakeReferenceToUpdatesReference" Id="{47728bc5-769f-0196-1257-cbf1991c1566}">
       <Declaration><![CDATA[METHOD PUBLIC TestMakeReferenceToUpdatesReference
 VAR
-    _type : _REAL(0.0);
-	target : REAL := 0.0;
-    expected : REAL := 123.4;
-    actual : REAL;
+    _type : _TOD(TOD#0:0:0);
+	target : TOD := TOD#0:0:0;
+    expected : TOD := TOD#12:34:56.789;
+    actual : TOD;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('TestMakeReferenceToUpdatesReference');
 
 _type.MakeReferenceTo(target);
-_type.Value := 123.4;
+_type.Value := TOD#12:34:56.789;
 
 actual := target;
 
-AssertEquals_REAL(
+AssertEquals_TIME_OF_DAY(
     Expected := expected,
     Actual := actual,
-    Delta := REAL#0.001,
     Message := 'Value did not update target'
 );
 
@@ -189,12 +186,12 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestSerializeTypeWith" Id="{81939243-ea80-0f98-0994-39b59a5227ca}">
+    <Method Name="TestSerializeTypeWith" Id="{d2b44eca-19ea-0aab-2933-458ecd790526}">
       <Declaration><![CDATA[METHOD PUBLIC TestSerializeTypeWith
 VAR
-    _type : _REAL(0.0);
+    _type : _TOD(TOD#0:0:0);
     serializer : JsonSerializer;
-    expected : STRING := '{"type":"REAL"}';
+    expected : STRING := '{"type":"TOD"}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
@@ -215,12 +212,12 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestSerializeWith" Id="{fb9dd60e-0eca-072f-2475-b45cd2c0179f}">
+    <Method Name="TestSerializeWith" Id="{5850d25c-c703-0f54-3a16-3402a9fed883}">
       <Declaration><![CDATA[METHOD PUBLIC TestSerializeWith
 VAR
-    _type : _REAL(123.4);
+    _type : _TOD(TOD#12:34:56.789);
     serializer : JsonSerializer;
-    expected : STRING := '123.40000152'; // Expected value due to the nature of floating point values defined by IEEE754.
+    expected : STRING := 'TOD#12:34:56.789';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
@@ -241,11 +238,11 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestSize" Id="{de3ed70c-eb06-03c8-236c-c16748e525fd}">
+    <Method Name="TestSize" Id="{28383b65-3965-073f-06eb-2cc5554cb73b}">
       <Declaration><![CDATA[METHOD PUBLIC TestSize
 VAR
-    _type : _REAL(0.0);
-    expected : UDINT := SIZEOF(REAL);
+    _type : _TOD(TOD#0:0:0);
+    expected : UDINT := SIZEOF(TOD);
     actual : UDINT;
 END_VAR
 ]]></Declaration>
@@ -264,14 +261,14 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryDeserializeFrom" Id="{01f4f376-c22f-0ce1-19b5-32495cdc9da3}">
+    <Method Name="TestTryDeserializeFrom" Id="{96592257-d8f1-0bd9-3c73-574931a9c407}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryDeserializeFrom
 VAR
     deserializer : JsonDeserializer;
-    json : STRING := '123.4';
-    _type : _REAL(0.0);
-    expected : REAL := 123.4;
-    actual : REAL;
+    json : STRING := 'TOD#12:34:56.789';
+    _type : _TOD(TOD#0:0:0);
+    expected : TOD := TOD#12:34:56.789;
+    actual : TOD;
  END_VAR
 ]]></Declaration>
       <Implementation>
@@ -283,10 +280,9 @@ _type.TryDeserializeFrom(deserializer);
 
 actual := _type.Value;
 
-AssertEquals_REAL(
+AssertEquals_TIME_OF_DAY(
     Expected := expected,
     Actual := actual,
-    Delta := REAL#0.001,
     Message := 'Type did not deserialize correctly.'
 );
 
@@ -294,27 +290,26 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToFollowsReference" Id="{cfe36170-9938-0837-2a87-419a18b32ca3}">
+    <Method Name="TestTryMakeReferenceToFollowsReference" Id="{ac9a24a8-28d8-04e4-1856-9607a97d0ee5}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToFollowsReference
 VAR
-    _type : _REAL(0.0);
-	target : _REAL(0.0);
-    expected : REAL := 123.4;
-    actual : REAL;
+    _type : _TOD(TOD#0:0:0);
+	target : _TOD(TOD#0:0:0);
+    expected : TOD := TOD#12:34:56.789;
+    actual : TOD;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('TestTryMakeReferenceToFollowsReference');
 
 _type.TryMakeReferenceTo(target);
-target.Value := 123.4;
+target.Value := TOD#12:34:56.789;
 
 actual := _type.Value;
 
-AssertEquals_REAL(
+AssertEquals_TIME_OF_DAY(
     Expected := expected,
     Actual := actual,
-    Delta := REAL#0.001,
     Message := 'Value did not follow target change'
 );
 
@@ -322,27 +317,26 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToUpdatesReference" Id="{a7f19ee6-9b7c-0f36-0d04-dffc930b79aa}">
+    <Method Name="TestTryMakeReferenceToUpdatesReference" Id="{3b86ef8f-adb5-0f9b-0c01-6053b2a36484}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToUpdatesReference
 VAR
-    _type : _REAL(0.0);
-	target : _REAL(0.0);
-    expected : REAL := 123.4;
-    actual : REAL;
+    _type : _TOD(TOD#0:0:0);
+	target : _TOD(TOD#0:0:0);
+    expected : TOD := TOD#12:34:56.789;
+    actual : TOD;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('TestTryMakeReferenceToUpdatesReference');
 
 _type.TryMakeReferenceTo(target);
-_type.Value := 123.4;
+_type.Value := TOD#12:34:56.789;
 
 actual := target.Value;
 
-AssertEquals_REAL(
+AssertEquals_TIME_OF_DAY(
     Expected := expected,
     Actual := actual,
-    Delta := REAL#0.001,
     Message := 'Value did not update target'
 );
 
@@ -350,25 +344,24 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestValueReturnsExpectedAfterChange" Id="{273c7472-1b95-0705-1f9a-7806c7819252}">
+    <Method Name="TestValueReturnsExpectedAfterChange" Id="{03ce31e4-bb69-0229-338c-c2a373fb5d4e}">
       <Declaration><![CDATA[METHOD PUBLIC TestValueReturnsExpectedAfterChange
 VAR
-    _type : _REAL(0.0);
-    expected : REAL := 123.4;
-    actual : REAL;
+    _type : _TOD(TOD#0:0:0);
+    expected : TOD := TOD#12:34:56.789;
+    actual : TOD;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('TestValueReturnsExpectedAfterChange');
 
-_type.Value := 123.4;
+_type.Value := TOD#12:34:56.789;
 
 actual := _type.Value;
 
-AssertEquals_REAL(
+AssertEquals_TIME_OF_DAY(
     Expected := expected,
     Actual := actual,
-    Delta := REAL#0.001,
     Message := 'Expected value not returned after change.'
 );
 
@@ -376,12 +369,12 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestValueReturnsExpectedAfterInit" Id="{46c01183-485e-0cb8-232a-7a0fb5c21738}">
+    <Method Name="TestValueReturnsExpectedAfterInit" Id="{9103d446-bb4b-0e56-0ed6-7578d419e529}">
       <Declaration><![CDATA[METHOD PUBLIC TestValueReturnsExpectedAfterInit
 VAR
-    _type : _REAL(123.4);
-    expected : REAL := 123.4;
-    actual : REAL;
+    _type : _TOD(TOD#12:34:56.789);
+    expected : TOD := TOD#12:34:56.789;
+    actual : TOD;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -389,10 +382,9 @@ END_VAR
 
 actual := _type.Value;
 
-AssertEquals_REAL(
+AssertEquals_TIME_OF_DAY(
     Expected := expected,
     Actual := actual,
-    Delta := REAL#0.001,
     Message := 'Expected value not returned after Init.'
 );
 

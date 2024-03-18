@@ -62,6 +62,9 @@
     <Compile Include="Datatypes\Primitive\_DINT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Datatypes\Primitive\_TIME_OF_DAY.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Datatypes\Primitive\_REAL.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -78,6 +81,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Datatypes\Primitive\_SINT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatypes\Primitive\_TOD.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Datatypes\Primitive\_UINT.TcPOU">
