@@ -48,6 +48,7 @@ END_VAR
       <Declaration><![CDATA[METHOD PUBLIC ABSTRACT TryDeserializeFrom : BOOL
 VAR_INPUT
 	Deserializer : I_Deserializer;
+	Feedback : I_DeserializerFeedback;
 END_VAR]]></Declaration>
     </Method>
     <Method Name="TryMakeReferenceTo" Id="{baec0ebb-3447-0677-3e86-cc7b3c3ce04c}">

@@ -200,7 +200,7 @@ END_VAR
 
 serializer.Reset();
 _type.SerializeTypeWith(serializer);
-serializer.TryGetSerialziedData(ADR(actual), SIZEOF(actual));
+serializer.TryGetSerializedData(ADR(actual), SIZEOF(actual));
 
 AssertEquals_STRING(
     Expected := expected,
@@ -226,7 +226,7 @@ END_VAR
 
 serializer.Reset();
 _type.SerializeWith(serializer);
-serializer.TryGetSerialziedData(ADR(actual), SIZEOF(actual));
+serializer.TryGetSerializedData(ADR(actual), SIZEOF(actual));
 
 AssertEquals_STRING(
     Expected := expected,
@@ -265,6 +265,7 @@ TEST_FINISHED();
       <Declaration><![CDATA[METHOD PUBLIC TestTryDeserializeFrom
 VAR
     deserializer : JsonDeserializer;
+    feedback : DeserializerFeedback;
     json : STRING := '65535';
     _type : _LWORD(0);
     expected : LWORD := 65535;
@@ -276,7 +277,7 @@ VAR
 
 deserializer.Reset();
 deserializer.TryLoad(json);
-_type.TryDeserializeFrom(deserializer);
+_type.TryDeserializeFrom(Deserializer, Feedback);
 
 actual := _type.Value;
 
@@ -290,7 +291,8 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToFollowsReference" Id="{ad702e74-5c91-01df-332e-0aaa7e154d31}">
+    <Method Name="TestTryMakeReferenceToFollowsReference"
+      Id="{ad702e74-5c91-01df-332e-0aaa7e154d31}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToFollowsReference
 VAR
     _type : _LWORD(0);
@@ -317,7 +319,8 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToUpdatesReference" Id="{dfbbadb4-b2ef-04c2-364e-f7e7dfb28c5d}">
+    <Method Name="TestTryMakeReferenceToUpdatesReference"
+      Id="{dfbbadb4-b2ef-04c2-364e-f7e7dfb28c5d}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToUpdatesReference
 VAR
     _type : _LWORD(0);

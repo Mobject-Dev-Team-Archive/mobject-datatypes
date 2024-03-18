@@ -80,9 +80,10 @@ END_VAR]]></Declaration>
       <Declaration><![CDATA[METHOD TryDeserializeFrom : BOOL
 VAR_INPUT
 	Deserializer : I_Deserializer;
+	Feedback : I_DeserializerFeedback;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[TryDeserializeFrom := _baseType.TryDeserializeFrom(Deserializer);]]></ST>
+        <ST><![CDATA[TryDeserializeFrom := _baseType.TryDeserializeFrom(Deserializer, Feedback);]]></ST>
       </Implementation>
     </Method>
     <Method Name="TryResolveAsAliasType" Id="{8b7c7d86-c00c-052e-0c75-6034d6f85e34}">

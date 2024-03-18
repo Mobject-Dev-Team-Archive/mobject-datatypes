@@ -111,6 +111,7 @@ enumerator.Dispose();]]></ST>
       <Declaration><![CDATA[METHOD PUBLIC TryDeserializeFrom : BOOL
 VAR_INPUT
 	Deserializer : I_Deserializer;
+	Feedback : I_DeserializerFeedback;
 END_VAR
 VAR
 	membersEnumerator : I_DeserializerObjectForwardEnumerator;
@@ -125,7 +126,7 @@ WHILE membersEnumerator.MoveNext() DO
 		CONTINUE;
 	END_IF
 	
-	IF NOT member.TryDeserializeFrom(membersEnumerator.Current) THEN
+	IF NOT member.TryDeserializeFrom(membersEnumerator.Current, Feedback) THEN
 		RETURN;
 	END_IF
 

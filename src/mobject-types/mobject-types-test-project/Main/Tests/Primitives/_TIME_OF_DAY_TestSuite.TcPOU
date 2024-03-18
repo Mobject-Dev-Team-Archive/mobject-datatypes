@@ -200,7 +200,7 @@ END_VAR
 
 serializer.Reset();
 _type.SerializeTypeWith(serializer);
-serializer.TryGetSerialziedData(ADR(actual), SIZEOF(actual));
+serializer.TryGetSerializedData(ADR(actual), SIZEOF(actual));
 
 AssertEquals_STRING(
     Expected := expected,
@@ -226,7 +226,7 @@ END_VAR
 
 serializer.Reset();
 _type.SerializeWith(serializer);
-serializer.TryGetSerialziedData(ADR(actual), SIZEOF(actual));
+serializer.TryGetSerializedData(ADR(actual), SIZEOF(actual));
 
 AssertEquals_STRING(
     Expected := expected,
@@ -265,6 +265,7 @@ TEST_FINISHED();
       <Declaration><![CDATA[METHOD PUBLIC TestTryDeserializeFrom
 VAR
     deserializer : JsonDeserializer;
+    feedback : DeserializerFeedback;
     json : STRING := 'TIME_OF_DAY#12:34:56.789';
     _type : _TIME_OF_DAY(TIME_OF_DAY#0:0:0);
     expected : TIME_OF_DAY := TIME_OF_DAY#12:34:56.789;
@@ -276,7 +277,7 @@ VAR
 
 deserializer.Reset();
 deserializer.TryLoad(json);
-_type.TryDeserializeFrom(deserializer);
+_type.TryDeserializeFrom(Deserializer, Feedback);
 
 actual := _type.Value;
 
@@ -290,7 +291,8 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToFollowsReference" Id="{87aa8bb1-4171-0655-2b2c-bc1de90ca327}">
+    <Method Name="TestTryMakeReferenceToFollowsReference"
+      Id="{87aa8bb1-4171-0655-2b2c-bc1de90ca327}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToFollowsReference
 VAR
     _type : _TIME_OF_DAY(TIME_OF_DAY#0:0:0);
@@ -317,7 +319,8 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToUpdatesReference" Id="{e91639c9-1648-0a77-1440-975ee3b7eb83}">
+    <Method Name="TestTryMakeReferenceToUpdatesReference"
+      Id="{e91639c9-1648-0a77-1440-975ee3b7eb83}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToUpdatesReference
 VAR
     _type : _TIME_OF_DAY(TIME_OF_DAY#0:0:0);

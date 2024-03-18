@@ -103,9 +103,10 @@ END_VAR
       <Declaration><![CDATA[METHOD TryDeserializeFrom : BOOL
 VAR_INPUT
 	Deserializer : I_Deserializer;
+	Feedback : I_DeserializerFeedback;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[TryDeserializeFrom := Deserializer.TryGetLreal(activeData);]]></ST>
+        <ST><![CDATA[TryDeserializeFrom := Deserializer.TryGetLreal(activeData, Feedback);]]></ST>
       </Implementation>
     </Method>
     <Method Name="TryMakeReferenceTo" Id="{67d05bab-3f10-0997-256f-61ac298e826f}">

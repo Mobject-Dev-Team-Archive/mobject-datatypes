@@ -115,9 +115,10 @@ memcpy(Address, Source.Address, Size);]]></ST>
       <Declaration><![CDATA[METHOD TryDeserializeFrom : BOOL
 VAR_INPUT
 	Deserializer : I_Deserializer;
+	Feedback : I_DeserializerFeedback;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[TryDeserializeFrom := membersHost.TryDeserializeFrom(Deserializer);]]></ST>
+        <ST><![CDATA[TryDeserializeFrom := membersHost.TryDeserializeFrom(Deserializer, Feedback);]]></ST>
       </Implementation>
     </Method>
     <Method Name="TryGetMemberByName" Id="{8f166c4e-7a97-0c21-3753-3c2e46dcf112}">

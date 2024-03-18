@@ -108,6 +108,7 @@ memcpy(Address, Source.Address, Size);]]></ST>
       <Declaration><![CDATA[METHOD PUBLIC ABSTRACT TryDeserializeFrom : BOOL
 VAR_INPUT
 	Deserializer : I_Deserializer;
+	Feedback : I_DeserializerFeedback;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[]]></ST>
