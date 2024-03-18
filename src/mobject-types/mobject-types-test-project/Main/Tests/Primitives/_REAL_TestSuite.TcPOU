@@ -220,7 +220,7 @@ TEST_FINISHED();
 VAR
     _type : _REAL(123.4);
     serializer : JsonSerializer;
-    expected : STRING := '123.4';
+    expected : STRING := '123.40000152'; // Expected value due to the nature of floating point values defined by IEEE754.
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
