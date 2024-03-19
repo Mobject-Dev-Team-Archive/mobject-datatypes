@@ -55,6 +55,9 @@
     <Compile Include="Tests\Primitives\_TOD_TestSuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\Primitives\_DT_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\Primitives\_ULINT_TestSuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>

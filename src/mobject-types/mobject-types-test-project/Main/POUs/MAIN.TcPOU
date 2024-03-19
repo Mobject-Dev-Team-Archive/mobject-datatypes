@@ -33,7 +33,7 @@ VAR
     
     //_DATE_TestSuite : _TIME_TestSuite;
     //_DATE_AND_TIME_TestSuite : _DATE_AND_TIME_TestSuite;
-    //_DT_TestSuite : _DT_TestSuite;
+    _DT_TestSuite : _DT_TestSuite;
     
     //_LDATE, LDATE_AND_TIME, _LDT, LTIME_OF_DAY & _LTOD require TC build >=4026.0
 	
@@ -42,7 +42,8 @@ VAR
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[TcUnit.RUN();]]></ST>
+      <ST><![CDATA[TcUnit.RUN();
+]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>
