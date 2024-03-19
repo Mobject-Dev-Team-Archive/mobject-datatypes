@@ -89,6 +89,9 @@
     <Compile Include="Datatypes\Primitive\_TOD.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Datatypes\Primitive\_DT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Datatypes\Primitive\_UINT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
