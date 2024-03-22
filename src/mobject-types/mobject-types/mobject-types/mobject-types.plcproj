@@ -53,67 +53,79 @@
     </LibraryReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Datatypes\Alias\_HRESULT.TcPOU">
+    <Compile Include="DatatypePacks\PlcBasicDatatypePack.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\Primitive\_BOOL.TcPOU">
+    <Compile Include="Datatypes\Datatypes.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\Primitive\_BYTE.TcPOU">
+    <Compile Include="Datatype\Alias\_HRESULT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\Primitive\_DINT.TcPOU">
+    <Compile Include="Datatype\Primitive\_BOOL.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\Primitive\_TIME_OF_DAY.TcPOU">
+    <Compile Include="Datatype\Primitive\_BYTE.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\Primitive\_REAL.TcPOU">
+    <Compile Include="Datatype\Primitive\_DINT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\Primitive\_LWORD.TcPOU">
+    <Compile Include="Datatype\Primitive\_TIME_OF_DAY.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\Primitive\_INT.TcPOU">
+    <Compile Include="Datatype\Primitive\_REAL.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\Primitive\_LINT.TcPOU">
+    <Compile Include="Datatype\Primitive\_LWORD.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\Primitive\_LREAL.TcPOU">
+    <Compile Include="Datatype\Primitive\_INT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\Primitive\_SINT.TcPOU">
+    <Compile Include="Datatype\Primitive\_LINT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\Primitive\_TOD.TcPOU">
+    <Compile Include="Datatype\Primitive\_LREAL.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\Primitive\_DT.TcPOU">
+    <Compile Include="Datatype\Primitive\_SINT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\Primitive\_UINT.TcPOU">
+    <Compile Include="Datatype\Primitive\_TOD.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\Primitive\_USINT.TcPOU">
+    <Compile Include="Datatype\Primitive\_DT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\Primitive\_UDINT.TcPOU">
+    <Compile Include="Datatype\Primitive\_UINT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\Primitive\_ULINT.TcPOU">
+    <Compile Include="Datatype\Primitive\_USINT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\Primitive\_WORD.TcPOU">
+    <Compile Include="Datatype\Primitive\_UDINT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\Primitive\_DWORD.TcPOU">
+    <Compile Include="Datatype\Primitive\_ULINT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\Structs\_TIMESTRUCT.TcPOU">
+    <Compile Include="Datatype\Primitive\_WORD.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Primitive\_DWORD.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Structs\_TIMESTRUCT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Interfaces\I_Datatype.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\I_DatatypePack.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\I_Datatypes.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Interfaces\I_StructuredDatatype.TcIO">
@@ -142,11 +154,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Datatypes\Alias" />
-    <Folder Include="Datatypes\Structs" />
-    <Folder Include="Datatypes\Primitive" />
-    <Folder Include="Interfaces" />
     <Folder Include="Datatypes" />
+    <Folder Include="Datatypes\Base" />
+    <Folder Include="Datatype\Alias" />
+    <Folder Include="Datatype\Structs" />
+    <Folder Include="Datatype\Primitive" />
+    <Folder Include="Interfaces" />
+    <Folder Include="Datatype" />
+    <Folder Include="DatatypePacks" />
     <Folder Include="_Internal" />
     <Folder Include="_Internal\Datatype" />
     <Folder Include="_Internal\MembersHost" />

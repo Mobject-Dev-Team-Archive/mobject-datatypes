@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_Datatypes" Id="{7caaaa3b-c9b5-08ca-062a-4a033e73fbf4}">
+    <Declaration><![CDATA[INTERFACE I_Datatypes
+]]></Declaration>
+    <Method Name="GetAliasByIdentifier" Id="{9c8469b5-f098-0324-1f0b-c519fffd25e1}">
+      <Declaration><![CDATA[METHOD PUBLIC GetAliasByIdentifier : BOOL
+VAR_INPUT
+	Identifier : T_MAXSTRING;
+	Destination : REFERENCE TO I_AliasDatatype;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="GetPrimitiveByIecType" Id="{f7c9ac77-a799-0bf5-15d2-1bfaa0378932}">
+      <Declaration><![CDATA[METHOD PUBLIC GetPrimitiveByIecType : BOOL
+VAR_INPUT
+	Identifier : T_MAXSTRING;
+	Destination : REFERENCE TO I_AliasDatatype;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="GetStructureByIdentifier" Id="{2cd8a0c0-be62-068a-2ca0-1ede8b201da5}">
+      <Declaration><![CDATA[METHOD PUBLIC GetStructureByIdentifier : BOOL
+VAR_INPUT
+	Identifier : T_MAXSTRING;
+	Destination : REFERENCE TO I_StructuredDatatype;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="RegisterDatatype" Id="{aa33d084-e797-0215-1a24-57f87a17de42}">
+      <Declaration><![CDATA[METHOD RegisterDatatype
+VAR_INPUT
+	Datatype : I_Datatype;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="SerializeTypeWith" Id="{401fd3f0-03f7-06c4-325b-b75c70f59c60}">
+      <Declaration><![CDATA[METHOD PUBLIC SerializeTypeWith
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>
