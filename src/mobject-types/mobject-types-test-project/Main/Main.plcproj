@@ -82,6 +82,9 @@
     <Compile Include="Tests\Primitives\_DWORD_TestSuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\Primitives\_STRING_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\Structs\_TIMESTRUCT_TestSuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>

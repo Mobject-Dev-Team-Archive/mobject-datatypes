@@ -37,6 +37,8 @@ VAR
     
     //_LDATE, LDATE_AND_TIME, _LDT, LTIME_OF_DAY & _LTOD require TC build >=4026.0
 	
+    _STRING_TestSuite : _STRING_TestSuite;
+    
 	// struct
 	_TIMESTRUCT_TestSuite : _TIMESTRUCT_TestSuite;
 END_VAR
