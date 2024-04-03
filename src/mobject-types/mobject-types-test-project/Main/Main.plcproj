@@ -28,6 +28,9 @@
     <Compile Include="Tests\Alias\_HRESULT_TestSuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\Alias\_FLOAT_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\Primitives\_BOOL_TestSuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>

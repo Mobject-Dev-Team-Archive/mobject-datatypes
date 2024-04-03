@@ -62,6 +62,9 @@
     <Compile Include="Datatype\Alias\_HRESULT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Datatype\Alias\_FLOAT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Datatype\Primitive\_BOOL.TcPOU">
       <SubType>Code</SubType>
     </Compile>
