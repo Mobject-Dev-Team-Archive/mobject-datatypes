@@ -116,6 +116,9 @@
     <Compile Include="Datatype\Primitive\_DWORD.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Datatype\Primitive\_STRING.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Datatype\Structs\_TIMESTRUCT.TcPOU">
       <SubType>Code</SubType>
     </Compile>

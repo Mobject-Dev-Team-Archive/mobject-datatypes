@@ -28,6 +28,7 @@ VAR
 	_ulint : _ULINT(0);
 	_usint : _USINT(0);
 	_word : _WORD(0);
+    _string : _STRING('');
 	
 	// structures
 	_timestruct : _TIMESTRUCT();
@@ -66,6 +67,7 @@ Datatypes.RegisterDatatype(_uint);
 Datatypes.RegisterDatatype(_ulint);
 Datatypes.RegisterDatatype(_usint);
 Datatypes.RegisterDatatype(_word);
+Datatypes.RegisterDatatype(_string);
 
 // structures
 Datatypes.RegisterDatatype(_timestruct);]]></ST>
