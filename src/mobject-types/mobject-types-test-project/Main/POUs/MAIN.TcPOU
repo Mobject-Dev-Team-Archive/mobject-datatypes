@@ -4,6 +4,7 @@
     <Declaration><![CDATA[PROGRAM MAIN
 VAR
 	//alias
+    _FLOAT_TestSuite : _FLOAT_TestSuite;
 	_HRESULT_TestSuite : _HRESULT_TestSuite;
 	
 	// primitive
