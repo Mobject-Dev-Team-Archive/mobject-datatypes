@@ -20,4 +20,4 @@ mobject's goal is to be a lightweight solution to typical oop problems.
 
 ## Why use mobject-types?
 
-The mobject-server library provides a consistent way to handle data types as objects. Focus is with the serialization and deserialization of primitives. This library can be used as a base for custom data types as objects.
+The mobject-types library provides a consistent way to handle data types as objects. Focus is with the serialization and deserialization of primitives. This library can be used as a base for custom data types as objects.
