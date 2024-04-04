@@ -1,155 +1,82 @@
-# Seralization Notes
+# SerializeWith(serializer)
 
-This is a work in progress. The information below is a guide to common serialization patterns used.
+When leveraging our serialization system, most datatype serialization concerns are managed by the base classes such as DatatypeBase, AliaseDatatypeBase, and StructuredDatatypeBase.
 
-## Primative
+These classes facilitate the automatic serialization of information based on the abstract properties you define. In the examples provided below, we illustrate how datatypes are serialized, assuming the use of the JsonSerializer class. This overview aims to give you a practical understanding of what the serialization output looks like for both primitive and structured datatypes. Whether you're working with basic types or more complex structures, the mobject-types will automate much of the serialization (and deserialization) for you if you use the provided base types.
+
+## Primatives
+
+Example of a BOOL.
 
 ```json
-{
-  "type": "BOOL"
-}
+{ "type": "BOOL" }
+```
+
+Example of a INT.
+
+```json
+{ "type": "INT" }
 ```
 
 ## Structures
 
+Example of TIMESTRUCT.
+
 ```json
 {
-  "name": "MachineSettings",
+  "name": "TIMESTRUCT",
   "type": "STRUCT",
-  "fields": [
-    {
-      "name": "Enabled",
-      "type": "BOOL"
+  "members": {
+    "wDay": {
+      "type": "WORD"
     },
-    {
-      "name": "Speed",
-      "type": "INT",
-      "defaultValue": 123
+    "wDayOfWeek": {
+      "type": "WORD"
+    },
+    "wHour": {
+      "type": "WORD"
+    },
+    "wMilliseconds": {
+      "type": "WORD"
+    },
+    "wMinute": {
+      "type": "WORD"
+    },
+    "wMonth": {
+      "type": "WORD"
+    },
+    "wSecond": {
+      "type": "WORD"
+    },
+    "wYear": {
+      "type": "WORD"
     }
-  ]
+  }
 }
 ```
 
 ## Enums
 
-```json
-{
-  "name": "MachineState",
-  "type": "ENUM",
-  "baseType": "DINT",
-  "attributes": ["qualified_only", "strict"],
-  "members": [
-    {
-      "name": "STOPPED",
-      "value": 0
-    },
-    {
-      "name": "RUNNING",
-      "value": 1
-    }
-  ],
-  "defaultValue": "STOPPED"
-}
-```
+TBA
 
 ## Alias
 
+Example of HRESULT
+
 ```json
 {
-  "name": "Speed",
+  "name": "HRESULT",
   "type": "ALIAS",
-  "baseType": "INT"
+  "baseType": {
+    "type": "DINT"
+  }
 }
 ```
 
 ## Unions
 
-```json
-{
-  "name": "Buffer",
-  "type": "UNION",
-  "members": [
-    {
-      "name": "AsWord",
-      "type": "WORD"
-    },
-    {
-      "name": "AsBytes",
-      "type": "ARRAY",
-      "elementType": "BYTE",
-      "dimensions": [
-        {
-          "lowerBound": 0,
-          "upperBound": 1
-        }
-      ]
-    }
-  ]
-}
-```
+TBA
 
 ## Interfaces
 
-```json
-{
-  "name": "I_Echo",
-  "type": "INTERFACE",
-  "methods": [
-    {
-      "name": "Echo",
-      "returnType": "STRING",
-      "parameters": [
-        {
-          "name": "input",
-          "type": "STRING"
-        }
-      ]
-    }
-  ]
-}
-```
-
-## Other
-
-```json
-// when adding an array to a UDT
-
-{
-	"name": "AsBytes",
-	"type": "ARRAY",
-	"elementType": "BYTE",
-	"dimensions": [
-	{
-		"lowerBound": 0,
-		"upperBound": 1
-	}
-	]
-}
-
-// when items have default values
-
-{
-  "name": "MachineSettings",
-  "type": "STRUCT",
-  "fields": [
-    {
-      "name": "Enabled",
-      "type": "BOOL",
-      "defaultValue": true
-    },
-    {
-      "name": "SpeedSetpoints",
-      "type": "ARRAY",
-      "elementType": "INT",
-      "dimensions": [
-        {
-          "lowerBound": 0,
-          "upperBound": 3
-        }
-      ],
-      "defaultValue": [1, 2, 3, 4]
-    }
-  ]
-}
-
-```
+TBA
