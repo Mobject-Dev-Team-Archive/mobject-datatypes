@@ -1,8 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <Itf Name="I_Datatypes" Id="{7caaaa3b-c9b5-08ca-062a-4a033e73fbf4}">
-    <Declaration><![CDATA[INTERFACE I_Datatypes
-]]></Declaration>
+    <Declaration><![CDATA[INTERFACE I_Datatypes EXTENDS I_EventEmitter]]></Declaration>
+    <Method Name="Accept" Id="{990ed99f-5b08-0e3f-1628-0f474cd0e653}">
+      <Declaration><![CDATA[METHOD PUBLIC Accept
+VAR_INPUT
+	Visitor : I_DatatypeVisitor;
+END_VAR]]></Declaration>
+    </Method>
     <Method Name="GetAliasByIdentifier" Id="{9c8469b5-f098-0324-1f0b-c519fffd25e1}">
       <Declaration><![CDATA[METHOD PUBLIC GetAliasByIdentifier : BOOL
 VAR_INPUT
