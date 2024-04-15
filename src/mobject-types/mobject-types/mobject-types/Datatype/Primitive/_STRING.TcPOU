@@ -46,6 +46,17 @@ Clone := pClone^;
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Datatype" Id="{44e03fa7-ffdb-0b18-2db4-770fb385b000}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Datatype : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{0309e4a8-2c3d-0d8c-0af8-8ec954adc0dd}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Datatype := 'STRING';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="FB_init" Id="{389437c0-6b47-0fc4-022d-e5a2725e77e5}" FolderPath="Constructor\">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
@@ -58,17 +69,6 @@ END_VAR
         <ST><![CDATA[localData := InitialValue;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="IecType" Id="{44e03fa7-ffdb-0b18-2db4-770fb385b000}">
-      <Declaration><![CDATA[PROPERTY PUBLIC IecType : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{0309e4a8-2c3d-0d8c-0af8-8ec954adc0dd}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[IecType := 'STRING';]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Method Name="MakeReferenceTo" Id="{170da9f2-3cff-0b43-189a-ab0bcd37d445}">
       <Declaration><![CDATA[METHOD PUBLIC MakeReferenceTo
 VAR_INPUT
@@ -118,7 +118,7 @@ VAR
 	pTargetData : POINTER TO T_MaxString;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT (Target.IecType = IecType) THEN
+        <ST><![CDATA[IF NOT (Target.Datatype = Datatype) THEN
 	RETURN;
 END_IF
 

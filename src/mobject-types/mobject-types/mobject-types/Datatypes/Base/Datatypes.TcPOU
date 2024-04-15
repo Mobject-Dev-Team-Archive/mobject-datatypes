@@ -222,7 +222,7 @@ END_IF
 
 // add arrays
 
-primitives.AddOrUpdate(Datatype.IecType, Datatype);
+primitives.AddOrUpdate(Datatype.Datatype, Datatype);
 emitOnDatatypeAddedEvent(Datatype);]]></ST>
       </Implementation>
     </Method>

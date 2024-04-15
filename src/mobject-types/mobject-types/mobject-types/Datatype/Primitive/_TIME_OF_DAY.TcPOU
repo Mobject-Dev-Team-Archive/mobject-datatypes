@@ -46,6 +46,17 @@ Clone := pClone^;
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Datatype" Id="{4d251238-7b32-0c3f-11d5-5dc080fadb33}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Datatype : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{38f8ea91-5cd2-0d74-10f0-4f5aff0833d6}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Datatype := 'TIME_OF_DAY';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="FB_init" Id="{6918d485-a7b6-0df0-382e-ed9b9ee1ea9d}" FolderPath="Constructor\">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
@@ -58,17 +69,6 @@ END_VAR
         <ST><![CDATA[localData := InitialValue;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="IecType" Id="{4d251238-7b32-0c3f-11d5-5dc080fadb33}">
-      <Declaration><![CDATA[PROPERTY PUBLIC IecType : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{38f8ea91-5cd2-0d74-10f0-4f5aff0833d6}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[IecType := 'TIME_OF_DAY';]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Method Name="MakeReferenceTo" Id="{e6966efc-b41d-0643-200e-cf89b0301914}">
       <Declaration><![CDATA[METHOD PUBLIC MakeReferenceTo
 VAR_INPUT
@@ -118,7 +118,7 @@ VAR
 	pTargetData : POINTER TO TIME_OF_DAY;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT (Target.IecType = IecType) THEN
+        <ST><![CDATA[IF NOT (Target.Datatype = Datatype) THEN
 	RETURN;
 END_IF
 

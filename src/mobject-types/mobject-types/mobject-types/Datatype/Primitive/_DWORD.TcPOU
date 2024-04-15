@@ -4,7 +4,7 @@
     <Declaration><![CDATA[{attribute 'linkalways'} 
 {attribute 'no_explicit_call' := 'This FB is a CLASS and must be accessed using methods or properties'}
 {attribute 'enable_dynamic_creation'}
-FUNCTION_BLOCK _DWORD EXTENDS DatatypeBase
+FUNCTION_BLOCK _DWORD EXTENDS IntegerDatatypeBase
 VAR
 	localData : DWORD;
 	activeData : REFERENCE TO DWORD REF= localData;
@@ -14,6 +14,7 @@ END_VAR
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Folder Name="Constructor" Id="{6081fa35-d0fa-0615-3e40-6bcf9d5ab0f5}" />
+    <Folder Name="Protected" Id="{96d98418-62ba-0b6b-2d76-12ed5905547e}" />
     <Property Name="Address" Id="{01b8a490-6357-09f2-2e3c-649a590225d1}">
       <Declaration><![CDATA[PROPERTY PUBLIC Address : PVOID]]></Declaration>
       <Get Name="Get" Id="{e9fac61d-1033-05e8-074e-76511964a6c1}">
@@ -46,6 +47,17 @@ Clone := pClone^;
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Datatype" Id="{a92004d4-57cd-00a6-11ea-2ced8b55ecde}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Datatype : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{59a1ab44-0ba1-0a61-2660-8b986cb2fee7}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Datatype := 'DWORD';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="FB_init" Id="{f444b33f-03c6-0d22-0fb3-60f155eabc87}" FolderPath="Constructor\">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
@@ -58,14 +70,25 @@ END_VAR
         <ST><![CDATA[localData := InitialValue;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="IecType" Id="{a92004d4-57cd-00a6-11ea-2ced8b55ecde}">
-      <Declaration><![CDATA[PROPERTY PUBLIC IecType : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{59a1ab44-0ba1-0a61-2660-8b986cb2fee7}">
+    <Property Name="IsSigned" Id="{aba69821-f124-00e4-03c3-652fd798cb58}">
+      <Declaration><![CDATA[PROPERTY PUBLIC IsSigned : BOOL]]></Declaration>
+      <Get Name="Get" Id="{2819fb0c-b977-0f9d-3668-eb598d35c185}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IecType := 'DWORD';]]></ST>
+          <ST><![CDATA[IsSigned := FALSE;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="LowerBound" Id="{23c2d45a-39cd-086f-23f5-d64ddc8f4454}">
+      <Declaration><![CDATA[PROPERTY PUBLIC LowerBound : DWORD]]></Declaration>
+      <Get Name="Get" Id="{c2dd81bb-b24f-0d89-2060-a0d8ed861b35}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[LowerBound := DatatypeLimits.DWORD_LOWER_LIMIT;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -77,6 +100,26 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SerializeLowerbound" Id="{4032cdcf-0b79-0a8b-1922-12cbdb2507ca}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED SerializeLowerbound
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Serializer.AddDword(Lowerbound);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SerializeUpperbound" Id="{750db5eb-be49-0cd9-0233-d973c1ca9b79}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED SerializeUpperbound
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Serializer.AddDword(Upperbound);]]></ST>
       </Implementation>
     </Method>
     <Method Name="SerializeWith" Id="{de88edbc-c461-0b88-0417-7a9c62325ef3}">
@@ -118,7 +161,7 @@ VAR
 	pTargetData : POINTER TO DWORD;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT (Target.IecType = IecType) THEN
+        <ST><![CDATA[IF NOT (Target.Datatype = Datatype) THEN
 	RETURN;
 END_IF
 
@@ -127,6 +170,17 @@ activeData REF= pTargetData^;
 TryMakeReferenceTo := TRUE;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="UpperBound" Id="{06a0b616-9c87-0284-364a-c93d765d2559}">
+      <Declaration><![CDATA[PROPERTY PUBLIC UpperBound : DWORD]]></Declaration>
+      <Get Name="Get" Id="{b00abbe0-d40f-0845-29c0-1a45581f3768}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[UpperBound := DatatypeLimits.DWORD_UPPER_LIMIT;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="Value" Id="{d615ead0-e05e-0f6d-34dc-cb0a584b413e}">
       <Declaration><![CDATA[PROPERTY PUBLIC Value : DWORD]]></Declaration>
       <Get Name="Get" Id="{b9f0dd16-4ed7-0445-385c-2902d495500b}">

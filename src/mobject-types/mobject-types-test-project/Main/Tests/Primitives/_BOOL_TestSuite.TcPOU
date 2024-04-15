@@ -119,7 +119,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[TEST('TestIecTypeReturnsExpected');
 
-actual := _type.IecType;
+actual := _type.Datatype;
 
 AssertEquals_STRING(
     Expected := expected,
@@ -190,7 +190,7 @@ TEST_FINISHED();
 VAR
     _type : _BOOL(TRUE);
     serializer : JsonSerializer;
-    expected : STRING := '{"type":"BOOL"}';
+    expected : STRING := '{"datatype":"BOOL"}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
@@ -290,8 +290,7 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToFollowsReference"
-      Id="{af5224eb-8a4f-0ca3-1ca6-9411a2d373f2}">
+    <Method Name="TestTryMakeReferenceToFollowsReference" Id="{af5224eb-8a4f-0ca3-1ca6-9411a2d373f2}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToFollowsReference
 VAR
     _type : _BOOL(FALSE);
@@ -318,8 +317,7 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToUpdatesReference"
-      Id="{21a28d82-6b46-0483-004b-977427fca09b}">
+    <Method Name="TestTryMakeReferenceToUpdatesReference" Id="{21a28d82-6b46-0483-004b-977427fca09b}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToUpdatesReference
 VAR
     _type : _BOOL(FALSE);

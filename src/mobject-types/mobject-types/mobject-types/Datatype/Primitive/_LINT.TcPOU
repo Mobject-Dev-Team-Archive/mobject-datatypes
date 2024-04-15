@@ -4,7 +4,7 @@
     <Declaration><![CDATA[{attribute 'linkalways'} 
 {attribute 'no_explicit_call' := 'This FB is a CLASS and must be accessed using methods or properties'}
 {attribute 'enable_dynamic_creation'}
-FUNCTION_BLOCK _LINT EXTENDS DatatypeBase
+FUNCTION_BLOCK _LINT EXTENDS IntegerDatatypeBase
 VAR
 	localData : LINT;
 	activeData : REFERENCE TO LINT REF= localData;
@@ -14,6 +14,7 @@ END_VAR
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Folder Name="Constructor" Id="{2e3dbac4-df59-0cfa-3714-defc8af50f7b}" />
+    <Folder Name="Protected" Id="{c3e95bf8-0859-043b-06b0-01464a9a08b6}" />
     <Property Name="Address" Id="{0db9698f-71b2-0e3a-3f12-09e067e113ed}">
       <Declaration><![CDATA[PROPERTY PUBLIC Address : PVOID]]></Declaration>
       <Get Name="Get" Id="{d8cd103f-bebd-04c0-1c90-c740ec1d1969}">
@@ -46,6 +47,17 @@ Clone := pClone^;
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Datatype" Id="{4f73e892-d305-03b1-3ff8-3c18c8f84cbd}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Datatype : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{f2d7ead6-7875-0053-38b9-740982899b2e}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Datatype := 'LINT';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="FB_init" Id="{a4df2d97-2866-0f97-1768-ebcce6eac5de}" FolderPath="Constructor\">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
@@ -58,14 +70,25 @@ END_VAR
         <ST><![CDATA[localData := InitialValue;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="IecType" Id="{4f73e892-d305-03b1-3ff8-3c18c8f84cbd}">
-      <Declaration><![CDATA[PROPERTY PUBLIC IecType : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{f2d7ead6-7875-0053-38b9-740982899b2e}">
+    <Property Name="IsSigned" Id="{7eae4ba8-d49c-07bb-0355-55d0462e35fa}">
+      <Declaration><![CDATA[PROPERTY PUBLIC IsSigned : BOOL]]></Declaration>
+      <Get Name="Get" Id="{79b2931a-5bff-0a12-0cf2-6b9902ca1252}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IecType := 'LINT';]]></ST>
+          <ST><![CDATA[IsSigned := TRUE;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="LowerBound" Id="{ce54839e-2b96-0db3-0e8e-fc481b95b49b}">
+      <Declaration><![CDATA[PROPERTY PUBLIC LowerBound : LINT]]></Declaration>
+      <Get Name="Get" Id="{c38796d3-283a-0711-0dcd-9af8c87f4905}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[LowerBound := DatatypeLimits.LINT_LOWER_LIMIT;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -77,6 +100,26 @@ END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SerializeLowerbound" Id="{fd727f69-2ca1-0f1e-009c-3cf16d8643a9}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED SerializeLowerbound
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Serializer.AddLint(Lowerbound);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SerializeUpperbound" Id="{e3e7bc57-75e8-0519-38b4-a72f6e575901}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED SerializeUpperbound
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Serializer.AddLint(Upperbound);]]></ST>
       </Implementation>
     </Method>
     <Method Name="SerializeWith" Id="{1e289958-6813-057a-3a07-7d697036efce}">
@@ -118,7 +161,7 @@ VAR
 	pTargetData : POINTER TO LINT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT (Target.IecType = IecType) THEN
+        <ST><![CDATA[IF NOT (Target.Datatype = Datatype) THEN
 	RETURN;
 END_IF
 
@@ -127,6 +170,17 @@ activeData REF= pTargetData^;
 TryMakeReferenceTo := TRUE;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="UpperBound" Id="{4a66617a-b23b-0bf7-266e-1e05f6733294}">
+      <Declaration><![CDATA[PROPERTY PUBLIC UpperBound : LINT]]></Declaration>
+      <Get Name="Get" Id="{76cd0108-4ea1-004e-32a2-4485c1dfafc9}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[UpperBound :=  DatatypeLimits.LINT_UPPER_LIMIT;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="Value" Id="{fd15c92e-eab9-0007-0dfe-350b39f88ae7}">
       <Declaration><![CDATA[PROPERTY PUBLIC Value : LINT]]></Declaration>
       <Get Name="Get" Id="{21ef97a5-6387-0daf-19ae-c76b24796325}">

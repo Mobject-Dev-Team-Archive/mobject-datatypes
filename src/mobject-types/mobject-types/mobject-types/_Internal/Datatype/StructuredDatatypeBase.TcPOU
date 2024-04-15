@@ -4,7 +4,7 @@
     <Declaration><![CDATA[{attribute 'linkalways'} 
 {attribute 'no_explicit_call' := 'This FB is a CLASS and must be accessed using methods or properties'}
 {attribute 'enable_dynamic_creation'}
-FUNCTION_BLOCK ABSTRACT StructuredDatatypeBase EXTENDS DatatypeBase IMPLEMENTS I_StructuredDatatype
+FUNCTION_BLOCK ABSTRACT StructuredDatatypeBase EXTENDS UserDefinedDatatypeBase IMPLEMENTS I_StructuredDatatype
 VAR
 	membersHost : MembersHost;
 END_VAR
@@ -34,6 +34,17 @@ END_VAR
         <ST><![CDATA[membersHost.AddMember(MemberName, Member);]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Datatype" Id="{a8c18764-bb60-0e02-27e9-99f1e4f4ba10}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Datatype : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{bc004734-b432-0c60-2e2e-c258a8f38112}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Datatype := 'STRUCT';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="GetMemberEnumerator" Id="{fac9ada8-4cb2-073e-22b0-6df830bd06b4}">
       <Declaration><![CDATA[METHOD PUBLIC GetMemberEnumerator : I_KeyValueForwardEnumerator
 VAR_INPUT
@@ -43,40 +54,14 @@ END_VAR
         <ST><![CDATA[GetMemberEnumerator := membersHost.GetMemberEnumerator();]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Identifier" Id="{fad1b093-141e-0c94-3cbf-d2814230ee8f}">
-      <Declaration><![CDATA[PROPERTY PUBLIC ABSTRACT Identifier : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{0ba07a67-9506-0b52-2c39-54987f0097d7}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
-    <Property Name="IecType" Id="{a8c18764-bb60-0e02-27e9-99f1e4f4ba10}">
-      <Declaration><![CDATA[PROPERTY PUBLIC IecType : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{bc004734-b432-0c60-2e2e-c258a8f38112}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[IecType := 'STRUCT';]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
-    <Method Name="SerializeTypeWith" Id="{9654791f-6cce-4be3-aa2e-1642f4102f87}">
-      <Declaration><![CDATA[METHOD PUBLIC SerializeTypeWith
+    <Method Name="OnSerializeTypeWith" Id="{6aff2491-e883-0d45-3087-d47a6efdc632}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED OnSerializeTypeWith
 VAR_INPUT
 	Serializer : I_Serializer;
-END_VAR
-]]></Declaration>
+END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Serializer.StartObject();
-Serializer.AddKeyString('name',Identifier);
-Serializer.AddKeyString('type',IecType);	
-membersHost.SerializeTypeWith(Serializer);
-Serializer.EndObject();]]></ST>
+        <ST><![CDATA[SUPER^.OnSerializeTypeWith(Serializer);
+membersHost.SerializeTypeWith(Serializer);]]></ST>
       </Implementation>
     </Method>
     <Method Name="SerializeWith" Id="{f673cce2-1a3e-44bc-81da-e8bc2c037902}">

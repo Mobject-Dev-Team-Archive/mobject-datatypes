@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="IntegerDatatypeBase" Id="{6f1eb65d-2dc0-0d58-2e25-2f05b19a5b4c}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'linkalways'} 
+{attribute 'no_explicit_call' := 'This FB is a CLASS and must be accessed using methods or properties'}
+{attribute 'enable_dynamic_creation'}
+FUNCTION_BLOCK ABSTRACT IntegerDatatypeBase EXTENDS DatatypeBase IMPLEMENTS I_IntegerDatatype
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="Protected" Id="{0775aeec-e6e3-08c0-0bd5-a96fc0b17e35}" />
+    <Property Name="IsSigned" Id="{eccdeb6f-91bd-0b7e-06bd-f859c210b3de}">
+      <Declaration><![CDATA[PROPERTY PUBLIC ABSTRACT IsSigned : BOOL]]></Declaration>
+      <Get Name="Get" Id="{1a391de6-e72b-01a7-223d-b1c7d4dcaf6f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="OnSerializeTypeWith" Id="{a12cac12-4b78-0363-1a58-b29135d476e6}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED OnSerializeTypeWith
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.OnSerializeTypeWith(Serializer);
+Serializer.AddKey('lowerBound');
+SerializeLowerbound(Serializer);
+Serializer.AddKey('upperBound');
+SerializeUpperbound(Serializer);
+Serializer.AddKeyBool('isSigned', IsSigned);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SerializeLowerbound" Id="{1b3e5609-1076-02ab-1243-ce942263068f}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED ABSTRACT SerializeLowerbound
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SerializeUpperbound" Id="{0322eecc-293c-0cb4-04c5-f0383a842e65}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED ABSTRACT SerializeUpperbound
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

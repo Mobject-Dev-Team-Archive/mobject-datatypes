@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_IntegerDatatype" Id="{70f66c5c-7a3b-087c-3c7c-3635a7e28769}">
+    <Declaration><![CDATA[INTERFACE I_IntegerDatatype EXTENDS I_Datatype]]></Declaration>
+    <Property Name="IsSigned" Id="{9ea617da-e362-035e-00f4-4fa3a97bf435}">
+      <Declaration><![CDATA[PROPERTY PUBLIC IsSigned : BOOL]]></Declaration>
+      <Get Name="Get" Id="{d426ad84-8c00-01bb-3f21-03595b3f9be5}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

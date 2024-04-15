@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="_DINT_TestSuite" Id="{4e4fa588-8936-0b8a-1377-1f035b13f2a6}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK _DINT_TestSuite EXTENDS TcUnit.FB_TestSuite
+  <POU Name="_E_TcEventClass_TestSuite" Id="{4b510b21-3f78-07a7-01b6-726e15a82945}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK _E_TcEventClass_TestSuite EXTENDS TcUnit.FB_TestSuite
 VAR
 END_VAR
 ]]></Declaration>
@@ -10,7 +10,6 @@ END_VAR
 TestClearReference();
 TestClone();
 TestIecTypeReturnsExpected();
-TestIsSigned();
 TestMakeReferenceToFollowsReference();
 TestMakeReferenceToUpdatesReference();
 TestSize();
@@ -23,10 +22,10 @@ TestTryMakeReferenceToFollowsReference();
 TestTryMakeReferenceToUpdatesReference();
 ]]></ST>
     </Implementation>
-    <Method Name="TestAddress" Id="{e16fd030-7dcb-07fb-2046-eef499bba341}">
+    <Method Name="TestAddress" Id="{cab3877f-8912-0de7-0ec2-783ae7910a28}">
       <Declaration><![CDATA[METHOD PUBLIC TestAddress
 VAR
-    _type : _DINT(0);
+    _type : _E_TcEventClass(E_TcEventClass.TCEVENTCLASS_NONE);
     notExpected : PVOID := 0;
     actual : PVOID;
 END_VAR
@@ -45,13 +44,13 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestClearReference" Id="{48e8d51f-5c93-0818-0a0c-4bd9620594d4}">
+    <Method Name="TestClearReference" Id="{e3d2b31e-0063-0899-3627-96e0dc59bd72}">
       <Declaration><![CDATA[METHOD PUBLIC TestClearReference
 VAR
-    _type : _DINT(0);
-	target : DINT := 0;
-    expected : DINT := 0;
-    actual : DINT;
+    _type : _E_TcEventClass(E_TcEventClass.TCEVENTCLASS_NONE);
+	target : E_TcEventClass := E_TcEventClass.TCEVENTCLASS_NONE;
+    expected : E_TcEventClass := E_TcEventClass.TCEVENTCLASS_NONE;
+    actual : E_TcEventClass;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -59,7 +58,7 @@ END_VAR
 
 _type.MakeReferenceTo(target);
 _type.ClearReference();
-target := 123;
+target := E_TcEventClass.TCEVENTCLASS_ALARM;
 
 actual := _type.Value;
 
@@ -73,10 +72,10 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestClone" Id="{98602eb6-16b6-05f7-11c6-291ae5007a9a}">
+    <Method Name="TestClone" Id="{d81e137d-ac1c-0924-3524-21b7dd042499}">
       <Declaration><![CDATA[METHOD PUBLIC TestClone
 VAR
-    _type : _DINT(123);
+    _type : _E_TcEventClass(E_TcEventClass.TCEVENTCLASS_NONE);
 	clone : I_Datatype;
 	isValidClone : BOOL;
 	compareResult : DINT;
@@ -110,11 +109,34 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestIecTypeReturnsExpected" Id="{ea16e37d-3534-064f-13f3-9ea38be0e1fd}">
+    <Method Name="TestIdentifierReturnsExpected" Id="{8e89eabe-1a06-087c-32f8-84fdb75e1d30}">
+      <Declaration><![CDATA[METHOD PUBLIC TestIdentifierReturnsExpected
+VAR
+    _type : _E_TcEventClass(E_TcEventClass.TCEVENTCLASS_NONE);;
+    expected : STRING := 'E_TcEventClass';
+    actual : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestIdentifierReturnsExpected');
+
+actual := _type.Identifier;
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Type did not return correct iec type.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestIecTypeReturnsExpected" Id="{1d520aa2-2d4d-054f-2963-1aaff1942084}">
       <Declaration><![CDATA[METHOD PUBLIC TestIecTypeReturnsExpected
 VAR
-    _type : _DINT(0);
-    expected : STRING := 'DINT';
+    _type : _E_TcEventClass(E_TcEventClass.TCEVENTCLASS_NONE);;
+    expected : STRING := 'ENUM';
     actual : STRING;
 END_VAR
 ]]></Declaration>
@@ -133,40 +155,20 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestIsSigned" Id="{1b105b04-03f1-0ee6-1ffb-f3e5b8d97d7c}">
-      <Declaration><![CDATA[METHOD PUBLIC TestIsSigned
-VAR
-    _type : _DINT(0);
-    expected : STRING := 'BOOL';
-    actual : STRING;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[TEST('TestIsSigned');
-
-AssertTrue(
-	Condition := _type.IsSigned,
-    Message := 'Type did not correctly identify itself as being signed'
-);
-
-TEST_FINISHED();
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="TestMakeReferenceToFollowsReference" Id="{d21ac7ab-7a90-0bc7-34e5-e7724b836d7e}">
+    <Method Name="TestMakeReferenceToFollowsReference" Id="{29363920-0e4d-0824-26f8-1f10fe3b5f8f}">
       <Declaration><![CDATA[METHOD PUBLIC TestMakeReferenceToFollowsReference
 VAR
-    _type : _DINT(0);
-	target : DINT := 0;
-    expected : DINT := 123;
-    actual : DINT;
+    _type : _E_TcEventClass(E_TcEventClass.TCEVENTCLASS_NONE);;
+	target : E_TcEventClass := E_TcEventClass.TCEVENTCLASS_NONE;
+    expected : E_TcEventClass := E_TcEventClass.TCEVENTCLASS_ALARM;
+    actual : E_TcEventClass;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('TestMakeReferenceToFollowsReference');
 
 _type.MakeReferenceTo(target);
-target := 123;
+target := E_TcEventClass.TCEVENTCLASS_ALARM;
 
 actual := _type.Value;
 
@@ -180,20 +182,20 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestMakeReferenceToUpdatesReference" Id="{b968487a-350f-032b-225e-fa87f93da73f}">
+    <Method Name="TestMakeReferenceToUpdatesReference" Id="{e4aea1f2-991a-0f22-154e-bc3808b3f05c}">
       <Declaration><![CDATA[METHOD PUBLIC TestMakeReferenceToUpdatesReference
 VAR
-    _type : _DINT(0);
-	target : DINT := 0;
-    expected : DINT := 123;
-    actual : DINT;
+    _type : _E_TcEventClass(E_TcEventClass.TCEVENTCLASS_NONE);;
+	target : E_TcEventClass := E_TcEventClass.TCEVENTCLASS_NONE;
+    expected : E_TcEventClass := E_TcEventClass.TCEVENTCLASS_ALARM;
+    actual : E_TcEventClass;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('TestMakeReferenceToUpdatesReference');
 
 _type.MakeReferenceTo(target);
-_type.Value := 123;
+_type.Value := E_TcEventClass.TCEVENTCLASS_ALARM;
 
 actual := target;
 
@@ -207,12 +209,12 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestSerializeTypeWith" Id="{c675454d-a95b-0661-33e4-58cc4ee6c831}">
+    <Method Name="TestSerializeTypeWith" Id="{42362a61-dffd-049c-0657-51d482829e80}">
       <Declaration><![CDATA[METHOD PUBLIC TestSerializeTypeWith
 VAR
-    _type : _DINT(0);
+    _type : _E_TcEventClass(E_TcEventClass.TCEVENTCLASS_NONE);
     serializer : JsonSerializer;
-    expected : STRING(500) := '{"datatype":"DINT","lowerBound":-2147483648,"upperBound":2147483647,"isSigned":true}';
+    expected : STRING(500) := '{"datatype":"ENUM","identifier":"E_TcEventClass","enumerations":["TCEVENTCLASS_ALARM","TCEVENTCLASS_HINT","TCEVENTCLASS_INSTRUCTION","TCEVENTCLASS_MAINTENANCE","TCEVENTCLASS_MESSAGE","TCEVENTCLASS_NONE","TCEVENTCLASS_PARAMERROR","TCEVENTCLASS_STATEINFO","TCEVENTCLASS_WARNING"],"baseType":{"datatype":"UINT","lowerBound":0,"upperBound":65535,"isSigned":false}}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
@@ -233,12 +235,12 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestSerializeWith" Id="{f26dacdc-2eba-0b61-05ba-3354ff0be316}">
+    <Method Name="TestSerializeWith" Id="{2b421d27-1116-09c6-3430-520597beff9f}">
       <Declaration><![CDATA[METHOD PUBLIC TestSerializeWith
 VAR
-    _type : _DINT(32767);
+    _type : _E_TcEventClass(E_TcEventClass.TCEVENTCLASS_ALARM);
     serializer : JsonSerializer;
-    expected : STRING := '32767';
+    expected : STRING := '"TCEVENTCLASS_ALARM"';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
@@ -259,11 +261,11 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestSize" Id="{063a4d56-54fe-08f5-3463-349394579a02}">
+    <Method Name="TestSize" Id="{4ead9ab9-9ab2-0f70-1dfe-c13832f9fa96}">
       <Declaration><![CDATA[METHOD PUBLIC TestSize
 VAR
-    _type : _DINT(0);
-    expected : UDINT := SIZEOF(DINT);
+    _type : _E_TcEventClass(E_TcEventClass.TCEVENTCLASS_NONE);;
+    expected : UDINT := SIZEOF(E_TcEventClass);
     actual : UDINT;
 END_VAR
 ]]></Declaration>
@@ -282,15 +284,15 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryDeserializeFrom" Id="{b3282ff2-88ea-03dd-2d07-11897def0e3c}">
+    <Method Name="TestTryDeserializeFrom" Id="{cf3ffba9-66a9-0dfb-3ebb-23dc45560407}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryDeserializeFrom
 VAR
     deserializer : JsonDeserializer;
     feedback : DeserializerFeedback;
-    json : STRING := '32767';
-    _type : _DINT(0);
-    expected : DINT := 32767;
-    actual : DINT;
+    json : STRING := '"TCEVENTCLASS_ALARM"';
+    _type : _E_TcEventClass(E_TcEventClass.TCEVENTCLASS_NONE);
+    expected : E_TcEventClass := E_TcEventClass.TCEVENTCLASS_ALARM;
+    actual : E_TcEventClass;
  END_VAR
 ]]></Declaration>
       <Implementation>
@@ -302,9 +304,10 @@ _type.TryDeserializeFrom(Deserializer, Feedback);
 
 actual := _type.Value;
 
-AssertEquals(
+AssertEquals_LREAL(
     Expected := expected,
     Actual := actual,
+    Delta := LREAL#0.001,
     Message := 'Type did not deserialize correctly.'
 );
 
@@ -312,20 +315,20 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToFollowsReference" Id="{28dd603a-2720-0ad4-3b9e-32f3ec394c91}">
+    <Method Name="TestTryMakeReferenceToFollowsReference" Id="{c07a7686-c11e-0769-3494-973e2b4399e9}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToFollowsReference
 VAR
-    _type : _DINT(0);
-	target : _DINT(0);
-    expected : DINT := 123;
-    actual : DINT;
+    _type : _E_TcEventClass(E_TcEventClass.TCEVENTCLASS_NONE);;
+	target : _E_TcEventClass(E_TcEventClass.TCEVENTCLASS_NONE);;
+    expected : E_TcEventClass := E_TcEventClass.TCEVENTCLASS_ALARM;
+    actual : E_TcEventClass;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('TestTryMakeReferenceToFollowsReference');
 
 _type.TryMakeReferenceTo(target);
-target.Value := 123;
+target.Value := E_TcEventClass.TCEVENTCLASS_ALARM;
 
 actual := _type.Value;
 
@@ -339,20 +342,20 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToUpdatesReference" Id="{27806854-d09d-0d12-0f3b-026cc636656c}">
+    <Method Name="TestTryMakeReferenceToUpdatesReference" Id="{089a9442-a41e-0c5b-26fd-321364f222c9}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToUpdatesReference
 VAR
-    _type : _DINT(0);
-	target : _DINT(0);
-    expected : DINT := 123;
-    actual : DINT;
+    _type : _E_TcEventClass(E_TcEventClass.TCEVENTCLASS_NONE);;
+	target : _E_TcEventClass(E_TcEventClass.TCEVENTCLASS_NONE);;
+    expected : E_TcEventClass := E_TcEventClass.TCEVENTCLASS_ALARM;
+    actual : E_TcEventClass;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('TestTryMakeReferenceToUpdatesReference');
 
 _type.TryMakeReferenceTo(target);
-_type.Value := 123;
+_type.Value := E_TcEventClass.TCEVENTCLASS_ALARM;
 
 actual := target.Value;
 
@@ -366,18 +369,18 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestValueReturnsExpectedAfterChange" Id="{467e9ae6-0030-0019-391e-3d332e6913cc}">
+    <Method Name="TestValueReturnsExpectedAfterChange" Id="{742c0c63-2a01-01c8-295e-636459b02db9}">
       <Declaration><![CDATA[METHOD PUBLIC TestValueReturnsExpectedAfterChange
 VAR
-    _type : _DINT(0);
-    expected : DINT := 32767;
-    actual : DINT;
+    _type : _E_TcEventClass(E_TcEventClass.TCEVENTCLASS_NONE);;
+    expected : E_TcEventClass := E_TcEventClass.TCEVENTCLASS_ALARM;
+    actual : E_TcEventClass;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('TestValueReturnsExpectedAfterChange');
 
-_type.Value := 32767;
+_type.Value := E_TcEventClass.TCEVENTCLASS_ALARM;
 
 actual := _type.Value;
 
@@ -391,12 +394,12 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestValueReturnsExpectedAfterInit" Id="{dfe99aa1-a7a7-0f79-3b68-b7855dffb13a}">
+    <Method Name="TestValueReturnsExpectedAfterInit" Id="{6d00cb0f-9f7c-03a3-35b0-d549d0482d56}">
       <Declaration><![CDATA[METHOD PUBLIC TestValueReturnsExpectedAfterInit
 VAR
-    _type : _DINT(32767);
-    expected : DINT := 32767;
-    actual : DINT;
+    _type : _E_TcEventClass(E_TcEventClass.TCEVENTCLASS_ALARM);
+    expected : E_TcEventClass := E_TcEventClass.TCEVENTCLASS_ALARM;
+    actual : E_TcEventClass;
 END_VAR
 ]]></Declaration>
       <Implementation>

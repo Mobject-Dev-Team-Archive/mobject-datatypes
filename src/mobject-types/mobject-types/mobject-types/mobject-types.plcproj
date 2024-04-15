@@ -39,6 +39,9 @@
     <LibraryReference Include="mobject-collections,1.1.0,mobject">
       <Namespace>mobject_collections</Namespace>
     </LibraryReference>
+    <LibraryReference Include="mobject-converters,1.0.1,mobject">
+      <Namespace>mobject_converters</Namespace>
+    </LibraryReference>
     <LibraryReference Include="mobject-deserialization,0.1.0,mobject">
       <Namespace>mobject_deserialization</Namespace>
     </LibraryReference>
@@ -47,6 +50,9 @@
     </LibraryReference>
     <LibraryReference Include="mobject-enumerable,1.1.0,mobject">
       <Namespace>mobject_enumerable</Namespace>
+    </LibraryReference>
+    <LibraryReference Include="mobject-errors,0.2.0,mobject">
+      <Namespace>mobject_errors</Namespace>
     </LibraryReference>
     <LibraryReference Include="mobject-events,1.0.0,mobject">
       <Namespace>mobject_events</Namespace>
@@ -84,6 +90,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Datatype\Alias\_FLOAT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Enums\_E_TcEventClass.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Datatype\Primitive\_BOOL.TcPOU">
@@ -146,6 +155,12 @@
     <Compile Include="Datatype\Structs\_TIMESTRUCT.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interfaces\I_EnumDatatype.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\I_IntegerDatatype.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Interfaces\I_Datatype.TcIO">
       <SubType>Code</SubType>
     </Compile>
@@ -161,16 +176,32 @@
     <Compile Include="Interfaces\I_AliasDatatype.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Interfaces\I_UserDefinedDatatype.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="_Internal\DatatypeVisitor\I_DatatypeVisitor.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="_Internal\Datatype\AliasDatatypeBase.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="_Internal\Datatype\EnumDatatypeBase.TcPOU">
+      <SubType>Code</SubType>
+      <ExcludeFromBuild>false</ExcludeFromBuild>
+    </Compile>
     <Compile Include="_Internal\Datatype\DatatypeBase.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="_Internal\Datatype\IntegerDatatypeBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="_Internal\Datatype\StructuredDatatypeBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\Datatype\UserDefinedDatatypeBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\Errors\UnknownEnumerationError.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="_Internal\MembersHost\I_HostMembers.TcIO">
@@ -185,6 +216,7 @@
     <Folder Include="Datatypes\Base" />
     <Folder Include="Datatypes\Events" />
     <Folder Include="Datatype\Alias" />
+    <Folder Include="Datatype\Enums" />
     <Folder Include="Datatype\Structs" />
     <Folder Include="Datatype\Primitive" />
     <Folder Include="Interfaces" />
@@ -194,8 +226,13 @@
     <Folder Include="_Internal\Datatype" />
     <Folder Include="_Internal\MembersHost" />
     <Folder Include="_Internal\DatatypeVisitor" />
+    <Folder Include="_Internal\Errors" />
   </ItemGroup>
   <ItemGroup>
+    <PlaceholderReference Include="Tc2_Standard">
+      <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Standard</Namespace>
+    </PlaceholderReference>
     <PlaceholderReference Include="Tc2_System">
       <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc2_System</Namespace>

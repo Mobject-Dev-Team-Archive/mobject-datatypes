@@ -11,6 +11,7 @@ END_VAR
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
+    <Folder Name="Protected" Id="{6a05f5d0-e949-0c1c-2ebf-f6a37260ee33}" />
     <Method Name="Accept" Id="{dd871bbb-4ec4-0283-1fd2-71cc24047cd6}">
       <Declaration><![CDATA[METHOD PUBLIC Accept
 VAR_INPUT
@@ -48,8 +49,8 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Property Name="IecType" Id="{4e6b709c-3c41-0f61-1dc2-0d8936572b7d}">
-      <Declaration><![CDATA[PROPERTY PUBLIC ABSTRACT IecType : T_MAXSTRING]]></Declaration>
+    <Property Name="Datatype" Id="{4e6b709c-3c41-0f61-1dc2-0d8936572b7d}">
+      <Declaration><![CDATA[PROPERTY PUBLIC ABSTRACT Datatype : T_MAXSTRING]]></Declaration>
       <Get Name="Get" Id="{0619a35f-75ef-01ba-106d-74a7e27a44d7}">
         <Declaration><![CDATA[VAR
 END_VAR
@@ -59,6 +60,15 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Method Name="OnSerializeTypeWith" Id="{969b142b-0816-0c8c-3581-697926ecbe26}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED OnSerializeTypeWith
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Serializer.AddKeyString('datatype',Datatype);]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="SerializeTypeWith" Id="{d792640c-a39f-4b1c-9df5-bece16fc714d}">
       <Declaration><![CDATA[METHOD PUBLIC SerializeTypeWith
 VAR_INPUT
@@ -66,7 +76,7 @@ VAR_INPUT
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[Serializer.StartObject();
-Serializer.AddKeyString('type',IecType);
+OnSerializeTypeWith(Serializer);
 Serializer.EndObject();]]></ST>
       </Implementation>
     </Method>
@@ -97,7 +107,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF Source.IecType <> IecType THEN
+        <ST><![CDATA[IF Source.Datatype <> Datatype THEN
 	RETURN;
 END_IF
 
@@ -130,8 +140,17 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[TryResolveAsAliasType := FALSE;
-RETURN;]]></ST>
+        <ST><![CDATA[TryResolveAsAliasType := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TryResolveAsEnumType" Id="{788e06a8-2cbf-0aa6-002d-57c7be26c3d7}">
+      <Declaration><![CDATA[METHOD PUBLIC TryResolveAsEnumType : BOOL
+VAR_INPUT
+	Destination : REFERENCE TO I_EnumDatatype;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TryResolveAsEnumType := FALSE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="TryResolveAsStructuredType" Id="{ec909d59-647a-0183-1246-435cce0f434c}">
@@ -141,8 +160,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[TryResolveAsStructuredType := FALSE;
-RETURN;]]></ST>
+        <ST><![CDATA[TryResolveAsStructuredType := FALSE;]]></ST>
       </Implementation>
     </Method>
   </POU>
