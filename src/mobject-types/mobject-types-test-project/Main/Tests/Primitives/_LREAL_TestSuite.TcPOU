@@ -10,6 +10,7 @@ END_VAR
 TestClearReference();
 TestClone();
 TestIecTypeReturnsExpected();
+TestIsSigned();
 TestMakeReferenceToFollowsReference();
 TestMakeReferenceToUpdatesReference();
 TestSize();
@@ -121,12 +122,32 @@ END_VAR
       <Implementation>
         <ST><![CDATA[TEST('TestIecTypeReturnsExpected');
 
-actual := _type.IecType;
+actual := _type.Datatype;
 
 AssertEquals_STRING(
     Expected := expected,
     Actual := actual,
     Message := 'Type did not return correct iec type.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestIsSigned" Id="{da012d0e-9af8-0218-280c-2af73d7accff}">
+      <Declaration><![CDATA[METHOD PUBLIC TestIsSigned
+VAR
+    _type : _LREAL(0);
+    expected : STRING := 'BOOL';
+    actual : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestIsSigned');
+
+AssertTrue(
+	Condition := _type.IsSigned,
+    Message := 'Type did not correctly identify itself as being signed'
 );
 
 TEST_FINISHED();
@@ -194,7 +215,7 @@ TEST_FINISHED();
 VAR
     _type : _LREAL(0.0);
     serializer : JsonSerializer;
-    expected : STRING := '{"type":"LREAL"}';
+    expected : STRING(500) := '{"datatype":"LREAL"}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
@@ -295,8 +316,7 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToFollowsReference"
-      Id="{8f928577-7a04-0977-0a53-efa0330d50b7}">
+    <Method Name="TestTryMakeReferenceToFollowsReference" Id="{8f928577-7a04-0977-0a53-efa0330d50b7}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToFollowsReference
 VAR
     _type : _LREAL(0.0);
@@ -324,8 +344,7 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToUpdatesReference"
-      Id="{f5a10526-19e3-051b-0430-22ccbb70b8ac}">
+    <Method Name="TestTryMakeReferenceToUpdatesReference" Id="{f5a10526-19e3-051b-0430-22ccbb70b8ac}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToUpdatesReference
 VAR
     _type : _LREAL(0.0);

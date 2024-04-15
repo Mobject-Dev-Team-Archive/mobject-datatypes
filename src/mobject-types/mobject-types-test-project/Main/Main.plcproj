@@ -31,6 +31,9 @@
     <Compile Include="Tests\Alias\_FLOAT_TestSuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\Enums\_E_TcEventClass_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\Primitives\_BOOL_TestSuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -96,6 +99,7 @@
     <Folder Include="Tests" />
     <Folder Include="POUs" />
     <Folder Include="Tests\Alias" />
+    <Folder Include="Tests\Enums" />
     <Folder Include="Tests\Structs" />
     <Folder Include="Tests\Primitives" />
   </ItemGroup>
@@ -136,7 +140,7 @@
     <LibraryReference Include="mobject-serialization,0.4.0,mobject">
       <Namespace>mobject_serialization</Namespace>
     </LibraryReference>
-    <LibraryReference Include="mobject-types,0.1.0,mobject">
+    <LibraryReference Include="mobject-types,0.1.1,mobject">
       <Namespace>mobject_types</Namespace>
     </LibraryReference>
   </ItemGroup>

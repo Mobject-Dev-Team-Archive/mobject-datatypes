@@ -120,7 +120,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[TEST('TestIecTypeReturnsExpected');
 
-actual := _type.IecType;
+actual := _type.Datatype;
 
 AssertEquals_STRING(
     Expected := expected,
@@ -191,7 +191,7 @@ TEST_FINISHED();
 VAR
     _type : _TOD(TOD#0:0:0);
     serializer : JsonSerializer;
-    expected : STRING := '{"type":"TOD"}';
+    expected : STRING := '{"datatype":"TOD"}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>

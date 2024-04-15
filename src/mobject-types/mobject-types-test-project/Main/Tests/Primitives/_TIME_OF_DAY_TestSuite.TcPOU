@@ -120,7 +120,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[TEST('TestIecTypeReturnsExpected');
 
-actual := _type.IecType;
+actual := _type.Datatype;
 
 AssertEquals_STRING(
     Expected := expected,
@@ -191,7 +191,7 @@ TEST_FINISHED();
 VAR
     _type : _TIME_OF_DAY(TIME_OF_DAY#0:0:0);
     serializer : JsonSerializer;
-    expected : STRING := '{"type":"TIME_OF_DAY"}';
+    expected : STRING := '{"datatype":"TIME_OF_DAY"}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>

@@ -25,8 +25,8 @@ END_VAR
       <Declaration><![CDATA[METHOD Clone : I_Datatype
 ]]></Declaration>
     </Method>
-    <Property Name="IecType" Id="{3e504b15-a23a-4860-84f9-0eb7a5748e54}">
-      <Declaration><![CDATA[PROPERTY PUBLIC IecType : T_MAXSTRING]]></Declaration>
+    <Property Name="Datatype" Id="{3e504b15-a23a-4860-84f9-0eb7a5748e54}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Datatype : T_MAXSTRING]]></Declaration>
       <Get Name="Get" Id="{754d9748-a1f0-4e02-a812-888502f394ac}">
         <Declaration><![CDATA[]]></Declaration>
       </Get>
@@ -62,6 +62,13 @@ END_VAR
       <Declaration><![CDATA[METHOD PUBLIC TryResolveAsAliasType : BOOL
 VAR_INPUT
 	Destination : REFERENCE TO I_AliasDatatype;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="TryResolveAsEnumType" Id="{d20f0ea6-c5d9-00c2-0ad8-6b1b9bf43c21}">
+      <Declaration><![CDATA[METHOD PUBLIC TryResolveAsEnumType : BOOL
+VAR_INPUT
+	Destination : REFERENCE TO I_EnumDatatype;
 END_VAR
 ]]></Declaration>
     </Method>

@@ -42,11 +42,14 @@ VAR
     
 	// struct
 	_TIMESTRUCT_TestSuite : _TIMESTRUCT_TestSuite;
+	
+	// enums
+	_E_TcEventClass_TestSuite : _E_TcEventClass_TestSuite;
+	
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[TcUnit.RUN();
-]]></ST>
+      <ST><![CDATA[TcUnit.RUN();]]></ST>
     </Implementation>
   </POU>
 </TcPlcObject>

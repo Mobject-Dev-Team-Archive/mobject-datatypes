@@ -46,6 +46,17 @@ Clone := pClone^;
 ]]></ST>
       </Implementation>
     </Method>
+    <Property Name="Datatype" Id="{3104f80c-37af-0f3a-2e47-e7c54b55107a}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Datatype : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{f299c4a8-b898-010c-397a-0ba7e64cd4d4}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Datatype := 'REAL';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="FB_init" Id="{ae35ad77-868b-01bd-24a1-53284b0c9912}" FolderPath="Constructor\">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
@@ -58,14 +69,14 @@ END_VAR
         <ST><![CDATA[localData := InitialValue;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="IecType" Id="{3104f80c-37af-0f3a-2e47-e7c54b55107a}">
-      <Declaration><![CDATA[PROPERTY PUBLIC IecType : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{f299c4a8-b898-010c-397a-0ba7e64cd4d4}">
+    <Property Name="IsSigned" Id="{44e8d0b8-f574-000e-077a-dc54c07be3d8}">
+      <Declaration><![CDATA[PROPERTY PUBLIC IsSigned : BOOL]]></Declaration>
+      <Get Name="Get" Id="{de43eb3c-4a89-02e4-1527-907fa89c702d}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[IecType := 'REAL';]]></ST>
+          <ST><![CDATA[IsSigned := TRUE;]]></ST>
         </Implementation>
       </Get>
     </Property>
@@ -118,7 +129,7 @@ VAR
 	pTargetData : POINTER TO REAL;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT (Target.IecType = IecType) THEN
+        <ST><![CDATA[IF NOT (Target.Datatype = Datatype) THEN
 	RETURN;
 END_IF
 

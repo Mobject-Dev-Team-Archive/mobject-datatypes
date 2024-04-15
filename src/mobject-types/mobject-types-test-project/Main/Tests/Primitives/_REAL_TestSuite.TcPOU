@@ -10,6 +10,7 @@ END_VAR
 TestClearReference();
 TestClone();
 TestIecTypeReturnsExpected();
+TestIsSigned();
 TestMakeReferenceToFollowsReference();
 TestMakeReferenceToUpdatesReference();
 TestSize();
@@ -121,12 +122,32 @@ END_VAR
       <Implementation>
         <ST><![CDATA[TEST('TestIecTypeReturnsExpected');
 
-actual := _type.IecType;
+actual := _type.Datatype;
 
 AssertEquals_STRING(
     Expected := expected,
     Actual := actual,
     Message := 'Type did not return correct iec type.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestIsSigned" Id="{6fed8012-e50c-03b8-18f2-dbcc28fe1cd9}">
+      <Declaration><![CDATA[METHOD PUBLIC TestIsSigned
+VAR
+    _type : _REAL(0);
+    expected : STRING := 'BOOL';
+    actual : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestIsSigned');
+
+AssertTrue(
+	Condition := _type.IsSigned,
+    Message := 'Type did not correctly identify itself as being signed'
 );
 
 TEST_FINISHED();
@@ -194,7 +215,7 @@ TEST_FINISHED();
 VAR
     _type : _REAL(0.0);
     serializer : JsonSerializer;
-    expected : STRING := '{"type":"REAL"}';
+    expected : STRING(500) := '{"datatype":"REAL"}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
@@ -295,8 +316,7 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToFollowsReference"
-      Id="{cfe36170-9938-0837-2a87-419a18b32ca3}">
+    <Method Name="TestTryMakeReferenceToFollowsReference" Id="{cfe36170-9938-0837-2a87-419a18b32ca3}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToFollowsReference
 VAR
     _type : _REAL(0.0);
@@ -324,8 +344,7 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToUpdatesReference"
-      Id="{a7f19ee6-9b7c-0f36-0d04-dffc930b79aa}">
+    <Method Name="TestTryMakeReferenceToUpdatesReference" Id="{a7f19ee6-9b7c-0f36-0d04-dffc930b79aa}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToUpdatesReference
 VAR
     _type : _REAL(0.0);

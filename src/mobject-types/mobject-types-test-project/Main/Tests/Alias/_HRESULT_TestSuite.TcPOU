@@ -143,7 +143,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[TEST('TestIecTypeReturnsExpected');
 
-actual := _type.IecType;
+actual := _type.Datatype;
 
 AssertEquals_STRING(
     Expected := expected,
@@ -214,7 +214,7 @@ TEST_FINISHED();
 VAR
     _type : _HRESULT(S_OK);
     serializer : JsonSerializer;
-    expected : STRING := '{"name":"HRESULT","type":"ALIAS","baseType":{"type":"DINT"}}';
+    expected : STRING(500) := '{"datatype":"ALIAS","identifier":"HRESULT","baseType":{"datatype":"DINT","lowerBound":-2147483648,"upperBound":2147483647,"isSigned":true}}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
@@ -314,8 +314,7 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToFollowsReference"
-      Id="{eca1b1f7-8028-0c9d-1123-24e4860df742}">
+    <Method Name="TestTryMakeReferenceToFollowsReference" Id="{eca1b1f7-8028-0c9d-1123-24e4860df742}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToFollowsReference
 VAR
     _type : _HRESULT(S_OK);
@@ -342,8 +341,7 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToUpdatesReference"
-      Id="{5be2926c-555a-0f58-2f90-e3e0c520061b}">
+    <Method Name="TestTryMakeReferenceToUpdatesReference" Id="{5be2926c-555a-0f58-2f90-e3e0c520061b}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToUpdatesReference
 VAR
     _type : _HRESULT(S_OK);

@@ -10,6 +10,7 @@ END_VAR
 TestClearReference();
 TestClone();
 TestIecTypeReturnsExpected();
+TestIsSigned();
 TestMakeReferenceToFollowsReference();
 TestMakeReferenceToUpdatesReference();
 TestSize();
@@ -120,12 +121,32 @@ END_VAR
       <Implementation>
         <ST><![CDATA[TEST('TestIecTypeReturnsExpected');
 
-actual := _type.IecType;
+actual := _type.Datatype;
 
 AssertEquals_STRING(
     Expected := expected,
     Actual := actual,
     Message := 'Type did not return correct iec type.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestIsSigned" Id="{48aeeda8-5849-0796-1dfe-16ad23aaa240}">
+      <Declaration><![CDATA[METHOD PUBLIC TestIsSigned
+VAR
+    _type : _WORD(0);
+    expected : STRING := 'BOOL';
+    actual : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestIsSigned');
+
+AssertFalse(
+	Condition := _type.IsSigned,
+    Message := 'Type did not correctly identify itself as being unsigned'
 );
 
 TEST_FINISHED();
@@ -191,7 +212,7 @@ TEST_FINISHED();
 VAR
     _type : _WORD(0);
     serializer : JsonSerializer;
-    expected : STRING := '{"type":"WORD"}';
+    expected : STRING(500) := '{"datatype":"WORD","lowerBound":0,"upperBound":65535,"isSigned":false}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
@@ -291,8 +312,7 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToFollowsReference"
-      Id="{80beb397-635c-0f3b-0f11-70cd68f9e3a2}">
+    <Method Name="TestTryMakeReferenceToFollowsReference" Id="{80beb397-635c-0f3b-0f11-70cd68f9e3a2}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToFollowsReference
 VAR
     _type : _WORD(0);
@@ -319,8 +339,7 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToUpdatesReference"
-      Id="{1c2f2b11-d196-07da-1774-57305fe1d259}">
+    <Method Name="TestTryMakeReferenceToUpdatesReference" Id="{1c2f2b11-d196-07da-1774-57305fe1d259}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToUpdatesReference
 VAR
     _type : _WORD(0);

@@ -144,7 +144,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[TEST('TestIecTypeReturnsExpected');
 
-actual := _type.IecType;
+actual := _type.Datatype;
 
 AssertEquals_STRING(
     Expected := expected,
@@ -217,7 +217,7 @@ TEST_FINISHED();
 VAR
     _type : _FLOAT(0.0);
     serializer : JsonSerializer;
-    expected : STRING := '{"name":"FLOAT","type":"ALIAS","baseType":{"type":"LREAL"}}';
+    expected : STRING(500) := '{"datatype":"ALIAS","identifier":"FLOAT","baseType":{"datatype":"LREAL"}}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
@@ -244,7 +244,7 @@ VAR
     _type : _FLOAT(123.4);
     serializer : JsonSerializer;
     expected : STRING := '123.4';
-    actual : STRING(500);
+    actual : STRING;
 END_VAR
 ]]></Declaration>
       <Implementation>
