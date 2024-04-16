@@ -16,7 +16,7 @@ TestMakeReferenceToUpdatesReference();
 TestSize();
 TestValueReturnsExpectedAfterInit();
 TestValueReturnsExpectedAfterChange();
-//TestSerializeTypeWith(); // disabled due to the issue with UWORD max value returning -1
+TestSerializeTypeWith();
 TestSerializeWith();
 TestTryDeserializeFrom();
 TestTryMakeReferenceToFollowsReference();

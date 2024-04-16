@@ -19,7 +19,7 @@
     <Company>mobject</Company>
     <Released>false</Released>
     <Title>mobject-types</Title>
-    <ProjectVersion>0.1.1</ProjectVersion>
+    <ProjectVersion>0.1.2</ProjectVersion>
     <DefaultNamespace>mobject-types</DefaultNamespace>
     <Placeholder>mobject-types</Placeholder>
     <Author>mobject dev team</Author>
