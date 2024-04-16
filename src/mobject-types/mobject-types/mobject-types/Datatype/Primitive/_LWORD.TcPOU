@@ -109,7 +109,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Serializer.AddLint(Lowerbound);]]></ST>
+        <ST><![CDATA[Serializer.AddLword(Lowerbound);]]></ST>
       </Implementation>
     </Method>
     <Method Name="SerializeUpperbound" Id="{5f4c0310-6d98-0d57-2a8a-5fb9a16cecec}" FolderPath="Protected\">
@@ -119,7 +119,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Serializer.AddLint(Upperbound);]]></ST>
+        <ST><![CDATA[Serializer.AddLword(Upperbound);]]></ST>
       </Implementation>
     </Method>
     <Method Name="SerializeWith" Id="{43957286-f88e-05ee-30ce-fc0a753ce5f1}">

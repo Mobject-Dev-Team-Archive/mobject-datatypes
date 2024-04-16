@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.1.2-alpha
+
+- Corrected copy paste error, in which ULINT and UWORD were being treated as LINT when their bounds were serialized.
+
 ## v0.1.1-alpha
 
 - Added mobject-converters 1.1.0
