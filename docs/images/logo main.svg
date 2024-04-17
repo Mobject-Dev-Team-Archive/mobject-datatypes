@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    data-v-fde0c5aa=""
-   viewBox="0 0 282 53"
+   viewBox="0 0 356 53"
    class="iconAboveSlogan"
    version="1.1"
    id="svg26"
    sodipodi:docname="logo main.svg"
-   width="282"
+   width="356"
    height="53"
    inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -26,11 +26,11 @@
      showguides="true"
      inkscape:guide-bbox="true"
      inkscape:zoom="2.91"
-     inkscape:cx="141.23711"
+     inkscape:cx="193.81443"
      inkscape:cy="70.274914"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
-     inkscape:window-x="4512"
+     inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg26"
@@ -153,5 +153,5 @@
        x="190.43094"
        y="38.18676"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;font-family:'Futura Lt BT';-inkscape-font-specification:'Futura Lt BT, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal"
-       id="tspan26453-3">types</tspan></text>
+       id="tspan26453-3">datatypes</tspan></text>
 </svg>
