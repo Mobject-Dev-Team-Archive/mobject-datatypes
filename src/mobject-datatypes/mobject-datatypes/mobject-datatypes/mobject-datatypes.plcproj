@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <FileVersion>1.0.0.0</FileVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3fce2e28-2ff7-40e1-b140-34b2946c0e80}</ProjectGuid>
+    <SubObjectsSortedByName>True</SubObjectsSortedByName>
+    <DownloadApplicationInfo>true</DownloadApplicationInfo>
+    <WriteProductVersion>true</WriteProductVersion>
+    <GenerateTpy>false</GenerateTpy>
+    <Name>mobject_datatypes</Name>
+    <ProgramVersion>3.1.4024.0</ProgramVersion>
+    <Application>{1d5879bd-77af-4fb3-a4d2-75de2e9e56c3}</Application>
+    <TypeSystem>{3bdc81ee-69c8-40a7-9bc7-a8c54a30ca29}</TypeSystem>
+    <Implicit_Task_Info>{1fb452f2-fac0-464e-813b-2248474f68d0}</Implicit_Task_Info>
+    <Implicit_KindOfTask>{95f5aedc-b353-4ce9-98e9-7f8e2112609c}</Implicit_KindOfTask>
+    <Implicit_Jitter_Distribution>{1ba29f25-ab09-4d73-9bc3-b2b5c6277d04}</Implicit_Jitter_Distribution>
+    <LibraryReferences>{014c124a-5c47-4d65-b651-cb65eeed8af3}</LibraryReferences>
+    <Released>false</Released>
+    <Title>mobject-datatypes</Title>
+    <ProjectVersion>0.2.0</ProjectVersion>
+    <Company>mobject</Company>
+    <DefaultNamespace>mobject-datatypes</DefaultNamespace>
+    <Placeholder>mobject-datatypes</Placeholder>
+    <Author>mobject dev team</Author>
+    <LibraryCategories>
+      <LibraryCategory xmlns="">
+        <Id>{1060d52a-c0ce-4c5f-a334-01a7e2e0ab1e}</Id>
+        <Version>1.0.0.0</Version>
+        <DefaultName>mobject</DefaultName>
+      </LibraryCategory>
+    </LibraryCategories>
+    <SelectedLibraryCategories>
+      <Id xmlns="">{1060d52a-c0ce-4c5f-a334-01a7e2e0ab1e}</Id>
+    </SelectedLibraryCategories>
+    <CombineIds>true</CombineIds>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Datatype" />
+    <Folder Include="DatatypePacks" />
+    <Folder Include="Datatypes" />
+    <Folder Include="Datatypes\Base" />
+    <Folder Include="Datatypes\Events" />
+    <Folder Include="Datatype\Alias" />
+    <Folder Include="Datatype\Enums" />
+    <Folder Include="Datatype\Primitive" />
+    <Folder Include="Datatype\Structs" />
+    <Folder Include="Interfaces" />
+    <Folder Include="_Internal" />
+    <Folder Include="_Internal\Datatype" />
+    <Folder Include="_Internal\DatatypeVisitor" />
+    <Folder Include="_Internal\Errors" />
+    <Folder Include="_Internal\MembersHost" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DatatypePacks\PlcBasicDatatypePack.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatypes\Base\Datatypes.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatypes\Events\AliasDatatypeAddedEvent.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatypes\Events\DatatypeAddedEvent.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatypes\Events\EnumDatatypeAddedEvent.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatypes\Events\I_AliasDatatypeAddedEvent.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatypes\Events\I_DatatypeAddedEvent.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatypes\Events\I_EnumDatatypeAddedEvent.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatypes\Events\I_StructuredDatatypeAddedEvent.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatypes\Events\StructuredDatatypeAddedEvent.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Alias\_FLOAT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Alias\_HRESULT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Enums\_E_TcEventClass.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Primitive\_BOOL.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Primitive\_BYTE.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Primitive\_DINT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Primitive\_DT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Primitive\_DWORD.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Primitive\_INT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Primitive\_LINT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Primitive\_LREAL.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Primitive\_LWORD.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Primitive\_REAL.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Primitive\_SINT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Primitive\_STRING.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Primitive\_TIME_OF_DAY.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Primitive\_TOD.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Primitive\_UDINT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Primitive\_UINT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Primitive\_ULINT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Primitive\_USINT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Primitive\_WORD.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Structs\_TIMESTRUCT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\I_AliasDatatype.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\I_Datatype.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\I_DatatypePack.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\I_Datatypes.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\I_EnumDatatype.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\I_NumericDatatype.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\I_StructuredDatatype.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Interfaces\I_UserDefinedDatatype.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\DatatypeVisitor\I_DatatypeVisitor.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\Datatype\AliasDatatypeBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\Datatype\DatatypeBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\Datatype\EnumDatatypeBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\Datatype\NumericDatatypeBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\Datatype\StructuredDatatypeBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\Datatype\UserDefinedDatatypeBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\Errors\UnknownEnumerationError.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\MembersHost\I_HostMembers.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\MembersHost\MembersHost.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <LibraryReference Include="mobject-collections,1.1.0,mobject">
+      <Namespace>mobject_collections</Namespace>
+    </LibraryReference>
+    <LibraryReference Include="mobject-converters,1.0.1,mobject">
+      <Namespace>mobject_converters</Namespace>
+    </LibraryReference>
+    <LibraryReference Include="mobject-deserialization,0.1.0,mobject">
+      <Namespace>mobject_deserialization</Namespace>
+    </LibraryReference>
+    <LibraryReference Include="mobject-disposable,1.0.0,mobject">
+      <Namespace>mobject_disposable</Namespace>
+    </LibraryReference>
+    <LibraryReference Include="mobject-enumerable,1.1.0,mobject">
+      <Namespace>mobject_enumerable</Namespace>
+    </LibraryReference>
+    <LibraryReference Include="mobject-errors,0.2.0,mobject">
+      <Namespace>mobject_errors</Namespace>
+    </LibraryReference>
+    <LibraryReference Include="mobject-events,1.0.0,mobject">
+      <Namespace>mobject_events</Namespace>
+    </LibraryReference>
+    <LibraryReference Include="mobject-serialization,0.4.0,mobject">
+      <Namespace>mobject_serialization</Namespace>
+    </LibraryReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PlaceholderReference Include="Tc2_Standard">
+      <DefaultResolution>Tc2_Standard, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Standard</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_System">
+      <DefaultResolution>Tc2_System, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_System</Namespace>
+    </PlaceholderReference>
+    <PlaceholderReference Include="Tc2_Utilities">
+      <DefaultResolution>Tc2_Utilities, * (Beckhoff Automation GmbH)</DefaultResolution>
+      <Namespace>Tc2_Utilities</Namespace>
+    </PlaceholderReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="mobject-datatypes.tmc">
+      <SubType>Content</SubType>
+    </None>
+  </ItemGroup>
+  <ProjectExtensions>
+    <PlcProjectOptions>
+      <XmlArchive>
+        <Data>
+          <o xml:space="preserve" t="OptionKey">
+      <v n="Name">"&lt;ProjectRoot&gt;"</v>
+      <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
+        <v>{192FAD59-8248-4824-A8DE-9177C94C195A}</v>
+        <o>
+          <v n="Name">"{192FAD59-8248-4824-A8DE-9177C94C195A}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" />
+        </o>
+        <v>{29BD8D0C-3586-4548-BB48-497B9A01693F}</v>
+        <o>
+          <v n="Name">"{29BD8D0C-3586-4548-BB48-497B9A01693F}"</v>
+          <d n="SubKeys" t="Hashtable" ckt="String" cvt="OptionKey">
+            <v>Rules</v>
+            <o>
+              <v n="Name">"Rules"</v>
+              <d n="SubKeys" t="Hashtable" />
+              <d n="Values" t="Hashtable" />
+            </o>
+          </d>
+          <d n="Values" t="Hashtable" />
+        </o>
+        <v>{40450F57-0AA3-4216-96F3-5444ECB29763}</v>
+        <o>
+          <v n="Name">"{40450F57-0AA3-4216-96F3-5444ECB29763}"</v>
+          <d n="SubKeys" t="Hashtable" />
+          <d n="Values" t="Hashtable" ckt="String" cvt="String">
+            <v>ActiveVisuProfile</v>
+            <v>IR0whWr8bwfwBwAAiD2qpQAAAABVAgAA37x72QAAAAABAAAAAAAAAAEaUwB5AHMAdABlAG0ALgBTAHQAcgBpAG4AZwACTHsAZgA5ADUAYgBiADQAMgA2AC0ANQA1ADIANAAtADQAYgA0ADUALQA5ADQAMAAwAC0AZgBiADAAZgAyAGUANwA3AGUANQAxAGIAfQADCE4AYQBtAGUABDBUAHcAaQBuAEMAQQBUACAAMwAuADEAIABCAHUAaQBsAGQAIAA0ADAAMgA0AC4ANwAFFlAAcgBvAGYAaQBsAGUARABhAHQAYQAGTHsAMQA2AGUANQA1AGIANgAwAC0ANwAwADQAMwAtADQAYQA2ADMALQBiADYANQBiAC0ANgAxADQANwAxADMAOAA3ADgAZAA0ADIAfQAHEkwAaQBiAHIAYQByAGkAZQBzAAhMewAzAGIAZgBkADUANAA1ADkALQBiADAANwBmAC0ANABkADYAZQAtAGEAZQAxAGEALQBhADgAMwAzADUANgBhADUANQAxADQAMgB9AAlMewA5AGMAOQA1ADgAOQA2ADgALQAyAGMAOAA1AC0ANAAxAGIAYgAtADgAOAA3ADEALQA4ADkANQBmAGYAMQBmAGUAZABlADEAYQB9AAoOVgBlAHIAcwBpAG8AbgALBmkAbgB0AAwKVQBzAGEAZwBlAA0KVABpAHQAbABlAA4aVgBpAHMAdQBFAGwAZQBtAE0AZQB0AGUAcgAPDkMAbwBtAHAAYQBuAHkAEAxTAHkAcwB0AGUAbQARElYAaQBzAHUARQBsAGUAbQBzABIwVgBpAHMAdQBFAGwAZQBtAHMAUwBwAGUAYwBpAGEAbABDAG8AbgB0AHIAbwBsAHMAEyhWAGkAcwB1AEUAbABlAG0AcwBXAGkAbgBDAG8AbgB0AHIAbwBsAHMAFCRWAGkAcwB1AEUAbABlAG0AVABlAHgAdABFAGQAaQB0AG8AcgAVIlYAaQBzAHUATgBhAHQAaQB2AGUAQwBvAG4AdAByAG8AbAAWFHYAaQBzAHUAaQBuAHAAdQB0AHMAFwxzAHkAcwB0AGUAbQAYGFYAaQBzAHUARQBsAGUAbQBCAGEAcwBlABkmRABlAHYAUABsAGEAYwBlAGgAbwBsAGQAZQByAHMAVQBzAGUAZAAaCGIAbwBvAGwAGyJQAGwAdQBnAGkAbgBDAG8AbgBzAHQAcgBhAGkAbgB0AHMAHEx7ADQAMwBkADUAMgBiAGMAZQAtADkANAAyAGMALQA0ADQAZAA3AC0AOQBlADkANAAtADEAYgBmAGQAZgAzADEAMABlADYAMwBjAH0AHRxBAHQATABlAGEAcwB0AFYAZQByAHMAaQBvAG4AHhRQAGwAdQBnAGkAbgBHAHUAaQBkAB8WUwB5AHMAdABlAG0ALgBHAHUAaQBkACBIYQBmAGMAZAA1ADQANAA2AC0ANAA5ADEANAAtADQAZgBlADcALQBiAGIANwA4AC0AOQBiAGYAZgBlAGIANwAwAGYAZAAxADcAIRRVAHAAZABhAHQAZQBJAG4AZgBvACJMewBiADAAMwAzADYANgBhADgALQBiADUAYwAwAC0ANABiADkAYQAtAGEAMAAwAGUALQBlAGIAOAA2ADAAMQAxADEAMAA0AGMAMwB9ACMOVQBwAGQAYQB0AGUAcwAkTHsAMQA4ADYAOABmAGYAYwA5AC0AZQA0AGYAYwAtADQANQAzADIALQBhAGMAMAA2AC0AMQBlADMAOQBiAGIANQA1ADcAYgA2ADkAfQAlTHsAYQA1AGIAZAA0ADgAYwAzAC0AMABkADEANwAtADQAMQBiADUALQBiADEANgA0AC0ANQBmAGMANgBhAGQAMgBiADkANgBiADcAfQAmFk8AYgBqAGUAYwB0AHMAVAB5AHAAZQAnVFUAcABkAGEAdABlAEwAYQBuAGcAdQBhAGcAZQBNAG8AZABlAGwARgBvAHIAQwBvAG4AdgBlAHIAdABpAGIAbABlAEwAaQBiAHIAYQByAGkAZQBzACgQTABpAGIAVABpAHQAbABlACkUTABpAGIAQwBvAG0AcABhAG4AeQAqHlUAcABkAGEAdABlAFAAcgBvAHYAaQBkAGUAcgBzACs4UwB5AHMAdABlAG0ALgBDAG8AbABsAGUAYwB0AGkAbwBuAHMALgBIAGEAcwBoAHQAYQBiAGwAZQAsEnYAaQBzAHUAZQBsAGUAbQBzAC1INgBjAGIAMQBjAGQAZQAxAC0AZAA1AGQAYwAtADQAYQAzAGIALQA5ADAANQA0AC0AMgAxAGYAYQA3ADUANgBhADMAZgBhADQALihJAG4AdABlAHIAZgBhAGMAZQBWAGUAcgBzAGkAbwBuAEkAbgBmAG8AL0x7AGMANgAxADEAZQA0ADAAMAAtADcAZgBiADkALQA0AGMAMwA1AC0AYgA5AGEAYwAtADQAZQAzADEANABiADUAOQA5ADYANAAzAH0AMBhNAGEAagBvAHIAVgBlAHIAcwBpAG8AbgAxGE0AaQBuAG8AcgBWAGUAcgBzAGkAbwBuADIMTABlAGcAYQBjAHkAMzBMAGEAbgBnAHUAYQBnAGUATQBvAGQAZQBsAFYAZQByAHMAaQBvAG4ASQBuAGYAbwA0MEwAbwBhAGQATABpAGIAcgBhAHIAaQBlAHMASQBuAHQAbwBQAHIAbwBqAGUAYwB0ADUaQwBvAG0AcABhAHQAaQBiAGkAbABpAHQAeQDQAAIaA9ADAS0E0AUGGgfQBwgaAUUHCQjQAAkaBEUKCwQDAAAABQAAAA0AAAAAAAAA0AwLrQIAAADQDQEtDtAPAS0Q0AAJGgRFCgsEAwAAAAUAAAANAAAAKAAAANAMC60BAAAA0A0BLRHQDwEtENAACRoERQoLBAMAAAAFAAAADQAAAAAAAADQDAutAgAAANANAS0S0A8BLRDQAAkaBEUKCwQDAAAABQAAAA0AAAAUAAAA0AwLrQIAAADQDQEtE9APAS0Q0AAJGgRFCgsEAwAAAAUAAAANAAAAAAAAANAMC60CAAAA0A0BLRTQDwEtENAACRoERQoLBAMAAAAFAAAADQAAAAAAAADQDAutAgAAANANAS0V0A8BLRDQAAkaBEUKCwQDAAAABQAAAA0AAAAAAAAA0AwLrQIAAADQDQEtFtAPAS0X0AAJGgRFCgsEAwAAAAUAAAANAAAAKAAAANAMC60EAAAA0A0BLRjQDwEtENAZGq0BRRscAdAAHBoCRR0LBAMAAAAFAAAADQAAAAAAAADQHh8tINAhIhoCRSMkAtAAJRoFRQoLBAMAAAADAAAAAAAAAAoAAADQJgutAAAAANADAS0n0CgBLRHQKQEtENAAJRoFRQoLBAMAAAADAAAAAAAAAAoAAADQJgutAQAAANADAS0n0CgBLRHQKQEtEJoqKwFFAAEC0AABLSzQAAEtF9AAHy0t0C4vGgPQMAutAQAAANAxC60XAAAA0DIarQDQMy8aA9AwC60CAAAA0DELrQMAAADQMhqtANA0Gq0A0DUarQA=</v>
+          </d>
+        </o>
+      </d>
+      <d n="Values" t="Hashtable" />
+    </o>
+        </Data>
+        <TypeList>
+          <Type n="Hashtable">System.Collections.Hashtable</Type>
+          <Type n="OptionKey">{54dd0eac-a6d8-46f2-8c27-2f43c7e49861}</Type>
+          <Type n="String">System.String</Type>
+        </TypeList>
+      </XmlArchive>
+    </PlcProjectOptions>
+  </ProjectExtensions>
+</Project>

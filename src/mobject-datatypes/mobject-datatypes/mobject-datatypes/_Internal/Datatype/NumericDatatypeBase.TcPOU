@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="NumericDatatypeBase" Id="{3e4bfd99-ce96-0f96-03b4-27ac386a37bb}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'linkalways'} 
+{attribute 'no_explicit_call' := 'This FB is a CLASS and must be accessed using methods or properties'}
+{attribute 'enable_dynamic_creation'}
+FUNCTION_BLOCK ABSTRACT NumericDatatypeBase EXTENDS DatatypeBase IMPLEMENTS I_NumericDatatype
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="Protected" Id="{91632431-d69e-0830-0182-b47d712170ab}" />
+    <Property Name="IsFloat" Id="{731f2630-f51e-0dab-2810-dd8dbfbfe51f}">
+      <Declaration><![CDATA[PROPERTY PUBLIC ABSTRACT IsFloat : BOOL]]></Declaration>
+      <Get Name="Get" Id="{1adf3a55-9ee5-03cf-31f8-dbd54b14455d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="IsSigned" Id="{6c8e66ee-7b95-0015-2e34-2346d97d8026}">
+      <Declaration><![CDATA[PROPERTY PUBLIC ABSTRACT IsSigned : BOOL]]></Declaration>
+      <Get Name="Get" Id="{4c222af9-77fb-0de2-0e82-add8c0784a76}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="OnSerializeTypeWith" Id="{3eb80dbe-f1f8-09fb-34e9-826bb8525a73}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED OnSerializeTypeWith
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.OnSerializeTypeWith(Serializer);
+Serializer.AddKey('lowerBound');
+SerializeLowerbound(Serializer);
+Serializer.AddKey('upperBound');
+SerializeUpperbound(Serializer);
+Serializer.AddKeyBool('isSigned', IsSigned);
+Serializer.AddKeyBool('isFloat', IsFloat);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SerializeLowerbound" Id="{e915cb36-608e-0f0f-0396-3f3a9db3cafa}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED ABSTRACT SerializeLowerbound
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SerializeUpperbound" Id="{efc7c592-a5cd-0bc0-331b-c013adadd590}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED ABSTRACT SerializeUpperbound
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

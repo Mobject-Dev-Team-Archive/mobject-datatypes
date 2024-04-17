@@ -9,13 +9,13 @@ These classes facilitate the automatic serialization of information based on the
 Example of a BOOL.
 
 ```json
-{ "type": "BOOL" }
+{ "name": "BOOL" }
 ```
 
 Example of a INT.
 
 ```json
-{ "type": "INT" }
+{ "name": "INT" }
 ```
 
 ## Structures
@@ -24,32 +24,32 @@ Example of TIMESTRUCT.
 
 ```json
 {
-  "name": "TIMESTRUCT",
-  "type": "STRUCT",
+  "identifier": "TIMESTRUCT",
+  "name": "STRUCT",
   "members": {
     "wDay": {
-      "type": "WORD"
+      "name": "WORD"
     },
     "wDayOfWeek": {
-      "type": "WORD"
+      "name": "WORD"
     },
     "wHour": {
-      "type": "WORD"
+      "name": "WORD"
     },
     "wMilliseconds": {
-      "type": "WORD"
+      "name": "WORD"
     },
     "wMinute": {
-      "type": "WORD"
+      "name": "WORD"
     },
     "wMonth": {
-      "type": "WORD"
+      "name": "WORD"
     },
     "wSecond": {
-      "type": "WORD"
+      "name": "WORD"
     },
     "wYear": {
-      "type": "WORD"
+      "name": "WORD"
     }
   }
 }
@@ -65,10 +65,10 @@ Example of HRESULT
 
 ```json
 {
-  "name": "HRESULT",
-  "type": "ALIAS",
-  "baseType": {
-    "type": "DINT"
+  "identifier": "HRESULT",
+  "name": "ALIAS",
+  "baseDatatype": {
+    "name": "DINT"
   }
 }
 ```

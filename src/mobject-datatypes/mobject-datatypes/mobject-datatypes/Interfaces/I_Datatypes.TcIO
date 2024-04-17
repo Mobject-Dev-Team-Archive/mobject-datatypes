@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_Datatypes" Id="{52dd9de6-2995-01cb-08b7-20ab42dc0ba1}">
+    <Declaration><![CDATA[INTERFACE I_Datatypes EXTENDS I_EventEmitter]]></Declaration>
+    <Method Name="Accept" Id="{03de7805-93cc-0aaa-3e95-ad90d3d0f1ee}">
+      <Declaration><![CDATA[METHOD PUBLIC Accept
+VAR_INPUT
+	Visitor : I_DatatypeVisitor;
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="GetAliasByIdentifier" Id="{86309a8e-2369-051f-2d11-204c941bfc59}">
+      <Declaration><![CDATA[METHOD PUBLIC GetAliasByIdentifier : BOOL
+VAR_INPUT
+	Identifier : T_MAXSTRING;
+	Destination : REFERENCE TO I_AliasDatatype;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="GetPrimitiveByIecType" Id="{2c7de1d5-7aa4-05bb-147a-ae842d0c6942}">
+      <Declaration><![CDATA[METHOD PUBLIC GetPrimitiveByIecType : BOOL
+VAR_INPUT
+	Identifier : T_MAXSTRING;
+	Destination : REFERENCE TO I_AliasDatatype;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="GetStructureByIdentifier" Id="{e8f5f94d-edfb-0211-3c6c-9f7bcce53451}">
+      <Declaration><![CDATA[METHOD PUBLIC GetStructureByIdentifier : BOOL
+VAR_INPUT
+	Identifier : T_MAXSTRING;
+	Destination : REFERENCE TO I_StructuredDatatype;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="RegisterDatatype" Id="{0a0c28cb-4b56-017f-0679-e569a07ea4dc}">
+      <Declaration><![CDATA[METHOD RegisterDatatype
+VAR_INPUT
+	Datatype : I_Datatype;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="SerializeTypeWith" Id="{bbb27b05-bf27-0444-0b29-95c9e795684b}">
+      <Declaration><![CDATA[METHOD PUBLIC SerializeTypeWith
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

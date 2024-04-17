@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_Datatype" Id="{f9228532-ea06-0cea-156b-b78f9ec3688c}">
+    <Declaration><![CDATA[INTERFACE I_Datatype extends I_Serializable, I_Deserializable, I_Disposable]]></Declaration>
+    <Method Name="Accept" Id="{222f1d5c-17b7-0656-3c13-c8636228d76a}">
+      <Declaration><![CDATA[METHOD PUBLIC Accept
+VAR_INPUT
+	Visitor : I_DatatypeVisitor;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="Address" Id="{208dfa1e-f2c9-0ae5-2623-d0ed741ef8b5}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Address : PVOID]]></Declaration>
+      <Get Name="Get" Id="{54c60cea-06d9-0436-2d98-e11a2955b4ed}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="ClearReference" Id="{3e6f425d-2cc3-0286-2773-4d68f68355c3}">
+      <Declaration><![CDATA[METHOD PUBLIC ClearReference
+VAR_INPUT
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="Clone" Id="{cba15b80-9b6c-09f2-371d-4de2af359262}">
+      <Declaration><![CDATA[METHOD Clone : I_Datatype
+]]></Declaration>
+    </Method>
+    <Property Name="Name" Id="{ea4da69c-fd1b-0766-085e-ae11be47eeb6}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Name : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{8d4b7908-183b-02d9-27cf-9fb0bce53892}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="SerializeTypeWith" Id="{49c39a8f-18b1-0e61-0283-6c14f52574e5}">
+      <Declaration><![CDATA[METHOD PUBLIC SerializeTypeWith
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Property Name="Size" Id="{82556afa-6c09-02a5-21b3-c6f1b10f4d7a}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Size : UDINT]]></Declaration>
+      <Get Name="Get" Id="{a604ab4c-7ad4-0419-3fa1-ddd96273706f}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Method Name="TryDeserializeFrom" Id="{37f3fe44-520f-0d11-174b-facb5919c405}">
+      <Declaration><![CDATA[METHOD PUBLIC ABSTRACT TryDeserializeFrom : BOOL
+VAR_INPUT
+	Deserializer : I_Deserializer;
+	Feedback : I_DeserializerFeedback;
+END_VAR]]></Declaration>
+    </Method>
+    <Method Name="TryMakeReferenceTo" Id="{71e1f5db-87ba-0edb-12be-d38f86ff6c6e}">
+      <Declaration><![CDATA[METHOD TryMakeReferenceTo : BOOL
+VAR_INPUT
+	Target : I_Datatype;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="TryResolveAsAliasDatatype" Id="{6901fdc3-b8df-0a50-076a-29e0627543a7}">
+      <Declaration><![CDATA[METHOD PUBLIC TryResolveAsAliasDatatype : BOOL
+VAR_INPUT
+	Destination : REFERENCE TO I_AliasDatatype;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="TryResolveAsEnumDatatype" Id="{e7be0424-a479-0a55-1293-36f08e36456b}">
+      <Declaration><![CDATA[METHOD PUBLIC TryResolveAsEnumDatatype : BOOL
+VAR_INPUT
+	Destination : REFERENCE TO I_EnumDatatype;
+END_VAR
+]]></Declaration>
+    </Method>
+    <Method Name="TryResolveAsStructuredDatatype" Id="{1f72b16a-4b89-0abc-267a-2a1e1af6e054}">
+      <Declaration><![CDATA[METHOD PUBLIC TryResolveAsStructuredDatatype : BOOL
+VAR_INPUT
+	Destination : REFERENCE TO I_StructuredDatatype;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

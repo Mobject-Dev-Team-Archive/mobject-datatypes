@@ -6,7 +6,7 @@
   </picture>
 </p>
 
-## The mobject-types Library
+## The mobject-datatypes Library
 
 This is one of the many libraries of [mobject](http://mobject.org). This library focuses on representing data types as objects.
 
@@ -20,7 +20,7 @@ mobject's goal is to be a lightweight solution to typical oop problems.
 
 ## Documentation
 
-The documentation for this project can be found [here](http://types.mobject.org/#/).
+The documentation for this project can be found [here](http://datatypes.mobject.org/#/).
 
 ## Versions
 

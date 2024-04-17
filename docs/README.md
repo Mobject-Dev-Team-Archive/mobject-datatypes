@@ -6,7 +6,7 @@
 
 > A framework and guide for writing object oriented programs in structured text.
 
-## The mobject-types Library
+## The mobject-datatypes Library
 
 This is one of the many libraries of [mobject](http://mobject.org). This library focuses on representing data types as objects.
 
@@ -20,4 +20,4 @@ mobject's goal is to be a lightweight solution to typical oop problems.
 
 ## Why use mobject-types?
 
-The mobject-types library provides a consistent way to handle data types as objects. Focus is with the serialization and deserialization of primitives. This library can be used as a base for custom data types as objects.
+The mobject-datatypes library provides a consistent way to handle data types as objects. Focus is with the serialization and deserialization of primitives. This library can be used as a base for custom data types as objects.

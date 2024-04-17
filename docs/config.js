@@ -1,2 +1,2 @@
 window.$docsify = window.$docsify || {};
-window.$docsify.repo = "https://github.com/Mobject-Dev-Team/mobject-types";
+window.$docsify.repo = "https://github.com/Mobject-Dev-Team/mobject-datatypes";

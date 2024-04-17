@@ -2,7 +2,7 @@
 
   - [Welcome](/)
 
-- mobject-types
+- mobject-datatypes
 
   - [Serialization Guide](serialization.md)
 

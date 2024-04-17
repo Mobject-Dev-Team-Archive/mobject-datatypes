@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="UserDefinedDatatypeBase" Id="{55e04311-6046-0326-1b5b-d143bc2974cf}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'linkalways'} 
+{attribute 'no_explicit_call' := 'This FB is a CLASS and must be accessed using methods or properties'}
+{attribute 'enable_dynamic_creation'}
+FUNCTION_BLOCK ABSTRACT UserDefinedDatatypeBase EXTENDS DatatypeBase IMPLEMENTS I_UserDefinedDatatype
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="Protected" Id="{2a921985-b010-00e4-0f7a-b7642debd7b7}" />
+    <Property Name="Identifier" Id="{502a5f15-d89b-0f8d-0c65-99b984a67087}">
+      <Declaration><![CDATA[PROPERTY PUBLIC ABSTRACT Identifier : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{7bd248e0-f12f-0361-07d7-f79c13979fc4}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="OnSerializeTypeWith" Id="{476ebd9b-4cc5-0045-27b8-a42929a121d4}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED OnSerializeTypeWith
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.OnSerializeTypeWith(Serializer);
+Serializer.AddKeyString('identifier',Identifier);]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
