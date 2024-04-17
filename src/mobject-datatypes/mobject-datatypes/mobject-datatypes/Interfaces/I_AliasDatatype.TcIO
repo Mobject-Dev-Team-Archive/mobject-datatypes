@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_AliasDatatype" Id="{30b5162c-72ab-0675-2a97-ef52691abe48}">
+    <Declaration><![CDATA[INTERFACE I_AliasDatatype EXTENDS I_UserDefinedDatatype]]></Declaration>
+    <Property Name="BaseDatatype" Id="{84bc8a25-a0ad-0d59-10cd-d2f653dd748c}">
+      <Declaration><![CDATA[PROPERTY PUBLIC BaseDatatype : I_Datatype]]></Declaration>
+      <Get Name="Get" Id="{525848eb-93c1-0d3a-119b-11672e33b7c4}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

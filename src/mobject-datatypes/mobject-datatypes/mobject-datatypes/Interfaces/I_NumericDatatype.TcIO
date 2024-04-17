@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_NumericDatatype" Id="{c5136485-18cb-0c27-1610-72d0069748a7}">
+    <Declaration><![CDATA[INTERFACE I_NumericDatatype EXTENDS I_Datatype]]></Declaration>
+    <Property Name="IsFloat" Id="{9bede2f9-2ecb-08b8-0e06-7ab6bbed3a31}">
+      <Declaration><![CDATA[PROPERTY PUBLIC ABSTRACT IsFloat : BOOL]]></Declaration>
+      <Get Name="Get" Id="{146766da-1f5a-0441-23e8-b20a0c39604d}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+    <Property Name="IsSigned" Id="{02e02b37-ecdb-04bb-2d74-84539d10b5de}">
+      <Declaration><![CDATA[PROPERTY PUBLIC IsSigned : BOOL]]></Declaration>
+      <Get Name="Get" Id="{3712da92-a2e3-07b1-3bec-97a3c6968dd8}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>

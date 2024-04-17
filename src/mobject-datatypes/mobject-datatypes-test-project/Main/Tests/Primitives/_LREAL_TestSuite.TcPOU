@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="_LREAL_TestSuite" Id="{1f061fe6-4762-0eb4-1beb-37cf7111e6bb}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK _LREAL_TestSuite EXTENDS TcUnit.FB_TestSuite
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[TestAddress();
+TestClearReference();
+TestClone();
+TestIecTypeReturnsExpected();
+TestIsSigned();
+TestMakeReferenceToFollowsReference();
+TestMakeReferenceToUpdatesReference();
+TestSize();
+TestValueReturnsExpectedAfterInit();
+TestValueReturnsExpectedAfterChange();
+TestSerializeTypeWith();
+TestSerializeWith();
+TestTryDeserializeFrom();
+TestTryMakeReferenceToFollowsReference();
+TestTryMakeReferenceToUpdatesReference();
+]]></ST>
+    </Implementation>
+    <Method Name="TestAddress" Id="{30812582-cb57-0cd5-3fac-d6d53d78047d}">
+      <Declaration><![CDATA[METHOD PUBLIC TestAddress
+VAR
+    _type : _LREAL(0.0);
+    notExpected : PVOID := 0;
+    actual : PVOID;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestAddress');
+
+actual := _type.Address;
+
+AssertFalse(
+    Condition := (notExpected = actual),
+    Message := 'Type did not return a valid address.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestClearReference" Id="{c0fafaa7-2a15-0399-3581-fa6deb419a31}">
+      <Declaration><![CDATA[METHOD PUBLIC TestClearReference
+VAR
+    _type : _LREAL(0.0);
+	target : LREAL := 0.0;
+    expected : LREAL := 0.0;
+    actual : LREAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestClearReference');
+
+_type.MakeReferenceTo(target);
+_type.ClearReference();
+target := 123.4;
+
+actual := _type.Value;
+
+AssertEquals_LREAL(
+    Expected := expected,
+    Actual := actual,
+    Delta := LREAL#0.001,
+    Message := 'Value did not follow target change'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestClone" Id="{58009d03-0a52-09bf-22e0-55c21d86c217}">
+      <Declaration><![CDATA[METHOD PUBLIC TestClone
+VAR
+    _type : _LREAL(123.4);
+	clone : I_Datatype;
+	isValidClone : BOOL;
+	compareResult : DINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestClone');
+
+clone := _type.Clone();
+
+isValidClone := clone <> 0;
+
+IF isValidClone THEN
+	compareResult := memcmp(_type.Address, clone.Address, clone.Size);
+END_IF
+
+AssertTrue(
+	Condition := isValidClone,
+	Message := 'Clone did not produce a clone'
+);
+
+AssertEquals_DINT(
+	Expected := 0,
+    Actual := compareResult,
+    Message := 'Clone did not return a valid clone.'
+);
+
+clone.Dispose();
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestIecTypeReturnsExpected" Id="{860f786c-d47a-004d-3e7f-c32baeda11f9}">
+      <Declaration><![CDATA[METHOD PUBLIC TestIecTypeReturnsExpected
+VAR
+    _type : _LREAL(0.0);
+    expected : STRING := 'LREAL';
+    actual : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestIecTypeReturnsExpected');
+
+actual := _type.Name;
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Type did not return correct iec type.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestIsSigned" Id="{da012d0e-9af8-0218-280c-2af73d7accff}">
+      <Declaration><![CDATA[METHOD PUBLIC TestIsSigned
+VAR
+    _type : _LREAL(0);
+    expected : STRING := 'BOOL';
+    actual : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestIsSigned');
+
+AssertTrue(
+	Condition := _type.IsSigned,
+    Message := 'Type did not correctly identify itself as being signed'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestMakeReferenceToFollowsReference" Id="{412cd066-3921-01c0-2137-ee62b7fcf317}">
+      <Declaration><![CDATA[METHOD PUBLIC TestMakeReferenceToFollowsReference
+VAR
+    _type : _LREAL(0.0);
+	target : LREAL := 0.0;
+    expected : LREAL := 123.4;
+    actual : LREAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestMakeReferenceToFollowsReference');
+
+_type.MakeReferenceTo(target);
+target := 123.4;
+
+actual := _type.Value;
+
+AssertEquals_LREAL(
+    Expected := expected,
+    Actual := actual,
+    Delta := LREAL#0.001,
+    Message := 'Value did not follow target change'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestMakeReferenceToUpdatesReference" Id="{9b1bc849-7294-0521-025f-b87d661397cf}">
+      <Declaration><![CDATA[METHOD PUBLIC TestMakeReferenceToUpdatesReference
+VAR
+    _type : _LREAL(0.0);
+	target : LREAL := 0.0;
+    expected : LREAL := 123.4;
+    actual : LREAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestMakeReferenceToUpdatesReference');
+
+_type.MakeReferenceTo(target);
+_type.Value := 123.4;
+
+actual := target;
+
+AssertEquals_LREAL(
+    Expected := expected,
+    Actual := actual,
+    Delta := LREAL#0.001,
+    Message := 'Value did not update target'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestSerializeTypeWith" Id="{f6191def-3288-0220-186f-742a33ce36cc}">
+      <Declaration><![CDATA[METHOD PUBLIC TestSerializeTypeWith
+VAR
+    _type : _LREAL(0.0);
+    serializer : JsonSerializer;
+    expected : STRING(500) := '{"name":"LREAL"}';
+    actual : STRING(500);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestSerializeTypeWith');
+
+serializer.Reset();
+_type.SerializeTypeWith(serializer);
+serializer.TryGetSerializedData(ADR(actual), SIZEOF(actual));
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Serialization of type did not return correct string.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestSerializeWith" Id="{747668ac-33bd-0a68-2c49-aed622b2ac3b}">
+      <Declaration><![CDATA[METHOD PUBLIC TestSerializeWith
+VAR
+    _type : _LREAL(123.4);
+    serializer : JsonSerializer;
+    expected : STRING := '123.4';
+    actual : STRING(500);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestSerializeWith');
+
+serializer.Reset();
+_type.SerializeWith(serializer);
+serializer.TryGetSerializedData(ADR(actual), SIZEOF(actual));
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Serialization of type data did not return correct string.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestSize" Id="{071c1e79-f69a-0f5c-0f7c-d0fc4b0b0a1d}">
+      <Declaration><![CDATA[METHOD PUBLIC TestSize
+VAR
+    _type : _LREAL(0.0);
+    expected : UDINT := SIZEOF(LREAL);
+    actual : UDINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestSize');
+
+actual := _type.Size;
+
+AssertEquals_UDINT(
+    Expected := Expected,
+    Actual := actual,
+    Message := 'Type did not return the correct size.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestTryDeserializeFrom" Id="{00768491-310e-0931-0c88-c6db21be5869}">
+      <Declaration><![CDATA[METHOD PUBLIC TestTryDeserializeFrom
+VAR
+    deserializer : JsonDeserializer;
+    feedback : DeserializerFeedback;
+    json : STRING := '123.4';
+    _type : _LREAL(0.0);
+    expected : LREAL := 123.4;
+    actual : LREAL;
+ END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestTryDeserializeFrom');
+
+deserializer.Reset();
+deserializer.TryLoad(json);
+_type.TryDeserializeFrom(Deserializer, Feedback);
+
+actual := _type.Value;
+
+AssertEquals_LREAL(
+    Expected := expected,
+    Actual := actual,
+    Delta := LREAL#0.001,
+    Message := 'Type did not deserialize correctly.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestTryMakeReferenceToFollowsReference" Id="{8f928577-7a04-0977-0a53-efa0330d50b7}">
+      <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToFollowsReference
+VAR
+    _type : _LREAL(0.0);
+	target : _LREAL(0.0);
+    expected : LREAL := 123.4;
+    actual : LREAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestTryMakeReferenceToFollowsReference');
+
+_type.TryMakeReferenceTo(target);
+target.Value := 123.4;
+
+actual := _type.Value;
+
+AssertEquals_LREAL(
+    Expected := expected,
+    Actual := actual,
+    Delta := LREAL#0.001,
+    Message := 'Value did not follow target change'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestTryMakeReferenceToUpdatesReference" Id="{f5a10526-19e3-051b-0430-22ccbb70b8ac}">
+      <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToUpdatesReference
+VAR
+    _type : _LREAL(0.0);
+	target : _LREAL(0.0);
+    expected : LREAL := 123.4;
+    actual : LREAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestTryMakeReferenceToUpdatesReference');
+
+_type.TryMakeReferenceTo(target);
+_type.Value := 123.4;
+
+actual := target.Value;
+
+AssertEquals_LREAL(
+    Expected := expected,
+    Actual := actual,
+    Delta := LREAL#0.001,
+    Message := 'Value did not update target'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestValueReturnsExpectedAfterChange" Id="{46d718d8-47e1-0247-1a45-fd31723b21e2}">
+      <Declaration><![CDATA[METHOD PUBLIC TestValueReturnsExpectedAfterChange
+VAR
+    _type : _LREAL(0.0);
+    expected : LREAL := 123.4;
+    actual : LREAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestValueReturnsExpectedAfterChange');
+
+_type.Value := 123.4;
+
+actual := _type.Value;
+
+AssertEquals_LREAL(
+    Expected := expected,
+    Actual := actual,
+    Delta := LREAL#0.001,
+    Message := 'Expected value not returned after change.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestValueReturnsExpectedAfterInit" Id="{81205262-4168-0c78-3ee5-17a04611dec5}">
+      <Declaration><![CDATA[METHOD PUBLIC TestValueReturnsExpectedAfterInit
+VAR
+    _type : _LREAL(123.4);
+    expected : LREAL := 123.4;
+    actual : LREAL;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestValueReturnsExpectedAfterInit');
+
+actual := _type.Value;
+
+AssertEquals_LREAL(
+    Expected := expected,
+    Actual := actual,
+    Delta := LREAL#0.001,
+    Message := 'Expected value not returned after Init.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

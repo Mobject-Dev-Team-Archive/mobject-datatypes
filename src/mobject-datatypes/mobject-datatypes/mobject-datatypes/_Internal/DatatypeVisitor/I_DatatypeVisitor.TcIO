@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_DatatypeVisitor" Id="{70ca9c36-d5bd-0a97-3562-fe73d6d54068}">
+    <Declaration><![CDATA[INTERFACE I_DatatypeVisitor
+]]></Declaration>
+    <Method Name="VisitDatatype" Id="{b0f9b298-444b-0412-2831-f14fbe8d7931}">
+      <Declaration><![CDATA[METHOD VisitDatatype
+VAR_INPUT
+	VisitingDatatype : I_Datatype;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

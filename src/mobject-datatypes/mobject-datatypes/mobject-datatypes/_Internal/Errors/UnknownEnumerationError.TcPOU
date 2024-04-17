@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="UnknownEnumerationError" Id="{19646a27-befd-05cf-2fd3-cc1f5cac95c2}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'linkalways'} 
+{attribute 'no_explicit_call' := 'This FB is a CLASS and must be accessed using methods or properties'}
+{attribute 'enable_dynamic_creation'}
+FUNCTION_BLOCK UnknownEnumerationError EXTENDS Error
+VAR
+	enumString : T_MAXSTRING;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="Constructor" Id="{d8cbdb7d-1052-0ca9-319e-d95fa0e20539}" />
+    <Property Name="ErrorType" Id="{ad2e303b-e2be-02a5-0600-b83cb2db45b6}">
+      <Declaration><![CDATA[PROPERTY PUBLIC ErrorType : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{b5e10fe4-943b-0c3b-3591-b3b111608d7f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[ErrorType := 'UNKNOWN_ENUMERATION_ERROR';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="FB_init" Id="{c8260202-0186-082f-39f1-248a3742d794}" FolderPath="Constructor\">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	EnumString : T_MAXSTRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^.enumString := EnumString;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Message" Id="{3223dc51-dde2-062b-2d5a-1f5834300a71}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Message : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{7513b460-bf41-0117-08df-e82e8b461216}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Message := CONCAT('Unknown Enumeration : ', enumString);]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

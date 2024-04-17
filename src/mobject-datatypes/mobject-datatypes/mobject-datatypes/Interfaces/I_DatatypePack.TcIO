@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_DatatypePack" Id="{e1cd5acd-cf5f-01e7-3ada-4a8d5051511e}">
+    <Declaration><![CDATA[INTERFACE I_DatatypePack
+]]></Declaration>
+    <Method Name="RegisterWith" Id="{a80882ed-4cbf-0b1c-2705-781730e52950}">
+      <Declaration><![CDATA[METHOD RegisterWith
+VAR_INPUT
+	Datatypes : I_Datatypes;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

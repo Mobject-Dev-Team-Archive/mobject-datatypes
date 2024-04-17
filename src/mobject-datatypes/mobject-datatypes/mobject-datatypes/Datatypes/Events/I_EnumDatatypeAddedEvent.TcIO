@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_EnumDatatypeAddedEvent" Id="{1a5d2c99-d06b-085e-1f96-ed6149f81738}">
+    <Declaration><![CDATA[INTERFACE I_EnumDatatypeAddedEvent EXTENDS I_Event]]></Declaration>
+    <Property Name="Target" Id="{c29c824d-7969-0515-3a7c-1eac25ed1ff8}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Target : I_EnumDatatype]]></Declaration>
+      <Get Name="Get" Id="{748c9943-2761-051c-02a2-051747cbcfaf}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>
