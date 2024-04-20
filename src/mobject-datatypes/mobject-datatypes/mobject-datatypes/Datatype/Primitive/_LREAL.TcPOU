@@ -90,17 +90,6 @@ END_VAR
         <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Name" Id="{e6316010-6ea7-03df-1fc2-e99b11b7beb6}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Name : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{b84d9190-6f40-00d5-3d70-6d8b22c8e8c3}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[Name := 'LREAL';]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Method Name="SerializeWith" Id="{40a92b8d-e560-0d74-0dc1-6dd2cb571dd2}">
       <Declaration><![CDATA[METHOD PUBLIC SerializeWith
 VAR_INPUT
@@ -140,7 +129,7 @@ VAR
 	pTargetData : POINTER TO LREAL;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT (Target.Name = Name) THEN
+        <ST><![CDATA[IF NOT (Target.TypeName = TypeName) THEN
 	RETURN;
 END_IF
 
@@ -149,6 +138,17 @@ activeData REF= pTargetData^;
 TryMakeReferenceTo := TRUE;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="TypeName" Id="{e6316010-6ea7-03df-1fc2-e99b11b7beb6}">
+      <Declaration><![CDATA[PROPERTY PUBLIC TypeName : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{b84d9190-6f40-00d5-3d70-6d8b22c8e8c3}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TypeName := 'LREAL';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="Value" Id="{6503b810-eb6a-0f1a-0982-25f7a5b8469b}">
       <Declaration><![CDATA[PROPERTY PUBLIC Value : LREAL]]></Declaration>
       <Get Name="Get" Id="{97728efa-957e-0010-1235-2c7994e7bc7f}">

@@ -70,17 +70,6 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Name" Id="{21745b08-4305-0c91-28a0-7d4bdc0f51be}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Name : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{d07c6a61-fa0a-0b92-2d64-72598b395452}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[Name := 'ENUM';]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Method Name="OnSerializeTypeWith" Id="{547cf7ae-ef21-07e4-109a-fccfaf9adaea}" FolderPath="Protected\">
       <Declaration><![CDATA[METHOD PROTECTED OnSerializeTypeWith
 VAR_INPUT
@@ -188,5 +177,16 @@ END_VAR
 TryResolveAsEnumDatatype := TRUE;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="TypeName" Id="{21745b08-4305-0c91-28a0-7d4bdc0f51be}">
+      <Declaration><![CDATA[PROPERTY PUBLIC TypeName : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{d07c6a61-fa0a-0b92-2d64-72598b395452}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TypeName := 'ENUM';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
   </POU>
 </TcPlcObject>

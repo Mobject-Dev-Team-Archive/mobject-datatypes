@@ -102,17 +102,6 @@ END_VAR
         <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Name" Id="{a86480b9-b762-0f4a-2cdb-6658c7e94a7e}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Name : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{fb945d17-8e78-055c-1428-68e021a3389f}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[Name := 'WORD';]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Method Name="SerializeLowerbound" Id="{dc6d2d22-4d4a-0139-1abb-84bbcdccbec4}" FolderPath="Protected\">
       <Declaration><![CDATA[METHOD PROTECTED SerializeLowerbound
 VAR_INPUT
@@ -172,7 +161,7 @@ VAR
 	pTargetData : POINTER TO WORD;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT (Target.Name = Name) THEN
+        <ST><![CDATA[IF NOT (Target.TypeName = TypeName) THEN
 	RETURN;
 END_IF
 
@@ -181,6 +170,17 @@ activeData REF= pTargetData^;
 TryMakeReferenceTo := TRUE;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="TypeName" Id="{a86480b9-b762-0f4a-2cdb-6658c7e94a7e}">
+      <Declaration><![CDATA[PROPERTY PUBLIC TypeName : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{fb945d17-8e78-055c-1428-68e021a3389f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TypeName := 'WORD';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="UpperBound" Id="{9d1ba09d-6980-0165-053b-cf805dbf9948}">
       <Declaration><![CDATA[PROPERTY PUBLIC UpperBound : WORD]]></Declaration>
       <Get Name="Get" Id="{6afedcf9-4217-09c3-2aff-5a2318b4d40a}">

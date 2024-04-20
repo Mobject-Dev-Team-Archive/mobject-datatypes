@@ -25,12 +25,6 @@ END_VAR
       <Declaration><![CDATA[METHOD Clone : I_Datatype
 ]]></Declaration>
     </Method>
-    <Property Name="Name" Id="{ea4da69c-fd1b-0766-085e-ae11be47eeb6}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Name : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{8d4b7908-183b-02d9-27cf-9fb0bce53892}">
-        <Declaration><![CDATA[]]></Declaration>
-      </Get>
-    </Property>
     <Method Name="SerializeTypeWith" Id="{49c39a8f-18b1-0e61-0283-6c14f52574e5}">
       <Declaration><![CDATA[METHOD PUBLIC SerializeTypeWith
 VAR_INPUT
@@ -79,5 +73,11 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
+    <Property Name="TypeName" Id="{ea4da69c-fd1b-0766-085e-ae11be47eeb6}">
+      <Declaration><![CDATA[PROPERTY PUBLIC TypeName : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{8d4b7908-183b-02d9-27cf-9fb0bce53892}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
   </Itf>
 </TcPlcObject>

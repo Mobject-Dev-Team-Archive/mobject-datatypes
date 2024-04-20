@@ -120,7 +120,7 @@ END_VAR
       <Implementation>
         <ST><![CDATA[TEST('TestIecTypeReturnsExpected');
 
-actual := _type.Name;
+actual := _type.TypeName;
 
 AssertEquals_STRING(
     Expected := expected,

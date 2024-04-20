@@ -68,17 +68,6 @@ END_VAR
         <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Name" Id="{1c323148-3802-0e58-0533-0a156a959090}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Name : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{afd28dc2-9810-0e51-04d9-f738234c8e47}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[Name := 'STRING';]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Method Name="SerializeWith" Id="{6f369039-49e5-0aeb-19d6-0ce197b2d7b2}">
       <Declaration><![CDATA[METHOD PUBLIC SerializeWith
 VAR_INPUT
@@ -118,7 +107,7 @@ VAR
 	pTargetData : POINTER TO T_MaxString;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT (Target.Name = Name) THEN
+        <ST><![CDATA[IF NOT (Target.TypeName = TypeName) THEN
 	RETURN;
 END_IF
 
@@ -127,6 +116,17 @@ activeData REF= pTargetData^;
 TryMakeReferenceTo := TRUE;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="TypeName" Id="{1c323148-3802-0e58-0533-0a156a959090}">
+      <Declaration><![CDATA[PROPERTY PUBLIC TypeName : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{afd28dc2-9810-0e51-04d9-f738234c8e47}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TypeName := 'STRING';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="Value" Id="{c9e6417f-ae47-04e3-3a2e-6943a0858fa0}">
       <Declaration><![CDATA[PROPERTY PUBLIC Value : T_MaxString]]></Declaration>
       <Get Name="Get" Id="{266ae04a-bc9b-0dcb-3ce6-a1882c771d9c}">

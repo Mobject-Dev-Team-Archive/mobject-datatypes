@@ -241,7 +241,7 @@ END_IF
 
 // add arrays
 
-primitives.AddOrUpdate(Datatype.name, Datatype);
+primitives.AddOrUpdate(Datatype.TypeName, Datatype);
 emitOnDatatypeAddedEvent(Datatype);]]></ST>
       </Implementation>
     </Method>
