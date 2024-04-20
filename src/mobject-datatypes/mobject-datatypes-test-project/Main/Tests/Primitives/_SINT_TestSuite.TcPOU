@@ -137,8 +137,6 @@ TEST_FINISHED();
       <Declaration><![CDATA[METHOD PUBLIC TestIsSigned
 VAR
     _type : _SINT(0);
-    expected : STRING := 'BOOL';
-    actual : STRING;
 END_VAR
 ]]></Declaration>
       <Implementation>
