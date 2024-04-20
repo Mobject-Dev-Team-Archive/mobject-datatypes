@@ -112,7 +112,7 @@ TEST_FINISHED();
     <Method Name="TestIdentifierReturnsExpected" Id="{f0c832a1-3a50-0570-34c0-a7147e2373d6}">
       <Declaration><![CDATA[METHOD PUBLIC TestIdentifierReturnsExpected
 VAR
-    _type : _HRESULT(S_OK);
+    _type : _TIMESTRUCT;
     expected : STRING := 'TIMESTRUCT';
     actual : STRING;
 END_VAR
