@@ -9,7 +9,7 @@ END_VAR
       <ST><![CDATA[TestAddress();
 TestClearReference();
 TestClone();
-TestIecTypeReturnsExpected();
+TestTypeNameReturnsExpected();
 TestIsFloat();
 TestIsSigned();
 TestMakeReferenceToFollowsReference();
@@ -106,29 +106,6 @@ AssertEquals_DINT(
 );
 
 clone.Dispose();
-
-TEST_FINISHED();
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="TestIecTypeReturnsExpected" Id="{ea16e37d-3534-064f-13f3-9ea38be0e1fd}">
-      <Declaration><![CDATA[METHOD PUBLIC TestIecTypeReturnsExpected
-VAR
-    _type : _DINT(0);
-    expected : STRING := 'DINT';
-    actual : STRING;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[TEST('TestIecTypeReturnsExpected');
-
-actual := _type.TypeName;
-
-AssertEquals_STRING(
-    Expected := expected,
-    Actual := actual,
-    Message := 'Type did not return correct iec type.'
-);
 
 TEST_FINISHED();
 ]]></ST>
@@ -377,6 +354,29 @@ AssertEquals(
     Expected := expected,
     Actual := actual,
     Message := 'Value did not update target'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestTypeNameReturnsExpected" Id="{ea16e37d-3534-064f-13f3-9ea38be0e1fd}">
+      <Declaration><![CDATA[METHOD PUBLIC TestTypeNameReturnsExpected
+VAR
+    _type : _DINT(0);
+    expected : STRING := 'DINT';
+    actual : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestTypeNameReturnsExpected');
+
+actual := _type.TypeName;
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Type did not return correct iec type.'
 );
 
 TEST_FINISHED();

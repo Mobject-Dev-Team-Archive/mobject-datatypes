@@ -9,7 +9,7 @@ END_VAR
       <ST><![CDATA[TestAddress();
 TestClearReference();
 TestClone();
-TestIecTypeReturnsExpected();
+TestTypeNameReturnsExpected();
 TestMakeReferenceToFollowsReference();
 TestMakeReferenceToUpdatesReference();
 TestSize();
@@ -120,29 +120,6 @@ END_VAR
         <ST><![CDATA[TEST('TestIdentifierReturnsExpected');
 
 actual := _type.Identifier;
-
-AssertEquals_STRING(
-    Expected := expected,
-    Actual := actual,
-    Message := 'Type did not return correct iec type.'
-);
-
-TEST_FINISHED();
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="TestIecTypeReturnsExpected" Id="{fa913cf5-fe11-0528-1dee-36df9d50f6f7}">
-      <Declaration><![CDATA[METHOD PUBLIC TestIecTypeReturnsExpected
-VAR
-    _type : _TIMESTRUCT;
-    expected : STRING := 'STRUCT';
-    actual : STRING;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[TEST('TestIecTypeReturnsExpected');
-
-actual := _type.TypeName;
 
 AssertEquals_STRING(
     Expected := expected,
@@ -370,6 +347,29 @@ AssertEquals(
     Expected := expected,
     Actual := actual,
     Message := 'Value did not update target'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestTypeNameReturnsExpected" Id="{fa913cf5-fe11-0528-1dee-36df9d50f6f7}">
+      <Declaration><![CDATA[METHOD PUBLIC TestTypeNameReturnsExpected
+VAR
+    _type : _TIMESTRUCT;
+    expected : STRING := 'STRUCT';
+    actual : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestTypeNameReturnsExpected');
+
+actual := _type.TypeName;
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Type did not return correct iec type.'
 );
 
 TEST_FINISHED();
