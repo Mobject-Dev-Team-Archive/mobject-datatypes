@@ -10,6 +10,7 @@ END_VAR
 TestClearReference();
 TestClone();
 TestIecTypeReturnsExpected();
+TestIsFloat();
 TestIsSigned();
 TestMakeReferenceToFollowsReference();
 TestMakeReferenceToUpdatesReference();
@@ -127,6 +128,24 @@ AssertEquals_STRING(
     Expected := expected,
     Actual := actual,
     Message := 'Type did not return correct iec type.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestIsFloat" Id="{4060af9c-297e-424f-af4f-aa19c5de6ff2}">
+      <Declaration><![CDATA[METHOD PUBLIC TestIsFloat
+VAR
+    _type : _DWORD(0);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestIsFloat');
+
+AssertFalse(
+	Condition := _type.IsFloat,
+    Message := 'Type did not correctly identify itself as being unsigned'
 );
 
 TEST_FINISHED();
