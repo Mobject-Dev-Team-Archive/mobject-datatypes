@@ -9,8 +9,8 @@ END_VAR
       <ST><![CDATA[TestAddress();
 TestClearReference();
 TestClone();
-TestIdentifierReturnsExpected();
 TestTypeNameReturnsExpected();
+TestIdentifierReturnsExpected();
 TestMakeReferenceToFollowsReference();
 TestMakeReferenceToUpdatesReference();
 TestSize();
