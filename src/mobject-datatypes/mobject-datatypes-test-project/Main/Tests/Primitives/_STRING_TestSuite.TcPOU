@@ -168,7 +168,7 @@ TEST_FINISHED();
 VAR
     _type : _STRING('');
     serializer : JsonSerializer;
-    expected : STRING := '{"name":"STRING"}';
+    expected : STRING := '{"typeName":"STRING"}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>

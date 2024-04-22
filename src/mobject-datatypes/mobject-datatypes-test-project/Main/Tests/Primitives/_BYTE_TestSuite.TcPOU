@@ -206,7 +206,7 @@ TEST_FINISHED();
 VAR
     _type : _BYTE(0);
     serializer : JsonSerializer;
-    expected : STRING(500) := '{"name":"BYTE","lowerBound":0,"upperBound":255,"isSigned":false,"isFloat":false}';
+    expected : STRING(500) := '{"typeName":"BYTE","minValue":0,"maxValue":255,"isSigned":false,"isFloat":false}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>

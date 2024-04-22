@@ -206,7 +206,7 @@ TEST_FINISHED();
 VAR
     _type : _LWORD(0);
     serializer : JsonSerializer;
-    expected : STRING(500) := '{"name":"LWORD","lowerBound":0,"upperBound":18446744073709551615,"isSigned":false,"isFloat":false}';
+    expected : STRING(500) := '{"typeName":"LWORD","minValue":0,"maxValue":18446744073709551615,"isSigned":false,"isFloat":false}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>

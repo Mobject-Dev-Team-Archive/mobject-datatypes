@@ -206,7 +206,7 @@ TEST_FINISHED();
 VAR
     _type : _INT(0);
     serializer : JsonSerializer;
-    expected : STRING(500) := '{"name":"INT","lowerBound":-32768,"upperBound":32767,"isSigned":true,"isFloat":false}';
+    expected : STRING(500) := '{"typeName":"INT","minValue":-32768,"maxValue":32767,"isSigned":true,"isFloat":false}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>

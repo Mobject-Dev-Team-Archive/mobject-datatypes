@@ -167,7 +167,7 @@ TEST_FINISHED();
 VAR
     _type : _BOOL(TRUE);
     serializer : JsonSerializer;
-    expected : STRING := '{"name":"BOOL"}';
+    expected : STRING := '{"typeName":"BOOL"}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>

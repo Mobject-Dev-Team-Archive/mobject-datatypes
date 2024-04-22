@@ -168,7 +168,7 @@ TEST_FINISHED();
 VAR
     _type : _TOD(TOD#0:0:0);
     serializer : JsonSerializer;
-    expected : STRING := '{"name":"TOD"}';
+    expected : STRING := '{"typeName":"TOD"}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>

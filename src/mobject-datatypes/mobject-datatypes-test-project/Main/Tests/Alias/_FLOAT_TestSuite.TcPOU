@@ -195,7 +195,7 @@ TEST_FINISHED();
 VAR
     _type : _FLOAT(0.0);
     serializer : JsonSerializer;
-    expected : STRING(500) := '{"name":"ALIAS","identifier":"FLOAT","baseDatatype":{"name":"LREAL"}}';
+    expected : STRING(500) := '{"typeName":"ALIAS","identifier":"FLOAT","baseDatatype":{"typeName":"LREAL","minValue":-1.7976931348623157e308,"maxValue":1.7976931348623157e308,"isSigned":true,"isFloat":true}}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>

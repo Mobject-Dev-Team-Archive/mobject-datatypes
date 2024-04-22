@@ -168,7 +168,7 @@ TEST_FINISHED();
 VAR
     _type : _DT(DT#2024-12-31-12:34:56);
     serializer : JsonSerializer;
-    expected : STRING := '{"name":"DT"}';
+    expected : STRING := '{"typeName":"DT"}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>

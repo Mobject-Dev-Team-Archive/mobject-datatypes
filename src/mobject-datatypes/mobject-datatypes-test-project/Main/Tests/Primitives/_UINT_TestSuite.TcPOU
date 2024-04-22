@@ -206,7 +206,7 @@ TEST_FINISHED();
 VAR
     _type : _UINT(0);
     serializer : JsonSerializer;
-    expected : STRING(500) := '{"name":"UINT","lowerBound":0,"upperBound":65535,"isSigned":false,"isFloat":false}';
+    expected : STRING(500) := '{"typeName":"UINT","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
