@@ -81,17 +81,6 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Property Name="LowerBound" Id="{75db9cf0-027a-0a07-1d66-6b49e137442b}">
-      <Declaration><![CDATA[PROPERTY PUBLIC LowerBound : WORD]]></Declaration>
-      <Get Name="Get" Id="{3a88e9f5-83de-07ad-27b1-1dfd4705cbb2}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[LowerBound := DatatypeLimits.WORD_LOWER_LIMIT;]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Method Name="MakeReferenceTo" Id="{0e8b1b01-c520-01c1-3d12-49fac3a194f8}">
       <Declaration><![CDATA[METHOD PUBLIC MakeReferenceTo
 VAR_INPUT
@@ -102,6 +91,28 @@ END_VAR
         <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="MaxValue" Id="{9d1ba09d-6980-0165-053b-cf805dbf9948}">
+      <Declaration><![CDATA[PROPERTY PUBLIC MaxValue : WORD]]></Declaration>
+      <Get Name="Get" Id="{6afedcf9-4217-09c3-2aff-5a2318b4d40a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[MaxValue :=  DatatypeLimits.WORD_MAX_VALUE;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="MinValue" Id="{75db9cf0-027a-0a07-1d66-6b49e137442b}">
+      <Declaration><![CDATA[PROPERTY PUBLIC MinValue : WORD]]></Declaration>
+      <Get Name="Get" Id="{3a88e9f5-83de-07ad-27b1-1dfd4705cbb2}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[MinValue := DatatypeLimits.WORD_MIN_VALUE;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="SerializeMaxValue" Id="{2ef5ea3e-767d-0af1-372c-36627e37d719}" FolderPath="Protected\">
       <Declaration><![CDATA[METHOD PROTECTED SerializeMaxValue
 VAR_INPUT
@@ -109,7 +120,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Serializer.AddWord(Upperbound);]]></ST>
+        <ST><![CDATA[Serializer.AddWord(MaxValue);]]></ST>
       </Implementation>
     </Method>
     <Method Name="SerializeMinValue" Id="{dc6d2d22-4d4a-0139-1abb-84bbcdccbec4}" FolderPath="Protected\">
@@ -119,7 +130,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Serializer.AddWord(Lowerbound);]]></ST>
+        <ST><![CDATA[Serializer.AddWord(MinValue);]]></ST>
       </Implementation>
     </Method>
     <Method Name="SerializeWith" Id="{bd002f7c-1b5e-079b-284d-27e658dfa1e6}">
@@ -178,17 +189,6 @@ END_VAR
 ]]></Declaration>
         <Implementation>
           <ST><![CDATA[TypeName := 'WORD';]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
-    <Property Name="UpperBound" Id="{9d1ba09d-6980-0165-053b-cf805dbf9948}">
-      <Declaration><![CDATA[PROPERTY PUBLIC UpperBound : WORD]]></Declaration>
-      <Get Name="Get" Id="{6afedcf9-4217-09c3-2aff-5a2318b4d40a}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[UpperBound :=  DatatypeLimits.WORD_UPPER_LIMIT;]]></ST>
         </Implementation>
       </Get>
     </Property>

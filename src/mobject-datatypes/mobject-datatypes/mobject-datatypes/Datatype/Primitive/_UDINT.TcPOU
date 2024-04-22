@@ -81,17 +81,6 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Property Name="LowerBound" Id="{6ae77e78-4aec-07b4-3561-a3caf551a93c}">
-      <Declaration><![CDATA[PROPERTY PUBLIC LowerBound : UDINT]]></Declaration>
-      <Get Name="Get" Id="{537f398f-6575-04cc-3e14-fb4f0101f6c0}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[LowerBound := DatatypeLimits.UDINT_LOWER_LIMIT;]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Method Name="MakeReferenceTo" Id="{7cc2271c-0461-003f-20e3-0c9467c7ce3a}">
       <Declaration><![CDATA[METHOD PUBLIC MakeReferenceTo
 VAR_INPUT
@@ -102,6 +91,28 @@ END_VAR
         <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="MaxValue" Id="{b5f5f62c-c9da-077e-20d6-37607d6f5c2e}">
+      <Declaration><![CDATA[PROPERTY PUBLIC MaxValue : UDINT]]></Declaration>
+      <Get Name="Get" Id="{94193550-c19c-01b9-1aac-71fe3b85603b}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[MaxValue :=  DatatypeLimits.UDINT_MAX_VALUE;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="MinValue" Id="{6ae77e78-4aec-07b4-3561-a3caf551a93c}">
+      <Declaration><![CDATA[PROPERTY PUBLIC MinValue : UDINT]]></Declaration>
+      <Get Name="Get" Id="{537f398f-6575-04cc-3e14-fb4f0101f6c0}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[MinValue := DatatypeLimits.UDINT_MIN_VALUE;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="SerializeMaxValue" Id="{81bcf06f-dabb-0e25-1640-5c70569f4e96}" FolderPath="Protected\">
       <Declaration><![CDATA[METHOD PROTECTED SerializeMaxValue
 VAR_INPUT
@@ -109,7 +120,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Serializer.AddUdint(Upperbound);]]></ST>
+        <ST><![CDATA[Serializer.AddUdint(MaxValue);]]></ST>
       </Implementation>
     </Method>
     <Method Name="SerializeMinValue" Id="{7468692a-27f2-0de1-1b46-f963db6307f6}" FolderPath="Protected\">
@@ -119,7 +130,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Serializer.AddUdint(Lowerbound);]]></ST>
+        <ST><![CDATA[Serializer.AddUdint(MinValue);]]></ST>
       </Implementation>
     </Method>
     <Method Name="SerializeWith" Id="{cbc294d5-a8f9-0bd2-288a-c0159e0a6685}">
@@ -178,17 +189,6 @@ END_VAR
 ]]></Declaration>
         <Implementation>
           <ST><![CDATA[TypeName := 'UDINT';]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
-    <Property Name="UpperBound" Id="{b5f5f62c-c9da-077e-20d6-37607d6f5c2e}">
-      <Declaration><![CDATA[PROPERTY PUBLIC UpperBound : UDINT]]></Declaration>
-      <Get Name="Get" Id="{94193550-c19c-01b9-1aac-71fe3b85603b}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[UpperBound :=  DatatypeLimits.UDINT_UPPER_LIMIT;]]></ST>
         </Implementation>
       </Get>
     </Property>
