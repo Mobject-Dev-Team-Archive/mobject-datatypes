@@ -55,7 +55,7 @@ VAR_INPUT
 	Serializer : I_Serializer;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Serializer.AddKeyString('name',TypeName);]]></ST>
+        <ST><![CDATA[Serializer.AddKeyString('typeName',TypeName);]]></ST>
       </Implementation>
     </Method>
     <Method Name="SerializeTypeWith" Id="{5bd065eb-d10f-02bb-3b09-65d4e690f4fc}">
