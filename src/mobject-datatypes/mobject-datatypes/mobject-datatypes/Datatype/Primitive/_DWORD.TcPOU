@@ -102,24 +102,24 @@ END_VAR
         <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SerializeLowerbound" Id="{608aece2-9605-00b2-209d-8ec3580a1f1f}" FolderPath="Protected\">
-      <Declaration><![CDATA[METHOD PROTECTED SerializeLowerbound
-VAR_INPUT
-	Serializer : I_Serializer;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[Serializer.AddDword(Lowerbound);]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="SerializeUpperbound" Id="{37aa899d-501e-01d9-1d08-71d728c3a8d2}" FolderPath="Protected\">
-      <Declaration><![CDATA[METHOD PROTECTED SerializeUpperbound
+    <Method Name="SerializeMaxValue" Id="{37aa899d-501e-01d9-1d08-71d728c3a8d2}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED SerializeMaxValue
 VAR_INPUT
 	Serializer : I_Serializer;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[Serializer.AddDword(Upperbound);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SerializeMinValue" Id="{608aece2-9605-00b2-209d-8ec3580a1f1f}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED SerializeMinValue
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Serializer.AddDword(Lowerbound);]]></ST>
       </Implementation>
     </Method>
     <Method Name="SerializeWith" Id="{eb21cfdd-f895-0d4a-278c-25149b1f23a5}">

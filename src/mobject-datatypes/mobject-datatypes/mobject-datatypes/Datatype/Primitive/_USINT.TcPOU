@@ -102,24 +102,24 @@ END_VAR
         <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SerializeLowerbound" Id="{9792c06e-bc0a-083a-06d1-a7674f9a53c1}" FolderPath="Protected\">
-      <Declaration><![CDATA[METHOD PROTECTED SerializeLowerbound
-VAR_INPUT
-	Serializer : I_Serializer;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[Serializer.AddUsint(Lowerbound);]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="SerializeUpperbound" Id="{7da2e7b7-08e6-0b8a-3578-b1c50ce0635a}" FolderPath="Protected\">
-      <Declaration><![CDATA[METHOD PROTECTED SerializeUpperbound
+    <Method Name="SerializeMaxValue" Id="{7da2e7b7-08e6-0b8a-3578-b1c50ce0635a}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED SerializeMaxValue
 VAR_INPUT
 	Serializer : I_Serializer;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[Serializer.AddUsint(Upperbound);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SerializeMinValue" Id="{9792c06e-bc0a-083a-06d1-a7674f9a53c1}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED SerializeMinValue
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Serializer.AddUsint(Lowerbound);]]></ST>
       </Implementation>
     </Method>
     <Method Name="SerializeWith" Id="{3320ec2d-ae10-03ad-3b96-5312a4debae2}">

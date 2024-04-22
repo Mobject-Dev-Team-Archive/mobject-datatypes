@@ -41,16 +41,16 @@ VAR_INPUT
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.OnSerializeTypeWith(Serializer);
-Serializer.AddKey('lowerBound');
-SerializeLowerbound(Serializer);
-Serializer.AddKey('upperBound');
-SerializeUpperbound(Serializer);
+Serializer.AddKey('minValue');
+SerializeMinValue(Serializer);
+Serializer.AddKey('maxValue');
+SerializeMaxValue(Serializer);
 Serializer.AddKeyBool('isSigned', IsSigned);
 Serializer.AddKeyBool('isFloat', IsFloat);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SerializeLowerbound" Id="{e915cb36-608e-0f0f-0396-3f3a9db3cafa}" FolderPath="Protected\">
-      <Declaration><![CDATA[METHOD PROTECTED ABSTRACT SerializeLowerbound
+    <Method Name="SerializeMaxValue" Id="{efc7c592-a5cd-0bc0-331b-c013adadd590}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED ABSTRACT SerializeMaxValue
 VAR_INPUT
 	Serializer : I_Serializer;
 END_VAR
@@ -59,8 +59,8 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SerializeUpperbound" Id="{efc7c592-a5cd-0bc0-331b-c013adadd590}" FolderPath="Protected\">
-      <Declaration><![CDATA[METHOD PROTECTED ABSTRACT SerializeUpperbound
+    <Method Name="SerializeMinValue" Id="{e915cb36-608e-0f0f-0396-3f3a9db3cafa}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED ABSTRACT SerializeMinValue
 VAR_INPUT
 	Serializer : I_Serializer;
 END_VAR
