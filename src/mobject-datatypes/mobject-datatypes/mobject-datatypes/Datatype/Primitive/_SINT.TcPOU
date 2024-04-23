@@ -81,17 +81,6 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Property Name="LowerBound" Id="{27e42da2-e116-0d5e-1223-69677c335c76}">
-      <Declaration><![CDATA[PROPERTY PUBLIC LowerBound : SINT]]></Declaration>
-      <Get Name="Get" Id="{6811e3ad-c85a-0ff9-245f-226cf28d721e}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[LowerBound := DatatypeLimits.SINT_LOWER_LIMIT;]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Method Name="MakeReferenceTo" Id="{43a737b6-c598-0a81-0f63-cff57cd231ee}">
       <Declaration><![CDATA[METHOD PUBLIC MakeReferenceTo
 VAR_INPUT
@@ -102,35 +91,46 @@ END_VAR
         <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Name" Id="{8c8bd5c6-a592-0001-322b-9b62907cea13}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Name : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{e89008bb-a6bf-0299-2eca-bd456f8bfd0b}">
+    <Property Name="MaxValue" Id="{5496765f-cace-002f-35da-21d924cc9b33}">
+      <Declaration><![CDATA[PROPERTY PUBLIC MaxValue : SINT]]></Declaration>
+      <Get Name="Get" Id="{10d8d093-542d-0cee-39e8-05c9407c10c3}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Name := 'SINT';]]></ST>
+          <ST><![CDATA[MaxValue :=  DatatypeLimits.SINT_MAX_VALUE;]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Method Name="SerializeLowerbound" Id="{6f092a90-69cf-0d0d-2b1b-e9aeae800f36}" FolderPath="Protected\">
-      <Declaration><![CDATA[METHOD PROTECTED SerializeLowerbound
+    <Property Name="MinValue" Id="{27e42da2-e116-0d5e-1223-69677c335c76}">
+      <Declaration><![CDATA[PROPERTY PUBLIC MinValue : SINT]]></Declaration>
+      <Get Name="Get" Id="{6811e3ad-c85a-0ff9-245f-226cf28d721e}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[MinValue := DatatypeLimits.SINT_MIN_VALUE;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="SerializeMaxValue" Id="{8cfd7bca-9e43-0a59-087a-53b07ab6827a}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED SerializeMaxValue
 VAR_INPUT
 	Serializer : I_Serializer;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Serializer.AddSint(Lowerbound);]]></ST>
+        <ST><![CDATA[Serializer.AddSint(MaxValue);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SerializeUpperbound" Id="{8cfd7bca-9e43-0a59-087a-53b07ab6827a}" FolderPath="Protected\">
-      <Declaration><![CDATA[METHOD PROTECTED SerializeUpperbound
+    <Method Name="SerializeMinValue" Id="{6f092a90-69cf-0d0d-2b1b-e9aeae800f36}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED SerializeMinValue
 VAR_INPUT
 	Serializer : I_Serializer;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Serializer.AddSint(Upperbound);]]></ST>
+        <ST><![CDATA[Serializer.AddSint(MinValue);]]></ST>
       </Implementation>
     </Method>
     <Method Name="SerializeWith" Id="{2ab9f70d-02be-092c-3a52-ff270bacac30}">
@@ -172,7 +172,7 @@ VAR
 	pTargetData : POINTER TO SINT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT (Target.Name = Name) THEN
+        <ST><![CDATA[IF NOT (Target.TypeName = TypeName) THEN
 	RETURN;
 END_IF
 
@@ -181,14 +181,14 @@ activeData REF= pTargetData^;
 TryMakeReferenceTo := TRUE;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="UpperBound" Id="{5496765f-cace-002f-35da-21d924cc9b33}">
-      <Declaration><![CDATA[PROPERTY PUBLIC UpperBound : SINT]]></Declaration>
-      <Get Name="Get" Id="{10d8d093-542d-0cee-39e8-05c9407c10c3}">
+    <Property Name="TypeName" Id="{8c8bd5c6-a592-0001-322b-9b62907cea13}">
+      <Declaration><![CDATA[PROPERTY PUBLIC TypeName : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{e89008bb-a6bf-0299-2eca-bd456f8bfd0b}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[UpperBound :=  DatatypeLimits.SINT_UPPER_LIMIT;]]></ST>
+          <ST><![CDATA[TypeName := 'SINT';]]></ST>
         </Implementation>
       </Get>
     </Property>

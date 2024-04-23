@@ -49,24 +49,13 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Name" Id="{a928e3c2-d6de-016d-0e1d-924aab8c6d2b}">
-      <Declaration><![CDATA[PROPERTY PUBLIC ABSTRACT Name : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{f31a8dc8-fb8a-0351-1573-92734b6ab865}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Method Name="OnSerializeTypeWith" Id="{59c4326a-7387-042d-0ffe-3e0ccd6db4b7}" FolderPath="Protected\">
       <Declaration><![CDATA[METHOD PROTECTED OnSerializeTypeWith
 VAR_INPUT
 	Serializer : I_Serializer;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Serializer.AddKeyString('name',Name);]]></ST>
+        <ST><![CDATA[Serializer.AddKeyString('typeName',TypeName);]]></ST>
       </Implementation>
     </Method>
     <Method Name="SerializeTypeWith" Id="{5bd065eb-d10f-02bb-3b09-65d4e690f4fc}">
@@ -107,7 +96,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF Source.Name <> Name THEN
+        <ST><![CDATA[IF Source.TypeName <> TypeName THEN
 	RETURN;
 END_IF
 
@@ -163,5 +152,16 @@ END_VAR
         <ST><![CDATA[TryResolveAsStructuredDatatype := FALSE;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="TypeName" Id="{a928e3c2-d6de-016d-0e1d-924aab8c6d2b}">
+      <Declaration><![CDATA[PROPERTY PUBLIC ABSTRACT TypeName : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{f31a8dc8-fb8a-0351-1573-92734b6ab865}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
   </POU>
 </TcPlcObject>

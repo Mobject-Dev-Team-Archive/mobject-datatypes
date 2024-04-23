@@ -9,7 +9,7 @@ END_VAR
       <ST><![CDATA[TestAddress();
 TestClearReference();
 TestClone();
-TestIecTypeReturnsExpected();
+TestTypeNameReturnsExpected();
 TestMakeReferenceToFollowsReference();
 TestMakeReferenceToUpdatesReference();
 TestSize();
@@ -109,29 +109,6 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestIecTypeReturnsExpected" Id="{770f8363-3fb1-09ee-36e9-78fee07f030a}">
-      <Declaration><![CDATA[METHOD PUBLIC TestIecTypeReturnsExpected
-VAR
-    _type : _STRING('');
-    expected : STRING := 'STRING';
-    actual : STRING;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[TEST('TestIecTypeReturnsExpected');
-
-actual := _type.Name;
-
-AssertEquals_STRING(
-    Expected := expected,
-    Actual := actual,
-    Message := 'Type did not return correct iec type.'
-);
-
-TEST_FINISHED();
-]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="TestMakeReferenceToFollowsReference" Id="{015ccb70-62c2-0f31-2aa1-fe22ba483b75}">
       <Declaration><![CDATA[METHOD PUBLIC TestMakeReferenceToFollowsReference
 VAR
@@ -191,7 +168,7 @@ TEST_FINISHED();
 VAR
     _type : _STRING('');
     serializer : JsonSerializer;
-    expected : STRING := '{"name":"STRING"}';
+    expected : STRING := '{"typeName":"STRING"}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
@@ -339,6 +316,29 @@ AssertEquals_STRING(
     Expected := expected,
     Actual := actual,
     Message := 'Value did not update target'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestTypeNameReturnsExpected" Id="{770f8363-3fb1-09ee-36e9-78fee07f030a}">
+      <Declaration><![CDATA[METHOD PUBLIC TestTypeNameReturnsExpected
+VAR
+    _type : _STRING('');
+    expected : STRING := 'STRING';
+    actual : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestTypeNameReturnsExpected');
+
+actual := _type.TypeName;
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Type did not return correct iec type.'
 );
 
 TEST_FINISHED();

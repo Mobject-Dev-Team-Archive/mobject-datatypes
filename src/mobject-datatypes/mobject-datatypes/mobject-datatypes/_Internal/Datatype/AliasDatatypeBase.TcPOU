@@ -34,17 +34,6 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Property Name="Name" Id="{5f086b0e-0db7-04c0-1b39-f1e395459705}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Name : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{67d55b3b-3b4d-03a8-3932-8e8f14bf44a4}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[Name := 'ALIAS';]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Method Name="OnSerializeTypeWith" Id="{f846069a-b6a1-0199-3b45-e4c9efc89bac}" FolderPath="Protected\">
       <Declaration><![CDATA[METHOD PROTECTED OnSerializeTypeWith
 VAR_INPUT
@@ -86,5 +75,16 @@ END_VAR
 TryResolveAsAliasDatatype := TRUE;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="TypeName" Id="{5f086b0e-0db7-04c0-1b39-f1e395459705}">
+      <Declaration><![CDATA[PROPERTY PUBLIC TypeName : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{67d55b3b-3b4d-03a8-3932-8e8f14bf44a4}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TypeName := 'ALIAS';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
   </POU>
 </TcPlcObject>

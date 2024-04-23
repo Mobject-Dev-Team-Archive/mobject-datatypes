@@ -9,8 +9,8 @@ END_VAR
       <ST><![CDATA[TestAddress();
 TestClearReference();
 TestClone();
+TestTypeNameReturnsExpected();
 TestIdentifierReturnsExpected();
-TestIecTypeReturnsExpected();
 TestMakeReferenceToFollowsReference();
 TestMakeReferenceToUpdatesReference();
 TestSize();
@@ -132,29 +132,6 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestIecTypeReturnsExpected" Id="{e4607604-b109-0a28-2dc4-95d9b03e4f5b}">
-      <Declaration><![CDATA[METHOD PUBLIC TestIecTypeReturnsExpected
-VAR
-    _type : _HRESULT(S_OK);
-    expected : STRING := 'ALIAS';
-    actual : STRING;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[TEST('TestIecTypeReturnsExpected');
-
-actual := _type.Name;
-
-AssertEquals_STRING(
-    Expected := expected,
-    Actual := actual,
-    Message := 'Type did not return correct iec type.'
-);
-
-TEST_FINISHED();
-]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="TestMakeReferenceToFollowsReference" Id="{a76a35bb-e4a0-0fe6-3ede-dd228e426a2d}">
       <Declaration><![CDATA[METHOD PUBLIC TestMakeReferenceToFollowsReference
 VAR
@@ -214,7 +191,7 @@ TEST_FINISHED();
 VAR
     _type : _HRESULT(S_OK);
     serializer : JsonSerializer;
-    expected : STRING(500) := '{"name":"ALIAS","identifier":"HRESULT","baseDatatype":{"name":"DINT","lowerBound":-2147483648,"upperBound":2147483647,"isSigned":true,"isFloat":false}}';
+    expected : STRING(500) := '{"typeName":"ALIAS","identifier":"HRESULT","baseDatatype":{"typeName":"DINT","minValue":-2147483648,"maxValue":2147483647,"isSigned":true,"isFloat":false}}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
@@ -362,6 +339,29 @@ AssertEquals(
     Expected := expected,
     Actual := actual,
     Message := 'Value did not update target'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestTypeNameReturnsExpected" Id="{e4607604-b109-0a28-2dc4-95d9b03e4f5b}">
+      <Declaration><![CDATA[METHOD PUBLIC TestTypeNameReturnsExpected
+VAR
+    _type : _HRESULT(S_OK);
+    expected : STRING := 'ALIAS';
+    actual : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestTypeNameReturnsExpected');
+
+actual := _type.TypeName;
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Type did not return correct iec type.'
 );
 
 TEST_FINISHED();

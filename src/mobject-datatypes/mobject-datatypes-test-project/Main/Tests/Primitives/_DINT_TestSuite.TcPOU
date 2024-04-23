@@ -9,7 +9,8 @@ END_VAR
       <ST><![CDATA[TestAddress();
 TestClearReference();
 TestClone();
-TestIecTypeReturnsExpected();
+TestTypeNameReturnsExpected();
+TestIsFloat();
 TestIsSigned();
 TestMakeReferenceToFollowsReference();
 TestMakeReferenceToUpdatesReference();
@@ -110,23 +111,18 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestIecTypeReturnsExpected" Id="{ea16e37d-3534-064f-13f3-9ea38be0e1fd}">
-      <Declaration><![CDATA[METHOD PUBLIC TestIecTypeReturnsExpected
+    <Method Name="TestIsFloat" Id="{beb0b901-130c-4bff-bf54-ac0510b65bbf}">
+      <Declaration><![CDATA[METHOD PUBLIC TestIsFloat
 VAR
     _type : _DINT(0);
-    expected : STRING := 'DINT';
-    actual : STRING;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[TEST('TestIecTypeReturnsExpected');
+        <ST><![CDATA[TEST('TestIsFloat');
 
-actual := _type.Name;
-
-AssertEquals_STRING(
-    Expected := expected,
-    Actual := actual,
-    Message := 'Type did not return correct iec type.'
+AssertFalse(
+	Condition := _type.IsFloat,
+    Message := 'Type did not correctly identify itself as being unsigned'
 );
 
 TEST_FINISHED();
@@ -137,8 +133,6 @@ TEST_FINISHED();
       <Declaration><![CDATA[METHOD PUBLIC TestIsSigned
 VAR
     _type : _DINT(0);
-    expected : STRING := 'BOOL';
-    actual : STRING;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -212,7 +206,7 @@ TEST_FINISHED();
 VAR
     _type : _DINT(0);
     serializer : JsonSerializer;
-    expected : STRING(500) := '{"name":"DINT","lowerBound":-2147483648,"upperBound":2147483647,"isSigned":true,"isFloat":false}';
+    expected : STRING(500) := '{"typeName":"DINT","minValue":-2147483648,"maxValue":2147483647,"isSigned":true,"isFloat":false}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
@@ -360,6 +354,29 @@ AssertEquals(
     Expected := expected,
     Actual := actual,
     Message := 'Value did not update target'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestTypeNameReturnsExpected" Id="{ea16e37d-3534-064f-13f3-9ea38be0e1fd}">
+      <Declaration><![CDATA[METHOD PUBLIC TestTypeNameReturnsExpected
+VAR
+    _type : _DINT(0);
+    expected : STRING := 'DINT';
+    actual : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestTypeNameReturnsExpected');
+
+actual := _type.TypeName;
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Type did not return correct iec type.'
 );
 
 TEST_FINISHED();

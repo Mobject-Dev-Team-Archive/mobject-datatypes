@@ -43,17 +43,6 @@ END_VAR
         <ST><![CDATA[GetMemberEnumerator := membersHost.GetMemberEnumerator();]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Name" Id="{1494bba3-e69c-0960-2bc5-2749401d0e3d}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Name : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{8b4ea1bd-9049-02d5-270b-7a023e8fff6f}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[Name := 'STRUCT';]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Method Name="OnSerializeTypeWith" Id="{34e88330-fcb3-03e6-144c-9de9f8513d63}" FolderPath="Protected\">
       <Declaration><![CDATA[METHOD PROTECTED OnSerializeTypeWith
 VAR_INPUT
@@ -135,5 +124,16 @@ END_VAR
 TryResolveAsStructuredDatatype := TRUE;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="TypeName" Id="{1494bba3-e69c-0960-2bc5-2749401d0e3d}">
+      <Declaration><![CDATA[PROPERTY PUBLIC TypeName : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{8b4ea1bd-9049-02d5-270b-7a023e8fff6f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TypeName := 'STRUCT';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
   </POU>
 </TcPlcObject>

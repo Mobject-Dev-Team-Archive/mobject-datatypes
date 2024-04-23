@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.3.0-alpha
+
+- updated Name to typeName on datatype base and serialization
+- LREAL and REAL are now Numeric
+- updated to support the new mobject-constants-datatype-limits v1.0.0
+- Ubound and Lbound now MinValue and MaxValue in both class and serialization
+
 ## v0.2.0-alpha
 
 - mobject-types change name to mobject-datatypes

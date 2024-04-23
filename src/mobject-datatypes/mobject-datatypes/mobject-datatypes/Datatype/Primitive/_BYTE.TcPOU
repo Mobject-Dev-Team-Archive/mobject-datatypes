@@ -81,17 +81,6 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Property Name="LowerBound" Id="{f2a63b20-1f5c-0c7a-2c87-2d6d4ad85dcd}">
-      <Declaration><![CDATA[PROPERTY PUBLIC LowerBound : BYTE]]></Declaration>
-      <Get Name="Get" Id="{c9360b68-0054-0210-2355-fe378193bacf}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[LowerBound := DatatypeLimits.BYTE_LOWER_LIMIT;]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Method Name="MakeReferenceTo" Id="{5aefd03a-0fff-0f66-211c-d5e2c4bb68cb}">
       <Declaration><![CDATA[METHOD PUBLIC MakeReferenceTo
 VAR_INPUT
@@ -102,35 +91,46 @@ END_VAR
         <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Name" Id="{5e1fb4b4-8820-090a-3c05-c86644a4c87e}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Name : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{6d3956ea-5b00-0900-2472-25cbe057e6b2}">
+    <Property Name="MaxValue" Id="{05dd455b-32d2-0788-2d0d-89d2aa4a3511}">
+      <Declaration><![CDATA[PROPERTY PUBLIC MaxValue : BYTE]]></Declaration>
+      <Get Name="Get" Id="{fc94c668-48e5-0e98-32ac-8b89f4120daf}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Name := 'BYTE';]]></ST>
+          <ST><![CDATA[MaxValue := DatatypeLimits.BYTE_MAX_VALUE;]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Method Name="SerializeLowerbound" Id="{29d35e7f-ffb1-029f-1ba1-a688753b6f5d}" FolderPath="Protected\">
-      <Declaration><![CDATA[METHOD PROTECTED SerializeLowerbound
+    <Property Name="MinValue" Id="{f2a63b20-1f5c-0c7a-2c87-2d6d4ad85dcd}">
+      <Declaration><![CDATA[PROPERTY PUBLIC MinValue : BYTE]]></Declaration>
+      <Get Name="Get" Id="{c9360b68-0054-0210-2355-fe378193bacf}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[MinValue := DatatypeLimits.BYTE_MIN_VALUE;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="SerializeMaxValue" Id="{692e460f-5f1f-023f-2111-d3903c907ce8}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED SerializeMaxValue
 VAR_INPUT
 	Serializer : I_Serializer;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Serializer.AddByte(Lowerbound);]]></ST>
+        <ST><![CDATA[Serializer.AddByte(MaxValue);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SerializeUpperbound" Id="{692e460f-5f1f-023f-2111-d3903c907ce8}" FolderPath="Protected\">
-      <Declaration><![CDATA[METHOD PROTECTED SerializeUpperbound
+    <Method Name="SerializeMinValue" Id="{29d35e7f-ffb1-029f-1ba1-a688753b6f5d}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED SerializeMinValue
 VAR_INPUT
 	Serializer : I_Serializer;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Serializer.AddByte(Upperbound);]]></ST>
+        <ST><![CDATA[Serializer.AddByte(MinValue);]]></ST>
       </Implementation>
     </Method>
     <Method Name="SerializeWith" Id="{24f8821d-1f88-0d56-1993-dbf051c1d566}">
@@ -172,7 +172,7 @@ VAR
 	pTargetData : POINTER TO BYTE;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT (Target.Name = Name) THEN
+        <ST><![CDATA[IF NOT (Target.TypeName = TypeName) THEN
 	RETURN;
 END_IF
 
@@ -181,14 +181,14 @@ activeData REF= pTargetData^;
 TryMakeReferenceTo := TRUE;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="UpperBound" Id="{05dd455b-32d2-0788-2d0d-89d2aa4a3511}">
-      <Declaration><![CDATA[PROPERTY PUBLIC UpperBound : BYTE]]></Declaration>
-      <Get Name="Get" Id="{fc94c668-48e5-0e98-32ac-8b89f4120daf}">
+    <Property Name="TypeName" Id="{5e1fb4b4-8820-090a-3c05-c86644a4c87e}">
+      <Declaration><![CDATA[PROPERTY PUBLIC TypeName : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{6d3956ea-5b00-0900-2472-25cbe057e6b2}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[UpperBound := DatatypeLimits.BYTE_UPPER_LIMIT;]]></ST>
+          <ST><![CDATA[TypeName := 'BYTE';]]></ST>
         </Implementation>
       </Get>
     </Property>

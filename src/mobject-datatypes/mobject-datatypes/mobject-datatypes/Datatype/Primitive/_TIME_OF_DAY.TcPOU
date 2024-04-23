@@ -68,17 +68,6 @@ END_VAR
         <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Name" Id="{df89fd02-abc2-023d-29d4-0197a773c90a}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Name : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{f75f0d69-8b55-0f23-28a0-425f2700783a}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[Name := 'TIME_OF_DAY';]]></ST>
-        </Implementation>
-      </Get>
-    </Property>
     <Method Name="SerializeWith" Id="{704258f6-87eb-0ab3-07c4-104ee2283e18}">
       <Declaration><![CDATA[METHOD PUBLIC SerializeWith
 VAR_INPUT
@@ -118,7 +107,7 @@ VAR
 	pTargetData : POINTER TO TIME_OF_DAY;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT (Target.Name = Name) THEN
+        <ST><![CDATA[IF NOT (Target.TypeName = TypeName) THEN
 	RETURN;
 END_IF
 
@@ -127,6 +116,17 @@ activeData REF= pTargetData^;
 TryMakeReferenceTo := TRUE;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="TypeName" Id="{df89fd02-abc2-023d-29d4-0197a773c90a}">
+      <Declaration><![CDATA[PROPERTY PUBLIC TypeName : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{f75f0d69-8b55-0f23-28a0-425f2700783a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TypeName := 'TIME_OF_DAY';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="Value" Id="{60d8e0d8-8150-032e-240f-cd363f409430}">
       <Declaration><![CDATA[PROPERTY PUBLIC Value : TIME_OF_DAY]]></Declaration>
       <Get Name="Get" Id="{6c04b15d-2448-0530-175a-0c6bc9b7cc91}">

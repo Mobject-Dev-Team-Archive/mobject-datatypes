@@ -9,7 +9,8 @@ END_VAR
       <ST><![CDATA[TestAddress();
 TestClearReference();
 TestClone();
-TestIecTypeReturnsExpected();
+TestTypeNameReturnsExpected();
+TestIdentifierReturnsExpected();
 TestMakeReferenceToFollowsReference();
 TestMakeReferenceToUpdatesReference();
 TestSize();
@@ -132,29 +133,6 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestIecTypeReturnsExpected" Id="{1d520aa2-2d4d-054f-2963-1aaff1942084}">
-      <Declaration><![CDATA[METHOD PUBLIC TestIecTypeReturnsExpected
-VAR
-    _type : _E_TcEventClass(E_TcEventClass.TCEVENTCLASS_NONE);;
-    expected : STRING := 'ENUM';
-    actual : STRING;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[TEST('TestIecTypeReturnsExpected');
-
-actual := _type.Name;
-
-AssertEquals_STRING(
-    Expected := expected,
-    Actual := actual,
-    Message := 'Type did not return correct iec type.'
-);
-
-TEST_FINISHED();
-]]></ST>
-      </Implementation>
-    </Method>
     <Method Name="TestMakeReferenceToFollowsReference" Id="{29363920-0e4d-0824-26f8-1f10fe3b5f8f}">
       <Declaration><![CDATA[METHOD PUBLIC TestMakeReferenceToFollowsReference
 VAR
@@ -214,7 +192,7 @@ TEST_FINISHED();
 VAR
     _type : _E_TcEventClass(E_TcEventClass.TCEVENTCLASS_NONE);
     serializer : JsonSerializer;
-    expected : STRING(500) := '{"name":"ENUM","identifier":"E_TcEventClass","enumerations":["TCEVENTCLASS_ALARM","TCEVENTCLASS_HINT","TCEVENTCLASS_INSTRUCTION","TCEVENTCLASS_MAINTENANCE","TCEVENTCLASS_MESSAGE","TCEVENTCLASS_NONE","TCEVENTCLASS_PARAMERROR","TCEVENTCLASS_STATEINFO","TCEVENTCLASS_WARNING"],"baseType":{"name":"UINT","lowerBound":0,"upperBound":65535,"isSigned":false,"isFloat":false}}';
+    expected : STRING(500) := '{"typeName":"ENUM","identifier":"E_TcEventClass","enumerations":["TCEVENTCLASS_ALARM","TCEVENTCLASS_HINT","TCEVENTCLASS_INSTRUCTION","TCEVENTCLASS_MAINTENANCE","TCEVENTCLASS_MESSAGE","TCEVENTCLASS_NONE","TCEVENTCLASS_PARAMERROR","TCEVENTCLASS_STATEINFO","TCEVENTCLASS_WARNING"],"baseType":{"typeName":"UINT","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false}}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
@@ -363,6 +341,29 @@ AssertEquals(
     Expected := expected,
     Actual := actual,
     Message := 'Value did not update target'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestTypeNameReturnsExpected" Id="{1d520aa2-2d4d-054f-2963-1aaff1942084}">
+      <Declaration><![CDATA[METHOD PUBLIC TestTypeNameReturnsExpected
+VAR
+    _type : _E_TcEventClass(E_TcEventClass.TCEVENTCLASS_NONE);;
+    expected : STRING := 'ENUM';
+    actual : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestTypeNameReturnsExpected');
+
+actual := _type.TypeName;
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Type did not return correct iec type.'
 );
 
 TEST_FINISHED();

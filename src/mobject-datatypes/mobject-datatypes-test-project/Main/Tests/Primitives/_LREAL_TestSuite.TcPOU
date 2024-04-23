@@ -9,7 +9,8 @@ END_VAR
       <ST><![CDATA[TestAddress();
 TestClearReference();
 TestClone();
-TestIecTypeReturnsExpected();
+TestTypeNameReturnsExpected();
+TestIsFloat();
 TestIsSigned();
 TestMakeReferenceToFollowsReference();
 TestMakeReferenceToUpdatesReference();
@@ -111,23 +112,18 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestIecTypeReturnsExpected" Id="{860f786c-d47a-004d-3e7f-c32baeda11f9}">
-      <Declaration><![CDATA[METHOD PUBLIC TestIecTypeReturnsExpected
+    <Method Name="TestIsFloat" Id="{14157f0f-865c-4a9b-ad52-e1c7b8a43568}">
+      <Declaration><![CDATA[METHOD PUBLIC TestIsFloat
 VAR
-    _type : _LREAL(0.0);
-    expected : STRING := 'LREAL';
-    actual : STRING;
+    _type : _LREAL(0);
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[TEST('TestIecTypeReturnsExpected');
+        <ST><![CDATA[TEST('TestIsFloat');
 
-actual := _type.Name;
-
-AssertEquals_STRING(
-    Expected := expected,
-    Actual := actual,
-    Message := 'Type did not return correct iec type.'
+AssertTrue(
+	Condition := _type.IsFloat,
+    Message := 'Type did not correctly identify itself as being unsigned'
 );
 
 TEST_FINISHED();
@@ -138,8 +134,6 @@ TEST_FINISHED();
       <Declaration><![CDATA[METHOD PUBLIC TestIsSigned
 VAR
     _type : _LREAL(0);
-    expected : STRING := 'BOOL';
-    actual : STRING;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -215,7 +209,7 @@ TEST_FINISHED();
 VAR
     _type : _LREAL(0.0);
     serializer : JsonSerializer;
-    expected : STRING(500) := '{"name":"LREAL"}';
+    expected : STRING(500) := '{"typeName":"LREAL","minValue":-1.7976931348623157e308,"maxValue":1.7976931348623157e308,"isSigned":true,"isFloat":true}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
@@ -366,6 +360,29 @@ AssertEquals_LREAL(
     Actual := actual,
     Delta := LREAL#0.001,
     Message := 'Value did not update target'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestTypeNameReturnsExpected" Id="{860f786c-d47a-004d-3e7f-c32baeda11f9}">
+      <Declaration><![CDATA[METHOD PUBLIC TestTypeNameReturnsExpected
+VAR
+    _type : _LREAL(0.0);
+    expected : STRING := 'LREAL';
+    actual : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestTypeNameReturnsExpected');
+
+actual := _type.TypeName;
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Type did not return correct iec type.'
 );
 
 TEST_FINISHED();

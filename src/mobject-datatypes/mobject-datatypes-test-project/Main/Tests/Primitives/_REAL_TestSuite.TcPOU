@@ -9,7 +9,8 @@ END_VAR
       <ST><![CDATA[TestAddress();
 TestClearReference();
 TestClone();
-TestIecTypeReturnsExpected();
+TestTypeNameReturnsExpected();
+TestIsFloat();
 TestIsSigned();
 TestMakeReferenceToFollowsReference();
 TestMakeReferenceToUpdatesReference();
@@ -111,23 +112,18 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestIecTypeReturnsExpected" Id="{ebaecb80-18bd-0fc1-1124-d7ffd7983c9c}">
-      <Declaration><![CDATA[METHOD PUBLIC TestIecTypeReturnsExpected
+    <Method Name="TestIsFloat" Id="{55b7a347-680a-4282-9f0e-b6faf433ba3d}">
+      <Declaration><![CDATA[METHOD PUBLIC TestIsFloat
 VAR
-    _type : _REAL(0.0);
-    expected : STRING := 'REAL';
-    actual : STRING;
+    _type : _REAL(0);
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[TEST('TestIecTypeReturnsExpected');
+        <ST><![CDATA[TEST('TestIsFloat');
 
-actual := _type.Name;
-
-AssertEquals_STRING(
-    Expected := expected,
-    Actual := actual,
-    Message := 'Type did not return correct iec type.'
+AssertTrue(
+	Condition := _type.IsFloat,
+    Message := 'Type did not correctly identify itself as being unsigned'
 );
 
 TEST_FINISHED();
@@ -138,8 +134,6 @@ TEST_FINISHED();
       <Declaration><![CDATA[METHOD PUBLIC TestIsSigned
 VAR
     _type : _REAL(0);
-    expected : STRING := 'BOOL';
-    actual : STRING;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -215,7 +209,7 @@ TEST_FINISHED();
 VAR
     _type : _REAL(0.0);
     serializer : JsonSerializer;
-    expected : STRING(500) := '{"name":"REAL"}';
+    expected : STRING(500) := '{"typeName":"REAL","minValue":-3.4028230607370967e38,"maxValue":3.4028230607370967e38,"isSigned":true,"isFloat":true}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
@@ -241,7 +235,7 @@ TEST_FINISHED();
 VAR
     _type : _REAL(123.4);
     serializer : JsonSerializer;
-    expected : STRING := '123.40000152'; // Expected value due to the nature of floating point values defined by IEEE754.
+    expected : STRING := '123.4000015258789'; // Expected value due to the nature of floating point values defined by IEEE754.
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
@@ -366,6 +360,29 @@ AssertEquals_REAL(
     Actual := actual,
     Delta := REAL#0.001,
     Message := 'Value did not update target'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestTypeNameReturnsExpected" Id="{ebaecb80-18bd-0fc1-1124-d7ffd7983c9c}">
+      <Declaration><![CDATA[METHOD PUBLIC TestTypeNameReturnsExpected
+VAR
+    _type : _REAL(0.0);
+    expected : STRING := 'REAL';
+    actual : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestTypeNameReturnsExpected');
+
+actual := _type.TypeName;
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Type did not return correct iec type.'
 );
 
 TEST_FINISHED();

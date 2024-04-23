@@ -4,7 +4,7 @@
     <Declaration><![CDATA[{attribute 'linkalways'} 
 {attribute 'no_explicit_call' := 'This FB is a CLASS and must be accessed using methods or properties'}
 {attribute 'enable_dynamic_creation'}
-FUNCTION_BLOCK _REAL EXTENDS DatatypeBase
+FUNCTION_BLOCK _REAL EXTENDS NumericDatatypeBase
 VAR
 	localData : REAL;
 	activeData : REFERENCE TO REAL REF= localData;
@@ -14,6 +14,7 @@ END_VAR
       <ST><![CDATA[]]></ST>
     </Implementation>
     <Folder Name="Constructor" Id="{3528773c-d7ad-0b0d-18f2-81143d5de4af}" />
+    <Folder Name="Protected" Id="{31a44128-d401-4e7f-b5e3-9a64c5cd7486}" />
     <Property Name="Address" Id="{d4c0265e-5f37-07e2-1405-56aad7cb6453}">
       <Declaration><![CDATA[PROPERTY PUBLIC Address : PVOID]]></Declaration>
       <Get Name="Get" Id="{374f109e-e794-030d-0f31-e1b3dba138c9}">
@@ -90,17 +91,48 @@ END_VAR
         <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Name" Id="{c122af64-7bc0-02cd-1d9e-a1391e87f892}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Name : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{158e4bad-a707-077e-37a2-700162417ee3}">
+    <Property Name="MaxValue" Id="{75b7bc31-5257-49c1-b2f6-9a349776682d}">
+      <Declaration><![CDATA[PROPERTY PUBLIC MaxValue : REAL]]></Declaration>
+      <Get Name="Get" Id="{49a3a31c-5fbf-4a51-9669-c1feec3fac24}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Name := 'REAL';]]></ST>
+          <ST><![CDATA[MaxValue :=  DatatypeLimits.REAL_MAX_VALUE;]]></ST>
         </Implementation>
       </Get>
     </Property>
+    <Property Name="MinValue" Id="{7f05c9cc-45eb-40b5-a46b-d0ea831ecedf}">
+      <Declaration><![CDATA[PROPERTY PUBLIC MinValue : REAL]]></Declaration>
+      <Get Name="Get" Id="{eacb0231-3432-4bdc-a8f5-938266e9d511}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[MinValue := DatatypeLimits.REAL_MIN_VALUE;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="SerializeMaxValue" Id="{2323a65c-f9de-479d-81c6-7933b1a717e2}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED SerializeMaxValue
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Serializer.AddReal(MaxValue);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SerializeMinValue" Id="{87ab9796-98b9-434a-bda9-09983c339855}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED SerializeMinValue
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Serializer.AddReal(MinValue);]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="SerializeWith" Id="{5a97850a-1405-02bb-38e6-f44f04b9329e}">
       <Declaration><![CDATA[METHOD PUBLIC SerializeWith
 VAR_INPUT
@@ -140,7 +172,7 @@ VAR
 	pTargetData : POINTER TO REAL;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[IF NOT (Target.Name = Name) THEN
+        <ST><![CDATA[IF NOT (Target.TypeName = TypeName) THEN
 	RETURN;
 END_IF
 
@@ -149,6 +181,17 @@ activeData REF= pTargetData^;
 TryMakeReferenceTo := TRUE;]]></ST>
       </Implementation>
     </Method>
+    <Property Name="TypeName" Id="{c122af64-7bc0-02cd-1d9e-a1391e87f892}">
+      <Declaration><![CDATA[PROPERTY PUBLIC TypeName : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{158e4bad-a707-077e-37a2-700162417ee3}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TypeName := 'REAL';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Property Name="Value" Id="{e0c77763-bd5b-0666-2535-9cf059d74e79}">
       <Declaration><![CDATA[PROPERTY PUBLIC Value : REAL]]></Declaration>
       <Get Name="Get" Id="{9836ec7c-9a58-01f9-3cf3-118e937e92dc}">

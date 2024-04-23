@@ -6,14 +6,15 @@ VAR
 	//alias
     _FLOAT_TestSuite : _FLOAT_TestSuite;
 	_HRESULT_TestSuite : _HRESULT_TestSuite;
-	
+    
 	// primitive
 	_BOOL_TestSuite : _BOOL_TestSuite;
     _BYTE_TestSuite : _BYTE_TestSuite;
+
     _WORD_TestSuite : _WORD_TestSuite;
     _DWORD_TestSuite : _DWORD_TestSuite;
     _LWORD_TestSuite : _LWORD_TestSuite;
-    
+
     _SINT_TestSuite : _SINT_TestSuite;
     _INT_TestSuite : _INT_TestSuite;
     _DINT_TestSuite : _DINT_TestSuite;
@@ -26,7 +27,7 @@ VAR
     
     _REAL_TestSuite : _REAL_TestSuite;
     _LREAL_TestSuite : _LREAL_TestSuite;
-    
+
     //_TIME_TestSuite : _TIME_TestSuite;
     //_LTIME_TestSuite : _LTIME_TestSuite;
     _TOD_TestSuite : _TOD_TestSuite;
