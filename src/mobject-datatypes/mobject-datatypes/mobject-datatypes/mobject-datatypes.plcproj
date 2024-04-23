@@ -18,7 +18,7 @@
     <LibraryReferences>{014c124a-5c47-4d65-b651-cb65eeed8af3}</LibraryReferences>
     <Released>false</Released>
     <Title>mobject-datatypes</Title>
-    <ProjectVersion>0.3.0</ProjectVersion>
+    <ProjectVersion>0.4.0</ProjectVersion>
     <Company>mobject</Company>
     <DefaultNamespace>mobject-datatypes</DefaultNamespace>
     <Placeholder>mobject-datatypes</Placeholder>
@@ -37,35 +37,21 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Datatype" />
-    <Folder Include="DatatypePacks" />
     <Folder Include="Datatypes" />
     <Folder Include="Datatypes\Base" />
     <Folder Include="Datatypes\Events" />
-    <Folder Include="Datatype\Alias" />
-    <Folder Include="Datatype\Enums" />
-    <Folder Include="Datatype\Primitive" />
-    <Folder Include="Datatype\Structs" />
-    <Folder Include="Interfaces" />
+    <Folder Include="Datatypes\Interface" />
+    <Folder Include="DatatypeVisitor" />
+    <Folder Include="Datatype\Interface" />
+    <Folder Include="DatatypePack" />
     <Folder Include="_Internal" />
-    <Folder Include="_Internal\Datatype" />
-    <Folder Include="_Internal\DatatypeVisitor" />
     <Folder Include="_Internal\Errors" />
     <Folder Include="_Internal\MembersHost" />
+    <Folder Include="_Internal\Datatype" />
+    <Folder Include="_Internal\Events" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatatypePacks\PlcBasicDatatypePack.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Datatypes\Base\Datatypes.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Datatypes\Events\AliasDatatypeAddedEvent.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Datatypes\Events\DatatypeAddedEvent.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Datatypes\Events\EnumDatatypeAddedEvent.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Datatypes\Events\I_AliasDatatypeAddedEvent.TcIO">
@@ -80,124 +66,64 @@
     <Compile Include="Datatypes\Events\I_StructuredDatatypeAddedEvent.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatypes\Events\StructuredDatatypeAddedEvent.TcPOU">
+    <Compile Include="Datatypes\Interface\I_Datatypes.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatype\Alias\_FLOAT.TcPOU">
+    <Compile Include="DatatypeVisitor\I_DatatypeVisitor.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatype\Alias\_HRESULT.TcPOU">
+    <Compile Include="Datatype\AliasDatatypeBase.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatype\Enums\_E_TcEventClass.TcPOU">
+    <Compile Include="Datatype\EnumDatatypeBase.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatype\Primitive\_BOOL.TcPOU">
+    <Compile Include="Datatype\Interface\I_AliasDatatype.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatype\Primitive\_BYTE.TcPOU">
+    <Compile Include="Datatype\Interface\I_Datatype.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatype\Primitive\_DINT.TcPOU">
+    <Compile Include="Datatype\Interface\I_EnumDatatype.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatype\Primitive\_DT.TcPOU">
+    <Compile Include="Datatype\Interface\I_NumericDatatype.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatype\Primitive\_DWORD.TcPOU">
+    <Compile Include="Datatype\Interface\I_StructuredDatatype.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatype\Primitive\_INT.TcPOU">
+    <Compile Include="Datatype\Interface\I_UserDefinedDatatype.TcIO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatype\Primitive\_LINT.TcPOU">
+    <Compile Include="Datatype\NumericDatatypeBase.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatype\Primitive\_LREAL.TcPOU">
+    <Compile Include="Datatype\StructuredDatatypeBase.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatype\Primitive\_LWORD.TcPOU">
+    <Compile Include="Datatype\UserDefinedDatatypeBase.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Datatype\Primitive\_REAL.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Datatype\Primitive\_SINT.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Datatype\Primitive\_STRING.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Datatype\Primitive\_TIME_OF_DAY.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Datatype\Primitive\_TOD.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Datatype\Primitive\_UDINT.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Datatype\Primitive\_UINT.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Datatype\Primitive\_ULINT.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Datatype\Primitive\_USINT.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Datatype\Primitive\_WORD.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Datatype\Structs\_TIMESTRUCT.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Interfaces\I_AliasDatatype.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Interfaces\I_Datatype.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Interfaces\I_DatatypePack.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Interfaces\I_Datatypes.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Interfaces\I_EnumDatatype.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Interfaces\I_NumericDatatype.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Interfaces\I_StructuredDatatype.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Interfaces\I_UserDefinedDatatype.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="_Internal\DatatypeVisitor\I_DatatypeVisitor.TcIO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="_Internal\Datatype\AliasDatatypeBase.TcPOU">
+    <Compile Include="DatatypePack\I_DatatypePack.TcIO">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="_Internal\Datatype\DatatypeBase.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Internal\Datatype\EnumDatatypeBase.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="_Internal\Datatype\NumericDatatypeBase.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="_Internal\Datatype\StructuredDatatypeBase.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="_Internal\Datatype\UserDefinedDatatypeBase.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="_Internal\Errors\UnknownEnumerationError.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\Events\AliasDatatypeAddedEvent.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\Events\DatatypeAddedEvent.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\Events\EnumDatatypeAddedEvent.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\Events\StructuredDatatypeAddedEvent.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="_Internal\MembersHost\I_HostMembers.TcIO">
@@ -210,9 +136,6 @@
   <ItemGroup>
     <LibraryReference Include="mobject-collections,1.1.0,mobject">
       <Namespace>mobject_collections</Namespace>
-    </LibraryReference>
-    <LibraryReference Include="mobject-constants-datatype-limits,1.0.0,mobject">
-      <Namespace>mobject_constants_datatype_limits</Namespace>
     </LibraryReference>
     <LibraryReference Include="mobject-deserialization,0.1.0,mobject">
       <Namespace>mobject_deserialization</Namespace>
