@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="_E_TcEventClass" Id="{b166a1bc-6634-0515-0850-5ed378ce2ee1}" SpecialFunc="None">
+  <POU Name="MockEnumDatatype_E_TcEventClass" Id="{5be12e34-c0d1-4973-8284-039090e83858}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute 'linkalways'} 
 {attribute 'no_explicit_call' := 'This FB is a CLASS and must be accessed using methods or properties'}
 {attribute 'enable_dynamic_creation'}
-FUNCTION_BLOCK _E_TcEventClass EXTENDS EnumDatatypeBase
+FUNCTION_BLOCK MockEnumDatatype_E_TcEventClass EXTENDS EnumDatatypeBase
 VAR
 	localData : E_TcEventClass;
 	activeData : REFERENCE TO E_TcEventClass;
@@ -14,10 +14,10 @@ END_VAR
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Folder Name="Constructor" Id="{9840b35c-f7f7-0913-2e1a-14652288637d}" />
-    <Folder Name="Private" Id="{1cc1c85f-6248-0b2c-228e-1cc7b0f1cf6f}" />
-    <Folder Name="Protected" Id="{fa7d5b03-cd5a-0c6c-33e7-0fac81043777}" />
-    <Method Name="AddLocalEnumeration" Id="{b8687235-911f-095a-3076-d5c1ba582fab}" FolderPath="Private\">
+    <Folder Name="Constructor" Id="{72c73cd4-5112-4575-a4ce-4926caae75c4}" />
+    <Folder Name="Private" Id="{f64647d7-c4ad-474a-a85a-418458d7d9d6}" />
+    <Folder Name="Protected" Id="{10fad48b-6bbf-400a-b933-52ef692221ce}" />
+    <Method Name="AddLocalEnumeration" Id="{52effdbd-37fa-453c-baa2-8882527e3912}" FolderPath="Private\">
       <Declaration><![CDATA[METHOD PRIVATE AddLocalEnumeration
 VAR_INPUT
 	Enumeration : T_MAXSTRING;
@@ -27,9 +27,9 @@ END_VAR]]></Declaration>
         <ST><![CDATA[AddEnumeration(Enumeration, Value);]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Address" Id="{36a28e97-1445-0846-121c-e46221a922b5}">
+    <Property Name="Address" Id="{dc25011f-b2a0-4420-98c8-b921c98f340c}">
       <Declaration><![CDATA[PROPERTY PUBLIC Address : PVOID]]></Declaration>
-      <Get Name="Get" Id="{8ce5d043-0618-0fe3-1455-8c576dfcaea9}">
+      <Get Name="Get" Id="{66625fcb-a0fd-4385-9e81-d11485dab810}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
@@ -38,7 +38,7 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="ClearReference" Id="{9193ffbd-aea6-090c-3ed7-6224dd2f5f6f}">
+    <Method Name="ClearReference" Id="{7b147035-0843-456a-b403-3f67350949d6}">
       <Declaration><![CDATA[METHOD PUBLIC ClearReference
 VAR_INPUT
 END_VAR
@@ -48,18 +48,18 @@ END_VAR
 SetBaseDatatypeReference();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Clone" Id="{9d536e67-a053-09fc-1b40-b0ff3e1f50ee}">
+    <Method Name="Clone" Id="{77d4e1ef-06b6-459a-9194-edbcd6394657}">
       <Declaration><![CDATA[METHOD PUBLIC Clone : I_Datatype
 VAR
-    pClone : POINTER TO _E_TcEventClass;
+    pClone : POINTER TO MockEnumDatatype_E_TcEventClass;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[pClone := __NEW(_E_TcEventClass(InitialValue := Value));
+        <ST><![CDATA[pClone := __NEW(MockEnumDatatype_E_TcEventClass(InitialValue := Value));
 Clone := pClone^;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="FB_init" Id="{647e8b0c-d9f7-0de1-1e26-66074a371660}" FolderPath="Constructor\">
+    <Method Name="FB_init" Id="{8ef90484-7f12-4187-94f2-3b44a21100d9}" FolderPath="Constructor\">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
@@ -83,9 +83,9 @@ AddLocalEnumeration('TCEVENTCLASS_ALARM', E_TcEventClass.TCEVENTCLASS_ALARM);
 AddLocalEnumeration('TCEVENTCLASS_PARAMERROR', E_TcEventClass.TCEVENTCLASS_PARAMERROR);]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Identifier" Id="{b9c572a8-d439-082b-28c0-0883357cc395}">
+    <Property Name="Identifier" Id="{5342fd20-72dc-444d-a214-55c0dd5ad52c}">
       <Declaration><![CDATA[PROPERTY PUBLIC Identifier : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{bc7bcdd4-112b-0208-3c05-f7d918f589a4}">
+      <Get Name="Get" Id="{56fc425c-b7ce-4e6e-b6d1-aa9af0d39f1d}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
@@ -94,7 +94,7 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="IsEnumeratorValueEqual" Id="{80e66694-34d3-0a97-0b81-dc94c6cf449d}" FolderPath="Protected\">
+    <Method Name="IsEnumeratorValueEqual" Id="{6a61e91c-9236-46f1-8155-81d72ee95224}" FolderPath="Protected\">
       <Declaration><![CDATA[METHOD IsEnumeratorValueEqual : BOOL
 VAR_INPUT
 	Enumerator : I_KeyValueForwardEnumerator;
@@ -110,7 +110,7 @@ END_IF
 IsEnumeratorValueEqual := storedValue = activeData;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="MakeReferenceTo" Id="{8ee8e762-eb14-0715-352e-4742538788ba}">
+    <Method Name="MakeReferenceTo" Id="{646f68ea-4df1-4b73-bffa-1a01bba19e03}">
       <Declaration><![CDATA[METHOD PUBLIC MakeReferenceTo
 VAR_INPUT
 	ReferenceTarget : REFERENCE TO E_TcEventClass;
@@ -121,7 +121,7 @@ END_VAR
 SetBaseDatatypeReference();]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SetBaseDatatypeReference" Id="{f98d4444-5eab-0687-01f1-c8953daee023}" FolderPath="Protected\">
+    <Method Name="SetBaseDatatypeReference" Id="{130acbcc-f84e-4ae1-8b25-95d6d588f69a}" FolderPath="Protected\">
       <Declaration><![CDATA[METHOD PROTECTED SetBaseDatatypeReference
 VAR_INPUT
 END_VAR
@@ -130,9 +130,9 @@ END_VAR
         <ST><![CDATA[enumBaseDatatype.MakeReferenceTo(activeData);]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Size" Id="{bd75d323-0b22-08c0-05de-324b0503d19b}">
+    <Property Name="Size" Id="{57f25cab-adc7-44a6-8f0a-6f08ed25c722}">
       <Declaration><![CDATA[PROPERTY PUBLIC Size : UDINT]]></Declaration>
-      <Get Name="Get" Id="{781b60f2-e4a8-0150-0af3-a3d3c8fa5421}">
+      <Get Name="Get" Id="{929cef7a-424d-4d36-8027-fe9020dc4298}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
@@ -141,7 +141,7 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="TryMakeReferenceTo" Id="{24d8d7b8-1e84-0c8f-038c-179296f199a7}">
+    <Method Name="TryMakeReferenceTo" Id="{ce5f5830-b861-40e9-8958-4ad17ed78f1e}">
       <Declaration><![CDATA[METHOD TryMakeReferenceTo : BOOL
 VAR_INPUT
 	Target : I_Datatype;
@@ -165,9 +165,9 @@ SetBaseDatatypeReference();
 TryMakeReferenceTo := TRUE;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Value" Id="{54638d7e-8c2f-0c87-2cc4-0cff7cc7cb08}">
+    <Property Name="Value" Id="{bee402f6-2aca-40e1-a610-51bc94e1ddb1}">
       <Declaration><![CDATA[PROPERTY PUBLIC Value : E_TcEventClass]]></Declaration>
-      <Get Name="Get" Id="{bc6b5bf8-6074-0fab-3620-5ee8c0556374}">
+      <Get Name="Get" Id="{56ecd470-c691-43cd-bcf4-03ab287375cd}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
@@ -175,7 +175,7 @@ END_VAR
           <ST><![CDATA[Value := activeData;]]></ST>
         </Implementation>
       </Get>
-      <Set Name="Set" Id="{5685a8a8-c251-0aee-025e-140f4dd0f67d}">
+      <Set Name="Set" Id="{bc022720-64b4-4688-888a-494ca5f6e0c4}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>

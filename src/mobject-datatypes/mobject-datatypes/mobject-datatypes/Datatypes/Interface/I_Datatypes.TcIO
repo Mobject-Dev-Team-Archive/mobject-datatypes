@@ -16,10 +16,10 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
-    <Method Name="GetPrimitiveByIecType" Id="{2c7de1d5-7aa4-05bb-147a-ae842d0c6942}">
-      <Declaration><![CDATA[METHOD PUBLIC GetPrimitiveByIecType : BOOL
+    <Method Name="GetPrimitiveByTypeName" Id="{2c7de1d5-7aa4-05bb-147a-ae842d0c6942}">
+      <Declaration><![CDATA[METHOD PUBLIC GetPrimitiveByTypeName : BOOL
 VAR_INPUT
-	Identifier : T_MAXSTRING;
+	TypeName : T_MAXSTRING;
 	Destination : REFERENCE TO I_AliasDatatype;
 END_VAR
 ]]></Declaration>

@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.4.0-alpha
+
+- removed basic datatypes to their own library. mobject-basic-datatyps.
+- renamed GetPrimitiveByTypeName in Datatypes and I_Datatypes
+- completed support for enums
+- added tests for base types
+
 ## v0.3.0-alpha
 
 - updated Name to typeName on datatype base and serialization

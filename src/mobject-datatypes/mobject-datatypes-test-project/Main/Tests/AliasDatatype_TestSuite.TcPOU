@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="_SINT_TestSuite" Id="{8253f6d9-6b74-08e1-18f9-83ade23add23}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK _SINT_TestSuite EXTENDS TcUnit.FB_TestSuite
+  <POU Name="AliasDatatype_TestSuite" Id="{3126607e-1658-0117-2d87-40eeac96a42f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK AliasDatatype_TestSuite EXTENDS TcUnit.FB_TestSuite
 VAR
 END_VAR
 ]]></Declaration>
@@ -10,8 +10,7 @@ END_VAR
 TestClearReference();
 TestClone();
 TestTypeNameReturnsExpected();
-TestIsFloat();
-TestIsSigned();
+TestIdentifierReturnsExpected();
 TestMakeReferenceToFollowsReference();
 TestMakeReferenceToUpdatesReference();
 TestSize();
@@ -21,13 +20,12 @@ TestSerializeTypeWith();
 TestSerializeWith();
 TestTryDeserializeFrom();
 TestTryMakeReferenceToFollowsReference();
-TestTryMakeReferenceToUpdatesReference();
-]]></ST>
+TestTryMakeReferenceToUpdatesReference();]]></ST>
     </Implementation>
-    <Method Name="TestAddress" Id="{4afcb581-a779-008b-20ba-4a6e494e7716}">
+    <Method Name="TestAddress" Id="{f25dee84-18b5-0e37-372c-2dc32025c2b1}">
       <Declaration><![CDATA[METHOD PUBLIC TestAddress
 VAR
-    _type : _SINT(0);
+    _type : MockAliasDatatype_HRESULT(S_OK);
     notExpected : PVOID := 0;
     actual : PVOID;
 END_VAR
@@ -46,13 +44,13 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestClearReference" Id="{b02dd206-0642-03d2-0945-5db0c72dc1f4}">
+    <Method Name="TestClearReference" Id="{0dc2fdec-7c49-0140-0478-50a36a39a687}">
       <Declaration><![CDATA[METHOD PUBLIC TestClearReference
 VAR
-    _type : _SINT(0);
-	target : SINT := 0;
-    expected : SINT := 0;
-    actual : SINT;
+    _type : MockAliasDatatype_HRESULT(S_OK);
+	target : HRESULT := S_OK;
+    expected : HRESULT := S_OK;
+    actual : HRESULT;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -60,7 +58,7 @@ END_VAR
 
 _type.MakeReferenceTo(target);
 _type.ClearReference();
-target := 123;
+target := S_FALSE;
 
 actual := _type.Value;
 
@@ -74,10 +72,10 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestClone" Id="{d8d9d9ea-3611-0ddf-1bae-2a2e5a6a585c}">
+    <Method Name="TestClone" Id="{8f354877-490e-030c-0dba-9c34dc13f198}">
       <Declaration><![CDATA[METHOD PUBLIC TestClone
 VAR
-    _type : _SINT(123);
+    _type : MockAliasDatatype_HRESULT(S_OK);
 	clone : I_Datatype;
 	isValidClone : BOOL;
 	compareResult : DINT;
@@ -111,56 +109,43 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestIsFloat" Id="{11f5ba58-2bae-48b7-a8c4-c6c6c91607aa}">
-      <Declaration><![CDATA[METHOD PUBLIC TestIsFloat
+    <Method Name="TestIdentifierReturnsExpected" Id="{3165a4f6-4fed-0c9d-2598-66bcf8827de6}">
+      <Declaration><![CDATA[METHOD PUBLIC TestIdentifierReturnsExpected
 VAR
-    _type : _SINT(0);
+    _type : MockAliasDatatype_HRESULT(S_OK);
+    expected : STRING := 'HRESULT';
+    actual : STRING;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[TEST('TestIsFloat');
+        <ST><![CDATA[TEST('TestIdentifierReturnsExpected');
 
-AssertFalse(
-	Condition := _type.IsFloat,
-    Message := 'Type did not correctly identify itself as being unsigned'
+actual := _type.Identifier;
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Type did not return correct iec type.'
 );
 
 TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestIsSigned" Id="{2d5f3a7c-543b-0966-30dc-8663e803900d}">
-      <Declaration><![CDATA[METHOD PUBLIC TestIsSigned
-VAR
-    _type : _SINT(0);
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[TEST('TestIsSigned');
-
-AssertTrue(
-	Condition := _type.IsSigned,
-    Message := 'Type did not correctly identify itself as being signed'
-);
-
-TEST_FINISHED();
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="TestMakeReferenceToFollowsReference" Id="{5f795c7b-5a03-0806-089d-785656fe6a8a}">
+    <Method Name="TestMakeReferenceToFollowsReference" Id="{a76a35bb-e4a0-0fe6-3ede-dd228e426a2d}">
       <Declaration><![CDATA[METHOD PUBLIC TestMakeReferenceToFollowsReference
 VAR
-    _type : _SINT(0);
-	target : SINT := 0;
-    expected : SINT := 123;
-    actual : SINT;
+    _type : MockAliasDatatype_HRESULT(S_OK);
+	target : HRESULT := S_OK;
+    expected : HRESULT := S_FALSE;
+    actual : HRESULT;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('TestMakeReferenceToFollowsReference');
 
 _type.MakeReferenceTo(target);
-target := 123;
+target := S_FALSE;
 
 actual := _type.Value;
 
@@ -174,20 +159,20 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestMakeReferenceToUpdatesReference" Id="{c3d2938a-7e22-0f14-1d3a-c15ed8d14646}">
+    <Method Name="TestMakeReferenceToUpdatesReference" Id="{c61f656f-b23b-0a46-2185-1bde701efbf7}">
       <Declaration><![CDATA[METHOD PUBLIC TestMakeReferenceToUpdatesReference
 VAR
-    _type : _SINT(0);
-	target : SINT := 0;
-    expected : SINT := 123;
-    actual : SINT;
+    _type : MockAliasDatatype_HRESULT(S_OK);
+	target : HRESULT := S_OK;
+    expected : HRESULT := S_FALSE;
+    actual : HRESULT;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('TestMakeReferenceToUpdatesReference');
 
 _type.MakeReferenceTo(target);
-_type.Value := 123;
+_type.Value := S_FALSE;
 
 actual := target;
 
@@ -201,12 +186,12 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestSerializeTypeWith" Id="{d556bfa3-6e00-0886-1c90-24dc5489f380}">
+    <Method Name="TestSerializeTypeWith" Id="{2500fb5f-6461-092c-1d90-89c01ddd73ad}">
       <Declaration><![CDATA[METHOD PUBLIC TestSerializeTypeWith
 VAR
-    _type : _SINT(0);
+    _type : MockAliasDatatype_HRESULT(S_OK);
     serializer : JsonSerializer;
-    expected : STRING(500) := '{"typeName":"SINT","minValue":-128,"maxValue":127,"isSigned":true,"isFloat":false}';
+    expected : STRING(500) := '{"typeName":"ALIAS","identifier":"HRESULT","baseDatatype":{"typeName":"DINT","minValue":-2147483648,"maxValue":2147483647,"isSigned":true,"isFloat":false}}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
@@ -227,12 +212,12 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestSerializeWith" Id="{74f12ab2-5194-02c4-3c96-303641719ee9}">
+    <Method Name="TestSerializeWith" Id="{106bab7d-0b4f-02de-137c-091f2f88c15a}">
       <Declaration><![CDATA[METHOD PUBLIC TestSerializeWith
 VAR
-    _type : _SINT(123);
+    _type : MockAliasDatatype_HRESULT(S_FALSE);
     serializer : JsonSerializer;
-    expected : STRING := '123';
+    expected : STRING := '1';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
@@ -253,11 +238,11 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestSize" Id="{2bb39c24-1232-0024-139b-ed8dd946c1f2}">
+    <Method Name="TestSize" Id="{4e5ac305-9227-0c2d-3b8d-c15d93c8d1eb}">
       <Declaration><![CDATA[METHOD PUBLIC TestSize
 VAR
-    _type : _SINT(0);
-    expected : UDINT := SIZEOF(SINT);
+    _type : MockAliasDatatype_HRESULT(S_OK);
+    expected : UDINT := SIZEOF(HRESULT);
     actual : UDINT;
 END_VAR
 ]]></Declaration>
@@ -276,15 +261,15 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryDeserializeFrom" Id="{75088590-5e60-0e69-2db0-2b319784c430}">
+    <Method Name="TestTryDeserializeFrom" Id="{748ec791-ab28-04b2-3d9c-6c68cf44013f}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryDeserializeFrom
 VAR
     deserializer : JsonDeserializer;
     feedback : DeserializerFeedback;
-    json : STRING := '123';
-    _type : _SINT(0);
-    expected : SINT := 123;
-    actual : SINT;
+    json : STRING := '0';
+    _type : MockAliasDatatype_HRESULT(S_OK);
+    expected : HRESULT := S_OK;
+    actual : HRESULT;
  END_VAR
 ]]></Declaration>
       <Implementation>
@@ -306,20 +291,20 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToFollowsReference" Id="{29820776-108e-00d3-0f7b-9a527d837896}">
+    <Method Name="TestTryMakeReferenceToFollowsReference" Id="{eca1b1f7-8028-0c9d-1123-24e4860df742}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToFollowsReference
 VAR
-    _type : _SINT(0);
-	target : _SINT(0);
-    expected : SINT := 123;
-    actual : SINT;
+    _type : MockAliasDatatype_HRESULT(S_OK);
+	target : MockAliasDatatype_HRESULT(S_OK);
+    expected : HRESULT := S_FALSE;
+    actual : HRESULT;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('TestTryMakeReferenceToFollowsReference');
 
 _type.TryMakeReferenceTo(target);
-target.Value := 123;
+target.Value := S_FALSE;
 
 actual := _type.Value;
 
@@ -333,20 +318,20 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToUpdatesReference" Id="{f0887213-7ddf-05c7-232a-fd51b04d78eb}">
+    <Method Name="TestTryMakeReferenceToUpdatesReference" Id="{5be2926c-555a-0f58-2f90-e3e0c520061b}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToUpdatesReference
 VAR
-    _type : _SINT(0);
-	target : _SINT(0);
-    expected : SINT := 123;
-    actual : SINT;
+    _type : MockAliasDatatype_HRESULT(S_OK);
+	target : MockAliasDatatype_HRESULT(S_OK);
+    expected : HRESULT := S_FALSE;
+    actual : HRESULT;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('TestTryMakeReferenceToUpdatesReference');
 
 _type.TryMakeReferenceTo(target);
-_type.Value := 123;
+_type.Value := S_FALSE;
 
 actual := target.Value;
 
@@ -360,11 +345,11 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTypeNameReturnsExpected" Id="{1d902baa-bf95-023e-0871-3befab668145}">
+    <Method Name="TestTypeNameReturnsExpected" Id="{e4607604-b109-0a28-2dc4-95d9b03e4f5b}">
       <Declaration><![CDATA[METHOD PUBLIC TestTypeNameReturnsExpected
 VAR
-    _type : _SINT(0);
-    expected : STRING := 'SINT';
+    _type : MockAliasDatatype_HRESULT(S_OK);
+    expected : STRING := 'ALIAS';
     actual : STRING;
 END_VAR
 ]]></Declaration>
@@ -383,18 +368,18 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestValueReturnsExpectedAfterChange" Id="{88f6dc4c-c05f-080c-19b4-5c4182b33e88}">
+    <Method Name="TestValueReturnsExpectedAfterChange" Id="{55992bd8-f975-021f-35b7-039a0a9c4594}">
       <Declaration><![CDATA[METHOD PUBLIC TestValueReturnsExpectedAfterChange
 VAR
-    _type : _SINT(0);
-    expected : SINT := 123;
-    actual : SINT;
+    _type : MockAliasDatatype_HRESULT(S_OK);
+    expected : HRESULT := S_FALSE;
+    actual : HRESULT;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('TestValueReturnsExpectedAfterChange');
 
-_type.Value := 123;
+_type.Value := S_FALSE;
 
 actual := _type.Value;
 
@@ -408,12 +393,12 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestValueReturnsExpectedAfterInit" Id="{f6808052-aca9-0ed3-0b95-93e55756ea43}">
+    <Method Name="TestValueReturnsExpectedAfterInit" Id="{86eacfa8-cb69-0c1d-3981-d4262702f0f3}">
       <Declaration><![CDATA[METHOD PUBLIC TestValueReturnsExpectedAfterInit
 VAR
-    _type : _SINT(123);
-    expected : SINT := 123;
-    actual : SINT;
+    _type : MockAliasDatatype_HRESULT(S_FALSE);
+    expected : HRESULT := S_FALSE;
+    actual : HRESULT;
 END_VAR
 ]]></Declaration>
       <Implementation>

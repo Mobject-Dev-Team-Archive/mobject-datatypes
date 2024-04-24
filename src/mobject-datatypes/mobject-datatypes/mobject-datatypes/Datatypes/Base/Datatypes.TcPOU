@@ -10,6 +10,7 @@ VAR
 	primitives : Dictionary;
 	structures : Dictionary;
 	alias : Dictionary;
+	enums : Dictionary;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -25,7 +26,8 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[AcceptPrimative(Visitor);
 AcceptStructures(Visitor);
-AcceptAlias(Visitor);]]></ST>
+AcceptAlias(Visitor);
+AcceptEnum(Visitor);]]></ST>
       </Implementation>
     </Method>
     <Method Name="AcceptAlias" Id="{f278894c-c4d0-0474-17be-0ee3cdb4640d}" FolderPath="Private\">
@@ -35,12 +37,33 @@ VAR_INPUT
 END_VAR
 VAR
 	enumerator : I_ForwardEnumerator;
-	datatype : I_Datatype;
+	datatype : I_AliasDatatype;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[enumerator := alias.GetEnumerator();
 
-WHILE (enumerator.MoveNext()) DO
+WHILE enumerator.MoveNext() DO
+	IF enumerator.TryGet(datatype) THEN
+		datatype.Accept(Visitor);
+	END_IF
+END_WHILE
+
+enumerator.Dispose();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AcceptEnum" Id="{9a711dcf-237c-441d-a411-7a1a97c8c05d}" FolderPath="Private\">
+      <Declaration><![CDATA[METHOD PRIVATE AcceptEnum
+VAR_INPUT
+	Visitor : I_DatatypeVisitor;
+END_VAR
+VAR
+	enumerator : I_ForwardEnumerator;
+	datatype : I_EnumDatatype;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[enumerator := enums.GetEnumerator();
+
+WHILE enumerator.MoveNext() DO
 	IF enumerator.TryGet(datatype) THEN
 		datatype.Accept(Visitor);
 	END_IF
@@ -61,7 +84,7 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[enumerator := primitives.GetEnumerator();
 
-WHILE (enumerator.MoveNext()) DO
+WHILE enumerator.MoveNext() DO
 	IF enumerator.TryGet(datatype) THEN
 		datatype.Accept(Visitor);
 	END_IF
@@ -77,12 +100,12 @@ VAR_INPUT
 END_VAR
 VAR
 	enumerator : I_ForwardEnumerator;
-	datatype : I_Datatype;
+	datatype : I_StructuredDatatype;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[enumerator := structures.GetEnumerator();
 
-WHILE (enumerator.MoveNext()) DO	
+WHILE enumerator.MoveNext() DO	
 	IF enumerator.TryGet(datatype) THEN
 		datatype.Accept(Visitor);
 	END_IF
@@ -158,15 +181,26 @@ END_VAR
         <ST><![CDATA[GetAliasByIdentifier := alias.TryGetValue(Identifier, Destination);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="GetPrimitiveByIecType" Id="{a71c7a3a-089b-01d8-1487-6f982249a862}">
-      <Declaration><![CDATA[METHOD PUBLIC GetPrimitiveByIecType : BOOL
+    <Method Name="GetEnumByIdentifier" Id="{8d0ae58c-2b0b-4a01-8f83-d5e6fb410bdd}">
+      <Declaration><![CDATA[METHOD PUBLIC GetEnumByIdentifier : BOOL
 VAR_INPUT
 	Identifier : T_MAXSTRING;
+	Destination : REFERENCE TO I_EnumDatatype;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[GetEnumByIdentifier := enums.TryGetValue(Identifier, Destination);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetPrimitiveByTypeName" Id="{a71c7a3a-089b-01d8-1487-6f982249a862}">
+      <Declaration><![CDATA[METHOD PUBLIC GetPrimitiveByTypeName : BOOL
+VAR_INPUT
+	TypeName : T_MAXSTRING;
 	Destination : REFERENCE TO I_AliasDatatype;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[GetPrimitiveByIecType := primitives.TryGetValue(Identifier, Destination);]]></ST>
+        <ST><![CDATA[GetPrimitiveByTypeName := primitives.TryGetValue(TypeName, Destination);]]></ST>
       </Implementation>
     </Method>
     <Method Name="GetStructureByIdentifier" Id="{efe5a31a-5d21-0199-1ad2-0d497d7d86a1}">
@@ -234,7 +268,7 @@ IF Datatype.TryResolveAsAliasDatatype(datatypeAsAlias) THEN
 END_IF
 
 IF Datatype.TryResolveAsEnumDatatype(datatypeAsEnum) THEN
-	alias.AddOrUpdate(datatypeAsEnum.Identifier, datatypeAsEnum);
+	enums.AddOrUpdate(datatypeAsEnum.Identifier, datatypeAsEnum);
 	emitOnEnumDatatypeAddedEvent(datatypeAsEnum);
 	RETURN;
 END_IF
@@ -256,6 +290,27 @@ VAR
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[enumerator := alias.GetEnumerator();
+
+WHILE enumerator.MoveNext() DO
+	IF enumerator.TryGet(datatype) THEN
+		datatype.SerializeTypeWith(Serializer);
+	END_IF
+END_WHILE
+
+enumerator.Dispose();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SerializeEnumsTypeWith" Id="{7ca1f1b2-9deb-4b2b-aa85-992dbd3e3451}" FolderPath="Private\">
+      <Declaration><![CDATA[METHOD PRIVATE SerializeEnumsTypeWith
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR
+VAR
+	enumerator : I_ForwardEnumerator;
+	datatype : I_EnumDatatype;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[enumerator := enums.GetEnumerator();
 
 WHILE enumerator.MoveNext() DO
 	IF enumerator.TryGet(datatype) THEN
@@ -320,6 +375,7 @@ Serializer.StartArray();
 SerializePrimitiveTypeWith(Serializer);
 SerializeStructuresTypeWith(Serializer);
 SerializeAliasTypeWith(Serializer);
+SerializeEnumsTypeWith(Serializer);
 Serializer.EndArray();
 Serializer.EndObject();]]></ST>
       </Implementation>

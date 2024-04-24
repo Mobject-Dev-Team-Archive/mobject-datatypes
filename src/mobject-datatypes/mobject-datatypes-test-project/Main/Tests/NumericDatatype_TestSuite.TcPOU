@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="_ULINT_TestSuite" Id="{8cff4da4-4184-03a5-03c8-b0cb12a91969}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK _ULINT_TestSuite EXTENDS TcUnit.FB_TestSuite
+  <POU Name="NumericDatatype_TestSuite" Id="{96a7ab73-a913-4f8e-8a2f-3ed98c4fdc93}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK NumericDatatype_TestSuite EXTENDS TcUnit.FB_TestSuite
 VAR
 END_VAR
 ]]></Declaration>
@@ -24,10 +24,10 @@ TestTryMakeReferenceToFollowsReference();
 TestTryMakeReferenceToUpdatesReference();
 ]]></ST>
     </Implementation>
-    <Method Name="TestAddress" Id="{73705b9e-e8af-034e-2d33-587980fc1f93}">
+    <Method Name="TestAddress" Id="{ab8adec7-0eaf-422a-af2c-f5b93eec3375}">
       <Declaration><![CDATA[METHOD PUBLIC TestAddress
 VAR
-    _type : _ULINT(0);
+    _type : MockNumericDatatype_INT(0);
     notExpected : PVOID := 0;
     actual : PVOID;
 END_VAR
@@ -46,13 +46,13 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestClearReference" Id="{c657da49-2246-00cb-34ad-550fbadd787c}">
+    <Method Name="TestClearReference" Id="{02641ec5-640c-02a6-0764-dca1ba33095a}">
       <Declaration><![CDATA[METHOD PUBLIC TestClearReference
 VAR
-    _type : _ULINT(0);
-	target : ULINT := 0;
-    expected : ULINT := 0;
-    actual : ULINT;
+    _type : MockNumericDatatype_INT(0);
+	target : INT := 0;
+    expected : INT := 0;
+    actual : INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -74,10 +74,10 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestClone" Id="{344890a9-b21a-00f9-2a24-f1b906f4a482}">
+    <Method Name="TestClone" Id="{36e8ef9c-47ae-077c-3382-48fd5378a88a}">
       <Declaration><![CDATA[METHOD PUBLIC TestClone
 VAR
-    _type : _ULINT(123);
+    _type : MockNumericDatatype_INT(123);
 	clone : I_Datatype;
 	isValidClone : BOOL;
 	compareResult : DINT;
@@ -111,10 +111,10 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestIsFloat" Id="{35100e06-d9ac-4660-9cb8-b7295c2fa349}">
+    <Method Name="TestIsFloat" Id="{b63a6895-720b-49eb-99ff-ca044c3d33a2}">
       <Declaration><![CDATA[METHOD PUBLIC TestIsFloat
 VAR
-    _type : _ULINT(0);
+    _type : _DWORD(0);
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -129,31 +129,31 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestIsSigned" Id="{e096f7ec-7906-0f25-00c6-74ad4317c30e}">
+    <Method Name="TestIsSigned" Id="{378dc2a1-16db-0f08-2f72-db867898717d}">
       <Declaration><![CDATA[METHOD PUBLIC TestIsSigned
 VAR
-    _type : _ULINT(0);
+    _type : MockNumericDatatype_INT(0);
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('TestIsSigned');
 
-AssertFalse(
+AssertTrue(
 	Condition := _type.IsSigned,
-    Message := 'Type did not correctly identify itself as being unsigned'
+    Message := 'Type did not correctly identify itself as being signed'
 );
 
 TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestMakeReferenceToFollowsReference" Id="{9f0a8e53-e9bd-0461-09a7-e5875b9be179}">
+    <Method Name="TestMakeReferenceToFollowsReference" Id="{edd879ed-8ec6-0727-1d2a-b292e4382fa3}">
       <Declaration><![CDATA[METHOD PUBLIC TestMakeReferenceToFollowsReference
 VAR
-    _type : _ULINT(0);
-	target : ULINT := 0;
-    expected : ULINT := 123;
-    actual : ULINT;
+    _type : MockNumericDatatype_INT(0);
+	target : INT := 0;
+    expected : INT := 123;
+    actual : INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -174,13 +174,13 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestMakeReferenceToUpdatesReference" Id="{5941cb8d-94c4-09d0-3569-27f52d696852}">
+    <Method Name="TestMakeReferenceToUpdatesReference" Id="{83845776-c6e3-0354-2435-b91da0e9df04}">
       <Declaration><![CDATA[METHOD PUBLIC TestMakeReferenceToUpdatesReference
 VAR
-    _type : _ULINT(0);
-	target : ULINT := 0;
-    expected : ULINT := 123;
-    actual : ULINT;
+    _type : MockNumericDatatype_INT(0);
+	target : INT := 0;
+    expected : INT := 123;
+    actual : INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -201,12 +201,12 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestSerializeTypeWith" Id="{5edbe297-59b4-03fb-0434-aa6bbfc96d04}">
+    <Method Name="TestSerializeTypeWith" Id="{32ad0aa1-be6a-42cf-aaa7-bc7b586be18e}">
       <Declaration><![CDATA[METHOD PUBLIC TestSerializeTypeWith
 VAR
-    _type : _ULINT(0);
+    _type : MockNumericDatatype_INT(0);
     serializer : JsonSerializer;
-    expected : STRING(500) := '{"typeName":"ULINT","minValue":0,"maxValue":18446744073709551615,"isSigned":false,"isFloat":false}';
+    expected : STRING(500) := '{"typeName":"INT","minValue":-32768,"maxValue":32767,"isSigned":true,"isFloat":false}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
@@ -227,10 +227,10 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestSerializeWith" Id="{a8ee65b3-6ccb-08af-02a6-c85db1335619}">
+    <Method Name="TestSerializeWith" Id="{887ce0e9-89b2-49be-bcc9-511505717dee}">
       <Declaration><![CDATA[METHOD PUBLIC TestSerializeWith
 VAR
-    _type : _ULINT(32767);
+    _type : MockNumericDatatype_INT(32767);
     serializer : JsonSerializer;
     expected : STRING := '32767';
     actual : STRING(500);
@@ -253,11 +253,11 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestSize" Id="{23bc32aa-a020-07b5-1d01-ed872c0dabb2}">
+    <Method Name="TestSize" Id="{72df271b-2e7d-411f-9e36-9c9bc4e5c76a}">
       <Declaration><![CDATA[METHOD PUBLIC TestSize
 VAR
-    _type : _ULINT(0);
-    expected : UDINT := SIZEOF(ULINT);
+    _type : MockNumericDatatype_INT(0);
+    expected : UDINT := SIZEOF(INT);
     actual : UDINT;
 END_VAR
 ]]></Declaration>
@@ -276,15 +276,15 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryDeserializeFrom" Id="{89fae5a4-8a04-0176-1d86-2c836c8dcf10}">
+    <Method Name="TestTryDeserializeFrom" Id="{1eae0fc6-1ebe-4bbb-8c2d-d9dc7cb42ac5}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryDeserializeFrom
 VAR
     deserializer : JsonDeserializer;
     feedback : DeserializerFeedback;
     json : STRING := '32767';
-    _type : _ULINT(0);
-    expected : ULINT := 32767;
-    actual : ULINT;
+    _type : MockNumericDatatype_INT(0);
+    expected : INT := 32767;
+    actual : INT;
  END_VAR
 ]]></Declaration>
       <Implementation>
@@ -306,13 +306,13 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToFollowsReference" Id="{92811fe9-ef1e-0134-36b0-f17a040b94cf}">
+    <Method Name="TestTryMakeReferenceToFollowsReference" Id="{a83e39a5-9126-0c0b-3741-132358e1880a}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToFollowsReference
 VAR
-    _type : _ULINT(0);
-	target : _ULINT(0);
-    expected : ULINT := 123;
-    actual : ULINT;
+    _type : MockNumericDatatype_INT(0);
+	target : MockNumericDatatype_INT(0);
+    expected : INT := 123;
+    actual : INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -333,13 +333,13 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToUpdatesReference" Id="{4f936be2-e579-033a-0c75-977b73261c3e}">
+    <Method Name="TestTryMakeReferenceToUpdatesReference" Id="{4d80e395-74dc-0585-020b-0d31aea195f6}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToUpdatesReference
 VAR
-    _type : _ULINT(0);
-	target : _ULINT(0);
-    expected : ULINT := 123;
-    actual : ULINT;
+    _type : MockNumericDatatype_INT(0);
+	target : MockNumericDatatype_INT(0);
+    expected : INT := 123;
+    actual : INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -360,11 +360,11 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTypeNameReturnsExpected" Id="{ef9213a2-39b3-0e7d-1770-3bd2c4135e38}">
+    <Method Name="TestTypeNameReturnsExpected" Id="{4f1f55dc-8b36-4c30-9c88-d7c35fd32871}">
       <Declaration><![CDATA[METHOD PUBLIC TestTypeNameReturnsExpected
 VAR
-    _type : _ULINT(0);
-    expected : STRING := 'ULINT';
+    _type : MockNumericDatatype_INT(0);
+    expected : STRING := 'INT';
     actual : STRING;
 END_VAR
 ]]></Declaration>
@@ -383,12 +383,12 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestValueReturnsExpectedAfterChange" Id="{980530ad-2221-08b3-3a4f-3947e470ab05}">
+    <Method Name="TestValueReturnsExpectedAfterChange" Id="{e4687985-10d0-46c6-b218-2c645518b0d7}">
       <Declaration><![CDATA[METHOD PUBLIC TestValueReturnsExpectedAfterChange
 VAR
-    _type : _ULINT(0);
-    expected : ULINT := 32767;
-    actual : ULINT;
+    _type : MockNumericDatatype_INT(0);
+    expected : INT := 32767;
+    actual : INT;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -408,12 +408,12 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestValueReturnsExpectedAfterInit" Id="{2cbb75d6-2971-0dc4-35d7-b81eaa812a72}">
+    <Method Name="TestValueReturnsExpectedAfterInit" Id="{9fa13c26-a280-4a61-8071-453a98178d49}">
       <Declaration><![CDATA[METHOD PUBLIC TestValueReturnsExpectedAfterInit
 VAR
-    _type : _ULINT(32767);
-    expected : ULINT := 32767;
-    actual : ULINT;
+    _type : MockNumericDatatype_INT(32767);
+    expected : INT := 32767;
+    actual : INT;
 END_VAR
 ]]></Declaration>
       <Implementation>

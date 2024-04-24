@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="_TOD_TestSuite" Id="{24a4035a-8b6a-01a7-0d6d-703327f09457}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK _TOD_TestSuite EXTENDS TcUnit.FB_TestSuite
+  <POU Name="StructuredDatatype_TestSuite" Id="{3b54022d-d5be-074a-1edc-76cf46aeecc1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK StructuredDatatype_TestSuite EXTENDS TcUnit.FB_TestSuite
 VAR
 END_VAR
 ]]></Declaration>
@@ -10,10 +10,10 @@ END_VAR
 TestClearReference();
 TestClone();
 TestTypeNameReturnsExpected();
+TestIdentifierReturnsExpected();
 TestMakeReferenceToFollowsReference();
 TestMakeReferenceToUpdatesReference();
 TestSize();
-TestValueReturnsExpectedAfterInit();
 TestValueReturnsExpectedAfterChange();
 TestSerializeTypeWith();
 TestSerializeWith();
@@ -22,10 +22,10 @@ TestTryMakeReferenceToFollowsReference();
 TestTryMakeReferenceToUpdatesReference();
 ]]></ST>
     </Implementation>
-    <Method Name="TestAddress" Id="{74e38a62-d55b-0e9a-0c2f-c4f664bf1d9d}">
+    <Method Name="TestAddress" Id="{3bfa7308-337e-0463-0d82-92d66c266aeb}">
       <Declaration><![CDATA[METHOD PUBLIC TestAddress
 VAR
-    _type : _TOD(TOD#0:0:0);
+    _type : MockStructuredDatatype_TIMESTRUCT;
     notExpected : PVOID := 0;
     actual : PVOID;
 END_VAR
@@ -44,13 +44,13 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestClearReference" Id="{2072720f-d814-043d-2e9e-ed2e5e8af9a5}">
+    <Method Name="TestClearReference" Id="{f74e0a80-2876-070b-091f-2c460135be00}">
       <Declaration><![CDATA[METHOD PUBLIC TestClearReference
 VAR
-    _type : _TOD(TOD#0:0:0);
-	target : TOD := TOD#0:0:0;
-    expected : TOD := TOD#0:0:0;
-    actual : TOD;
+    _type : MockStructuredDatatype_TIMESTRUCT;
+	target : TIMESTRUCT;
+    expected : TIMESTRUCT;
+    actual : TIMESTRUCT;
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -58,7 +58,7 @@ END_VAR
 
 _type.MakeReferenceTo(target);
 _type.ClearReference();
-target := TOD#12:34:56.789;
+target.wDay := 2;
 
 actual := _type.Value;
 
@@ -72,10 +72,10 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestClone" Id="{d0f3e9d6-e2be-00f5-1053-ca55f17de2cf}">
+    <Method Name="TestClone" Id="{098a51af-fa40-026f-3bf9-fa8fbe8868fb}">
       <Declaration><![CDATA[METHOD PUBLIC TestClone
 VAR
-    _type : _TIME_OF_DAY(TIME_OF_DAY#12:34:56.789);
+    _type : MockStructuredDatatype_TIMESTRUCT;
 	clone : I_Datatype;
 	isValidClone : BOOL;
 	compareResult : DINT;
@@ -109,24 +109,47 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestMakeReferenceToFollowsReference" Id="{ba94f02c-136b-0d5c-1d7d-edd2b18b3d11}">
+    <Method Name="TestIdentifierReturnsExpected" Id="{f0c832a1-3a50-0570-34c0-a7147e2373d6}">
+      <Declaration><![CDATA[METHOD PUBLIC TestIdentifierReturnsExpected
+VAR
+    _type : MockStructuredDatatype_TIMESTRUCT;
+    expected : STRING := 'TIMESTRUCT';
+    actual : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestIdentifierReturnsExpected');
+
+actual := _type.Identifier;
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Type did not return correct iec type.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestMakeReferenceToFollowsReference" Id="{7ad4c8b5-563f-0114-0322-44c28ce6fd44}">
       <Declaration><![CDATA[METHOD PUBLIC TestMakeReferenceToFollowsReference
 VAR
-    _type : _TOD(TOD#0:0:0);
-	target : TOD := TOD#0:0:0;
-    expected : TOD := TOD#12:34:56.789;
-    actual : TOD;
+    _type : MockStructuredDatatype_TIMESTRUCT;
+	target : TIMESTRUCT;
+    expected : TIMESTRUCT := (wDay := 2);
+    actual : TIMESTRUCT;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('TestMakeReferenceToFollowsReference');
 
 _type.MakeReferenceTo(target);
-target := TOD#12:34:56.789;
+target.wDay := 2;
 
 actual := _type.Value;
 
-AssertEquals_TIME_OF_DAY(
+AssertEquals(
     Expected := expected,
     Actual := actual,
     Message := 'Value did not follow target change'
@@ -136,24 +159,24 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestMakeReferenceToUpdatesReference" Id="{47728bc5-769f-0196-1257-cbf1991c1566}">
+    <Method Name="TestMakeReferenceToUpdatesReference" Id="{1ae4f0fa-3d42-077f-395f-1029b3c8141d}">
       <Declaration><![CDATA[METHOD PUBLIC TestMakeReferenceToUpdatesReference
 VAR
-    _type : _TOD(TOD#0:0:0);
-	target : TOD := TOD#0:0:0;
-    expected : TOD := TOD#12:34:56.789;
-    actual : TOD;
+    _type : MockStructuredDatatype_TIMESTRUCT;
+	target : TIMESTRUCT;
+    expected : TIMESTRUCT := (wDay := 2);
+    actual : TIMESTRUCT;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('TestMakeReferenceToUpdatesReference');
 
 _type.MakeReferenceTo(target);
-_type.Value := TOD#12:34:56.789;
+_type.wDay.Value := 2;
 
 actual := target;
 
-AssertEquals_TIME_OF_DAY(
+AssertEquals(
     Expected := expected,
     Actual := actual,
     Message := 'Value did not update target'
@@ -163,13 +186,13 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestSerializeTypeWith" Id="{d2b44eca-19ea-0aab-2933-458ecd790526}">
+    <Method Name="TestSerializeTypeWith" Id="{788fcee2-4fe1-06ec-35f1-1597ac8256bf}">
       <Declaration><![CDATA[METHOD PUBLIC TestSerializeTypeWith
 VAR
-    _type : _TOD(TOD#0:0:0);
+    _type : MockStructuredDatatype_TIMESTRUCT;
     serializer : JsonSerializer;
-    expected : STRING := '{"typeName":"TOD"}';
-    actual : STRING(500);
+    expected : STRING(1000) := '{"typeName":"STRUCT","identifier":"TIMESTRUCT","members":{"wDay":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wDayOfWeek":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wHour":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wMilliseconds":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wMinute":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wMonth":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wSecond":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false},"wYear":{"typeName":"WORD","minValue":0,"maxValue":65535,"isSigned":false,"isFloat":false}}}';
+    actual : STRING(1000);
 END_VAR
 ]]></Declaration>
       <Implementation>
@@ -189,17 +212,26 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestSerializeWith" Id="{5850d25c-c703-0f54-3a16-3402a9fed883}">
+    <Method Name="TestSerializeWith" Id="{196719f3-9826-03ad-2758-ee0965b1d9f1}">
       <Declaration><![CDATA[METHOD PUBLIC TestSerializeWith
 VAR
-    _type : _TOD(TOD#12:34:56.789);
+    _type : MockStructuredDatatype_TIMESTRUCT;
     serializer : JsonSerializer;
-    expected : STRING := '"TOD#12:34:56.789"';
+    expected : STRING(500) := '{"wDay":3,"wDayOfWeek":2,"wHour":4,"wMilliseconds":7,"wMinute":5,"wMonth":1,"wSecond":6,"wYear":2000}';
     actual : STRING(500);
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('TestSerializeWith');
+
+_type.wYear.Value := 2000;
+_type.wMonth.Value := 1;
+_type.wDayOfWeek.Value := 2;
+_type.wDay.Value := 3;
+_type.wHour.Value := 4;
+_type.wMinute.Value := 5;
+_type.wSecond.Value := 6;
+_type.wMilliseconds.Value := 7;
 
 serializer.Reset();
 _type.SerializeWith(serializer);
@@ -215,11 +247,11 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestSize" Id="{28383b65-3965-073f-06eb-2cc5554cb73b}">
+    <Method Name="TestSize" Id="{2fdcb075-aadc-07a6-3545-a2feac63b1d1}">
       <Declaration><![CDATA[METHOD PUBLIC TestSize
 VAR
-    _type : _TOD(TOD#0:0:0);
-    expected : UDINT := SIZEOF(TOD);
+    _type : MockStructuredDatatype_TIMESTRUCT;
+    expected : UDINT := SIZEOF(TIMESTRUCT);
     actual : UDINT;
 END_VAR
 ]]></Declaration>
@@ -238,15 +270,15 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryDeserializeFrom" Id="{96592257-d8f1-0bd9-3c73-574931a9c407}">
+    <Method Name="TestTryDeserializeFrom" Id="{a8b0e840-3084-0ab5-0b04-dd4499877922}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryDeserializeFrom
 VAR
     deserializer : JsonDeserializer;
     feedback : DeserializerFeedback;
-    json : STRING := '"TOD#12:34:56.789"';
-    _type : _TOD(TOD#0:0:0);
-    expected : TOD := TOD#12:34:56.789;
-    actual : TOD;
+    json : STRING(500) := '{"wDay":3,"wDayOfWeek":2,"wHour":4,"wMilliseconds":7,"wMinute":5,"wMonth":1,"wSecond":6,"wYear":2000}';
+    _type : MockStructuredDatatype_TIMESTRUCT;
+    expected : TIMESTRUCT := (wYear := 2000, wMonth := 1, wDayOfWeek := 2, wDay := 3, wHour := 4, wMinute := 5, wSecond := 6, wMilliseconds := 7);
+    actual : TIMESTRUCT;
  END_VAR
 ]]></Declaration>
       <Implementation>
@@ -258,7 +290,7 @@ _type.TryDeserializeFrom(Deserializer, Feedback);
 
 actual := _type.Value;
 
-AssertEquals_TIME_OF_DAY(
+AssertEquals(
     Expected := expected,
     Actual := actual,
     Message := 'Type did not deserialize correctly.'
@@ -268,24 +300,24 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToFollowsReference" Id="{ac9a24a8-28d8-04e4-1856-9607a97d0ee5}">
+    <Method Name="TestTryMakeReferenceToFollowsReference" Id="{c252327c-b4a0-0f37-3d44-4aaa8a58b62d}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToFollowsReference
 VAR
-    _type : _TOD(TOD#0:0:0);
-	target : _TOD(TOD#0:0:0);
-    expected : TOD := TOD#12:34:56.789;
-    actual : TOD;
+    _type : MockStructuredDatatype_TIMESTRUCT;
+	target : MockStructuredDatatype_TIMESTRUCT;
+    expected : TIMESTRUCT := (wDay := 2);
+    actual : TIMESTRUCT;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('TestTryMakeReferenceToFollowsReference');
 
 _type.TryMakeReferenceTo(target);
-target.Value := TOD#12:34:56.789;
+target.wDay.Value := 2;
 
 actual := _type.Value;
 
-AssertEquals_TIME_OF_DAY(
+AssertEquals(
     Expected := expected,
     Actual := actual,
     Message := 'Value did not follow target change'
@@ -295,24 +327,24 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTryMakeReferenceToUpdatesReference" Id="{3b86ef8f-adb5-0f9b-0c01-6053b2a36484}">
+    <Method Name="TestTryMakeReferenceToUpdatesReference" Id="{7845a0bd-b518-0448-1fe9-9112d87773b5}">
       <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToUpdatesReference
 VAR
-    _type : _TOD(TOD#0:0:0);
-	target : _TOD(TOD#0:0:0);
-    expected : TOD := TOD#12:34:56.789;
-    actual : TOD;
+    _type : MockStructuredDatatype_TIMESTRUCT;
+	target : MockStructuredDatatype_TIMESTRUCT;
+    expected : TIMESTRUCT := (wDay := 2);
+    actual : TIMESTRUCT;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('TestTryMakeReferenceToUpdatesReference');
 
 _type.TryMakeReferenceTo(target);
-_type.Value := TOD#12:34:56.789;
+_type.wDay.Value := 2;
 
 actual := target.Value;
 
-AssertEquals_TIME_OF_DAY(
+AssertEquals(
     Expected := expected,
     Actual := actual,
     Message := 'Value did not update target'
@@ -322,11 +354,11 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestTypeNameReturnsExpected" Id="{c0608f1a-0df8-09f4-03cd-8238be2cd1b8}">
+    <Method Name="TestTypeNameReturnsExpected" Id="{fa913cf5-fe11-0528-1dee-36df9d50f6f7}">
       <Declaration><![CDATA[METHOD PUBLIC TestTypeNameReturnsExpected
 VAR
-    _type : _TOD(TOD#0:0:0);
-    expected : STRING := 'TOD';
+    _type : MockStructuredDatatype_TIMESTRUCT;
+    expected : STRING := 'STRUCT';
     actual : STRING;
 END_VAR
 ]]></Declaration>
@@ -345,48 +377,25 @@ TEST_FINISHED();
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TestValueReturnsExpectedAfterChange" Id="{03ce31e4-bb69-0229-338c-c2a373fb5d4e}">
+    <Method Name="TestValueReturnsExpectedAfterChange" Id="{58fb67c4-407c-05a7-27c5-840a25a936aa}">
       <Declaration><![CDATA[METHOD PUBLIC TestValueReturnsExpectedAfterChange
 VAR
-    _type : _TOD(TOD#0:0:0);
-    expected : TOD := TOD#12:34:56.789;
-    actual : TOD;
+    _type : MockStructuredDatatype_TIMESTRUCT;
+	value : TIMESTRUCT := (wDay := 2);
+    expected : TIMESTRUCT := (wDay := 2);
+    actual : TIMESTRUCT;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[TEST('TestValueReturnsExpectedAfterChange');
 
-_type.Value := TOD#12:34:56.789;
-
+_type.Value := value;
 actual := _type.Value;
 
-AssertEquals_TIME_OF_DAY(
+AssertEquals(
     Expected := expected,
     Actual := actual,
     Message := 'Expected value not returned after change.'
-);
-
-TEST_FINISHED();
-]]></ST>
-      </Implementation>
-    </Method>
-    <Method Name="TestValueReturnsExpectedAfterInit" Id="{9103d446-bb4b-0e56-0ed6-7578d419e529}">
-      <Declaration><![CDATA[METHOD PUBLIC TestValueReturnsExpectedAfterInit
-VAR
-    _type : _TOD(TOD#12:34:56.789);
-    expected : TOD := TOD#12:34:56.789;
-    actual : TOD;
-END_VAR
-]]></Declaration>
-      <Implementation>
-        <ST><![CDATA[TEST('TestValueReturnsExpectedAfterInit');
-
-actual := _type.Value;
-
-AssertEquals_TIME_OF_DAY(
-    Expected := expected,
-    Actual := actual,
-    Message := 'Expected value not returned after Init.'
 );
 
 TEST_FINISHED();

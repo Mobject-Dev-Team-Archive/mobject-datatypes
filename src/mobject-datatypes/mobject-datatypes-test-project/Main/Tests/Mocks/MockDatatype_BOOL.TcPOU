@@ -1,22 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="_TIME_OF_DAY" Id="{09091076-4c50-0c79-075a-93b2440ef830}" SpecialFunc="None">
+  <POU Name="MockDatatype_BOOL" Id="{d86b57f3-7abc-4274-ae09-e4159b41fdfc}" SpecialFunc="None">
     <Declaration><![CDATA[{attribute 'linkalways'} 
 {attribute 'no_explicit_call' := 'This FB is a CLASS and must be accessed using methods or properties'}
 {attribute 'enable_dynamic_creation'}
-FUNCTION_BLOCK _TIME_OF_DAY EXTENDS DatatypeBase
+FUNCTION_BLOCK MockDatatype_BOOL EXTENDS DatatypeBase
 VAR
-	localData : TIME_OF_DAY;
-	activeData : REFERENCE TO TIME_OF_DAY REF= localData;
+	localData : BOOL;
+	activeData : REFERENCE TO BOOL REF= localData;
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[]]></ST>
     </Implementation>
-    <Folder Name="Constructor" Id="{bc75c500-de81-095c-1afc-f7b783e9397d}" />
-    <Property Name="Address" Id="{971a8994-f5cd-0ee9-1115-61454c7df407}">
+    <Folder Name="Constructor" Id="{70dfba46-4ea8-44c3-87e2-59949dbe5ffa}" />
+    <Property Name="Address" Id="{4bca5794-4d5d-430e-8518-b7fcea23a642}">
       <Declaration><![CDATA[PROPERTY PUBLIC Address : PVOID]]></Declaration>
-      <Get Name="Get" Id="{43b22550-8ac9-0820-04b3-3f4bf07a2383}">
+      <Get Name="Get" Id="{0b080db4-a33e-478d-93f6-5efcf78453a0}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
@@ -25,7 +25,7 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="ClearReference" Id="{e729ce88-b9ea-032f-3f2d-6bc83fd21c56}">
+    <Method Name="ClearReference" Id="{7c34fa36-e620-4f84-964c-c92246c1a6ba}">
       <Declaration><![CDATA[METHOD PUBLIC ClearReference
 VAR_INPUT
 END_VAR
@@ -34,52 +34,52 @@ END_VAR
         <ST><![CDATA[activeData REF= localData;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="Clone" Id="{8889ee8d-d9d4-0a6f-16dc-aae4357a9077}">
+    <Method Name="Clone" Id="{f10aea8c-11f7-46d5-8126-275c28ae21df}">
       <Declaration><![CDATA[METHOD PUBLIC Clone : I_Datatype
 VAR
-    pClone : POINTER TO _TIME_OF_DAY;
+    pClone : POINTER TO MockDatatype_BOOL;
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[pClone := __NEW(_TIME_OF_DAY(InitialValue := Value));
+        <ST><![CDATA[pClone := __NEW(MockDatatype_BOOL(InitialValue := Value));
 Clone := pClone^;
 ]]></ST>
       </Implementation>
     </Method>
-    <Method Name="FB_init" Id="{5dbe585a-3e5b-02a1-199a-3e99a46aa38d}" FolderPath="Constructor\">
+    <Method Name="FB_init" Id="{bb3246cb-9522-473f-9a41-72fd8a1177a7}" FolderPath="Constructor\">
       <Declaration><![CDATA[METHOD FB_init : BOOL
 VAR_INPUT
 	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
-	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved WORDo the copy code (online change)
-	InitialValue : TIME_OF_DAY;
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	InitialValue : BOOL;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[localData := InitialValue;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="MakeReferenceTo" Id="{ce3da2d1-083a-01c5-3259-bad5bf7dad39}">
+    <Method Name="MakeReferenceTo" Id="{0c9cd5c8-7466-49d9-b7e9-f01eb69bb472}">
       <Declaration><![CDATA[METHOD PUBLIC MakeReferenceTo
 VAR_INPUT
-	ReferenceTarget : REFERENCE TO TIME_OF_DAY;
+	ReferenceTarget : REFERENCE TO BOOL;
 END_VAR
 ]]></Declaration>
       <Implementation>
         <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
       </Implementation>
     </Method>
-    <Method Name="SerializeWith" Id="{704258f6-87eb-0ab3-07c4-104ee2283e18}">
+    <Method Name="SerializeWith" Id="{1b83739f-9aa1-4545-874d-d72d5ca46bae}">
       <Declaration><![CDATA[METHOD PUBLIC SerializeWith
 VAR_INPUT
 	Serializer : I_Serializer;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[Serializer.AddTod(activeData);]]></ST>
+        <ST><![CDATA[Serializer.AddBool(activeData);]]></ST>
       </Implementation>
     </Method>
-    <Property Name="Size" Id="{3e1f3b9e-d588-014b-2dd2-caab1fc808fe}">
+    <Property Name="Size" Id="{5d01c6d3-3aca-42db-bad6-c0d53c8b2a50}">
       <Declaration><![CDATA[PROPERTY PUBLIC Size : UDINT]]></Declaration>
-      <Get Name="Get" Id="{fcab8b16-d06b-0978-21b1-1306d8d23688}">
+      <Get Name="Get" Id="{819358d0-fe15-4ac7-80eb-342c3f84802f}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
@@ -88,23 +88,23 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="TryDeserializeFrom" Id="{aa41599a-0230-0d11-2bdc-8596be3bd35a}">
+    <Method Name="TryDeserializeFrom" Id="{a9b4aa66-ac10-4f97-b0b4-3a3853e8ae9d}">
       <Declaration><![CDATA[METHOD TryDeserializeFrom : BOOL
 VAR_INPUT
 	Deserializer : I_Deserializer;
 	Feedback : I_DeserializerFeedback;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[TryDeserializeFrom := Deserializer.TryGetTod(activeData, Feedback);]]></ST>
+        <ST><![CDATA[TryDeserializeFrom := Deserializer.TryGetBool(activeData, Feedback);]]></ST>
       </Implementation>
     </Method>
-    <Method Name="TryMakeReferenceTo" Id="{657a6ad8-8b41-0476-1761-edb8be0a3f66}">
+    <Method Name="TryMakeReferenceTo" Id="{c8eea0ca-4c90-4a2d-a147-5dd9aac9182f}">
       <Declaration><![CDATA[METHOD TryMakeReferenceTo : BOOL
 VAR_INPUT
 	Target : I_Datatype;
 END_VAR
 VAR
-	pTargetData : POINTER TO TIME_OF_DAY;
+	pTargetData : POINTER TO BOOL;
 END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[IF NOT (Target.TypeName = TypeName) THEN
@@ -116,20 +116,20 @@ activeData REF= pTargetData^;
 TryMakeReferenceTo := TRUE;]]></ST>
       </Implementation>
     </Method>
-    <Property Name="TypeName" Id="{df89fd02-abc2-023d-29d4-0197a773c90a}">
+    <Property Name="TypeName" Id="{eb827a17-b560-452a-ad90-accac71a0197}">
       <Declaration><![CDATA[PROPERTY PUBLIC TypeName : T_MAXSTRING]]></Declaration>
-      <Get Name="Get" Id="{f75f0d69-8b55-0f23-28a0-425f2700783a}">
+      <Get Name="Get" Id="{f3069bb3-1217-4d7b-bd58-a9504a904ec1}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[TypeName := 'TIME_OF_DAY';]]></ST>
+          <ST><![CDATA[TypeName := 'BOOL';]]></ST>
         </Implementation>
       </Get>
     </Property>
-    <Property Name="Value" Id="{60d8e0d8-8150-032e-240f-cd363f409430}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Value : TIME_OF_DAY]]></Declaration>
-      <Get Name="Get" Id="{6c04b15d-2448-0530-175a-0c6bc9b7cc91}">
+    <Property Name="Value" Id="{9c36f494-b1cb-49a7-903e-f0dda2a5a724}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Value : BOOL]]></Declaration>
+      <Get Name="Get" Id="{feebd140-9c42-4c21-a754-6e54d04bd79d}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
@@ -137,7 +137,7 @@ END_VAR
           <ST><![CDATA[Value := activeData;]]></ST>
         </Implementation>
       </Get>
-      <Set Name="Set" Id="{c624266e-72ec-0200-1751-4077690ac1b4}">
+      <Set Name="Set" Id="{08c57b1c-cff9-4079-b74c-47800bd08bd7}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
