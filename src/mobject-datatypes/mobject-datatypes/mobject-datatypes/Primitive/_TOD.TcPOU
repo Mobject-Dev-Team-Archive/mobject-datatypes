@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="_TOD" Id="{bcd363b4-626c-49ad-b2b8-c84d36d95303}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'linkalways'} 
+{attribute 'no_explicit_call' := 'This FB is a CLASS and must be accessed using methods or properties'}
+{attribute 'enable_dynamic_creation'}
+FUNCTION_BLOCK _TOD EXTENDS DatatypeBase
+VAR
+	localData : TOD;
+	activeData : REFERENCE TO TOD REF= localData;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="Constructor" Id="{e8c49be3-dec5-407b-8389-d9ed73b52038}" />
+    <Property Name="Address" Id="{1960a0c3-e4a7-4df1-a1f6-7771bb5c9973}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Address : PVOID]]></Declaration>
+      <Get Name="Get" Id="{de9f5f03-e66c-42aa-bf50-924f959249c8}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Address := ADR(activeData);]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ClearReference" Id="{20a7615c-c974-4c3e-92e8-d7ee6f58f0cc}">
+      <Declaration><![CDATA[METHOD PUBLIC ClearReference
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[activeData REF= localData;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Clone" Id="{3a94648b-07d9-41f6-8151-91d3e5349449}">
+      <Declaration><![CDATA[METHOD PUBLIC Clone : I_Datatype
+VAR
+    pClone : POINTER TO _TOD;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[pClone := __NEW(_TOD(InitialValue := Value));
+Clone := pClone^;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_init" Id="{f5681c67-72b9-4841-bde5-c2a492e97dd9}" FolderPath="Constructor\">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved WORDo the copy code (online change)
+	InitialValue : TOD;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[localData := InitialValue;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MakeReferenceTo" Id="{118a0396-f01f-4abf-a5e5-9f56980b56e5}">
+      <Declaration><![CDATA[METHOD PUBLIC MakeReferenceTo
+VAR_INPUT
+	ReferenceTarget : REFERENCE TO TOD;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SerializeWith" Id="{83bba87a-cb7f-4e9f-b688-aba058efd2ee}">
+      <Declaration><![CDATA[METHOD PUBLIC SerializeWith
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Serializer.AddTod(activeData);]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Size" Id="{281833d1-03c6-46d8-8d1e-288237d51b56}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Size : UDINT]]></Declaration>
+      <Get Name="Get" Id="{ce238e98-402e-4b1f-95f2-51e1afa7c496}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Size := SIZEOF(activeData);]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="TryDeserializeFrom" Id="{aeda49ab-3cef-45d8-84b5-8ab97c2f40b6}">
+      <Declaration><![CDATA[METHOD TryDeserializeFrom : BOOL
+VAR_INPUT
+	Deserializer : I_Deserializer;
+	Feedback : I_DeserializerFeedback;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TryDeserializeFrom := Deserializer.TryGetTod(activeData, Feedback);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TryMakeReferenceTo" Id="{08b10af8-f8c8-4f4c-bba9-f2e6256c9503}">
+      <Declaration><![CDATA[METHOD TryMakeReferenceTo : BOOL
+VAR_INPUT
+	Target : I_Datatype;
+END_VAR
+VAR
+	pTargetData : POINTER TO TOD;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT (Target.TypeName = TypeName) THEN
+	RETURN;
+END_IF
+
+pTargetData := Target.Address;
+activeData REF= pTargetData^;
+TryMakeReferenceTo := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="TypeName" Id="{4143fa6e-409e-496e-8c76-be2fdb177b47}">
+      <Declaration><![CDATA[PROPERTY PUBLIC TypeName : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{d1353625-eaf6-4202-8552-63a16568dbf6}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TypeName := 'TOD';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Value" Id="{9088584d-8163-4efc-b375-78deb37de13f}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Value : TOD]]></Declaration>
+      <Get Name="Get" Id="{4c2a9aed-9248-4010-a648-5aea37b39f3c}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Value := activeData;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{87e889bd-3700-4a80-b15f-594fd0a5f443}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[activeData := Value;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+  </POU>
+</TcPlcObject>

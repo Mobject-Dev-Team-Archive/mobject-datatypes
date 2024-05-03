@@ -55,6 +55,63 @@
     <Compile Include="Tests\StructuredDatatype_TestSuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\_BOOL_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\_BYTE_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\_DINT_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\_DT_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\_DWORD_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\_INT_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\_LINT_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\_LREAL_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\_LWORD_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\_REAL_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\_SINT_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\_STRING_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\_TIME_OF_DAY_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\_TOD_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\_UDINT_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\_UINT_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\_ULINT_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\_USINT_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\_WORD_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tests" />
@@ -92,7 +149,7 @@
     <LibraryReference Include="mobject-constants-datatype-limits,1.0.0,mobject">
       <Namespace>mobject_constants_datatype_limits</Namespace>
     </LibraryReference>
-    <LibraryReference Include="mobject-datatypes,0.3.0,mobject">
+    <LibraryReference Include="mobject-datatypes,0.4.1,mobject">
       <Namespace>mobject_datatypes</Namespace>
     </LibraryReference>
     <LibraryReference Include="mobject-deserialization,0.1.0,mobject">

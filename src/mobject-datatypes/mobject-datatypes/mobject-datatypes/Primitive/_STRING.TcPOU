@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="_STRING" Id="{e34be6f6-ed11-4620-954b-fc59662a1046}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'linkalways'} 
+{attribute 'no_explicit_call' := 'This FB is a CLASS and must be accessed using methods or properties'}
+{attribute 'enable_dynamic_creation'}
+FUNCTION_BLOCK _STRING EXTENDS DatatypeBase
+VAR
+	localData : T_MaxString;
+	activeData : REFERENCE TO T_MaxString REF= localData;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="Constructor" Id="{dd58c89a-155d-4574-b6af-e4353333780b}" />
+    <Property Name="Address" Id="{63cfd837-ca02-42ac-a331-b6a79dc69cba}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Address : PVOID]]></Declaration>
+      <Get Name="Get" Id="{48e4edf2-3b35-463a-a0a0-fdb358543548}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Address := ADR(activeData);]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ClearReference" Id="{748f1968-4e1a-4626-9f38-f6709e4e2c8c}">
+      <Declaration><![CDATA[METHOD PUBLIC ClearReference
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[activeData REF= localData;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Clone" Id="{d34f0c28-9732-495b-af1a-52f63da75e91}">
+      <Declaration><![CDATA[METHOD PUBLIC Clone : I_Datatype
+VAR
+    pClone : POINTER TO _STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[pClone := __NEW(_STRING(InitialValue := Value));
+Clone := pClone^;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_init" Id="{37120b81-68ce-4c13-b9f5-e936732b021d}" FolderPath="Constructor\">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved WORDo the copy code (online change)
+	InitialValue : T_MaxString;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[localData := InitialValue;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MakeReferenceTo" Id="{7f64c2c2-3c77-47ea-bd28-1b5bb5b0e2b0}">
+      <Declaration><![CDATA[METHOD PUBLIC MakeReferenceTo
+VAR_INPUT
+	ReferenceTarget : REFERENCE TO T_MaxString;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SerializeWith" Id="{85b11fb1-ef00-468d-9302-51a27f94c10b}">
+      <Declaration><![CDATA[METHOD PUBLIC SerializeWith
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Serializer.AddString(activeData);]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Size" Id="{cbf10651-cbd3-4204-9c43-c4e897fd0649}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Size : UDINT]]></Declaration>
+      <Get Name="Get" Id="{9549af45-4750-421b-8006-69e5d1807263}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Size := SIZEOF(activeData);]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="TryDeserializeFrom" Id="{263d0a40-070b-4131-8b48-06f2a957fe3e}">
+      <Declaration><![CDATA[METHOD TryDeserializeFrom : BOOL
+VAR_INPUT
+	Deserializer : I_Deserializer;
+	Feedback : I_DeserializerFeedback;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TryDeserializeFrom := Deserializer.TryGetString(activeData, Feedback);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TryMakeReferenceTo" Id="{10c93950-7080-4e3b-ba07-f647051f1cd5}">
+      <Declaration><![CDATA[METHOD TryMakeReferenceTo : BOOL
+VAR_INPUT
+	Target : I_Datatype;
+END_VAR
+VAR
+	pTargetData : POINTER TO T_MaxString;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT (Target.TypeName = TypeName) THEN
+	RETURN;
+END_IF
+
+pTargetData := Target.Address;
+activeData REF= pTargetData^;
+TryMakeReferenceTo := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="TypeName" Id="{f6b5bec0-9ee7-423e-8fe7-575682b38629}">
+      <Declaration><![CDATA[PROPERTY PUBLIC TypeName : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{4555024a-3ef5-4237-8e0d-aa7bcb6a98fe}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TypeName := 'STRING';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Value" Id="{2361cef7-08a2-4885-b0fa-340048a39919}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Value : T_MaxString]]></Declaration>
+      <Get Name="Get" Id="{cced6fc2-1a7e-41ad-b632-fccbc4510b25}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Value := activeData;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{7e0501ed-f25e-4954-866b-0925d0671d01}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[activeData := Value;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="_USINT" Id="{2936c95f-0287-41d7-b6a8-2b7cc2f494b2}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'linkalways'} 
+{attribute 'no_explicit_call' := 'This FB is a CLASS and must be accessed using methods or properties'}
+{attribute 'enable_dynamic_creation'}
+FUNCTION_BLOCK _USINT EXTENDS NumericDatatypeBase
+VAR
+	localData : USINT;
+	activeData : REFERENCE TO USINT REF= localData;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="Constructor" Id="{b1e072c1-e060-495b-b682-613a6948e498}" />
+    <Folder Name="Protected" Id="{63834cec-4b59-4bf7-b146-fd1db6627c09}" />
+    <Property Name="Address" Id="{eece26d4-7e24-4c9c-add3-bfe3505c449a}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Address : PVOID]]></Declaration>
+      <Get Name="Get" Id="{c86e5216-aa63-414b-baa4-d83a2e3fa3de}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Address := ADR(activeData);]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ClearReference" Id="{d0a32cfd-eab8-43fb-aeea-80cd30155e3d}">
+      <Declaration><![CDATA[METHOD PUBLIC ClearReference
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[activeData REF= localData;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Clone" Id="{c466b556-d782-497e-ae59-243a4d0fd9f7}">
+      <Declaration><![CDATA[METHOD PUBLIC Clone : I_Datatype
+VAR
+    pClone : POINTER TO _USINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[pClone := __NEW(_USINT(InitialValue := Value));
+Clone := pClone^;
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_init" Id="{6404e0a6-5a2e-4c13-9e28-5fc2c03dd1a7}" FolderPath="Constructor\">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+	InitialValue : USINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[localData := InitialValue;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="IsFloat" Id="{2844c20e-2660-4869-b5ee-c56423b82cf8}">
+      <Declaration><![CDATA[PROPERTY PUBLIC IsFloat : BOOL]]></Declaration>
+      <Get Name="Get" Id="{57c687bc-4571-46c4-b92b-89c9624a2986}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsFloat := FALSE;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="IsSigned" Id="{663be363-2359-45c4-95c8-d9bc359daa27}">
+      <Declaration><![CDATA[PROPERTY PUBLIC IsSigned : BOOL]]></Declaration>
+      <Get Name="Get" Id="{a780054b-fe40-4050-99a3-0b45bab541c5}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsSigned := FALSE;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="MakeReferenceTo" Id="{cded812a-ecd5-4a6d-b9ff-e1b1daa6cd56}">
+      <Declaration><![CDATA[METHOD PUBLIC MakeReferenceTo
+VAR_INPUT
+	ReferenceTarget : REFERENCE TO USINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[activeData REF= ReferenceTarget;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="MaxValue" Id="{6f5d2c26-3837-4f01-ac00-5a3508b05aac}">
+      <Declaration><![CDATA[PROPERTY PUBLIC MaxValue : USINT]]></Declaration>
+      <Get Name="Get" Id="{dee68e37-23aa-425d-9583-4b4ad957f153}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[MaxValue :=  DatatypeLimits.USINT_MAX_VALUE;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="MinValue" Id="{d820967c-3263-4f3d-bdcf-d4b8f9cf406c}">
+      <Declaration><![CDATA[PROPERTY PUBLIC MinValue : USINT]]></Declaration>
+      <Get Name="Get" Id="{d31879ab-b824-4f28-8414-f9335df3fffd}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[MinValue := DatatypeLimits.USINT_MIN_VALUE;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="SerializeMaxValue" Id="{9725683f-ae03-47ec-bfac-ec86e4c675e3}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED SerializeMaxValue
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Serializer.AddUsint(MaxValue);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SerializeMinValue" Id="{7d154fe6-1aef-445c-8c05-fa24a7bc4578}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED SerializeMinValue
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Serializer.AddUsint(MinValue);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SerializeWith" Id="{d9a763a5-08f5-4fcb-b142-0e514cf8ac5b}">
+      <Declaration><![CDATA[METHOD PUBLIC SerializeWith
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Serializer.AddUsint(activeData);]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Size" Id="{42ae505a-6f95-4e28-9e21-a8ccbc25bb5e}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Size : UDINT]]></Declaration>
+      <Get Name="Get" Id="{9f509d37-2e98-4722-9398-7cbd6377cbac}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Size := SIZEOF(activeData);]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="TryDeserializeFrom" Id="{87acf17c-5bb2-4fb8-ab02-65fd76bbc9dd}">
+      <Declaration><![CDATA[METHOD TryDeserializeFrom : BOOL
+VAR_INPUT
+	Deserializer : I_Deserializer;
+	Feedback : I_DeserializerFeedback;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TryDeserializeFrom := Deserializer.TryGetUsint(activeData, Feedback);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TryMakeReferenceTo" Id="{c7abae44-d2e6-4339-be01-bfcd075c87d7}">
+      <Declaration><![CDATA[METHOD TryMakeReferenceTo : BOOL
+VAR_INPUT
+	Target : I_Datatype;
+END_VAR
+VAR
+	pTargetData : POINTER TO USINT;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT (Target.TypeName = TypeName) THEN
+	RETURN;
+END_IF
+
+pTargetData := Target.Address;
+activeData REF= pTargetData^;
+TryMakeReferenceTo := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="TypeName" Id="{ac00c49e-a50d-4410-b871-652bc7d060cb}">
+      <Declaration><![CDATA[PROPERTY PUBLIC TypeName : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{9848f3a9-5483-43b1-a13d-6aa2728312a4}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TypeName := 'USINT';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Value" Id="{2d122a0f-2b21-4399-baea-07c867bb9c85}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Value : USINT]]></Declaration>
+      <Get Name="Get" Id="{b666fb7f-38f2-4e55-a6f8-fba8b183369a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Value := activeData;]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{0dba600b-f09f-4ca6-be7a-5363e6f54089}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[activeData := Value;]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+  </POU>
+</TcPlcObject>

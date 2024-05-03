@@ -163,7 +163,9 @@ IF NOT enumerations.TryGetValueTo(key, Address, Size) THEN
 	error := CreateEnumError(key);
 	Feedback.LogError(error);
 	RETURN;
-END_IF]]></ST>
+END_IF
+
+TryDeserializeFrom := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="TryResolveAsEnumDatatype" Id="{257f8d88-70ef-0584-3d43-12a10891fa60}">

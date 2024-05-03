@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.5.0-alpha
+
+- bug fix TryDeserialize was always returning false on Enums
+- moved primitives back to library, this reduces coupling.
+
 ## v0.4.0-alpha
 
 - removed basic datatypes to their own library. mobject-basic-datatyps.

@@ -1,0 +1,435 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="_LWORD_TestSuite" Id="{3d1e9b5e-c419-0f2c-2840-93fc587676aa}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK _LWORD_TestSuite EXTENDS TcUnit.FB_TestSuite
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[TestAddress();
+TestClearReference();
+TestClone();
+TestTypeNameReturnsExpected();
+TestIsFloat();
+TestIsSigned();
+TestMakeReferenceToFollowsReference();
+TestMakeReferenceToUpdatesReference();
+TestSize();
+TestValueReturnsExpectedAfterInit();
+TestValueReturnsExpectedAfterChange();
+TestSerializeTypeWith();
+TestSerializeWith();
+TestTryDeserializeFrom();
+TestTryMakeReferenceToFollowsReference();
+TestTryMakeReferenceToUpdatesReference();
+]]></ST>
+    </Implementation>
+    <Method Name="TestAddress" Id="{96a1d63a-0053-0082-231a-6d8e1e6fe941}">
+      <Declaration><![CDATA[METHOD PUBLIC TestAddress
+VAR
+    _type : _LWORD(0);
+    notExpected : PVOID := 0;
+    actual : PVOID;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestAddress');
+
+actual := _type.Address;
+
+AssertFalse(
+    Condition := (notExpected = actual),
+    Message := 'Type did not return a valid address.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestClearReference" Id="{10d0c809-2b62-0de9-0467-ba665992a5a2}">
+      <Declaration><![CDATA[METHOD PUBLIC TestClearReference
+VAR
+    _type : _LWORD(0);
+	target : LWORD := 0;
+    expected : LWORD := 0;
+    actual : LWORD;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestClearReference');
+
+_type.MakeReferenceTo(target);
+_type.ClearReference();
+target := 123;
+
+actual := _type.Value;
+
+AssertEquals(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Value did not follow target change'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestClone" Id="{e40620cc-6c96-0c25-29e7-64a145317056}">
+      <Declaration><![CDATA[METHOD PUBLIC TestClone
+VAR
+    _type : _LWORD(123);
+	clone : I_Datatype;
+	isValidClone : BOOL;
+	compareResult : DINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestClone');
+
+clone := _type.Clone();
+
+isValidClone := clone <> 0;
+
+IF isValidClone THEN
+	compareResult := memcmp(_type.Address, clone.Address, clone.Size);
+END_IF
+
+AssertTrue(
+	Condition := isValidClone,
+	Message := 'Clone did not produce a clone'
+);
+
+AssertEquals_DINT(
+	Expected := 0,
+    Actual := compareResult,
+    Message := 'Clone did not return a valid clone.'
+);
+
+clone.Dispose();
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestIsFloat" Id="{7fa9dbab-3f45-4f3b-85f1-6dd273fdbf9c}">
+      <Declaration><![CDATA[METHOD PUBLIC TestIsFloat
+VAR
+    _type : _LWORD(0);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestIsFloat');
+
+AssertFalse(
+	Condition := _type.IsFloat,
+    Message := 'Type did not correctly identify itself as being unsigned'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestIsSigned" Id="{c6fca86b-c9ce-0c42-189b-390bf1a8dda5}">
+      <Declaration><![CDATA[METHOD PUBLIC TestIsSigned
+VAR
+    _type : _LWORD(0);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestIsSigned');
+
+AssertFalse(
+	Condition := _type.IsSigned,
+    Message := 'Type did not correctly identify itself as being unsigned'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestMakeReferenceToFollowsReference" Id="{6b3cde4f-64e4-0c88-3204-f87f77dd672d}">
+      <Declaration><![CDATA[METHOD PUBLIC TestMakeReferenceToFollowsReference
+VAR
+    _type : _LWORD(0);
+	target : LWORD := 0;
+    expected : LWORD := 123;
+    actual : LWORD;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestMakeReferenceToFollowsReference');
+
+_type.MakeReferenceTo(target);
+target := 123;
+
+actual := _type.Value;
+
+AssertEquals(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Value did not follow target change'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestMakeReferenceToUpdatesReference" Id="{8a4df007-3d56-0307-2cf7-d260b03ea912}">
+      <Declaration><![CDATA[METHOD PUBLIC TestMakeReferenceToUpdatesReference
+VAR
+    _type : _LWORD(0);
+	target : LWORD := 0;
+    expected : LWORD := 123;
+    actual : LWORD;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestMakeReferenceToUpdatesReference');
+
+_type.MakeReferenceTo(target);
+_type.Value := 123;
+
+actual := target;
+
+AssertEquals(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Value did not update target'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestSerializeTypeWith" Id="{9fcb17da-a622-0d1f-2000-7bc7c82f7d74}">
+      <Declaration><![CDATA[METHOD PUBLIC TestSerializeTypeWith
+VAR
+    _type : _LWORD(0);
+    serializer : JsonSerializer;
+    expected : STRING(500) := '{"typeName":"LWORD","minValue":0,"maxValue":18446744073709551615,"isSigned":false,"isFloat":false}';
+    actual : STRING(500);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestSerializeTypeWith');
+
+serializer.Reset();
+_type.SerializeTypeWith(serializer);
+serializer.TryGetSerializedData(ADR(actual), SIZEOF(actual));
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Serialization of type did not return correct string.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestSerializeWith" Id="{754afb6a-581f-080e-2acf-7e845cc5beb3}">
+      <Declaration><![CDATA[METHOD PUBLIC TestSerializeWith
+VAR
+    _type : _LWORD(65535);
+    serializer : JsonSerializer;
+    expected : STRING := '65535';
+    actual : STRING(500);
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestSerializeWith');
+
+serializer.Reset();
+_type.SerializeWith(serializer);
+serializer.TryGetSerializedData(ADR(actual), SIZEOF(actual));
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Serialization of type data did not return correct string.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestSize" Id="{5c284fbc-04ef-0f73-1d2e-1dbcc25ede3e}">
+      <Declaration><![CDATA[METHOD PUBLIC TestSize
+VAR
+    _type : _LWORD(0);
+    expected : UDINT := SIZEOF(LWORD);
+    actual : UDINT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestSize');
+
+actual := _type.Size;
+
+AssertEquals_UDINT(
+    Expected := Expected,
+    Actual := actual,
+    Message := 'Type did not return the correct size.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestTryDeserializeFrom" Id="{fb094138-87c3-03ed-31b8-726ca6949a52}">
+      <Declaration><![CDATA[METHOD PUBLIC TestTryDeserializeFrom
+VAR
+    deserializer : JsonDeserializer;
+    feedback : DeserializerFeedback;
+    json : STRING := '65535';
+    _type : _LWORD(0);
+    expected : LWORD := 65535;
+    actual : LWORD;
+ END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestTryDeserializeFrom');
+
+deserializer.Reset();
+deserializer.TryLoad(json);
+_type.TryDeserializeFrom(Deserializer, Feedback);
+
+actual := _type.Value;
+
+AssertEquals(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Type did not deserialize correctly.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestTryMakeReferenceToFollowsReference" Id="{ad702e74-5c91-01df-332e-0aaa7e154d31}">
+      <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToFollowsReference
+VAR
+    _type : _LWORD(0);
+	target : _LWORD(0);
+    expected : LWORD := 123;
+    actual : LWORD;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestTryMakeReferenceToFollowsReference');
+
+_type.TryMakeReferenceTo(target);
+target.Value := 123;
+
+actual := _type.Value;
+
+AssertEquals(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Value did not follow target change'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestTryMakeReferenceToUpdatesReference" Id="{dfbbadb4-b2ef-04c2-364e-f7e7dfb28c5d}">
+      <Declaration><![CDATA[METHOD PUBLIC TestTryMakeReferenceToUpdatesReference
+VAR
+    _type : _LWORD(0);
+	target : _LWORD(0);
+    expected : LWORD := 123;
+    actual : LWORD;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestTryMakeReferenceToUpdatesReference');
+
+_type.TryMakeReferenceTo(target);
+_type.Value := 123;
+
+actual := target.Value;
+
+AssertEquals(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Value did not update target'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestTypeNameReturnsExpected" Id="{469ba24b-930c-0f18-15f2-1204c592edf5}">
+      <Declaration><![CDATA[METHOD PUBLIC TestTypeNameReturnsExpected
+VAR
+    _type : _LWORD(0);
+    expected : STRING := 'LWORD';
+    actual : STRING;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestTypeNameReturnsExpected');
+
+actual := _type.TypeName;
+
+AssertEquals_STRING(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Type did not return correct iec type.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestValueReturnsExpectedAfterChange" Id="{e7ba9b59-c77d-0f42-023c-fa5ab1051117}">
+      <Declaration><![CDATA[METHOD PUBLIC TestValueReturnsExpectedAfterChange
+VAR
+    _type : _LWORD(0);
+    expected : LWORD := 65535;
+    actual : LWORD;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestValueReturnsExpectedAfterChange');
+
+_type.Value := 65535;
+
+actual := _type.Value;
+
+AssertEquals(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Expected value not returned after change.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestValueReturnsExpectedAfterInit" Id="{4406783a-c393-05fc-19d6-6809d8b809e5}">
+      <Declaration><![CDATA[METHOD PUBLIC TestValueReturnsExpectedAfterInit
+VAR
+    _type : _LWORD(65535);
+    expected : LWORD := 65535;
+    actual : LWORD;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TEST('TestValueReturnsExpectedAfterInit');
+
+actual := _type.Value;
+
+AssertEquals(
+    Expected := expected,
+    Actual := actual,
+    Message := 'Expected value not returned after Init.'
+);
+
+TEST_FINISHED();
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>
