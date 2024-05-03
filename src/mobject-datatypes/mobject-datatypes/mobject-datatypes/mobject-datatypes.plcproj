@@ -18,7 +18,7 @@
     <LibraryReferences>{014c124a-5c47-4d65-b651-cb65eeed8af3}</LibraryReferences>
     <Released>false</Released>
     <Title>mobject-datatypes</Title>
-    <ProjectVersion>0.4.0</ProjectVersion>
+    <ProjectVersion>0.5.0</ProjectVersion>
     <Company>mobject</Company>
     <DefaultNamespace>mobject-datatypes</DefaultNamespace>
     <Placeholder>mobject-datatypes</Placeholder>
@@ -44,6 +44,7 @@
     <Folder Include="DatatypeVisitor" />
     <Folder Include="Datatype\Interface" />
     <Folder Include="DatatypePack" />
+    <Folder Include="Primitive" />
     <Folder Include="_Internal" />
     <Folder Include="_Internal\Errors" />
     <Folder Include="_Internal\MembersHost" />
@@ -51,6 +52,9 @@
     <Folder Include="_Internal\Events" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PrimitiveDatatypePack.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Datatypes\Base\Datatypes.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -108,6 +112,63 @@
     <Compile Include="DatatypePack\I_DatatypePack.TcIO">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Primitive\_BOOL.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Primitive\_BYTE.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Primitive\_DINT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Primitive\_DT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Primitive\_DWORD.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Primitive\_INT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Primitive\_LINT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Primitive\_LREAL.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Primitive\_LWORD.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Primitive\_REAL.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Primitive\_SINT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Primitive\_STRING.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Primitive\_TIME_OF_DAY.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Primitive\_TOD.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Primitive\_UDINT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Primitive\_UINT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Primitive\_ULINT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Primitive\_USINT.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Primitive\_WORD.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="_Internal\Datatype\DatatypeBase.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -136,6 +197,9 @@
   <ItemGroup>
     <LibraryReference Include="mobject-collections,1.1.0,mobject">
       <Namespace>mobject_collections</Namespace>
+    </LibraryReference>
+    <LibraryReference Include="mobject-constants-datatype-limits,1.0.0,mobject">
+      <Namespace>mobject_constants_datatype_limits</Namespace>
     </LibraryReference>
     <LibraryReference Include="mobject-deserialization,0.1.0,mobject">
       <Namespace>mobject_deserialization</Namespace>
