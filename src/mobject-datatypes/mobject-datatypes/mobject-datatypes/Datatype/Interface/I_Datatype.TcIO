@@ -25,6 +25,12 @@ END_VAR
       <Declaration><![CDATA[METHOD Clone : I_Datatype
 ]]></Declaration>
     </Method>
+    <Property Name="IsUserDefined" Id="{acc2d798-2f2b-47aa-b664-a7dabd1fa5e5}">
+      <Declaration><![CDATA[PROPERTY PUBLIC IsUserDefined : BOOL]]></Declaration>
+      <Get Name="Get" Id="{98703baf-5563-449d-9176-64070ab24cd7}">
+        <Declaration><![CDATA[]]></Declaration>
+      </Get>
+    </Property>
     <Method Name="SerializeTypeWith" Id="{49c39a8f-18b1-0e61-0283-6c14f52574e5}">
       <Declaration><![CDATA[METHOD PUBLIC SerializeTypeWith
 VAR_INPUT
@@ -38,6 +44,13 @@ END_VAR
         <Declaration><![CDATA[]]></Declaration>
       </Get>
     </Property>
+    <Method Name="TryCopyFrom" Id="{799ca117-6aed-4029-8900-4a8b83228335}">
+      <Declaration><![CDATA[METHOD PUBLIC TryCopyFrom : BOOL
+VAR_INPUT
+	Source : I_Datatype;
+END_VAR
+]]></Declaration>
+    </Method>
     <Method Name="TryDeserializeFrom" Id="{37f3fe44-520f-0d11-174b-facb5919c405}">
       <Declaration><![CDATA[METHOD PUBLIC ABSTRACT TryDeserializeFrom : BOOL
 VAR_INPUT

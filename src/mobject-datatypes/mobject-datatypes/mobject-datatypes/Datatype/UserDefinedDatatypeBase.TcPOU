@@ -23,6 +23,17 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
+    <Property Name="IsUserDefined" Id="{164d1cf2-f703-4acc-9484-666a26254dab}">
+      <Declaration><![CDATA[PROPERTY PUBLIC IsUserDefined : BOOL]]></Declaration>
+      <Get Name="Get" Id="{c50956ad-91da-48d1-86bd-9c0a6d4a100d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsUserDefined := TRUE;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="OnSerializeTypeWith" Id="{476ebd9b-4cc5-0045-27b8-a42929a121d4}" FolderPath="Protected\">
       <Declaration><![CDATA[METHOD PROTECTED OnSerializeTypeWith
 VAR_INPUT
@@ -31,6 +42,26 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[SUPER^.OnSerializeTypeWith(Serializer);
 Serializer.AddKeyString('identifier',Identifier);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TryCopyFrom" Id="{04470212-2e7a-4fdf-9649-5ed37bb2ce21}">
+      <Declaration><![CDATA[METHOD PUBLIC TryCopyFrom : BOOL
+VAR_INPUT
+	Source : I_Datatype;
+END_VAR
+VAR
+	sourceAsUdt : I_UserDefinedDatatype;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT __QUERYINTERFACE(Source, sourceAsUdt) THEN
+	RETURN;
+END_IF
+
+IF sourceAsUdt.Identifier <> Identifier THEN
+	RETURN;
+END_IF
+
+TryCopyFrom := SUPER^.TryCopyFrom(Source);]]></ST>
       </Implementation>
     </Method>
   </POU>

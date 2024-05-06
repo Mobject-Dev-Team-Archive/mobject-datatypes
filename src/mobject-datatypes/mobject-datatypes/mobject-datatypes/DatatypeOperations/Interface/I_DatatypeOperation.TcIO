@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_DatatypeOperation" Id="{4d749c49-3db4-4fa2-97e5-003f1b6ebe8c}">
+    <Declaration><![CDATA[INTERFACE I_DatatypeOperation EXTENDS I_Disposable
+]]></Declaration>
+    <Method Name="Execute" Id="{8c79392f-5f6c-4d1e-aa80-a516a128b16f}">
+      <Declaration><![CDATA[METHOD Execute
+VAR
+END_VAR]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

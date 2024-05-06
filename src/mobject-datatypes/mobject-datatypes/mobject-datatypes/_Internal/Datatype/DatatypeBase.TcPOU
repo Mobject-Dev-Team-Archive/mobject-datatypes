@@ -49,6 +49,17 @@ END_VAR
         <ST><![CDATA[]]></ST>
       </Implementation>
     </Method>
+    <Property Name="IsUserDefined" Id="{24df131a-430b-42dc-a578-05afe6778c37}">
+      <Declaration><![CDATA[PROPERTY PUBLIC IsUserDefined : BOOL]]></Declaration>
+      <Get Name="Get" Id="{16bf0cad-0219-4c6b-9aa3-48102d0a81e9}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsUserDefined := FALSE;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
     <Method Name="OnSerializeTypeWith" Id="{59c4326a-7387-042d-0ffe-3e0ccd6db4b7}" FolderPath="Protected\">
       <Declaration><![CDATA[METHOD PROTECTED OnSerializeTypeWith
 VAR_INPUT
@@ -89,8 +100,8 @@ END_VAR
         </Implementation>
       </Get>
     </Property>
-    <Method Name="TryCopy" Id="{7523d889-9201-067b-250b-9d2d21b27274}">
-      <Declaration><![CDATA[METHOD PUBLIC TryCopy : BOOL
+    <Method Name="TryCopyFrom" Id="{7523d889-9201-067b-250b-9d2d21b27274}">
+      <Declaration><![CDATA[METHOD PUBLIC TryCopyFrom : BOOL
 VAR_INPUT
 	Source : I_Datatype;
 END_VAR
@@ -100,7 +111,8 @@ END_VAR
 	RETURN;
 END_IF
 
-memcpy(Address, Source.Address, Size);]]></ST>
+memcpy(Address, Source.Address, Size);
+TryCopyFrom := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Method Name="TryDeserializeFrom" Id="{c7727495-1d61-0379-2442-e827e43cdaeb}">

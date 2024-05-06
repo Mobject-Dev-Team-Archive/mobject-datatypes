@@ -18,7 +18,7 @@
     <LibraryReferences>{014c124a-5c47-4d65-b651-cb65eeed8af3}</LibraryReferences>
     <Released>false</Released>
     <Title>mobject-datatypes</Title>
-    <ProjectVersion>0.5.0</ProjectVersion>
+    <ProjectVersion>0.6.0</ProjectVersion>
     <Company>mobject</Company>
     <DefaultNamespace>mobject-datatypes</DefaultNamespace>
     <Placeholder>mobject-datatypes</Placeholder>
@@ -37,6 +37,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Datatype" />
+    <Folder Include="DatatypeOperations\Collection" />
+    <Folder Include="DatatypeOperations\Interface" />
     <Folder Include="Datatypes" />
     <Folder Include="Datatypes\Base" />
     <Folder Include="Datatypes\Events" />
@@ -44,14 +46,29 @@
     <Folder Include="DatatypeVisitor" />
     <Folder Include="Datatype\Interface" />
     <Folder Include="DatatypePack" />
+    <Folder Include="DatatypeOperations" />
     <Folder Include="Primitive" />
     <Folder Include="_Internal" />
     <Folder Include="_Internal\Errors" />
-    <Folder Include="_Internal\MembersHost" />
     <Folder Include="_Internal\Datatype" />
     <Folder Include="_Internal\Events" />
+    <Folder Include="_Internal\StructureMembers" />
+    <Folder Include="_Internal\StructureMembers\Host" />
+    <Folder Include="_Internal\StructureMembers\Interface" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatatypeOperations\Collection\DatatypeOperations.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DatatypeOperations\Interface\I_DatatypeOperation.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DatatypeOperations\MemCopyOperation.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="DatatypeOperations\SafeMemCopyOperation.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PrimitiveDatatypePack.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -187,10 +204,13 @@
     <Compile Include="_Internal\Events\StructuredDatatypeAddedEvent.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Internal\MembersHost\I_HostMembers.TcIO">
+    <Compile Include="_Internal\StructureMembers\Host\StructureMemberHost.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="_Internal\MembersHost\MembersHost.TcPOU">
+    <Compile Include="_Internal\StructureMembers\Interface\I_HostStructureMembers.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="_Internal\StructureMembers\Interface\I_StructureMembers.TcIO">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

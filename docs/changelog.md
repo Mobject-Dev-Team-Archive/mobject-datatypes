@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.6.0-alpha
+
+- finished / added TryCopyFrom on all datatypes.
+- added IsUserDefined property to I_Datatype to assist with conversion
+- I_StructuredDatatype now no longer has direct access to TryGetMemberByName (reason, see below)
+- I_StructuredDatatype now extends I_HostStructureMembers which gives access to Members
+- added 2 memory operations, MemCopyOperation and SafeMemCopyOperation
+
 ## v0.5.0-alpha
 
 - bug fix TryDeserialize was always returning false on Enums
