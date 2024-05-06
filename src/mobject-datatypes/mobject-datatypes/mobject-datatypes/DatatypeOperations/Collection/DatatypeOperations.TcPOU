@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="DatatypeOperations" Id="{708b0684-560f-40e9-9f5c-eacc1f244428}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'linkalways'} 
+{attribute 'no_explicit_call' := 'This FB is a CLASS and must be accessed using methods or properties'}
+{attribute 'enable_dynamic_creation'}
+FUNCTION_BLOCK DatatypeOperations
+VAR
+	operations : Stack;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="Destructor" Id="{e9d473f4-534f-48be-9ad9-8065a552fc27}" />
+    <Folder Name="Private" Id="{0618b737-9985-499e-9c25-c68bcb08b915}" />
+    <Method Name="AddMemoryCopyOperation" Id="{0b56884a-04bf-4df6-8151-73d98e4185b0}">
+      <Declaration><![CDATA[METHOD PUBLIC AddMemoryCopyOperation
+VAR_INPUT
+	Source : I_Datatype;
+	Destination : I_Datatype;
+END_VAR
+VAR
+	operation : I_DatatypeOperation;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[operation := CreateMemoryCopyOperation(Source,Destination);
+operations.Push(operation);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AddSafeMemoryCopyOperation" Id="{33d58660-017d-46db-9c10-803ea54aae4e}">
+      <Declaration><![CDATA[METHOD PUBLIC AddSafeMemoryCopyOperation
+VAR_INPUT
+	Source : I_Datatype;
+	Destination : I_Datatype;
+END_VAR
+VAR
+	operation : I_DatatypeOperation;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[operation := CreateSafeMemoryCopyOperation(Source,Destination);
+operations.Push(operation);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Clear" Id="{c1a776d8-6574-44ae-ae04-07581ae56e57}">
+      <Declaration><![CDATA[METHOD PUBLIC Clear
+VAR
+	operation : I_DatatypeOperation;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[WHILE operations.TryPop(operation) DO
+	operation.Dispose();
+END_WHILE]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CreateMemoryCopyOperation" Id="{3ed42d4c-c19e-4091-a24b-e689760c3035}" FolderPath="Private\">
+      <Declaration><![CDATA[METHOD PRIVATE CreateMemoryCopyOperation : I_DatatypeOperation
+VAR_INPUT
+	OperationSource : I_Datatype;
+	OperationDestination : I_Datatype;
+END_VAR
+VAR
+	pOperation : POINTER TO MemCopyOperation;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[pOperation := __NEW(MemCopyOperation(Source := OperationSource, Destination := OperationDestination));
+CreateMemoryCopyOperation := pOperation^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CreateSafeMemoryCopyOperation" Id="{5e3b25fa-db01-4f2c-8df3-dac5b2a717de}" FolderPath="Private\">
+      <Declaration><![CDATA[METHOD PRIVATE CreateSafeMemoryCopyOperation : I_DatatypeOperation
+VAR_INPUT
+	OperationSource : I_Datatype;
+	OperationDestination : I_Datatype;
+END_VAR
+VAR
+	pOperation : POINTER TO SafeMemCopyOperation;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[pOperation := __NEW(SafeMemCopyOperation(Source := OperationSource, Destination := OperationDestination));
+CreateSafeMemoryCopyOperation := pOperation^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Execute" Id="{0d36df40-f191-46a1-84c9-8d13d60c0338}">
+      <Declaration><![CDATA[METHOD PUBLIC Execute
+VAR
+	enumerator : I_ForwardEnumerator;
+	operation : I_DatatypeOperation;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[enumerator := operations.GetEnumerator();
+
+WHILE enumerator.MoveNext() DO
+	IF enumerator.TryGet(operation) THEN
+		operation.Execute();
+	END_IF
+END_WHILE
+
+enumerator.Dispose();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_exit" Id="{350f7d84-6ecb-4517-8681-368ca2861a92}" FolderPath="Destructor\">
+      <Declaration><![CDATA[METHOD FB_exit : BOOL
+VAR_INPUT
+	bInCopyCode : BOOL; // if TRUE, the exit method is called for exiting an instance that is copied afterwards (online change).
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF bInCopyCode THEN
+	RETURN;
+END_IF
+
+operations.Clear();]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

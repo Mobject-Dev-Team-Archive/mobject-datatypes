@@ -1,13 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
   <Itf Name="I_StructuredDatatype" Id="{5569c051-8fc2-0c65-2ffb-50da033176e9}">
-    <Declaration><![CDATA[INTERFACE I_StructuredDatatype EXTENDS I_UserDefinedDatatype]]></Declaration>
-    <Method Name="TryGetMemberByName" Id="{a41ccd19-8d69-0a53-1080-d8b1cfac1207}">
-      <Declaration><![CDATA[METHOD PUBLIC TryGetMemberByName : BOOL
-VAR_INPUT
-	Name : T_MAXSTRING;
-	Destination : REFERENCE TO I_Datatype;
-END_VAR]]></Declaration>
-    </Method>
+    <Declaration><![CDATA[INTERFACE I_StructuredDatatype EXTENDS I_UserDefinedDatatype, I_HostStructureMembers]]></Declaration>
   </Itf>
 </TcPlcObject>
