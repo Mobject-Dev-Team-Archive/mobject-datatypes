@@ -79,6 +79,13 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
+    <Method Name="TryResolveAsInterfaceDatatype" Id="{3f4e049e-ff77-4df3-8fae-28e2b7b3de74}">
+      <Declaration><![CDATA[METHOD PUBLIC TryResolveAsInterfaceDatatype : BOOL
+VAR_INPUT
+	Destination : REFERENCE TO I_InterfaceDatatype;
+END_VAR
+]]></Declaration>
+    </Method>
     <Method Name="TryResolveAsStructuredDatatype" Id="{1f72b16a-4b89-0abc-267a-2a1e1af6e054}">
       <Declaration><![CDATA[METHOD PUBLIC TryResolveAsStructuredDatatype : BOOL
 VAR_INPUT

@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="InterfaceDatatypeBase" Id="{4cec4ea4-52ba-4a8f-9cb2-d853b09f5016}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'linkalways'} 
+{attribute 'no_explicit_call' := 'This FB is a CLASS and must be accessed using methods or properties'}
+{attribute 'enable_dynamic_creation'}
+FUNCTION_BLOCK ABSTRACT InterfaceDatatypeBase EXTENDS DatatypeBase IMPLEMENTS I_InterfaceDatatype
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="Protected" Id="{33a6ae48-3763-4956-b972-7dd7c54cebcc}" />
+    <Property Name="Identifier" Id="{407a0089-b583-4518-bbe6-4cbec9996e45}">
+      <Declaration><![CDATA[PROPERTY PUBLIC ABSTRACT Identifier : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{320a3715-5f9c-42d8-8620-64702f1ff3ac}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="IsUserDefined" Id="{d18b1469-03ed-4bc5-9302-58c4a2f1984c}">
+      <Declaration><![CDATA[PROPERTY PUBLIC IsUserDefined : BOOL]]></Declaration>
+      <Get Name="Get" Id="{edbfa430-1cb0-4dc2-8a1b-edf0ef849fd3}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IsUserDefined := FALSE;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="OnSerializeTypeWith" Id="{5c4d3304-ef85-4e15-8f63-18c0ce3c1a59}" FolderPath="Protected\">
+      <Declaration><![CDATA[METHOD PROTECTED OnSerializeTypeWith
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[SUPER^.OnSerializeTypeWith(Serializer);
+Serializer.AddKeyString('identifier',Identifier);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TryCopyFrom" Id="{0820a392-e788-497b-bba4-d8dc623c2d68}">
+      <Declaration><![CDATA[METHOD PUBLIC TryCopyFrom : BOOL
+VAR_INPUT
+	Source : I_Datatype;
+END_VAR
+VAR
+	sourceAsInterface : I_InterfaceDatatype;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT __QUERYINTERFACE(Source, sourceAsInterface) THEN
+	RETURN;
+END_IF
+
+IF sourceAsInterface.Identifier <> Identifier THEN
+	RETURN;
+END_IF
+
+TryCopyFrom := SUPER^.TryCopyFrom(Source);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TryResolveAsInterfaceDatatype" Id="{536062fb-ac06-4a91-9025-e106d39a9701}">
+      <Declaration><![CDATA[METHOD PUBLIC TryResolveAsInterfaceDatatype : BOOL
+VAR_INPUT
+	Destination : REFERENCE TO I_InterfaceDatatype;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Destination := THIS^;
+TryResolveAsInterfaceDatatype := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="TypeName" Id="{bab36bea-45e7-44e3-9000-b20c2aba1f60}">
+      <Declaration><![CDATA[PROPERTY PUBLIC TypeName : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{b5598086-7a8f-4d1c-91d5-d64d64b933eb}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TypeName := 'INTERFACE';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>
