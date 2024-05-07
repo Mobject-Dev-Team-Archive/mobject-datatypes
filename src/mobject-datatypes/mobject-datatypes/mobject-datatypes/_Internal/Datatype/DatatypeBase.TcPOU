@@ -154,6 +154,16 @@ END_VAR
         <ST><![CDATA[TryResolveAsEnumDatatype := FALSE;]]></ST>
       </Implementation>
     </Method>
+    <Method Name="TryResolveAsInterfaceDatatype" Id="{c4743d49-3a2f-4e61-a824-2c25526c5c8b}">
+      <Declaration><![CDATA[METHOD PUBLIC TryResolveAsInterfaceDatatype : BOOL
+VAR_INPUT
+	Destination : REFERENCE TO I_InterfaceDatatype;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TryResolveAsInterfaceDatatype := FALSE;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="TryResolveAsStructuredDatatype" Id="{2c90cbcc-818e-0a8a-0576-3fb18456d03e}">
       <Declaration><![CDATA[METHOD PUBLIC TryResolveAsStructuredDatatype : BOOL
 VAR_INPUT

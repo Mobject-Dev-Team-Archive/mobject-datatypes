@@ -69,6 +69,12 @@
     <Compile Include="DatatypeOperations\SafeMemCopyOperation.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Datatype\InterfaceDatatypeBase.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Datatype\Interface\I_InterfaceDatatype.TcIO">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="PrimitiveDatatypePack.TcPOU">
       <SubType>Code</SubType>
     </Compile>

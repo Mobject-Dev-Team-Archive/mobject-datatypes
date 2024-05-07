@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <Itf Name="I_InterfaceDatatype" Id="{323088ec-6ba5-4fe0-afdb-47275dc98016}">
+    <Declaration><![CDATA[INTERFACE I_InterfaceDatatype EXTENDS I_Datatype
+]]></Declaration>
+    <Property Name="Identifier" Id="{6c55f951-bca8-4037-92fa-277b77548ef1}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Identifier : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{a8ca722f-9607-4d3f-8b6a-5cf70a3d9178}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+      </Get>
+    </Property>
+  </Itf>
+</TcPlcObject>
