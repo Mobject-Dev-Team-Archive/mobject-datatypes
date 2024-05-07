@@ -18,7 +18,7 @@
     <LibraryReferences>{014c124a-5c47-4d65-b651-cb65eeed8af3}</LibraryReferences>
     <Released>false</Released>
     <Title>mobject-datatypes</Title>
-    <ProjectVersion>0.6.0</ProjectVersion>
+    <ProjectVersion>0.7.0</ProjectVersion>
     <Company>mobject</Company>
     <DefaultNamespace>mobject-datatypes</DefaultNamespace>
     <Placeholder>mobject-datatypes</Placeholder>
@@ -215,13 +215,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <LibraryReference Include="mobject-collections,1.1.0,mobject">
+    <LibraryReference Include="mobject-collections,1.2.0,mobject">
       <Namespace>mobject_collections</Namespace>
     </LibraryReference>
     <LibraryReference Include="mobject-constants-datatype-limits,1.0.0,mobject">
       <Namespace>mobject_constants_datatype_limits</Namespace>
     </LibraryReference>
-    <LibraryReference Include="mobject-deserialization,0.1.0,mobject">
+    <LibraryReference Include="mobject-deserialization,0.2.0,mobject">
       <Namespace>mobject_deserialization</Namespace>
     </LibraryReference>
     <LibraryReference Include="mobject-disposable,1.0.0,mobject">

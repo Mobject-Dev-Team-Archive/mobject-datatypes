@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.7.0-alpha
+
+- updated to support mobject-deserialization v0.2.0
+- updated to support mobject-collections v1.2.0
+
 ## v0.6.0-alpha
 
 - finished / added TryCopyFrom on all datatypes.
