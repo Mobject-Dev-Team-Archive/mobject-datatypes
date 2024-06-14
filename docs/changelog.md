@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.9.0-alpha
+
+- Correctly serializes structure and enums in order they are added. (i.e. using OrderedDictionary)
+
 ## v0.8.0-alpha
 
 - \_BIT datatype added

@@ -7,7 +7,7 @@
 FUNCTION_BLOCK ABSTRACT EnumDatatypeBase EXTENDS UserDefinedDatatypeBase IMPLEMENTS I_EnumDatatype
 VAR
 	_baseDatatype : I_Datatype;
-	enumerations : Dictionary;
+	enumerations : OrderedDictionary;
 END_VAR
 ]]></Declaration>
     <Implementation>

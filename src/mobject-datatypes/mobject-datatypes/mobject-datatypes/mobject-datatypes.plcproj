@@ -18,7 +18,7 @@
     <LibraryReferences>{014c124a-5c47-4d65-b651-cb65eeed8af3}</LibraryReferences>
     <Released>false</Released>
     <Title>mobject-datatypes</Title>
-    <ProjectVersion>0.8.0</ProjectVersion>
+    <ProjectVersion>0.9.0</ProjectVersion>
     <Company>mobject</Company>
     <DefaultNamespace>mobject-datatypes</DefaultNamespace>
     <Placeholder>mobject-datatypes</Placeholder>
