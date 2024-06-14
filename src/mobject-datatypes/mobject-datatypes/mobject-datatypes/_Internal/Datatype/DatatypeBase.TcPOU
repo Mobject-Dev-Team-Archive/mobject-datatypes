@@ -144,6 +144,16 @@ END_VAR
         <ST><![CDATA[TryResolveAsAliasDatatype := FALSE;]]></ST>
       </Implementation>
     </Method>
+    <Method Name="TryResolveAsBitDatatype" Id="{28045ef9-04c5-41d7-ad6e-e49988c2431b}">
+      <Declaration><![CDATA[METHOD PUBLIC TryResolveAsBitDatatype : BOOL
+VAR_INPUT
+	Destination : REFERENCE TO I_BitDatatype;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[TryResolveAsBitDatatype := FALSE;]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="TryResolveAsEnumDatatype" Id="{8b899453-0875-06c9-311e-1a3391bbc461}">
       <Declaration><![CDATA[METHOD PUBLIC TryResolveAsEnumDatatype : BOOL
 VAR_INPUT

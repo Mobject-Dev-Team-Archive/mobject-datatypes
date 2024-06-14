@@ -25,6 +25,9 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\Mocks\DUT\MyStruct.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\Mocks\MockDatatype_BOOL.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -49,6 +52,9 @@
     <Compile Include="Tests\AliasDatatype_TestSuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Tests\Mocks\_MyStruct.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Tests\NumericDatatype_TestSuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>
@@ -56,6 +62,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tests\_BOOL_TestSuite.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Tests\_BIT_UsingMockStructure_TestSuite.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Tests\_BYTE_TestSuite.TcPOU">
@@ -117,6 +126,7 @@
     <Folder Include="Tests" />
     <Folder Include="POUs" />
     <Folder Include="Tests\Mocks" />
+    <Folder Include="Tests\Mocks\DUT" />
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_Standard">
@@ -149,19 +159,19 @@
     <LibraryReference Include="mobject-constants-datatype-limits,1.0.0,mobject">
       <Namespace>mobject_constants_datatype_limits</Namespace>
     </LibraryReference>
-    <LibraryReference Include="mobject-datatypes,0.7.0,mobject">
+    <LibraryReference Include="mobject-datatypes,0.8.0,mobject">
       <Namespace>mobject_datatypes</Namespace>
     </LibraryReference>
-    <LibraryReference Include="mobject-deserialization,0.2.0,mobject">
+    <LibraryReference Include="mobject-deserialization,0.3.0,mobject">
       <Namespace>mobject_deserialization</Namespace>
     </LibraryReference>
-    <LibraryReference Include="mobject-enumerable,1.1.0,mobject">
+    <LibraryReference Include="mobject-enumerable,1.2.0,mobject">
       <Namespace>mobject_enumerable</Namespace>
     </LibraryReference>
-    <LibraryReference Include="mobject-json,1.5.0,mobject">
+    <LibraryReference Include="mobject-json,1.6.0,mobject">
       <Namespace>mobject_json</Namespace>
     </LibraryReference>
-    <LibraryReference Include="mobject-serialization,0.4.0,mobject">
+    <LibraryReference Include="mobject-serialization,0.5.0,mobject">
       <Namespace>mobject_serialization</Namespace>
     </LibraryReference>
   </ItemGroup>

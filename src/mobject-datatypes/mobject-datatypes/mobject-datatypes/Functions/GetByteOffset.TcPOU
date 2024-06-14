@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="GetByteOffset" Id="{0efc41c6-3334-4710-9ede-e85597a19f9b}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'linkalways'} 
+FUNCTION GetByteOffset : PVOID
+VAR_INPUT
+	Structure : ANY;
+	Member : ANY_BIT; 
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[GetByteOffset := Member.pValue - Structure.pValue;]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

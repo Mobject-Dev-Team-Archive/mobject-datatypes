@@ -6,7 +6,7 @@
 {attribute 'enable_dynamic_creation'}
 FUNCTION_BLOCK PrimitiveDatatypePack IMPLEMENTS I_DatatypePack
 VAR
-	
+	// _bit not included as this can only be part of a structure
 	_bool : _BOOL(FALSE);
 	_byte : _BYTE(0);
 	_dint : _DINT(0);
@@ -26,7 +26,6 @@ VAR
 	_usint : _USINT(0);
 	_word : _WORD(0);
     _string : _STRING('');
-	
 END_VAR
 ]]></Declaration>
     <Implementation>

@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.8.0-alpha
+
+- \_BIT datatype added
+- added 2 memory operations, WriteBitToBoolOperation and WriteBoolToBitOperation
+- updated to support mobject-deserialization v0.3.0
+- Updated to support mobject-collections v1.3.0
+- Updated to support mobject-disposable v1.1.1
+- Updated to support mobject-enumerable v1.2.0
+- Updated to support mobject-errors v0.3.0
+- Updated to support mobject-events v1.1.0
+- Updated to support mobject-serialization v0.5.0
+- swapped values to reference to, so that they can be used directly in functions
+
 ## v0.7.0-alpha
 
 - updated to support mobject-deserialization v0.2.0

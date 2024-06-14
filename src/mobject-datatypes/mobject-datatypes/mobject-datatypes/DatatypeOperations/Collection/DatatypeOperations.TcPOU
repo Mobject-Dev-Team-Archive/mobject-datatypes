@@ -42,6 +42,34 @@ END_VAR]]></Declaration>
 operations.Push(operation);]]></ST>
       </Implementation>
     </Method>
+    <Method Name="AddWriteBitToBoolOperation" Id="{b1df01cf-5dd7-413c-8414-ab9aae948c26}">
+      <Declaration><![CDATA[METHOD PUBLIC AddWriteBitToBoolOperation
+VAR_INPUT
+	Source : I_BitDatatype;
+	Destination : Reference to _BOOL;
+END_VAR
+VAR
+	operation : I_DatatypeOperation;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[operation := CreateWriteBitToBoolOperation(Source,Destination);
+operations.Push(operation);]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="AddWriteBoolToBitOperation" Id="{d4be1b58-d006-4f02-bc1f-dce058564e69}">
+      <Declaration><![CDATA[METHOD PUBLIC AddWriteBoolToBitOperation
+VAR_INPUT
+	Source : REFERENCE TO _BOOL;
+	Destination : I_BitDatatype;
+END_VAR
+VAR
+	operation : I_DatatypeOperation;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[operation := CreateWriteBoolToBitOperation(Source,Destination);
+operations.Push(operation);]]></ST>
+      </Implementation>
+    </Method>
     <Method Name="Clear" Id="{c1a776d8-6574-44ae-ae04-07581ae56e57}">
       <Declaration><![CDATA[METHOD PUBLIC Clear
 VAR
@@ -80,6 +108,34 @@ END_VAR]]></Declaration>
       <Implementation>
         <ST><![CDATA[pOperation := __NEW(SafeMemCopyOperation(Source := OperationSource, Destination := OperationDestination));
 CreateSafeMemoryCopyOperation := pOperation^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CreateWriteBitToBoolOperation" Id="{59f957cb-1c50-4fd8-b3e4-c6e1e7d519cf}" FolderPath="Private\">
+      <Declaration><![CDATA[METHOD PRIVATE CreateWriteBitToBoolOperation : I_DatatypeOperation
+VAR_INPUT
+	OperationSource : I_BitDatatype;
+	OperationDestination : REFERENCE TO _BOOL;
+END_VAR
+VAR
+	pOperation : POINTER TO WriteBitToBoolOperation;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[pOperation := __NEW(WriteBitToBoolOperation(Source := OperationSource, Destination := OperationDestination));
+CreateWriteBitToBoolOperation := pOperation^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="CreateWriteBoolToBitOperation" Id="{90e95abd-d6fb-4f00-b918-4d1da5d6e592}" FolderPath="Private\">
+      <Declaration><![CDATA[METHOD PRIVATE CreateWriteBoolToBitOperation : I_DatatypeOperation
+VAR_INPUT
+	OperationSource : REFERENCE TO _BOOL;
+	OperationDestination : I_BitDatatype;
+END_VAR
+VAR
+	pOperation : POINTER TO WriteBoolToBitOperation;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[pOperation := __NEW(WriteBoolToBitOperation(Source := OperationSource, Destination := OperationDestination));
+CreateWriteBoolToBitOperation := pOperation^;]]></ST>
       </Implementation>
     </Method>
     <Method Name="Execute" Id="{0d36df40-f191-46a1-84c9-8d13d60c0338}">

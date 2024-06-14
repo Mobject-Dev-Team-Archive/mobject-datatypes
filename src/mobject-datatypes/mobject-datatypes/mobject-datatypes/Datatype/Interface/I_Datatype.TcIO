@@ -72,6 +72,13 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
     </Method>
+    <Method Name="TryResolveAsBitDatatype" Id="{37b2c7b8-a2f6-4f47-b5f1-fc524e00a742}">
+      <Declaration><![CDATA[METHOD PUBLIC TryResolveAsBitDatatype : BOOL
+VAR_INPUT
+	Destination : REFERENCE TO I_BitDatatype;
+END_VAR
+]]></Declaration>
+    </Method>
     <Method Name="TryResolveAsEnumDatatype" Id="{e7be0424-a479-0a55-1293-36f08e36456b}">
       <Declaration><![CDATA[METHOD PUBLIC TryResolveAsEnumDatatype : BOOL
 VAR_INPUT

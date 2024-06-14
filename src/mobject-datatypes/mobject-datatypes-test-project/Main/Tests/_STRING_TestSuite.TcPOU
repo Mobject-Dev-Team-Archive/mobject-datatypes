@@ -65,7 +65,7 @@ actual := _type.Value;
 AssertEquals_STRING(
     Expected := expected,
     Actual := actual,
-    Message := 'Value did not follow target change'
+    Message := 'Value incorrectly followed target change'
 );
 
 TEST_FINISHED();
