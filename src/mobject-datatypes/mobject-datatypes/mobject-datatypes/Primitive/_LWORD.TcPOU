@@ -193,23 +193,15 @@ END_VAR
       </Get>
     </Property>
     <Property Name="Value" Id="{177b8ca6-5e7b-4bc9-89ab-f56395a81e9e}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Value : LWORD]]></Declaration>
+      <Declaration><![CDATA[PROPERTY PUBLIC Value : REFERENCE TO LWORD]]></Declaration>
       <Get Name="Get" Id="{01e69469-b4d6-4465-9236-4483f5d443e4}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Value := activeData;]]></ST>
+          <ST><![CDATA[Value REF= activeData;]]></ST>
         </Implementation>
       </Get>
-      <Set Name="Set" Id="{9ceae39a-8436-414d-955b-b354c82babb0}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[activeData := Value;]]></ST>
-        </Implementation>
-      </Set>
     </Property>
   </POU>
 </TcPlcObject>

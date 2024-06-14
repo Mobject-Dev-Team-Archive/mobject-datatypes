@@ -166,23 +166,15 @@ TryMakeReferenceTo := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Property Name="Value" Id="{bee402f6-2aca-40e1-a610-51bc94e1ddb1}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Value : E_TcEventClass]]></Declaration>
+      <Declaration><![CDATA[PROPERTY PUBLIC Value : REFERENCE TO E_TcEventClass]]></Declaration>
       <Get Name="Get" Id="{56ecd470-c691-43cd-bcf4-03ab287375cd}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Value := activeData;]]></ST>
+          <ST><![CDATA[Value REF= activeData;]]></ST>
         </Implementation>
       </Get>
-      <Set Name="Set" Id="{bc022720-64b4-4688-888a-494ca5f6e0c4}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[activeData := Value;]]></ST>
-        </Implementation>
-      </Set>
     </Property>
   </POU>
 </TcPlcObject>

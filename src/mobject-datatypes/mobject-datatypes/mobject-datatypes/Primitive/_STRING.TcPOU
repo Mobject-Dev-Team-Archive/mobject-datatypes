@@ -128,23 +128,15 @@ END_VAR
       </Get>
     </Property>
     <Property Name="Value" Id="{2361cef7-08a2-4885-b0fa-340048a39919}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Value : T_MaxString]]></Declaration>
+      <Declaration><![CDATA[PROPERTY PUBLIC Value : REFERENCE TO T_MaxString]]></Declaration>
       <Get Name="Get" Id="{cced6fc2-1a7e-41ad-b632-fccbc4510b25}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Value := activeData;]]></ST>
+          <ST><![CDATA[Value REF= activeData;]]></ST>
         </Implementation>
       </Get>
-      <Set Name="Set" Id="{7e0501ed-f25e-4954-866b-0925d0671d01}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[activeData := Value;]]></ST>
-        </Implementation>
-      </Set>
     </Property>
   </POU>
 </TcPlcObject>

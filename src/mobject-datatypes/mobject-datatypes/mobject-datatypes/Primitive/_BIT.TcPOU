@@ -1,0 +1,262 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="_BIT" Id="{d1424362-55ba-4d92-a95d-e8783b2964a0}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'linkalways'} 
+{attribute 'no_explicit_call' := 'This FB is a CLASS and must be accessed using methods or properties'}
+{attribute 'enable_dynamic_creation'}
+FUNCTION_BLOCK _BIT EXTENDS DatatypeBase implements I_BitDatatype
+VAR
+	initialised : BOOL;
+	activeParent : I_StructuredDatatype;
+	activeByteOffset : PVOID;
+	activeBitOffset : DWORD;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Folder Name="Private" Id="{c3d05154-870e-475c-a27e-cd1fcffe3cf1}" />
+    <Property Name="Address" Id="{8ce2401c-05df-4eb1-aaaa-e51cf82b4182}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Address : PVOID]]></Declaration>
+      <Get Name="Get" Id="{545c811f-eef1-45c7-a4ab-f506d6cb452d}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF NOT initialised THEN 
+	RETURN;
+END_IF
+
+Address := activeParent.Address + activeByteOffset;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="BitOffset" Id="{735eba2b-20b5-4bf7-9f38-96a145fea705}">
+      <Declaration><![CDATA[PROPERTY PUBLIC BitOffset : DWORD]]></Declaration>
+      <Get Name="Get" Id="{0a2641ac-3657-4e69-9fac-22f8de72fc1f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF NOT initialised THEN 
+	RETURN;
+END_IF
+
+BitOffset := activeBitOffset;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="ByteOffset" Id="{d1b6fa75-0c02-49b9-bb4e-aabb416fdfae}">
+      <Declaration><![CDATA[PROPERTY PUBLIC ByteOffset : PVOID]]></Declaration>
+      <Get Name="Get" Id="{d9f7ed97-5e68-43fa-a0fa-97a8e00d3dda}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[IF NOT initialised THEN 
+	RETURN;
+END_IF
+
+ByteOffset := activeByteOffset;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ClearReference" Id="{5c376c4e-accf-4f1a-bb6d-379d0cfc8b00}">
+      <Declaration><![CDATA[METHOD PUBLIC ClearReference
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[activeParent := 0;
+activeByteOffset := 0;
+activeBitOffset := 0;
+initialised := FALSE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Clone" Id="{753ceb0f-b2bc-448c-b8ee-6f5ba0d1bb9c}">
+      <Declaration><![CDATA[METHOD PUBLIC Clone : I_Datatype
+VAR
+    pClone : POINTER TO _BIT;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[pClone := __NEW(_BIT);
+
+IF initialised THEN
+	pClone^.MakeReferenceTo(activeParent, activeByteOffset, activeBitOffset);
+END_IF
+
+Clone := pClone^;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="GetBitValue" Id="{e718f332-2d9f-4470-bca6-2e66196e89da}" FolderPath="Private\">
+      <Declaration><![CDATA[METHOD PRIVATE GetBitValue : BOOL
+VAR
+	pByte : POINTER TO BYTE := Address;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT initialised THEN
+	RETURN;
+END_IF
+
+CASE activeBitOffset OF
+	0: GetBitValue := pByte^.0;
+	1: GetBitValue := pByte^.1;
+	2: GetBitValue := pByte^.2;
+	3: GetBitValue := pByte^.3;
+	4: GetBitValue := pByte^.4;
+	5: GetBitValue := pByte^.5;
+	6: GetBitValue := pByte^.6;
+	7: GetBitValue := pByte^.7;
+END_CASE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="MakeReferenceTo" Id="{02d8f63e-1347-43cf-906d-8d5aad1dd547}">
+      <Declaration><![CDATA[METHOD PUBLIC MakeReferenceTo
+VAR_INPUT
+	Parent : I_StructuredDatatype;
+	ByteOffset : PVOID;
+	BitOffset : DWORD;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[activeParent := Parent;
+activeByteOffset := ByteOffset;
+activeBitOffset := BitOffset AND 16#7;
+initialised := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Parent" Id="{4f72d0f5-a246-4460-b19a-3ed250554bc0}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Parent : I_StructuredDatatype]]></Declaration>
+      <Get Name="Get" Id="{27048d9f-42bf-4f72-8544-b8a04c1b55bf}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Parent := activeParent;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="SerializeWith" Id="{baca04a6-9a00-45e4-9c70-c5893a3fbacb}">
+      <Declaration><![CDATA[METHOD PUBLIC SerializeWith
+VAR_INPUT
+	Serializer : I_Serializer;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Serializer.AddBool(GetBitValue());]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="SetBitValue" Id="{eb7119ad-8b00-47f4-93cf-15e68d899c91}" FolderPath="Private\">
+      <Declaration><![CDATA[METHOD PRIVATE SetBitValue : BOOL
+VAR_INPUT
+	Value : BOOL;
+END_VAR
+VAR
+	pByte : POINTER TO BYTE := Address;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT initialised THEN
+	RETURN;
+END_IF
+
+CASE activeBitOffset OF
+	0: pByte^.0 := Value;
+	1: pByte^.1 := Value;
+	2: pByte^.2 := Value;
+	3: pByte^.3 := Value;
+	4: pByte^.4 := Value;
+	5: pByte^.5 := Value;
+	6: pByte^.6 := Value;
+	7: pByte^.7 := Value;
+END_CASE;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Size" Id="{2d097b90-a037-4e11-98c2-b872aed4fe5c}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Size : UDINT]]></Declaration>
+      <Get Name="Get" Id="{6f6242e3-ce9b-4842-95d3-8b6375c06015}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Size := 1;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="TryDeserializeFrom" Id="{7f223bf3-10e0-4d0f-90c0-9e425c9e8a7e}">
+      <Declaration><![CDATA[METHOD TryDeserializeFrom : BOOL
+VAR_INPUT
+	Deserializer : I_Deserializer;
+	Feedback : I_DeserializerFeedback;
+END_VAR
+VAR 
+	value : BOOL;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT Deserializer.TryGetBool(value, Feedback) THEN
+	RETURN;
+END_IF
+
+SetBitValue(value);
+TryDeserializeFrom := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TryMakeReferenceTo" Id="{885b2714-b6a4-48c4-8eed-f9f3bcd35447}">
+      <Declaration><![CDATA[METHOD TryMakeReferenceTo : BOOL
+VAR_INPUT
+	Target : I_Datatype;
+END_VAR
+VAR
+	targetAsBit : I_BitDatatype;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT Target.TryResolveAsBitDatatype(targetAsBit) THEN
+	RETURN;
+END_IF
+
+MakeReferenceTo(targetAsBit.Parent, targetAsBit.ByteOffset, targetAsBit.BitOffset);
+TryMakeReferenceTo := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TryResolveAsBitDatatype" Id="{19d25133-7123-4fdb-9973-911d4285cbcc}">
+      <Declaration><![CDATA[METHOD PUBLIC TryResolveAsBitDatatype : BOOL
+VAR_INPUT
+	Destination : REFERENCE TO I_BitDatatype;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[Destination := this^;
+TryResolveAsBitDatatype := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="TypeName" Id="{01e01daf-5c20-4c7e-9e2f-d72201aed978}">
+      <Declaration><![CDATA[PROPERTY PUBLIC TypeName : T_MAXSTRING]]></Declaration>
+      <Get Name="Get" Id="{372186b1-53af-4265-bca2-ff200db394a0}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TypeName := 'BIT';]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="Value" Id="{ec906a72-0494-4dde-a569-fe54fde95591}">
+      <Declaration><![CDATA[PROPERTY PUBLIC Value : BOOL]]></Declaration>
+      <Get Name="Get" Id="{109c7b57-8357-40aa-a6ff-805ba5ee1838}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Value := GetBitValue();]]></ST>
+        </Implementation>
+      </Get>
+      <Set Name="Set" Id="{fa60ea83-5f75-4446-908d-6f3bf2f111bb}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[SetBitValue(Value);]]></ST>
+        </Implementation>
+      </Set>
+    </Property>
+  </POU>
+</TcPlcObject>

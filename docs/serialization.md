@@ -4,18 +4,18 @@ When leveraging our serialization system, most datatype serialization concerns a
 
 These classes facilitate the automatic serialization of information based on the abstract properties you define. In the examples provided below, we illustrate how datatypes are serialized, assuming the use of the JsonSerializer class. This overview aims to give you a practical understanding of what the serialization output looks like for both primitive and structured datatypes. Whether you're working with basic types or more complex structures, the mobject-types will automate much of the serialization (and deserialization) for you if you use the provided base types.
 
-## Primatives
+## Primitives
 
 Example of a BOOL.
 
 ```json
-{ "name": "BOOL" }
+{ "typeName": "BOOL" }
 ```
 
 Example of a INT.
 
 ```json
-{ "name": "INT" }
+{ "typeName": "INT" }
 ```
 
 ## Structures
@@ -25,31 +25,31 @@ Example of TIMESTRUCT.
 ```json
 {
   "identifier": "TIMESTRUCT",
-  "name": "STRUCT",
+  "typeName": "STRUCT",
   "members": {
     "wDay": {
-      "name": "WORD"
+      "typeName": "WORD"
     },
     "wDayOfWeek": {
-      "name": "WORD"
+      "typeName": "WORD"
     },
     "wHour": {
-      "name": "WORD"
+      "typeName": "WORD"
     },
     "wMilliseconds": {
-      "name": "WORD"
+      "typeName": "WORD"
     },
     "wMinute": {
-      "name": "WORD"
+      "typeName": "WORD"
     },
     "wMonth": {
-      "name": "WORD"
+      "typeName": "WORD"
     },
     "wSecond": {
-      "name": "WORD"
+      "typeName": "WORD"
     },
     "wYear": {
-      "name": "WORD"
+      "typeName": "WORD"
     }
   }
 }
@@ -66,9 +66,9 @@ Example of HRESULT
 ```json
 {
   "identifier": "HRESULT",
-  "name": "ALIAS",
+  "typeName": "ALIAS",
   "baseDatatype": {
-    "name": "DINT"
+    "typeName": "DINT"
   }
 }
 ```

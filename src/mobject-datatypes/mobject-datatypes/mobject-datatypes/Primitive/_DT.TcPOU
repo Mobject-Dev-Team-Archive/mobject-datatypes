@@ -128,23 +128,15 @@ END_VAR
       </Get>
     </Property>
     <Property Name="Value" Id="{994236d9-26f2-48e9-afc4-2298f7c33a37}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Value : DT]]></Declaration>
+      <Declaration><![CDATA[PROPERTY PUBLIC Value : REFERENCE TO DT]]></Declaration>
       <Get Name="Get" Id="{dc2b5892-6a17-4f11-8a48-929cb26d660e}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Value := activeData;]]></ST>
+          <ST><![CDATA[Value REF= activeData;]]></ST>
         </Implementation>
       </Get>
-      <Set Name="Set" Id="{ea7bc41f-8273-4f4e-8c62-8d10cba74d0f}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[activeData := Value;]]></ST>
-        </Implementation>
-      </Set>
     </Property>
   </POU>
 </TcPlcObject>

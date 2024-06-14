@@ -68,7 +68,7 @@ AssertEquals_LREAL(
     Expected := expected,
     Actual := actual,
     Delta := LREAL#0.001,
-    Message := 'Value did not follow target change'
+    Message := 'Value incorrectly followed target change'
 );
 
 TEST_FINISHED();

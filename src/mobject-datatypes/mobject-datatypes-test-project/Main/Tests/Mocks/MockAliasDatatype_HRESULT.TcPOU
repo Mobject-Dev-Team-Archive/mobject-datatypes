@@ -130,23 +130,15 @@ TryMakeReferenceTo := TRUE;]]></ST>
       </Implementation>
     </Method>
     <Property Name="Value" Id="{66a95d13-bcd7-45da-8840-f91e6a4bd783}">
-      <Declaration><![CDATA[PROPERTY PUBLIC Value : HRESULT]]></Declaration>
+      <Declaration><![CDATA[PROPERTY PUBLIC Value : REFERENCE TO HRESULT]]></Declaration>
       <Get Name="Get" Id="{a32f3b0e-b8ff-4b54-8e11-c9c7a479cf0d}">
         <Declaration><![CDATA[VAR
 END_VAR
 ]]></Declaration>
         <Implementation>
-          <ST><![CDATA[Value := activeData;]]></ST>
+          <ST><![CDATA[Value REF= activeData;]]></ST>
         </Implementation>
       </Get>
-      <Set Name="Set" Id="{e4645bcd-ba3e-48a9-be43-1f5ff3c600a5}">
-        <Declaration><![CDATA[VAR
-END_VAR
-]]></Declaration>
-        <Implementation>
-          <ST><![CDATA[activeData := Value;]]></ST>
-        </Implementation>
-      </Set>
     </Property>
   </POU>
 </TcPlcObject>
